@@ -7,37 +7,83 @@
 <nav class="top"><div class="in"><a class="brand" href="index.html" style="text-decoration:none">MINIWAR <b>·</b> 개발 바이블</a><a href="index.html">표지</a><a href="01_overview.html">개요</a><a href="02_map.html">맵·지역</a><a href="03_nations_units.html">국가·유닛</a><a href="04_combat.html">전투</a><a href="05_events.html">이벤트</a><a href="06_development.html" class="active">개발기</a><a href="07_reference.html">근거</a></div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="eyebrow">06 · Development</span>
-  <h1>웹 프로토타입에서 배포 빌드까지.<span class="sub">회귀 테스트로 기능을 잠그고, 샌드박스에서 빌드한다.</span></h1>
-  <p class="lede">Miniwar는 브라우저 프로토타입에서 출발해 Godot로 이식되며 기능을 하나씩 복원해 왔습니다. 모든 변경은 자동 검증 스위트로 잠그고, 값은 설정 파일에서만 조정합니다.</p>
+  <span class="eyebrow">06 · Development history</span>
+  <h1>웹 프로토타입에서 배포 빌드까지.<span class="sub">0.1 브라우저 프로토타입 → Godot 0.21 배포. 회귀 테스트로 매 단계를 잠갔다.</span></h1>
+  <p class="lede">Miniwar는 2026-07-10 브라우저 프로토타입으로 시작해, 원작 실행 파일 심층 분석으로 규칙을 교정하고(웹 0.8 · 193항목 통과), Godot로 이관해 화면·조작·전투를 하나씩 복원하며 0.21 배포까지 왔습니다. 아래는 버전별 변경점과 실제 빌드 화면입니다.</p>
 </div></header>
 
 <section><div class="wrap">
-  <span class="eyebrow blue">Journey</span>
-  <h2><span class="n">01</span>개발 여정</h2>
-  <div class="steps">
-    <div class="step"><div class="no">STEP 1</div><h4>웹 0.8</h4><p>game/js 프로토타입. node 하니스 193항목 통과 기준선.</p></div>
-    <div class="step"><div class="no">STEP 2</div><h4>Godot 이식 0.10–0.12.1</h4><p>기능 정본 복원. 데이터·로직·UI 분리 확립.</p></div>
-    <div class="step"><div class="no">STEP 3</div><h4>0.14 조작 복원</h4><p>지도 이동·공격 입력, 원작형 Build Forces 생산창.</p></div>
-    <div class="step"><div class="no">STEP 4</div><h4>0.19–0.20</h4><p>UI 캡처 세트, 전투 규칙 정비.</p></div>
+  <div class="stats">
+    <div class="stat"><div class="v gold">2</div><div class="k">개발 모드 (복각·어드밴스드)</div></div>
+    <div class="stat"><div class="v green">193</div><div class="k">웹 회귀 항목 0 FAIL</div></div>
+    <div class="stat"><div class="v">0.1 → 0.21</div><div class="k">빌드 반복</div></div>
+    <div class="stat"><div class="v allies">2026-07</div><div class="k">착수·집중 개발</div></div>
   </div>
-  <p style="margin-top:6px">이 바이블의 화면들은 대부분 0.19 캡처 세트에서 가져왔습니다.</p>
 </div></section>
 
 <section><div class="wrap">
-  <span class="eyebrow">Versions</span>
-  <h2><span class="n">02</span>버전 현황</h2>
+  <span class="eyebrow blue">Phase 1 · Browser prototypes</span>
+  <h2><span class="n">01</span>웹 프로토타입 (game/) — 0.1 ~ 0.8</h2>
+  <p class="muted">순수 HTML·JS·CSS로 규칙 엔진을 먼저 세우고, 원작 실행 파일 분석으로 수치를 교정한 단계. UI는 새 SVG·CSS로 재구현하고 원작은 분석에만 사용했습니다.</p>
+
+  <div class="ver"><h4>0.2 <span class="tag next">코어 루프</span></h4>
+    <p>신규 빌드로 0.1+0.2 통합. 초기엔 <b>창작 지역표(육지 58 + 해역 14)</b>, 7개국 고정 턴순, 유닛 9종/건물 5종, 공장 게이트+차턴 활성화, 육·해·공 이동, 지상/해전 동시판정, AA·벙커, 수송·상륙, 항모·함재기, 전략폭격(공장→비행장→가치), 해안포격, 개전 스크립트, 미/소 참전, 승점→FFA, 세이브, AI 7국+전황 보고.</p></div>
+  <div class="ver"><h4>v3 <span class="tag wip">원작 전면 정합</span></h4>
+    <p>창작 지역표 폐기 → <b>원작 61 육지 + 53 해역으로 전면 교체</b>(좌표·인접·가치·건물·초기배치·초기함대 100% 정합, 제너레이터 자동 변환). 배경 = 원본 지도 트레이스 랜드마스크(RLE, 자체 렌더 — 원본 비트맵 미포함). 세계 총가치 236, 승점 40 / FFA 140.</p></div>
+  <div class="ver"><h4>0.3 – 0.6 <span class="tag next">어드밴스드 실험 · 듀얼 모드</span></h4>
+    <p>0.3 틱 전투·지형(사막/도시/산악)·참호/벙커·기갑 돌파·장군. 0.4 독일=직함 확정. 0.5 동시턴·단일 파일·UI 하이브리드. 0.6 폴더 전환 + <b>클래식/어드밴스드 듀얼 모드</b> 분리.</p></div>
+  <div class="ver done"><h4>0.7 <span class="tag done">클래식 재구현</span></h4>
+    <p>원작 61/53 지도와 온전한 <b>Turn 1, Spring 1940</b>. 실제 턴 순서(독→프→이→소→일→영→미), Active/Reserve 편성, 공장 회계(Gross·Bombing Repair·Blockade·Granted), 잠수함 봉쇄, 일반전 1라운드·상륙 전멸, 전략폭격 다중턴 복구, 120/40 승리, 이벤트(핀란드·대조국전쟁·스탈린), 원작형 2열 툴바. <code>harness7</code>.</p></div>
+  <div class="ver done"><h4>0.8 <span class="tag done">EXE 분석 교정 · 193 PASS</span></h4>
+    <p><code>winwar2.exe</code> 실행 코드 심층 분석으로 추정값 교정: 이동 행동비 = 생산비합 × 0.005, 공격 × 0.01, 잠수함 선제사격, 대공포 <code>수 &gt; Random(100)</code>, 전략폭격 지역별 원장, 해안포격 <code>Random(100) ≤ 10</code>, 봉쇄 49% 판정, 미·소 동원율 교정. <b><code>node harness8.js</code> → 193 PASS / 0 FAIL</b>(기존 184 회귀 유지). 이후 Godot 이관의 실행 사양서 역할.</p></div>
+  <div class="callout"><div class="lab">보드의 완성</div><p>이 단계에서 확정된 <b>114개 지역 보드</b>가 지금까지 이어집니다 — <a href="02_map.html">맵·지역</a>의 전체 월드맵이 그 결과물입니다.</p></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow gold" style="color:#e0c428">Phase 2 · Godot port</span>
+  <h2><span class="n">02</span>Godot 이식과 복원 — 0.9 ~ 0.21</h2>
+  <p class="muted">검증된 규칙 엔진을 Godot 4.7로 옮기고, 원작의 화면·조작·전투 감각을 하나씩 복원한 단계.</p>
+
+  <figure>
+    <img src="shot_v010.jpg" alt="Miniwar Godot 0.10 — 초기 통합 빌드 (국가 현황·지역 정보·이동/공격 패널)">
+    <figcaption><b>Godot 0.10 — 기능완성 후보 (가장 초기 Godot 빌드 화면).</b> 웹 0.8 규칙을 Godot로 옮긴 직후. 좌측 국가 현황·지역 정보·이동/공격 패널, 우측 전체 월드맵. 26개 이벤트 슬롯·특수무기·AI 특수행동을 한 빌드에 결합했습니다.</figcaption>
+  </figure>
+
+  <div class="ver"><h4>0.9 – 0.10 <span class="tag next">통합 엔진</span></h4>
+    <p>브라우저 규칙 엔진을 Godot로 이관·통합. 0.10은 <b>26개 이벤트 슬롯</b>, 특수 무기·기술(원폭·V2·가미카제), 저장·시나리오·점수, AI 특수행동을 결합한 기능완성 후보. 역사 고정/상황 트리거 표 정립.</p></div>
+  <div class="ver"><h4>0.11 – 0.12.1 <span class="tag next">원작 화면 복원</span></h4>
+    <p>원작 시작 화면(622×423 폼 비율 Win95형), 등록판 New Game Options, System Functions, USS Iowa 공개도메인 사진, 국가별 Human/Computer 독립 선택. Natural Earth 1:110m 공개데이터로 2650×1200 지형 마스크 독립 생성. 0.12.1 = 기능 정본 복원 기준선.</p></div>
+  <div class="ver"><h4>0.14 <span class="tag next">조작·생산창</span></h4>
+    <p>지도 이동·공격 입력 복원(아군 지역 클릭 → 조준 커서 → 인접 목표 단일 클릭)과 원작형 <b>Build Forces</b> 생산창(병종별 수량·스탯·Active/Reserve). 실패·재시도 시 출발지·자원 보존.</p></div>
+
+  <div class="fig-row">
+    <figure><img src="shot_build_forces.jpg" alt="Build Forces 생산창"><figcaption>0.14 — Build Forces 생산창(수량·스탯·편성).</figcaption></figure>
+    <figure><img src="shot_germany_map.jpg" alt="독일 턴 월드맵"><figcaption>0.19 — 독일 턴 월드맵(지역 박스·가치·유닛 아이콘).</figcaption></figure>
+  </div>
+
+  <div class="ver"><h4>0.19 – 0.20 <span class="tag next">UI 캡처·전투 정비</span></h4>
+    <p>타이틀·생산·브리핑·편성 등 UI 캡처 세트 정립(이 바이블의 화면 다수가 여기서 나왔습니다). 0.20에서 전투 규칙을 정비.</p></div>
   <div class="ver done"><h4>0.21 <span class="tag done">배포됨</span></h4>
-    <p>25% 중간종료 전투(한 방씩·AA 포함), 전투 결과창→AA→이벤트 팝업 흐름, 원작 사운드 9종 + 전투 배경음, 네이티브 픽셀 렌더, 메뉴 작은창 + 게임 전체화면, 드래그 패닝·가장자리 스크롤·지역 베벨, 이벤트 역사사진 배선, BGM 플레이리스트.</p></div>
+    <p><b>25% 중간종료 전투</b>(한 방씩·AA 포함), 전투 결과창 → 대공포 손실 → 이벤트 팝업 흐름, 원작 사운드 9종 + 전투 배경음, 네이티브 픽셀 렌더, 메뉴 작은창 + 게임 전체화면, 드래그 패닝·가장자리 스크롤·지역 베벨, 이벤트 역사사진 배선, BGM 플레이리스트.</p></div>
+
+  <div class="fig-row">
+    <figure><img src="shot_battle_report.jpg" alt="Battle Report"><figcaption>0.21 — Battle Report(병종별 손실·AA 격추).</figcaption></figure>
+    <figure><img src="shot_turn_briefing.jpg" alt="턴 브리핑"><figcaption>0.21 — 턴 브리핑 서술상자(이벤트 서사).</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Now &amp; next</span>
+  <h2><span class="n">03</span>현재와 다음</h2>
   <div class="ver wip"><h4>0.22 <span class="tag wip">준비 중</span></h4>
     <p>미니맵 위젯, 턴1 독일 재무장 + 턴2 이후 침공 분기 사진, 이벤트 캡션·역사 해설 배선, 전투 결과창 UI(국기 + 유닛 아이콘 + 시작/손실/잔존), 이벤트 없는 턴 폴백 백드롭 10종, 생산화면 국가명 가독성, <b>멀티언어팩(한/영) + 설정 메뉴</b>(언어·해상도).</p></div>
-  <div class="ver"><h4>이후 <span class="tag next">로드맵</span></h4>
-    <p>원작복각 100% 완료 후 <b>어드밴스드 모드</b>: EU4식 전장 씬, 장군 시스템, 확장 이벤트(~100), 지역 세분화.</p></div>
+  <div class="ver"><h4>이후 <span class="tag next">어드밴스드 모드</span></h4>
+    <p>원작복각 100% 완료 후: EU4식 전장 씬(틱 전투·사기·퇴각·연출), 장군 시스템, 확장 이벤트(~100), 지역 세분화. <b>모드 1이 끝나기 전에는 착수하지 않습니다.</b></p></div>
 </div></section>
 
 <section><div class="wrap">
   <span class="eyebrow">Pipeline</span>
-  <h2><span class="n">03</span>빌드·검증 파이프라인</h2>
+  <h2><span class="n">04</span>빌드·검증 파이프라인</h2>
   <div class="grid g2">
     <div class="card"><h4>샌드박스 빌드</h4><p>리눅스 Godot 4.7 headless로 <code>--import</code>(스크립트 파싱 검증) → <code>--export-pack</code>으로 <code>Miniwar.pck</code> 생성. pck는 플랫폼 공통이라 Windows exe와 그대로 짝을 이룹니다.</p></div>
     <div class="card"><h4>부팅 스모크 + 테스트</h4><p>엔진·캠페인·특수규칙·전투·이동 스택 회귀 스위트 실행. 웹 하니스 193항목 0 FAIL 유지가 병합 조건입니다.</p></div>
@@ -46,7 +92,7 @@
   </div>
   <figure style="margin-top:18px">
     <img src="hero.jpg" alt="복각 빌드 화면 모음">
-    <figcaption>복각 빌드의 실제 화면들 — 타이틀, 이벤트, 브리핑, 전투 보고가 하나의 UI 언어로 묶여 있습니다.</figcaption>
+    <figcaption>0.21 배포 빌드의 실제 화면들 — 타이틀·이벤트·브리핑·전투 보고가 하나의 UI 언어로 묶여 있습니다.</figcaption>
   </figure>
 </div></section>
 
