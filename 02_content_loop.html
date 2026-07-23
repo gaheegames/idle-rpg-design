@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="전투, 던전, 필드, 지역 정복, 계승으로 이어지는 방치형 RPG 콘텐츠 순환과 자원 경제 설계">
+  <title>콘텐츠 순환 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="loop">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="기획서 표지로 이동">
+        <span class="brand-mark" aria-hidden="true">AR</span>
+        <span class="brand-copy"><strong>Autonomous Raid</strong><small>Game Design Bible</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="global-nav">목차</button>
+      <nav class="site-nav" id="global-nav" aria-label="전체 기획서">
+        <a data-nav="cover" href="index.html">표지</a>
+        <a data-nav="overview" href="01_overview.html">핵심</a>
+        <a data-nav="loop" href="02_content_loop.html">순환</a>
+        <a data-nav="explore" href="03_auto_explore.html">자동 탐색</a>
+        <a data-nav="dungeon" href="04_dungeon.html">던전</a>
+        <a data-nav="world" href="05_world.html">필드</a>
+        <a data-nav="progression" href="06_progression.html">성장</a>
+        <a data-nav="architecture" href="07_architecture.html">구조</a>
+        <a data-nav="mvp" href="08_mvp.html">MVP</a>
+        <a data-nav="reference" href="09_reference.html">근거</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">02 · CONTENT CIRCULATION <span class="status status-proposal">신규 제안</span></p>
+        <h1>모든 전투가<br><em>월드 변화로 돌아온다.</em></h1>
+        <p class="lede">짧은 전투의 보상은 파티를 강화하고, 강화된 파티는 던전을 거점으로 바꾸며, 거점은 다음 지역 공략을 돕는다. 이 페이지는 1초의 행동부터 여러 런의 계승까지 끊기지 않는 순환을 정의한다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#master-loop">통합 순환도 보기</a>
+          <a class="button ghost" href="#economy">자원 경제 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual loop-preview" aria-label="전투, 보상, 성장, 거점, 지역 해금이 연결된 순환">
+        <div class="mini-loop">
+          <span class="mini-loop-node">전투</span>
+          <span class="mini-loop-arrow">→</span>
+          <span class="mini-loop-node">보상</span>
+          <span class="mini-loop-arrow">→</span>
+          <span class="mini-loop-node">성장</span>
+          <span class="mini-loop-arrow">→</span>
+          <span class="mini-loop-node">정복</span>
+          <span class="mini-loop-return">↺</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-strip" aria-label="콘텐츠 순환 핵심 수치">
+      <article class="kpi-card"><span class="kpi-label">완주 층위</span><strong class="kpi-value">8</strong><span class="kpi-note">행동부터 메타까지</span></article>
+      <article class="kpi-card"><span class="kpi-label">권장 런 자원</span><strong class="kpi-value">3</strong><span class="kpi-note">XP · 골드 · 유물 조각</span></article>
+      <article class="kpi-card"><span class="kpi-label">거점 용도</span><strong class="kpi-value">4</strong><span class="kpi-note">정찰 · 훈련 · 채굴 · 수호</span></article>
+      <article class="kpi-card"><span class="kpi-label">완주 후 선택</span><strong class="kpi-value">2</strong><span class="kpi-note">계승 / 심층 계속</span></article>
+    </section>
+
+    <div class="content-layout">
+      <aside class="section-nav" aria-label="이 페이지 목차">
+        <p class="section-nav-title">이 페이지</p>
+        <nav>
+          <a href="#reference-loop">레퍼런스 루프</a>
+          <a href="#master-loop">신규 통합 순환</a>
+          <a href="#time-loops">시간 층위</a>
+          <a href="#expedition-loop">던전과 지역</a>
+          <a href="#economy">자원 경제</a>
+          <a href="#item-loop">아이템 순환</a>
+          <a href="#endgame-loop">런 종료</a>
+          <a href="#guardrails">순환 안전장치</a>
+        </nav>
+        <div class="legend compact">
+          <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
+          <span><i class="legend-dot proposal"></i> 신규 제안</span>
+        </div>
+      </aside>
+
+      <div class="prose">
+        <section class="content-section" id="reference-loop">
+          <div class="section-heading">
+            <p class="eyebrow">OBSERVED LOOP <span class="status status-reference">확인</span></p>
+            <h2>레퍼런스가 실제로 닫는 순환</h2>
+            <p>분석 대상의 핵심은 단순 자동 전투가 아니다. 자동 행동이 전투와 탐색을 계속 생산하고, 그 결과가 성장과 자동화를 강화하며, 강화된 자동화가 더 먼 콘텐츠를 소비한다.</p>
+          </div>
+
+          <div class="flow-board reference-flow" role="img" aria-label="필드 목표 선택에서 메타 성장까지 이어지는 레퍼런스 콘텐츠 순환">
+            <div class="flow-lane">
+              <span class="lane-label">행동</span>
+              <div class="flow-node"><small>01</small><strong>필드 목표</strong><span>상점 · 성 · 던전</span></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node"><small>02</small><strong>자동 원정</strong><span>이동 · 방 탐색 · 전투</span></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node"><small>03</small><strong>정산</strong><span>XP · 처치 · 골드 · 장비</span></div>
+            </div>
+            <div class="flow-lane">
+              <span class="lane-label">성장</span>
+              <div class="flow-node"><small>04</small><strong>파티 강화</strong><span>레벨 · 기술 · 장비</span></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node"><small>05</small><strong>규칙 강화</strong><span>설정 · 농장 · 자동화</span></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node"><small>06</small><strong>적 티어</strong><span>상위 위험 접근</span></div>
+            </div>
+            <div class="flow-lane">
+              <span class="lane-label">정복</span>
+              <div class="flow-node"><small>07</small><strong>던전 정복</strong><span>지역 조건 누적</span></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node"><small>08</small><strong>성 정복</strong><span>인접 영지 해금</span></div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node"><small>09</small><strong>승리 이후</strong><span>프레스티지 · 계속 · 도전</span></div>
+            </div>
+          </div>
+
+          <div class="callout warning-callout">
+            <div><span class="status status-reference">확인된 단절</span><strong>“공격 준비”와 “공격 예약”은 다르다</strong></div>
+            <p>성 자동 공격 클래스의 흔적은 있지만 기본 자동화 갱신 경로에는 연결되지 않는다. 지역 던전을 모두 끝낸 뒤에도 성 공격 예약 입력을 기다리며 장기 순환이 멈출 수 있다. 신규 설계에서는 예상 승률·소모품·최근 실패 조건에 따른 자동 예약을 기본 정책으로 둔다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="master-loop">
+          <div class="section-heading">
+            <p class="eyebrow">TARGET LOOP <span class="status status-proposal">신규 제안</span></p>
+            <h2>신규 프로젝트의 통합 콘텐츠 순환</h2>
+          </div>
+
+          <div class="master-loop" role="img" aria-label="정책 설정에서 필드, 던전, 거점, 지역 보스, 계승을 거쳐 다시 정책으로 돌아오는 콘텐츠 순환">
+            <div class="master-loop-track">
+              <article class="loop-node node-policy"><span>01</span><strong>정책·빌드</strong><small>위험 · 회복 · 루팅 · 성장</small></article>
+              <article class="loop-node node-world"><span>02</span><strong>필드 목표</strong><small>진척 · 자원 · 위협 · 이동비</small></article>
+              <article class="loop-node node-dungeon"><span>03</span><strong>자동 던전</strong><small>탐색 · 전투 · 분기 · 철수</small></article>
+              <article class="loop-node node-reward"><span>04</span><strong>정산</strong><small>XP · 골드 · 장비 · 유물</small></article>
+              <article class="loop-node node-outpost"><span>05</span><strong>거점 전환</strong><small>정찰 · 훈련 · 채굴 · 수호</small></article>
+              <article class="loop-node node-region"><span>06</span><strong>지역 보스</strong><small>조건 충족 · 공격 · 정복</small></article>
+              <article class="loop-node node-world"><span>07</span><strong>새 지역</strong><small>경로 · 규칙 · 위협 확장</small></article>
+              <article class="loop-node node-legacy"><span>08</span><strong>계승·심층</strong><small>새 전략 / 같은 빌드 한계</small></article>
+            </div>
+            <p class="loop-return-label">결과가 새 정책 선택지를 열고 01로 귀환</p>
+          </div>
+
+          <div class="principle-band">
+            <strong>순환의 핵심</strong>
+            <p>던전은 소모되는 전투장이 아니다. 완료 결과가 필드 노드의 기능을 바꾸고, 그 노드가 다음 원정의 자원·정보·안전도를 바꿔야 한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="time-loops">
+          <div class="section-heading">
+            <p class="eyebrow">LOOPS BY HORIZON</p>
+            <h2>플레이 시간마다 하나씩 닫히는 완주감</h2>
+            <p>짧은 피드백이 긴 목표를 밀어 올리지 못하면 방치는 정지 화면이 되고, 긴 목표만 있으면 성장이 체감되지 않는다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>층위</th><th>초기 목표 시간</th><th>자동 순환</th><th>플레이어 결정</th><th>완료 신호</th></tr></thead>
+              <tbody>
+                <tr><td>행동</td><td>0.25–3초</td><td>이동·공격·회복·스킬</td><td>전투 전 행동 원칙</td><td>명중·치유·이동 완료</td></tr>
+                <tr><td>인카운터</td><td>5–25초</td><td>타깃 선정→전투→드롭</td><td>빌드 결과 관찰</td><td>위협 제거·즉시 보상</td></tr>
+                <tr><td>방</td><td>20–60초</td><td>전투→수집→상호작용</td><td>루팅·상호작용 정책</td><td>방 해결·frontier 갱신</td></tr>
+                <tr><td>층</td><td>2–5분</td><td>주요 경로·분기·출구</td><td>안전·완전 탐색·직행</td><td>층 목표·계단</td></tr>
+                <tr><td>던전</td><td>8–20분</td><td>복수 층·최종 목표·귀환</td><td>철수 기준·보상 성향</td><td>결과 리포트·거점 선택</td></tr>
+                <tr><td>지역</td><td>45분–8시간</td><td>던전망→영향력→보스</td><td>공략 순서·시설 조합</td><td>보스·인접 지역 해금</td></tr>
+                <tr><td>런</td><td>누적 3–14일</td><td>지역 연쇄→최종 위협</td><td>계승 시점·빌드 방향</td><td>런 완료</td></tr>
+                <tr><td>메타</td><td>여러 런</td><td>새 규칙·클래스·정책</td><td>장기 플레이 스타일</td><td>수평 선택지 확장</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption"><span class="status status-proposal">신규 제안</span> 시간은 초기 밸런스 가설이다. 실제 전투 템포와 이탈 지점으로 조정하되 층위 간 인과관계는 유지한다.</p>
+        </section>
+
+        <section class="content-section" id="expedition-loop">
+          <div class="section-heading">
+            <p class="eyebrow">EXPEDITION → REGION</p>
+            <h2>한 번의 던전이 지역 전략으로 바뀌는 과정</h2>
+          </div>
+          <div class="stage-grid">
+            <article class="stage-card"><span class="stage-number">전</span><h3>원정 준비</h3><ul><li>파티와 행동 정책 선택</li><li>보스·유물·구조·정찰 등 목표 선택</li><li>철수·회복·전리품 기준 설정</li></ul></article>
+            <article class="stage-card"><span class="stage-number">중</span><h3>자동 수행</h3><ul><li>Director가 목표·경로 선택</li><li>전투 AI가 방 단위 위협 해결</li><li>새 정보로 위험·frontier 재평가</li></ul></article>
+            <article class="stage-card"><span class="stage-number">후</span><h3>결과 정산</h3><ul><li>성장·장비·실패 원인 요약</li><li>던전 노드의 거점 용도 결정</li><li>지역 보스 조건과 추천 목표 갱신</li></ul></article>
+          </div>
+
+          <h3>완료한 던전의 네 가지 두 번째 삶</h3>
+          <div class="card-grid four-col facility-grid">
+            <article class="card"><span class="facility-icon" aria-hidden="true">◇</span><h4>정찰소</h4><p>인접 노드 공개, 방·보스 정보 증가</p><small>경로 계획 강화</small></article>
+            <article class="card"><span class="facility-icon" aria-hidden="true">△</span><h4>훈련소</h4><p>대기 영웅 XP, 역할 숙련 생산</p><small>로스터 성장 강화</small></article>
+            <article class="card"><span class="facility-icon" aria-hidden="true">⬡</span><h4>채굴소</h4><p>골드와 제작 재료 생산</p><small>장비·시설 투자 강화</small></article>
+            <article class="card"><span class="facility-icon" aria-hidden="true">▣</span><h4>수호소</h4><p>지역 위협 지연, 이동 안전도 증가</p><small>방치 안정성 강화</small></article>
+          </div>
+
+          <div class="gate-stack" aria-label="지역 보스 해금의 세 가지 권장 조건">
+            <div><span>게이트 A</span><strong>필수 목표 3개 중 2개</strong><small>모든 던전 강제를 완화</small></div>
+            <div><span>게이트 B</span><strong>지역 영향력 달성</strong><small>던전·사건 결과를 누적</small></div>
+            <div><span>게이트 C</span><strong>보스 단서 1개 이상</strong><small>정찰과 선택 콘텐츠에 가치</small></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="economy">
+          <div class="section-heading">
+            <p class="eyebrow">RESOURCE ECONOMY</p>
+            <h2>자원마다 한 가지 질문에 답하게 한다</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>자원</th><th>수명</th><th>주 공급</th><th>주 소비·역할</th><th>답하는 질문</th></tr></thead>
+              <tbody>
+                <tr><td><strong>영웅 XP</strong></td><td>런 내</td><td>전투·훈련소·목표</td><td>자동 레벨업</td><td>누구를 먼저 성장시킬까?</td></tr>
+                <tr><td><strong>골드</strong></td><td>런 내</td><td>전투·분해·채굴소</td><td>제작·재련·시설·소모품</td><td>당장 어느 병목에 투자할까?</td></tr>
+                <tr><td><strong>유물 조각</strong></td><td>런 내</td><td>엘리트·보스·사건</td><td>런 기술·유물 결합</td><td>이번 런의 방향은 무엇인가?</td></tr>
+                <tr><td><strong>계승 인장</strong></td><td>영구</td><td>지역·런 최초 목표·도전</td><td>클래스·정책 슬롯·시설 유형</td><td>다음 런에 어떤 전략을 열까?</td></tr>
+                <tr><td><strong>지역 영향력</strong></td><td>비화폐 상태</td><td>던전·사건 완료</td><td>소비하지 않는 해금 게이트</td><td>지역 공략은 얼마나 진척됐나?</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="compare-panel">
+            <div class="compare-side muted">
+              <span class="status status-reference">레퍼런스 확인</span>
+              <h3>처치 수 = 기록 + 화폐</h3>
+              <p>몬스터 처치와 농장이 생산하고, 전투 설정·적 티어 해금에 소비한다. 플레이 성과를 나타내는 통계와 구매력이 섞여 의미가 흐려진다.</p>
+            </div>
+            <div class="compare-arrow" aria-hidden="true">→</div>
+            <div class="compare-side bright">
+              <span class="status status-proposal">신규 제안</span>
+              <h3>처치 수 = 기록</h3>
+              <p>진행은 영향력, 투자는 골드, 빌드는 유물, 메타는 계승 인장이 담당한다. 적 티어는 지역 난도와 선택한 위협 단계에서 결정한다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="item-loop">
+          <div class="section-heading">
+            <p class="eyebrow">ITEM CIRCULATION</p>
+            <h2>획득보다 처리까지 닫혀야 하는 아이템 루프</h2>
+          </div>
+          <div class="branch-flow" role="img" aria-label="드롭을 비교해 장착, 보존, 분해하고 다시 제작과 고위험 던전으로 이어지는 흐름">
+            <div class="branch-root"><strong>드롭</strong><small>전투 · 엘리트 · 보스 · 사건</small></div>
+            <div class="branch-line" aria-hidden="true"></div>
+            <div class="branch-options">
+              <div><strong>장착 후보</strong><small>전투력·빌드 변화</small></div>
+              <div><strong>보존</strong><small>태그·세트·스킬 옵션</small></div>
+              <div><strong>자동 분해</strong><small>골드·제작 재료</small></div>
+            </div>
+            <div class="branch-merge"><strong>재련·제작</strong><span>→</span><strong>목표 옵션</strong><span>→</span><strong>더 높은 위험</strong></div>
+          </div>
+          <ul class="check-list">
+            <li>희귀도, 향상률, 태그 잠금으로 자동 처리한다.</li>
+            <li>가방 한도 도달 전에 선제 정리하고 최근 처리 목록에서 짧게 되돌릴 수 있다.</li>
+            <li>상점은 정리를 강제하는 경유지가 아니라 희귀 제작·재련처럼 찾아갈 이유가 있는 선택 장소다.</li>
+            <li>초과 아이템은 무보상으로 사라지지 않는다.</li>
+          </ul>
+        </section>
+
+        <section class="content-section" id="endgame-loop">
+          <div class="section-heading">
+            <p class="eyebrow">RUN COMPLETION</p>
+            <h2>완주 뒤에는 새 조합과 한계 시험을 분리한다</h2>
+          </div>
+          <div class="choice-grid">
+            <article class="choice-card">
+              <span class="choice-label">PATH A</span>
+              <h3>계승</h3>
+              <p>영구 정책, 클래스·시설 해금, 계승 보상을 유지하고 파티 레벨·런 장비·지역 상태·런 자원을 초기화한다.</p>
+              <strong>목적: 새 조합과 새 월드 반복</strong>
+            </article>
+            <article class="choice-card">
+              <span class="choice-label">PATH B</span>
+              <h3>심층 계속</h3>
+              <p>현재 파티와 빌드를 유지하되 지역 지도와 일부 생산망을 재구성하고 별도의 난도 계수·보상 표를 적용한다.</p>
+              <strong>목적: 같은 빌드의 한계 시험</strong>
+            </article>
+          </div>
+          <p class="caption">두 경로를 같은 배율 경제에서 무한히 중첩하지 않는다. 심층 계속의 영구 보상은 낮추고 수평 보상을 중심으로 둔다.</p>
+        </section>
+
+        <section class="content-section" id="guardrails">
+          <div class="section-heading">
+            <p class="eyebrow">LOOP GUARDRAILS</p>
+            <h2>순환이 폭주하거나 멈추지 않게 하는 규칙</h2>
+          </div>
+          <div class="card-grid two-col numbered-grid">
+            <article class="card"><span class="card-index">01</span><p>모든 런 자원은 최소 두 개의 의미 있는 소비처를 가진다.</p></article>
+            <article class="card"><span class="card-index">02</span><p>영구 자원은 전투 배율보다 새 규칙과 정책을 먼저 연다.</p></article>
+            <article class="card"><span class="card-index">03</span><p>시설 수익은 전투 보상을 완전히 대체하지 않고 서로 보완한다.</p></article>
+            <article class="card"><span class="card-index">04</span><p>반복 던전은 최초 보상보다 낮지만 필요한 자원을 지정 파밍할 수 있다.</p></article>
+            <article class="card"><span class="card-index">05</span><p>공격·경제·시간 계열 배율에는 상한 또는 감쇠를 둔다.</p></article>
+            <article class="card"><span class="card-index">06</span><p>자동 수금·자동 보스 예약으로 관리 입력 대기 정체를 제거한다.</p></article>
+            <article class="card"><span class="card-index">07</span><p>같은 보상 ID는 저장·로드·복구 뒤에도 한 번만 정산한다.</p></article>
+            <article class="card"><span class="card-index">08</span><p>오프라인도 같은 규칙을 쓰며 중요한 선택 경계만 정책으로 처리한다.</p></article>
+          </div>
+        </section>
+
+        <nav class="pager" aria-label="페이지 이동">
+          <a class="pager-prev" href="01_overview.html"><span>이전</span><strong>핵심 설계</strong></a>
+          <a class="pager-next" href="03_auto_explore.html"><span>다음</span><strong>자동 탐색</strong></a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>자율 원정대 방치형 RPG · 게임플레이 기획서</p>
+    <a href="#main">위로</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="방치형 RPG의 절차 생성 던전 구조, 시드, 방 그래프, 콘텐츠 예산, 검증과 폴백 설계">
+  <meta name="theme-color" content="#14263b">
+  <title>던전 생성과 진행 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="dungeon">
+  <div data-site-header></div>
+
+  <main id="main-content" class="page-shell">
+    <header class="page-heading">
+      <p class="page-kicker">04 · PROCEDURAL DUNGEON</p>
+      <h1>방을 무작위로 놓는 것이 아니라<br><em>선택의 리듬</em>을 생성한다</h1>
+      <p class="page-summary">레퍼런스의 결정적 기하와 지연 생성은 유지할 가치가 있다. 신규 생성기는 연결성에 그치지 않고 주요 경로, 선택 분기, 위험·보상 예산, 출구 거리와 해결 가능성을 검증해 한 층의 플레이 경험까지 보장한다.</p>
+      <div class="meta-row">
+        <span class="status-chip complete">생성 규칙 확인</span>
+        <span class="status-chip design">신규 파이프라인</span>
+        <span class="status-chip warning">무제한 재시도 금지</span>
+      </div>
+    </header>
+
+    <section class="metric-grid" aria-label="레퍼런스 던전 생성 핵심 수치">
+      <article class="metric-card"><span class="metric-label">Internal Grid</span><strong class="metric-value">120²</strong><p>레퍼런스 내부 맵 타일 격자</p></article>
+      <article class="metric-card"><span class="metric-label">Classic Rooms</span><strong class="metric-value">5–9</strong><p>방 한 변 8–14타일</p></article>
+      <article class="metric-card"><span class="metric-label">Classic Floors</span><strong class="metric-value">3–6</strong><p>고정 월드 176개 던전에서 확인</p></article>
+      <article class="metric-card"><span class="metric-label">Graph Shape</span><strong class="metric-value">N−1</strong><p>방 N개에 복도 N−1개인 순수 트리</p></article>
+    </section>
+
+    <div class="article-layout">
+      <article class="article">
+        <h2 id="reference-summary">레퍼런스 생성 구조의 핵심</h2>
+        <p class="lead">필드 던전 메타데이터는 이동 중 생기는 것이 아니라 월드 구성 시 선계산된다. 던전 안에서는 필드 좌표와 층 인덱스로 구조를 재현하고, 아직 열지 않은 방의 인카운터는 문을 열 때 실체화한다.</p>
+
+        <div class="flow" aria-label="레퍼런스 던전 생성 순서">
+          <div class="flow-node"><span class="step-index">01</span><strong>방 배치</strong><span>크기·위치 추첨, 충돌 검사, 북서 압축</span></div>
+          <div class="flow-node"><span class="step-index">02</span><strong>트리 연결</strong><span>새 방을 기존 연결 집합의 가까운 방에 부착</span></div>
+          <div class="flow-node"><span class="step-index">03</span><strong>복도 라우팅</strong><span>타일 A* 유사 탐색, 최대 500 노드 확장</span></div>
+          <div class="flow-node"><span class="step-index">04</span><strong>입구·출구</strong><span>서로 다른 임의 방에 계단 배치</span></div>
+        </div>
+
+        <table>
+          <thead><tr><th>항목</th><th>확인된 레퍼런스 동작</th><th>기획적 의미</th></tr></thead>
+          <tbody>
+            <tr><td>클래식 월드</td><td>고정 시드에서 176개 던전, 각 3–6층</td><td>새 게임마다 공간이 바뀌는 월드가 아니라 고정 정복 지도에 가까움</td></tr>
+            <tr><td>챌린지</td><td>90개 던전, 실제로 모두 2층</td><td>공간 탐험보다 긴 순차 전투 코스</td></tr>
+            <tr><td>기하 시드</td><td><code>961×worldCol + 31×worldRow + floorIndex</code></td><td>같은 좌표·층은 같은 방·복도·계단 구조</td></tr>
+            <tr><td>일반 방</td><td>클래식 5–9개, 각 축 8–14타일</td><td>짧고 읽기 쉬운 층</td></tr>
+            <tr><td>그래프</td><td>성공한 방 N개에 복도 N−1개, 순환 0개</td><td>명확하지만 막다른 길과 역주행이 많음</td></tr>
+            <tr><td>입구·출구</td><td>서로 다른 임의 방, 최소 그래프 거리 없음</td><td>매우 짧거나 긴 층이 품질 통제 없이 발생</td></tr>
+            <tr><td>콘텐츠 생성</td><td>입구 방은 즉시, 나머지는 첫 문 개방 시</td><td>아직 보지 않은 방의 비용을 늦출 수 있음</td></tr>
+            <tr><td>재시도</td><td>전체 생성 시도 상한 없음</td><td>드문 실패가 영구 로딩으로 이어질 위험</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout success">
+          <strong class="callout-title">유지할 원리</strong>
+          공간 기하를 seed로 재생성하고 공개·문 상태만 델타로 저장하는 방식, 방 콘텐츠를 공개 순간까지 지연하는 방식, 공용 방 그래프와 지역 waypoint를 나누는 방식은 신규 설계에서도 유효하다.
+        </div>
+
+        <h2 id="reference-topology">트리 맵이 만드는 실제 플레이</h2>
+        <div class="state-lane" aria-label="순수 트리 던전의 진행 형태">
+          <span class="state">입구</span><span class="arrow">→</span>
+          <span class="state">주요 갈림길</span><span class="arrow">↗</span>
+          <span class="state">막다른 보상</span><span class="arrow">↩</span>
+          <span class="state">주요 갈림길</span><span class="arrow">→</span>
+          <span class="state">출구</span>
+        </div>
+        <p>모든 방이 연결되고 구조를 읽기 쉽다는 장점이 있지만, 두 갈래가 다시 만나는 지름길이 없다. 자동 탐색은 막다른 분기에서 반드시 같은 복도를 되돌아와야 하며, “어느 길이 안전하거나 효율적인가”보다 “어느 막다른 길을 먼저 소비할까”에 가까운 선택만 남는다.</p>
+
+        <h3 id="reference-risks">확인된 품질 위험</h3>
+        <div class="card-grid">
+          <article class="card"><span class="status-chip risk">거리</span><h3>임의 출구</h3><p>입구와 출구 사이 최소 거리를 검사하지 않아 한두 방 만에 층이 끝날 수 있다.</p></article>
+          <article class="card"><span class="status-chip risk">실패</span><h3>무제한 재시도</h3><p>생성 전체의 시도 횟수·시간 예산·검증된 폴백이 없다.</p></article>
+          <article class="card"><span class="status-chip risk">재현</span><h3>난수 경계 혼합</h3><p>기하는 재현되지만 몬스터·상자·장식은 다른 난수원에 의존한다.</p></article>
+          <article class="card"><span class="status-chip warning">검증</span><h3>품질 검사 부족</h3><p>출구 거리, spawn 안전 반경, 문 좌표 중복, 전체 flood-fill 품질을 검사하지 않는다.</p></article>
+          <article class="card"><span class="status-chip warning">배치</span><h3>북서 편향</h3><p>배치된 방을 북서로 밀어 넓은 캔버스 한쪽에 군집이 생긴다.</p></article>
+          <article class="card"><span class="status-chip warning">저장</span><h3>배열 순서 의존</h3><p>방·복도 델타가 생성 코드 버전의 배열 순서에 의존한다.</p></article>
+        </div>
+
+        <h2 id="design-goals">신규 던전 생성의 다섯 목표</h2>
+        <div class="principle-grid">
+          <article class="principle-card"><span class="principle-index">01</span><h3>읽을 수 있음</h3><p>주요 경로와 선택 분기의 의미가 화면과 탐색 로그에서 드러난다.</p></article>
+          <article class="principle-card"><span class="principle-index">02</span><h3>결정성</h3><p>같은 seed와 명령 로그는 같은 공간·인카운터·보상을 만든다.</p></article>
+          <article class="principle-card"><span class="principle-index">03</span><h3>복구 가능</h3><p>생성 실패는 정해진 횟수 뒤 검증된 템플릿으로 끝난다.</p></article>
+          <article class="principle-card"><span class="principle-index">04</span><h3>데이터 조절</h3><p>방 수, 분기, 거리, 전투·보상 밀도를 profile로 조절한다.</p></article>
+          <article class="principle-card"><span class="principle-index">05</span><h3>동일 규칙</h3><p>화면 실행과 오프라인 계산이 같은 층 결과를 사용한다.</p></article>
+        </div>
+
+        <h2 id="seed-streams">난수 스트림을 목적별로 분리한다</h2>
+        <p>이름 하나를 추가했더니 뒤쪽 던전 위치가 바뀌거나, 장식 변경이 보스 조합을 바꾸는 일이 없어야 한다. 각 스트림은 root seed, 안정 domain tag, entity ID, floor에서 파생한다.</p>
+        <table>
+          <thead><tr><th>범위</th><th>스트림</th><th>소유하는 결과</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="4">월드</td><td><code>geographySeed</code></td><td>영지·지역 그래프·POI 위치</td></tr>
+            <tr><td><code>terrainSeed</code></td><td>지형과 통행 비용</td></tr>
+            <tr><td><code>namingSeed</code></td><td>명칭</td></tr>
+            <tr><td><code>cosmeticSeed</code></td><td>월드 장식</td></tr>
+            <tr><td rowspan="4">던전</td><td><code>topologySeed</code></td><td>방 그래프·주요 경로·분기</td></tr>
+            <tr><td><code>geometrySeed</code></td><td>방 크기·좌표·복도</td></tr>
+            <tr><td><code>populationSeed</code></td><td>몬스터·상자·드롭·상호작용</td></tr>
+            <tr><td><code>cosmeticSeed</code></td><td>타일 변형과 소품</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="generation-pipeline">토폴로지 먼저, 기하는 나중에</h2>
+        <p>방 위치부터 뽑고 우연히 생긴 연결을 쓰지 않는다. 먼저 이 층이 제공해야 할 선택을 그래프로 만든 다음 화면 공간에 배치한다.</p>
+        <ol class="step-list">
+          <li><strong>프로필 결정</strong> 지역 테마, 위험 티어, 던전 목적, 층 수와 난도 예산을 정한다.</li>
+          <li><strong>토폴로지 생성</strong> 주요 경로 길이, 선택 분기, 막다른 보상실, 소수의 순환 edge를 만든다.</li>
+          <li><strong>방 역할 배정</strong> 전투·엘리트·보물·사건·회복·출구 quota를 지킨다.</li>
+          <li><strong>기하 배치</strong> 그래프 노드를 방 크기·좌표로 변환하고 충돌·여유 공간을 검사한다.</li>
+          <li><strong>복도 라우팅</strong> 정해진 path budget 안에서 모든 edge를 실제 복도로 잇는다.</li>
+          <li><strong>입구·출구 선택</strong> 그래프 거리 기준을 만족하는 먼 출구를 고르고 계단 안전 반경을 확보한다.</li>
+          <li><strong>콘텐츠 예산 배분</strong> 전투·위험·보상·회복 예산을 방 역할과 경로 위치에 맞춰 나눈다.</li>
+          <li><strong>해결 가능성 검증</strong> 키·봉인 의존성과 모든 필수 방 도달 가능성을 확인한다.</li>
+          <li><strong>유한 재시도</strong> 최대 횟수까지 실패하면 즉시 검증된 폴백 템플릿을 사용한다.</li>
+        </ol>
+
+        <pre><code>BuildFloor(profile, seedSet):
+  for attempt in 0 .. profile.maxAttempts - 1:
+    graph     = BuildRoomGraph(profile, topologyStream(attempt))
+    rooms     = PlaceGeometry(graph, geometryStream(attempt))
+    corridors = RouteEdges(rooms, graph, profile.pathBudget)
+
+    if placement or routing failed: continue
+
+    entrance = ChooseEntrance(graph)
+    exit     = ChooseFarExit(graph, entrance, profile.exitPercentile)
+    report   = ValidateFloor(graph, rooms, corridors, entrance, exit)
+
+    if report.ok: return Floor(...)
+
+  return BuildGuaranteedFallbackFloor(profile)</code></pre>
+
+        <h2 id="topology-profile">권장 그래프와 생성 프로필</h2>
+        <div class="layer-stack">
+          <div class="layer"><strong>주요 경로</strong> 입구에서 목표·출구까지 4–8개 방</div>
+          <div class="layer"><strong>선택 분기</strong> 층당 1–3개, 끝에는 추가 비용보다 조금 높은 기대 보상</div>
+          <div class="layer"><strong>막다른 보상실</strong> 되돌아갈 이유가 명확한 보상 또는 정보</div>
+          <div class="layer"><strong>순환 edge</strong> 일부 층에 0–2개, 과도한 역주행을 줄이고 회피 경로 제공</div>
+          <div class="layer"><strong>안전 방</strong> 긴 전투 구간 사이에 최소 1개</div>
+        </div>
+
+        <table>
+          <thead><tr><th>항목</th><th>일반 던전</th><th>대규모·챌린지</th></tr></thead>
+          <tbody>
+            <tr><td>방 수</td><td class="data-number">7–11</td><td class="data-number">6–9</td></tr>
+            <tr><td>방 한 변</td><td class="data-number">7–13</td><td class="data-number">14–22</td></tr>
+            <tr><td>추가 순환 간선</td><td>트리 간선의 15–25%</td><td>10–20%</td></tr>
+            <tr><td>입구→출구 최소</td><td>그래프 4간선</td><td>그래프 3간선</td></tr>
+            <tr><td>막다른 방 비율</td><td>20–40%</td><td>15–30%</td></tr>
+            <tr><td>전체 생성 시도</td><td>최대 8회</td><td>최대 8회</td></tr>
+            <tr><td>실패 처리</td><td>검증된 템플릿 폴백</td><td>검증된 템플릿 폴백</td></tr>
+          </tbody>
+        </table>
+        <p class="caption"><span class="status-chip design">신규 제안</span> 프로필 수치는 초기 기본값이다. 트리의 명확성은 유지하되 적은 수의 순환로로 경로 정책에 실제 선택을 만든다.</p>
+
+        <h2 id="room-roles">방 역할이 콘텐츠 조합의 문법이다</h2>
+        <div class="card-grid">
+          <article class="card"><span class="tag">BASELINE</span><h3>일반 전투실</h3><p>기본 성장 재료와 현재 빌드의 지속 전투 능력을 검사한다.</p></article>
+          <article class="card"><span class="tag">RISK</span><h3>엘리트실</h3><p>높은 위험 대신 유물 조각·빌드 핵심 보상을 준다.</p></article>
+          <article class="card"><span class="tag">ECONOMY</span><h3>보물실</h3><p>전리품 정책과 인벤토리 판단을 일으킨다.</p></article>
+          <article class="card"><span class="tag">CHOICE</span><h3>사건실</h3><p>조건부 선택으로 런 규칙과 위험·보상 구성을 바꾼다.</p></article>
+          <article class="card"><span class="tag">RHYTHM</span><h3>회복실</h3><p>다음 위험을 감당하게 하는 리듬 장치이자 안전 snapshot 지점이다.</p></article>
+          <article class="card"><span class="tag">GATE</span><h3>봉인·퍼즐실</h3><p>키, 능력, 직업 조합을 검사하되 필수 경로를 막으면 해결 순서를 검증한다.</p></article>
+        </div>
+
+        <h2 id="content-budget">한 층의 위험과 보상을 예산으로 묶는다</h2>
+        <div class="formula">floorBudget = baseBudget
+            × depthFactor
+            × regionDanger
+            × activeModifier</div>
+        <p>총예산을 전투, 환경 위험, 보상, 회복에 배분한다. 전투 예산이 올라가면 보상 예산도 따라 올라가야 하며, 선택 분기의 기대 보상은 추가 이동·전투 비용보다 조금 높아야 한다.</p>
+        <ul>
+          <li>회복실은 공짜 보상이 아니라 다음 고위험 구간을 가능하게 하는 템포 장치다.</li>
+          <li>보스 직전에는 무작위로 치명적인 encounter tag 조합을 제한한다.</li>
+          <li>목표 직행·완전 탐색 어느 한쪽만 항상 정답이 되지 않게 자원 압박과 선택 보상을 함께 둔다.</li>
+          <li>동일 지형을 재사용해도 population seed와 modifier로 다른 전투 구성을 만들 수 있다.</li>
+        </ul>
+
+        <h2 id="validation">필수 생성 검증과 폴백</h2>
+        <div class="card-grid">
+          <article class="card"><h3>연결성</h3><p>입구에서 모든 필수 방과 출구에 도달 가능하며 키·봉인 의존성이 위상 순서를 만족한다.</p></article>
+          <article class="card"><h3>거리</h3><p>입구→출구가 그래프 지름의 60% 이상 또는 프로필의 최소 3–4간선을 충족한다.</p></article>
+          <article class="card"><h3>공간 안전</h3><p>문·계단 좌표가 겹치지 않고 계단 2타일 반경에 문·상자·몬스터가 생성되지 않는다.</p></article>
+          <article class="card"><h3>구조 계약</h3><p>각 문이 정확히 방 하나와 복도 하나에 연결되고 복도 폭·벽 여유가 기준을 만족한다.</p></article>
+          <article class="card"><h3>밀도</h3><p>방 면적 대비 최대 동시 적 수, 막다른 길 비율, 총 이동 거리와 바닥 셀 수가 목표 구간에 있다.</p></article>
+          <article class="card"><h3>시간 예산</h3><p>시도 횟수 또는 생성 시간 예산을 넘기면 더 시도하지 않고 즉시 폴백한다.</p></article>
+        </div>
+        <div class="callout warning">
+          <strong class="callout-title">폴백은 예외가 아니라 제품 기능</strong>
+          폴백 층도 같은 방 역할 quota, 안정 ID, seed 파생, 보상 예산을 가진 검증된 템플릿이어야 한다. “빈 직선 맵”으로 게임 규칙을 우회하지 않는다.
+        </div>
+
+        <h2 id="runtime-lifecycle">생성된 층의 런타임 수명 주기</h2>
+        <div class="state-lane" aria-label="던전 층의 생성, 탐색, 완료, 저장 수명 주기">
+          <span class="state">SEED 확정</span><span class="arrow">→</span>
+          <span class="state">기하 생성·검증</span><span class="arrow">→</span>
+          <span class="state">입구 공개</span><span class="arrow">→</span>
+          <span class="state">문 개방 시 콘텐츠 생성</span><span class="arrow">→</span>
+          <span class="state">방 해결·델타 기록</span><span class="arrow">→</span>
+          <span class="state">층 완료</span>
+        </div>
+        <p>세이브에는 전체 타일 배열 대신 <code>generationVersion</code>, seed set, 안정적인 Room/Door/Object ID, 공개·개방·완료 델타를 기록한다. 생성 코드가 바뀌면 버전별 생성기 또는 명시적 마이그레이션으로 이전 세이브를 보호한다.</p>
+
+        <h3 id="save-contract">저장할 최소 상태</h3>
+        <dl class="definition-grid">
+          <dt>정적 재생성</dt><dd>generationVersion · floorId · seed set · profileId</dd>
+          <dt>공간 델타</dt><dd>공개 방·복도 · 문 상태 · 파괴·봉인 상태</dd>
+          <dt>콘텐츠 델타</dt><dd>해결된 인카운터 · 수집한 loot ID · 완료 interaction ID</dd>
+          <dt>원정 상태</dt><dd>파티 node·anchor · Director 목표·경로·복구 단계 · floorRevision</dd>
+          <dt>중복 방지</dt><dd>RewardLedger의 안정 event ID와 정산 여부</dd>
+        </dl>
+
+        <h2 id="validation-targets">던전 시스템 완료 기준</h2>
+        <ul>
+          <li>10,000개 seed의 모든 필수 방·출구가 도달 가능하거나 제한된 생성 단계에서 폴백된다.</li>
+          <li>동일 seed set·generationVersion은 동일한 그래프·방 역할·콘텐츠 ID를 만든다.</li>
+          <li>입구→출구 거리, 분기, 막다른 길, 순환로, 전투·보상 예산 분포가 profile 범위 안에 든다.</li>
+          <li>저장·로드 뒤 공개 상태, 문, 전리품, 상호작용과 보상이 정확히 복원된다.</li>
+          <li>생성 실패가 무한 로딩으로 이어지는 경우가 0이다.</li>
+        </ul>
+      </article>
+
+      <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
+    </div>
+
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="자율 원정대 방치형 RPG의 상태 수명, 시뮬레이션, 모듈 경계, 이벤트, 저장과 오프라인 구조">
+  <title>게임 구조 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="architecture">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="기획서 표지로 이동">
+        <span class="brand-mark" aria-hidden="true">AR</span>
+        <span class="brand-copy"><strong>Autonomous Raid</strong><small>Game Design Bible</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="global-nav">목차</button>
+      <nav class="site-nav" id="global-nav" aria-label="전체 기획서">
+        <a data-nav="cover" href="index.html">표지</a>
+        <a data-nav="overview" href="01_overview.html">핵심</a>
+        <a data-nav="loop" href="02_content_loop.html">순환</a>
+        <a data-nav="explore" href="03_auto_explore.html">자동 탐색</a>
+        <a data-nav="dungeon" href="04_dungeon.html">던전</a>
+        <a data-nav="world" href="05_world.html">필드</a>
+        <a data-nav="progression" href="06_progression.html">성장</a>
+        <a data-nav="architecture" href="07_architecture.html" aria-current="page">구조</a>
+        <a data-nav="mvp" href="08_mvp.html">MVP</a>
+        <a data-nav="reference" href="09_reference.html">근거</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">07 · GAME ARCHITECTURE <span class="status status-proposal">신규 제안</span></p>
+        <h1>자동 원정이<br><em>오래 돌아도 흔들리지 않게.</em></h1>
+        <p class="lede">영구 프로필, 한 런, 현재 원정의 수명을 나누고 모든 진행을 하나의 고정 시뮬레이션과 사건 원장으로 처리한다. 화면·오프라인·저장 복구가 같은 규칙을 공유한다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#state-ownership">상태 구조 보기</a>
+          <a class="button ghost" href="#event-flow">사건 흐름 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="프로필, 런, 원정, 던전 상태가 계층으로 분리된 구조">
+        <div class="orbit-stack">
+          <div class="orbit-card orbit-a"><span>META</span><strong>Profile</strong><small>영구 해금 · 계승</small></div>
+          <div class="orbit-card orbit-b"><span>RUN</span><strong>Campaign</strong><small>파티 · 월드 · 경제</small></div>
+          <div class="orbit-card orbit-c"><span>NOW</span><strong>Expedition</strong><small>탐색 · 전투 · 보상</small></div>
+          <div class="orbit-card orbit-d"><span>LOG</span><strong>Ledger</strong><small>중복 없는 사건</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-strip" aria-label="구조 설계 핵심 수치">
+      <article class="kpi-card"><span class="kpi-label">상태 수명</span><strong class="kpi-value">3</strong><span class="kpi-note">프로필 · 런 · 원정</span></article>
+      <article class="kpi-card"><span class="kpi-label">권위 시간축</span><strong class="kpi-value">1</strong><span class="kpi-note">고정 tick 시뮬레이션</span></article>
+      <article class="kpi-card"><span class="kpi-label">핵심 원장</span><strong class="kpi-value">2</strong><span class="kpi-note">경제 · 보상 완료</span></article>
+      <article class="kpi-card"><span class="kpi-label">중복 보상</span><strong class="kpi-value">0</strong><span class="kpi-note">idempotent 명령</span></article>
+    </section>
+
+    <div class="content-layout">
+      <aside class="section-nav" aria-label="이 페이지 목차">
+        <p class="section-nav-title">이 페이지</p>
+        <nav>
+          <a href="#reference-coupling">레퍼런스 구조</a>
+          <a href="#state-ownership">상태 소유권</a>
+          <a href="#modules">모듈 경계</a>
+          <a href="#event-flow">명령과 사건</a>
+          <a href="#simulation">시뮬레이션</a>
+          <a href="#save-boundary">저장과 원장</a>
+          <a href="#invariants">필수 불변조건</a>
+        </nav>
+        <div class="legend compact">
+          <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
+          <span><i class="legend-dot proposal"></i> 신규 제안</span>
+        </div>
+      </aside>
+
+      <div class="prose">
+        <section class="content-section" id="reference-coupling">
+          <div class="section-heading">
+            <p class="eyebrow">REFERENCE STRUCTURE</p>
+            <h2>기능 흐름은 선명하지만 시스템 경계는 약했다</h2>
+            <p>레퍼런스는 필드 → 원정 → 전투 → 보상이라는 플레이 흐름이 분명하다. 반면 여러 객체가 전역 상태를 통해 서로를 직접 호출해 한 사건이 많은 시스템을 동시에 수정한다.</p>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="status status-reference">확인</span><h3>몬스터 사망</h3><p>한 처리에서 XP·처치 수·드롭·인카운터·통계·영구 포인트 등을 함께 바꾼다.</p></article>
+            <article class="card"><span class="status status-reference">확인</span><h3>던전 종료</h3><p>월드 전환·정복·성 진행·자동 장비·통계·포인트·파티 위치를 직접 변경한다.</p></article>
+            <article class="card"><span class="status status-reference">확인</span><h3>파티 목표</h3><p>목적지 선택뿐 아니라 판매·진입·문 개방과 일부 보상 사건까지 담당한다.</p></article>
+          </div>
+          <div class="callout reference-callout">
+            <div><span class="status status-reference">분석 판단</span><strong>서비스 로케이터형 결합</strong></div>
+            <p>작은 게임을 빠르게 만드는 데는 유리하지만 업데이트 순서가 암묵적이고, 오프라인 결과 일치·부분 테스트·중복 보상 복구가 어려워진다. 신규 프로젝트는 명령과 도메인 사건으로 이 호출 사슬을 끊는다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="state-ownership">
+          <div class="section-heading">
+            <p class="eyebrow">STATE OWNERSHIP</p>
+            <h2>데이터의 수명과 소유자를 한눈에 알 수 있게 한다</h2>
+          </div>
+          <div class="layer-diagram" role="img" aria-label="영구 프로필, 런, 원정, 던전과 전투 상태의 계층">
+            <div class="layer-row"><span>영구</span><strong>MetaProfile</strong><small>클래스 · 정책 슬롯 · 계승 인장 · 평생 기록</small></div>
+            <div class="layer-row"><span>한 런</span><strong>RunState</strong><small>파티 · 런 자원 · 월드 · 시설 · 난도</small></div>
+            <div class="layer-row"><span>월드</span><strong>WorldCampaign</strong><small>지역 · 노드 · 도로 · 해금 · 위협</small></div>
+            <div class="layer-row"><span>한 출정</span><strong>ExpeditionState</strong><small>목표 · phase · 반환점 · 결과</small></div>
+            <div class="layer-row"><span>한 던전</span><strong>DungeonInstance</strong><small>층 · 방 · 문 · 공개 상태 · seed</small></div>
+            <div class="layer-row"><span>현재 처리</span><strong>ExploreDirector + CombatState</strong><small>경로 · 복구 · 행동 큐 · 효과</small></div>
+            <div class="layer-row"><span>정산</span><strong>RewardLedger</strong><small>완료 ID · 지급 여부 · 원인</small></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>구분</th><th>저장하는 권위 상태</th><th>저장하지 않는 파생 상태</th></tr></thead>
+              <tbody>
+                <tr><td>경제</td><td>잔액, 거래 원장, 원인 eventId</td><td>현재 구매 가능한 목록</td></tr>
+                <tr><td>월드</td><td>노드 상태 enum, 시설, 다음 완료 tick</td><td>가장 가까운 목적지, 지도 필터 결과</td></tr>
+                <tr><td>캐릭터</td><td>레벨, 기술, 장비 ID, 상태 효과</td><td>최종 능력치, 장착 추천</td></tr>
+                <tr><td>원정</td><td>phase, 사이트, 층, 반환 anchor</td><td>열린 문까지의 임시 경로</td></tr>
+                <tr><td>생성</td><td>seed, 생성 버전, 탐험 델타</td><td>주변 렌더 캐시</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">소유권 원칙</span><strong>결정자는 보상을 지급하지 않는다</strong></div>
+            <p>ExploreDirector는 다음 행동을 고르고, RewardResolver가 검증된 완료 사건을 정산한다. 길찾기·전투·UI가 지갑을 직접 바꾸지 못하게 하면 같은 보상이 두 번 들어가는 경로를 차단할 수 있다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="modules">
+          <div class="section-heading">
+            <p class="eyebrow">MODULE CONTRACTS</p>
+            <h2>각 모듈은 하나의 이유로만 변한다</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>모듈</th><th>소유 책임</th><th>밖으로 내보내는 계약</th><th>알면 안 되는 것</th></tr></thead>
+              <tbody>
+                <tr><td><strong>SimulationClock</strong></td><td>고정 tick, 예약 사건</td><td><code>advance(ticks)</code></td><td>전투·보상 규칙</td></tr>
+                <tr><td><strong>WorldCampaign</strong></td><td>지역, 사이트, 도로, 해금</td><td><code>queryTargets</code>, <code>revealRegion</code></td><td>캐릭터 행동</td></tr>
+                <tr><td><strong>DungeonGenerator</strong></td><td>seed 기반 공간·역할·검증</td><td><code>generate</code>, <code>validate</code></td><td>런 경제 지급</td></tr>
+                <tr><td><strong>ExpeditionDirector</strong></td><td>공용 목표, 상태 전이, 복구</td><td><code>evaluate</code> → Command</td><td>개별 스킬 수식</td></tr>
+                <tr><td><strong>AgentBrain</strong></td><td>이동·전투·회복 의도</td><td><code>chooseIntent</code></td><td>다음 던전 선택</td></tr>
+                <tr><td><strong>RoutePlanner</strong></td><td>상위 그래프와 실제 비용</td><td><code>findRoute</code></td><td>보상 생성</td></tr>
+                <tr><td><strong>CombatEngine</strong></td><td>행동, 명중, 피해, 효과</td><td><code>resolveAction</code></td><td>월드 해금</td></tr>
+                <tr><td><strong>RewardResolver</strong></td><td>드롭 표, 보상 원천</td><td><code>resolve(event)</code></td><td>아이템 화면</td></tr>
+                <tr><td><strong>InventoryService</strong></td><td>소유, 장착, 분해 정책</td><td><code>collect</code>, <code>equip</code></td><td>필드 이동</td></tr>
+                <tr><td><strong>EconomyLedger</strong></td><td>모든 자원 증감과 원인</td><td><code>credit</code>, <code>spend</code></td><td>AI 목표 선택</td></tr>
+                <tr><td><strong>ProgressionService</strong></td><td>레벨, 지역, 계승 해금</td><td><code>applyProgress</code></td><td>던전 공간 수정</td></tr>
+                <tr><td><strong>SaveService</strong></td><td>버전, 원자 저장, 이관</td><td><code>saveAtomic</code></td><td>게임 규칙 판단</td></tr>
+                <tr><td><strong>ReadModel</strong></td><td>화면용 설명과 추천 카드</td><td>읽기 전용 projection</td><td>권위 상태 수정</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">수동 조작과 자동화는 같은 명령 포트를 사용한다. 자동화가 별도 보상·별도 비용 경로를 가지지 않는다.</p>
+        </section>
+
+        <section class="content-section" id="event-flow">
+          <div class="section-heading">
+            <p class="eyebrow">COMMAND → EVENT → VIEW</p>
+            <h2>의도, 일어난 사실, 화면 설명을 분리한다</h2>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card accent-card"><span class="card-index">COMMAND</span><h3>해 달라는 요청</h3><p><code>OpenDoor</code>, <code>LevelUp</code>, <code>BuildFacility</code>, <code>CommitLegacy</code>. 비용과 상태를 검증하기 전에는 사실이 아니다.</p></article>
+            <article class="card accent-card"><span class="card-index">EVENT</span><h3>이미 일어난 사실</h3><p><code>DoorOpened</code>, <code>MonsterDefeated</code>, <code>DungeonCompleted</code>, <code>LegacyCommitted</code>. 안정 eventId를 가진다.</p></article>
+            <article class="card accent-card"><span class="card-index">READ MODEL</span><h3>플레이어가 읽는 설명</h3><p>다음 목표, 예상 완료 시간, 추천 카드, 정지 이유. 도메인 상태를 직접 변경하지 않는다.</p></article>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="한 시뮬레이션 틱의 사건 흐름">
+            <div class="cycle-step"><span>01</span><strong>Snapshot</strong><small>tick 시작 상태</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>Command</strong><small>Director · Agent 의도</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>Domain Events</strong><small>전투 · 방 · 보상 사실</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>Projection</strong><small>원장 · 진행 · 설명 갱신</small></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>핵심 사건</th><th>권위 생산자</th><th>주 소비자</th></tr></thead>
+              <tbody>
+                <tr><td><code>FieldTargetSelected</code></td><td>ExpeditionDirector</td><td>필드 이동, UI 설명</td></tr>
+                <tr><td><code>RoomRevealed</code></td><td>Dungeon</td><td>인카운터, 보물 배치</td></tr>
+                <tr><td><code>MonsterDefeated</code></td><td>CombatEngine</td><td>보상, 진행, 통계</td></tr>
+                <tr><td><code>LootResolved</code></td><td>InventoryService</td><td>경제 원장, 장비 추천</td></tr>
+                <tr><td><code>DungeonCompleted</code></td><td>Expedition</td><td>월드 노드, 지역 준비도, 보상</td></tr>
+                <tr><td><code>RegionConquered</code></td><td>WorldCampaign</td><td>이웃 지역, 계승 보상, UI</td></tr>
+                <tr><td><code>RunCompleted</code></td><td>ProgressionService</td><td>요약, 저장, 승리 선택</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="content-section" id="simulation">
+          <div class="section-heading">
+            <p class="eyebrow">ONE SIMULATION</p>
+            <h2>화면과 오프라인이 같은 게임을 실행한다</h2>
+          </div>
+          <div class="callout reference-callout">
+            <div><span class="status status-reference">확인된 레퍼런스</span><strong>요약 공식이 아닌 실제 턴 가속 재생</strong></div>
+            <p>오프라인에서도 필드 이동, 던전 진입, 방 탐색, 전투, 드롭, 재감염과 시설 생산이 실제 턴 규칙으로 처리된다. 기본 턴은 0.25초이며 한 화면 프레임에서 여러 턴을 묶어 진행한다.</p>
+          </div>
+          <pre class="formula-block" aria-label="신규 시뮬레이션 계약"><code>simulateTicks(count, mode)
+  mode = FOREGROUND | CATCH_UP
+  같은 도메인 규칙
+  같은 이름 있는 RNG stream
+  같은 명령·사건 처리 순서
+  연출만 CATCH_UP에서 요약</code></pre>
+          <div class="card-grid two-col">
+            <article class="card"><span class="card-index">정밀 재생</span><h3>결정이 민감한 구간</h3><p>현재 전투, 보스, 장비 교체, 철수, 문·층 전환은 실제 사건 경계까지 정확히 재생한다.</p></article>
+            <article class="card"><span class="card-index">시간 점프</span><h3>결과가 닫힌 구간</h3><p>안정적인 시설 생산, 타이머, 다음 waypoint 도착은 다음 의미 있는 사건 시각으로 점프한다.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">결정성</span><strong>seed만이 아니라 stream과 counter도 저장한다</strong></div>
+            <p>월드·지형·인카운터·보상 난수를 이름 있는 스트림으로 분리한다. 같은 시작 상태, 정책, seed, tick 순서에서는 화면 실행과 오프라인 실행의 결과가 같아야 한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="save-boundary">
+          <div class="section-heading">
+            <p class="eyebrow">SAVE &amp; LEDGER</p>
+            <h2>공간 전환과 보상 사이에서 끊겨도 안전하다</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>체크포인트</th><th>저장해야 할 핵심</th><th>복구 시 검사</th></tr></thead>
+              <tbody>
+                <tr><td>행동 완료 뒤</td><td>simulationTick, 행동 결과 사건</td><td>같은 행동 재해결 금지</td></tr>
+                <tr><td>방 해결 뒤</td><td>room revision, 획득·미획득 보상</td><td>보상 원천 ledger 대조</td></tr>
+                <tr><td>문·계단 전후</td><td>phase, 양쪽 anchor, transition token</td><td>리더만 이동한 불가능 상태 방지</td></tr>
+                <tr><td>던전 정산 전후</td><td>DungeonCompleted eventId, 노드 상태</td><td>정복·시설 후보 중복 금지</td></tr>
+                <tr><td>계승 확정 전후</td><td>보상 snapshot, ResetPolicy, 새 runId</td><td>보상 1회·반쪽 초기화 방지</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">안정 ID</span><strong>모든 보상 원천은 한 번만 닫힌다</strong></div>
+            <p>상자, 보스, 방, 던전, 지역, 계승마다 안정 ID를 두고 RewardLedger에 완료 여부를 기록한다. 같은 명령을 다시 적용해도 이미 완료된 결과를 반환하는 멱등 처리를 사용한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="invariants">
+          <div class="section-heading">
+            <p class="eyebrow">NON-NEGOTIABLES</p>
+            <h2>출시 전에 자동 검증해야 할 불변조건</h2>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card metric-card"><strong>자원</strong><p>모든 증감은 원장 항목 하나와 대응하고 잔액은 음수가 되지 않는다.</p></article>
+            <article class="card metric-card"><strong>보상</strong><p>같은 eventId를 두 번 처리해도 한 번만 정산된다.</p></article>
+            <article class="card metric-card"><strong>원정</strong><p>FIELD에는 내부 층이 없고, EXPLORING에는 유효한 사이트·층·입출구가 있다.</p></article>
+            <article class="card metric-card"><strong>전투</strong><p>살아 있는 캐릭터는 한 tick에 최대 하나의 행동 의도만 제출한다.</p></article>
+            <article class="card metric-card"><strong>월드</strong><p>잠긴 지역은 목표가 될 수 없고 한 사이트에 던전과 시설이 동시에 활성화되지 않는다.</p></article>
+            <article class="card metric-card"><strong>저장</strong><p>schemaVersion, contentVersion, runSeed, tick, RNG counter가 항상 함께 있다.</p></article>
+          </div>
+        </section>
+
+        <nav class="pager" aria-label="페이지 이동">
+          <a class="pager-prev" href="06_progression.html"><span>이전</span><strong>성장과 경제</strong></a>
+          <a class="pager-next" href="08_mvp.html"><span>다음</span><strong>MVP 로드맵</strong></a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>자율 원정대 방치형 RPG · 게임플레이 기획서</p>
+    <a href="#main">위로</a>
+  </footer>
+</body>
+</html>

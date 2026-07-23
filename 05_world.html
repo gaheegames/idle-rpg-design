@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="자율 원정대 방치형 RPG의 필드 노드, 던전 거점 전환, 목표 선정, 지역 보스와 월드 확장 구조">
+  <title>필드와 월드 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="world">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="기획서 표지로 이동">
+        <span class="brand-mark" aria-hidden="true">AR</span>
+        <span class="brand-copy"><strong>Autonomous Raid</strong><small>Game Design Bible</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="global-nav">목차</button>
+      <nav class="site-nav" id="global-nav" aria-label="전체 기획서">
+        <a data-nav="cover" href="index.html">표지</a>
+        <a data-nav="overview" href="01_overview.html">핵심</a>
+        <a data-nav="loop" href="02_content_loop.html">순환</a>
+        <a data-nav="explore" href="03_auto_explore.html">자동 탐색</a>
+        <a data-nav="dungeon" href="04_dungeon.html">던전</a>
+        <a data-nav="world" href="05_world.html" aria-current="page">필드</a>
+        <a data-nav="progression" href="06_progression.html">성장</a>
+        <a data-nav="architecture" href="07_architecture.html">구조</a>
+        <a data-nav="mvp" href="08_mvp.html">MVP</a>
+        <a data-nav="reference" href="09_reference.html">근거</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">05 · FIELD &amp; WORLD <span class="status status-proposal">신규 제안</span></p>
+        <h1>던전을 끝내면<br><em>지도가 달라진다.</em></h1>
+        <p class="lede">필드는 던전 사이를 걷는 배경이 아니라 다음 원정을 선택하고, 완료한 장소를 생산·정찰·방어망으로 바꾸는 전략판이다. 정복 기록은 보존하되 위협과 시설 상태는 계속 변한다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#node-lifecycle">노드 생애주기</a>
+          <a class="button ghost" href="#target-policy">목표 선정 규칙</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="던전, 거점, 지역 보스와 다음 지역이 연결된 필드 구조">
+        <div class="orbit-stack">
+          <div class="orbit-card orbit-a"><span>01</span><strong>던전</strong><small>탐험 · 정복</small></div>
+          <div class="orbit-card orbit-b"><span>02</span><strong>거점</strong><small>정찰 · 생산 · 방어</small></div>
+          <div class="orbit-card orbit-c"><span>03</span><strong>지역 보스</strong><small>준비도 · 공략</small></div>
+          <div class="orbit-card orbit-d"><span>04</span><strong>새 지역</strong><small>규칙 · 경로 해금</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-strip" aria-label="필드 설계 핵심 수치">
+      <article class="kpi-card"><span class="kpi-label">노드 상태</span><strong class="kpi-value">8</strong><span class="kpi-note">발견 전부터 방어까지</span></article>
+      <article class="kpi-card"><span class="kpi-label">시설 역할</span><strong class="kpi-value">4</strong><span class="kpi-note">정찰 · 훈련 · 채굴 · 수호</span></article>
+      <article class="kpi-card"><span class="kpi-label">지역 기본 구성</span><strong class="kpi-value">3–5</strong><span class="kpi-note">일반 던전 + 특수 던전 + 보스</span></article>
+      <article class="kpi-card"><span class="kpi-label">목표 판단 축</span><strong class="kpi-value">7</strong><span class="kpi-note">진척부터 반복 패널티까지</span></article>
+    </section>
+
+    <div class="content-layout">
+      <aside class="section-nav" aria-label="이 페이지 목차">
+        <p class="section-nav-title">이 페이지</p>
+        <nav>
+          <a href="#reference-field">레퍼런스 필드</a>
+          <a href="#node-lifecycle">노드 생애주기</a>
+          <a href="#site-conversion">거점 전환</a>
+          <a href="#target-policy">목표 정책</a>
+          <a href="#travel-graph">필드 이동</a>
+          <a href="#region-gate">지역과 보스</a>
+        </nav>
+        <div class="legend compact">
+          <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
+          <span><i class="legend-dot proposal"></i> 신규 제안</span>
+        </div>
+      </aside>
+
+      <div class="prose">
+        <section class="content-section" id="reference-field">
+          <div class="section-heading">
+            <p class="eyebrow">REFERENCE MODEL</p>
+            <h2>필드는 자동 진행의 목적지 조정자였다</h2>
+            <p>레퍼런스에서 필드의 주 기능은 전투가 아니라 상점·던전·성 가운데 다음 생산 활동을 정하는 것이다.</p>
+          </div>
+          <div class="callout reference-callout">
+            <div><span class="status status-reference">확인된 레퍼런스</span><strong>실제 목표 우선순위</strong></div>
+            <p>열등 장비가 있으면 상점 → 예약된 성 → 현재 지역 미정복 던전 → 열린 지역의 미정복 던전 → 재감염 던전 순으로 목적지를 잡는다. 성은 지역 던전 완료, 요구 적 단계, 공격 예약을 함께 검사한다.</p>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="레퍼런스의 던전 완료에서 다음 지역 해금까지의 흐름">
+            <div class="cycle-step"><span>01</span><strong>지역 던전</strong><small>마지막 층 완료</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>성 준비</strong><small>요구 적 단계 결정</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>성 정복</strong><small>보스 검문소</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>이웃 지역</strong><small>상하좌우 잠금 해제</small></div>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card"><span class="card-index">강점</span><h3>로컬 완료가 월드 진행이 된다</h3><p>방과 던전에서 얻은 성장이 성이라는 검문소에 모이고, 성 정복이 새 영토를 연다. 작은 자동 행동이 장기 목표와 직접 연결된다.</p></article>
+            <article class="card"><span class="card-index">단절</span><h3>성 공격 예약이 자동 순환을 끊는다</h3><p>자동 성 공격 클래스는 존재하지만 기본 자동화 갱신 경로에는 연결되지 않았다. 새 게임은 보스 자동 예약을 기본 정책으로 포함해야 한다.</p></article>
+          </div>
+        </section>
+
+        <section class="content-section" id="node-lifecycle">
+          <div class="section-heading">
+            <p class="eyebrow">SITE LIFECYCLE <span class="status status-proposal">신규 제안</span></p>
+            <h2>한 장소가 탐험·거점·방어 콘텐츠로 순환한다</h2>
+            <p>정복 여부와 현재 위협 상태를 분리한다. 이미 얻은 핵심 해금은 되돌리지 않고, 같은 장소의 현재 역할만 바뀐다.</p>
+          </div>
+          <div class="layer-diagram" role="img" aria-label="필드 노드의 여덟 상태">
+            <div class="layer-row"><span>01</span><strong>HIDDEN</strong><small>지도에 존재하지 않음</small></div>
+            <div class="layer-row"><span>02</span><strong>RUMORED</strong><small>대략적 위치와 테마만 공개</small></div>
+            <div class="layer-row"><span>03</span><strong>DISCOVERED</strong><small>진입 가능 · 위험 일부 확인</small></div>
+            <div class="layer-row"><span>04</span><strong>ACTIVE</strong><small>던전 seed와 위협 활성</small></div>
+            <div class="layer-row"><span>05</span><strong>CLEARED</strong><small>최초 목표 완료</small></div>
+            <div class="layer-row"><span>06</span><strong>OCCUPIED</strong><small>시설 용도 선택</small></div>
+            <div class="layer-row"><span>07</span><strong>THREATENED</strong><small>생산·안전 보너스 일시 저하</small></div>
+            <div class="layer-row"><span>08</span><strong>DEFENDED</strong><small>방어 후 정상화 · 추가 보상</small></div>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">원칙</span><strong>반격은 벌점이 아니라 새 기회다</strong></div>
+            <p>위협 상태는 핵심 월드 해금을 취소하지 않는다. 생산 효율 저하, 변형 던전, 방어 보상으로 표현해 “방치했더니 과거 성과가 사라졌다”는 감정을 막는다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="site-conversion">
+          <div class="section-heading">
+            <p class="eyebrow">CLEARED → OCCUPIED</p>
+            <h2>완료한 던전은 다음 원정의 기반이 된다</h2>
+            <p>레퍼런스의 농장 전환 아이디어를 확장하되, 던전을 영구히 탐험 후보에서 제거하지 않는다. 시설 용도는 비용과 전환 시간을 지불하고 바꿀 수 있다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>시설</th><th>주 효과</th><th>다음 원정에 미치는 영향</th><th>상충 선택</th></tr></thead>
+              <tbody>
+                <tr><td><strong>정찰소</strong></td><td>인접 노드와 방·보스 정보 공개</td><td>목표 점수의 불확실성과 실패 위험 감소</td><td>직접 경제 생산이 낮음</td></tr>
+                <tr><td><strong>훈련소</strong></td><td>대기 영웅 XP·역할 숙련</td><td>로스터의 최저 전투력을 보정</td><td>주력 파티 즉시 보상은 적음</td></tr>
+                <tr><td><strong>채굴소</strong></td><td>골드·제작 재료 생산</td><td>장비·시설 투자 속도 상승</td><td>위협 억제에 기여하지 않음</td></tr>
+                <tr><td><strong>수호소</strong></td><td>지역 위협 지연·도로 안전도 상승</td><td>장기 방치와 오프라인 안정성 확보</td><td>성장 재료 생산이 낮음</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card"><span class="status status-reference">확인</span><h3>정복과 재감염은 별개</h3><p>레퍼런스의 정복 기록은 유지되고 던전만 다시 감염된다. 최초 완료는 해금, 재감염은 반복 파밍이라는 역할 분리가 유효하다.</p></article>
+            <article class="card"><span class="status status-proposal">제안</span><h3>EXPLORE ↔ OUTPOST 전환</h3><p>탐험 모드에서는 희귀 장비·특수 자원을, 거점 모드에서는 패시브 생산을 얻는다. 짧은 쿨다운과 비용으로 되돌릴 수 있어 공간을 잃지 않는다.</p></article>
+          </div>
+        </section>
+
+        <section class="content-section" id="target-policy">
+          <div class="section-heading">
+            <p class="eyebrow">FIELD DIRECTOR</p>
+            <h2>거리 대신 목적과 위험을 함께 계산한다</h2>
+            <p>목표 선택은 자동이지만 이유는 숨기지 않는다. 점수의 상위 세 항목을 “새 지역 진행 +100 · 필요한 제작 재료 +28 · 이동 2분 −16”처럼 보여 준다.</p>
+          </div>
+          <pre class="formula-block" aria-label="필드 목표 효용 점수식"><code>fieldUtility =
+  진행 가치
++ 필요한 자원 가치
++ 기한·위협 긴급도
++ 현재 빌드 적합도
+− 이동 비용
+− 예상 실패 위험
+− 최근 반복 패널티</code></pre>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>우선순위</th><th>목표 종류</th><th>선택 조건</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>긴급 귀환</td><td>전멸 위험, 진행을 막는 상태, 복구 실패</td></tr>
+                <tr><td>2</td><td>사용자 고정 목표</td><td>잠금·도달·생존 조건을 만족</td></tr>
+                <tr><td>3</td><td>지역 보스·핵심 목표</td><td>준비도와 안전 정책을 통과</td></tr>
+                <tr><td>4</td><td>필수 미완료 던전</td><td>현재 지역의 진행 게이트와 연결</td></tr>
+                <tr><td>5</td><td>위협받는 핵심 시설</td><td>방어 가치가 원정 기회비용보다 큼</td></tr>
+                <tr><td>6</td><td>선택 던전</td><td>보상·빌드 적합도·신선도 합산</td></tr>
+                <tr><td>7</td><td>반복 파밍</td><td>필요 자원과 변이가 현재 계획에 적합</td></tr>
+                <tr><td>8</td><td>안전 거점</td><td>유효한 공격 목표가 없거나 회복 필요</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">사용자는 숫자를 직접 편집하기보다 진척 우선·안전·장비 파밍·변이 사냥 같은 프리셋과 소수 슬라이더를 선택한다.</p>
+        </section>
+
+        <section class="content-section" id="travel-graph">
+          <div class="section-heading">
+            <p class="eyebrow">WORLD GRAPH</p>
+            <h2>지형은 장식이 아니라 이동 비용과 사건의 규칙이다</h2>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card accent-card"><span class="card-index">NODE</span><h3>장소</h3><p>던전, 성채, 시설, 사건, 휴식 지점이 안정 ID와 상태를 가진다.</p></article>
+            <article class="card accent-card"><span class="card-index">EDGE</span><h3>도로</h3><p>이동 시간, 위험, 사건 확률, 잠금 조건과 지역 특성을 가진다.</p></article>
+            <article class="card accent-card"><span class="card-index">ANCHOR</span><h3>복귀점</h3><p>던전 진입 시 node ID와 도착 지점을 저장하고 종료 후 같은 곳으로 돌아온다.</p></article>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="필드 이동 처리 흐름">
+            <div class="cycle-step"><span>01</span><strong>목표 선택</strong><small>효용 점수와 정책</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>A* 경로</strong><small>노드·도로 그래프</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>여정 사건</strong><small>위협은 인터럽트</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>도착·진입</strong><small>반환 anchor 저장</small></div>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">구현 경계</span><strong>필드 경로와 던전 경로를 분리한다</strong></div>
+            <p>필드는 지역 노드·도로 A*, 던전은 방 그래프와 지역 waypoint를 사용한다. 여정 사건이 발생해도 최종 목적지는 보존하며, 사건 종료 후 기존 계획을 재평가한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="region-gate">
+          <div class="section-heading">
+            <p class="eyebrow">REGION BOSS</p>
+            <h2>모든 던전 강제 대신 여러 준비 경로를 허용한다</h2>
+            <p>한 지역은 일반 던전 3~5개, 특수 던전 1개, 지역 보스 1개를 기본 단위로 삼는다. 필수 목표 일부와 영향력, 단서를 조합해 보스를 연다.</p>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card metric-card"><strong>필수 목표 3개 중 2개</strong><p>핵심 진행은 보장하면서 공략 순서를 선택하게 한다.</p></article>
+            <article class="card metric-card"><strong>지역 영향력 목표</strong><p>던전·사건·시설 성과가 보스 준비에 합류한다.</p></article>
+            <article class="card metric-card"><strong>보스 단서 1개 이상</strong><p>보스의 기믹 또는 약점을 미리 알아낼 수 있다.</p></article>
+            <article class="card metric-card"><strong>남은 던전은 선택 보상</strong><p>추가 시설 슬롯, 희귀 보상, 보스 약화로 가치가 남는다.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">자동 공격 정책</span><strong>준비 완료와 실제 출격을 끊지 않는다</strong></div>
+            <p>예상 승률, 회복 자원, 최근 실패, 오프라인 허용 여부를 검사해 성 공격을 자동 예약한다. 실행하지 못하면 “예상 승률 62%가 설정 기준 75%보다 낮음”처럼 한 줄로 설명한다.</p>
+          </div>
+        </section>
+
+        <nav class="pager" aria-label="페이지 이동">
+          <a class="pager-prev" href="04_dungeon.html"><span>이전</span><strong>던전 생성</strong></a>
+          <a class="pager-next" href="06_progression.html"><span>다음</span><strong>성장과 경제</strong></a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>자율 원정대 방치형 RPG · 게임플레이 기획서</p>
+    <a href="#main">위로</a>
+  </footer>
+</body>
+</html>

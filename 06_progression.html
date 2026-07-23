@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="자율 원정대 방치형 RPG의 성장 자원, 장비 순환, 자동화, 계승과 심층 계속을 정리한 기획서">
+  <title>성장과 경제 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body data-page="progression">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="기획서 표지로 이동">
+        <span class="brand-mark" aria-hidden="true">AR</span>
+        <span class="brand-copy"><strong>Autonomous Raid</strong><small>Game Design Bible</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="global-nav">목차</button>
+      <nav class="site-nav" id="global-nav" aria-label="전체 기획서">
+        <a data-nav="cover" href="index.html">표지</a>
+        <a data-nav="overview" href="01_overview.html">핵심</a>
+        <a data-nav="loop" href="02_content_loop.html">순환</a>
+        <a data-nav="explore" href="03_auto_explore.html">자동 탐색</a>
+        <a data-nav="dungeon" href="04_dungeon.html">던전</a>
+        <a data-nav="world" href="05_world.html">필드</a>
+        <a data-nav="progression" href="06_progression.html" aria-current="page">성장</a>
+        <a data-nav="architecture" href="07_architecture.html">구조</a>
+        <a data-nav="mvp" href="08_mvp.html">MVP</a>
+        <a data-nav="reference" href="09_reference.html">근거</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">06 · PROGRESSION &amp; ECONOMY <span class="status status-proposal">신규 제안</span></p>
+        <h1>성장은 배율보다<br><em>선택지를 넓힌다.</em></h1>
+        <p class="lede">전투 자원, 런 경제, 지역 진행, 영구 성장을 서로 다른 역할로 나눈다. 기본 자동화는 처음부터 주고, 장기 성장은 더 깊은 정책·조합·월드 규칙을 여는 데 사용한다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#resource-model">자원 구조 보기</a>
+          <a class="button ghost" href="#post-victory">승리 이후 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="전투 보상이 빌드와 지역을 강화하고 계승으로 이어지는 순환">
+        <div class="orbit-stack">
+          <div class="orbit-card orbit-a"><span>01</span><strong>획득</strong><small>XP · 골드 · 장비</small></div>
+          <div class="orbit-card orbit-b"><span>02</span><strong>투자</strong><small>기술 · 제작 · 시설</small></div>
+          <div class="orbit-card orbit-c"><span>03</span><strong>정복</strong><small>인장 · 새 지역</small></div>
+          <div class="orbit-card orbit-d"><span>04</span><strong>계승</strong><small>정책 · 클래스 · 규칙</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-strip" aria-label="성장 설계 핵심 수치">
+      <article class="kpi-card"><span class="kpi-label">핵심 자원</span><strong class="kpi-value">5</strong><span class="kpi-note">역할이 겹치지 않는 최소 체계</span></article>
+      <article class="kpi-card"><span class="kpi-label">기본 자동화</span><strong class="kpi-value">즉시</strong><span class="kpi-note">이동 · 전투 · 루팅 · 분해</span></article>
+      <article class="kpi-card"><span class="kpi-label">승리 후 경로</span><strong class="kpi-value">2</strong><span class="kpi-note">계승 또는 심층 계속</span></article>
+      <article class="kpi-card"><span class="kpi-label">무보상 소실</span><strong class="kpi-value">0</strong><span class="kpi-note">아이템·보상 불변조건</span></article>
+    </section>
+
+    <div class="content-layout">
+      <aside class="section-nav" aria-label="이 페이지 목차">
+        <p class="section-nav-title">이 페이지</p>
+        <nav>
+          <a href="#reference-economy">레퍼런스 경제</a>
+          <a href="#resource-model">신규 자원</a>
+          <a href="#item-loop">장비 순환</a>
+          <a href="#automation-curve">자동화 성장</a>
+          <a href="#post-victory">승리 이후</a>
+          <a href="#reset-policy">보존과 초기화</a>
+          <a href="#guardrails">경제 안전장치</a>
+        </nav>
+        <div class="legend compact">
+          <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
+          <span><i class="legend-dot proposal"></i> 신규 제안</span>
+        </div>
+      </aside>
+
+      <div class="prose">
+        <section class="content-section" id="reference-economy">
+          <div class="section-heading">
+            <p class="eyebrow">REFERENCE ECONOMY</p>
+            <h2>많은 성장 신호가 계속 보이는 대신 역할이 충돌했다</h2>
+            <p>레퍼런스는 처치, XP, 아이템, 골드, 기술 포인트, 모험 포인트가 서로 다른 속도로 쌓여 관전 중에도 성장감을 유지한다. 그러나 일부 자원은 진행 열쇠와 경제 투자를 동시에 담당한다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>자원</th><th>확인된 공급</th><th>확인된 소비·변환</th><th>구조적 판단</th></tr></thead>
+              <tbody>
+                <tr><td><strong>처치 수</strong></td><td>전투, 농장 수확</td><td>런 설정 강화, 적 단계 해금·은퇴</td><td>통계·경제·진행이 한 잔액에서 경쟁</td></tr>
+                <tr><td><strong>공유 XP</strong></td><td>몬스터 처치</td><td>선택 영웅 레벨업</td><td>집중 성장과 파티 최저 레벨 보정의 선택</td></tr>
+                <tr><td><strong>기술 포인트</strong></td><td>영웅 레벨업</td><td>클래스 기술·주문</td><td>빌드 차별화의 핵심</td></tr>
+                <tr><td><strong>아이템</strong></td><td>적, 보스, 상자</td><td>장착, 판매, 인벤토리 교체</td><td>저품질 드롭이 상점 우회 비용으로 바뀜</td></tr>
+                <tr><td><strong>골드</strong></td><td>바닥 드롭, 아이템 판매</td><td>농장, 주문 강화</td><td>판매금이 수동 수금 버퍼에 머묾</td></tr>
+                <tr><td><strong>모험 포인트</strong></td><td>처치·문·층·던전·성 등 다수 활동</td><td>영구 속도·자동화·경제 보너스</td><td>모든 루프를 동시에 가속해 복리 폭주 가능</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card"><span class="status status-reference">유지할 원리</span><h3>공유 XP의 배분 선택</h3><p>XP를 즉시 영웅에게 귀속하지 않고 파티 풀에 쌓으면 주력 집중, 최저 레벨 보정, 특정 기술 선해금 사이에 선택이 생긴다.</p></article>
+            <article class="card"><span class="status status-proposal">바꿀 구조</span><h3>진행 열쇠와 투자 화폐 분리</h3><p>경제 강화를 샀다는 이유로 다음 지역 진입이 늦어지지 않도록 정복 조건은 소비하지 않는 진행 상태로 둔다.</p></article>
+          </div>
+        </section>
+
+        <section class="content-section" id="resource-model">
+          <div class="section-heading">
+            <p class="eyebrow">FIVE CORE RESOURCES <span class="status status-proposal">신규 제안</span></p>
+            <h2>한 자원에는 한 가지 분명한 질문만 맡긴다</h2>
+            <p>처치 수는 통계로 남기고, 플레이어가 실제로 관리하는 핵심 숫자 자원은 다섯 개를 넘기지 않는다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>자원·상태</th><th>지속 범위</th><th>주 공급</th><th>주 사용처</th><th>답하는 질문</th></tr></thead>
+              <tbody>
+                <tr><td><strong>영웅 XP</strong></td><td>런</td><td>전투, 훈련소, 목표</td><td>레벨·기술 노드</td><td>누구를 먼저 성장시킬까?</td></tr>
+                <tr><td><strong>골드</strong></td><td>런</td><td>전투, 자동 정산, 채굴소</td><td>제작, 재련, 시설, 소모품</td><td>지금 전투력과 기반 중 어디에 투자할까?</td></tr>
+                <tr><td><strong>유물 조각</strong></td><td>런</td><td>엘리트, 보스, 사건</td><td>런 기술·유물 결합</td><td>이번 런의 빌드를 어느 방향으로 꺾을까?</td></tr>
+                <tr><td><strong>계승 인장</strong></td><td>영구</td><td>지역·런 최초 목표, 도전</td><td>클래스, 정책 슬롯, 시설 유형</td><td>다음 런에 어떤 새 전략을 열까?</td></tr>
+                <tr><td><strong>지역 영향력</strong></td><td>지역 상태</td><td>서로 다른 던전·사건 완료</td><td>소비하지 않음</td><td>보스에 도전할 준비가 되었나?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">분리 원칙</span><strong>진행 상태는 범용 구매와 경쟁하지 않는다</strong></div>
+            <p>지역 영향력은 화폐가 아니라 누적 성과다. 장비를 강화하거나 시설을 지었다는 이유로 보스 해금이 후퇴하지 않는다. 계승 인장도 반복 처치보다 최초 정복·새 티어·짧은 도전을 중심으로 지급한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="item-loop">
+          <div class="section-heading">
+            <p class="eyebrow">ITEM PIPELINE</p>
+            <h2>드롭은 이동 방해물이 아니라 즉시 판단 가능한 빌드 재료다</h2>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="아이템 드롭에서 다음 위험 던전까지의 순환">
+            <div class="cycle-step"><span>01</span><strong>드롭</strong><small>안정 ID · 옵션 태그</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>자동 비교</strong><small>향상률 · 세트 · 잠금</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>처분</strong><small>장착 · 보존 · 분해</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>재투자</strong><small>제작 · 재련 · 고위험</small></div>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card accent-card"><span class="card-index">FILTER</span><h3>자동 분해 규칙</h3><p>희귀도, 현재 장비 대비 향상률, 특정 옵션 태그를 조합한다.</p></article>
+            <article class="card accent-card"><span class="card-index">LOCK</span><h3>보존 규칙</h3><p>세트, 스킬 변형, 클래스 전용 태그는 수치가 낮아도 자동 잠금한다.</p></article>
+            <article class="card accent-card"><span class="card-index">UNDO</span><h3>회수 목록</h3><p>자동 처리 결과는 짧은 기간 되돌릴 수 있어 정책 실수의 손실을 막는다.</p></article>
+          </div>
+          <div class="callout reference-callout">
+            <div><span class="status status-reference">레퍼런스 문제</span><strong>인벤토리 초과와 상점 우회</strong></div>
+            <p>가방이 가득 찼을 때 낮은 가치 아이템이 보상 없이 사라질 수 있고, 열등 장비 하나만 있어도 상점이 던전보다 먼저 선택된다. 신규안은 초과 아이템을 골드·재료 중 하나로 반드시 전환하고 정산 때문에 원정 목표를 바꾸지 않는다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="automation-curve">
+          <div class="section-heading">
+            <p class="eyebrow">AUTOMATION CURVE</p>
+            <h2>편의를 잠그지 않고 정책의 깊이를 성장시킨다</h2>
+            <p>자동화의 존재 여부를 보상으로 삼으면 초반 게임이 의도적으로 불편해진다. 기본 반복은 처음부터 자동이고, 진행할수록 조건을 더 정교하게 조합한다.</p>
+          </div>
+          <div class="layer-diagram" role="img" aria-label="게임 진행에 따른 자동화 정책 확장">
+            <div class="layer-row"><span>시작 즉시</span><strong>기본 자율 행동</strong><small>이동 · 전투 · 루팅 · 무가치 드롭 분해 · 판매금 입금</small></div>
+            <div class="layer-row"><span>첫 던전</span><strong>장비 정책</strong><small>즉시 장착 · 보관 · 향상률 임계값</small></div>
+            <div class="layer-row"><span>첫 지역 중반</span><strong>전술 정책</strong><small>포션 HP% · 스킬 우선순위 프리셋</small></div>
+            <div class="layer-row"><span>첫 지역 보스</span><strong>원정 정책</strong><small>던전 프리셋 · 시설 전환 조건</small></div>
+            <div class="layer-row"><span>두 번째 보스</span><strong>보스 정책</strong><small>예상 승률 · 자원 · 오프라인 허용</small></div>
+            <div class="layer-row"><span>첫 승리</span><strong>계획 슬롯</strong><small>계승 조건 · 심층 계속 · 다중 계획</small></div>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">메타 성장</span><strong>슬롯 수와 조건 조합 수를 늘린다</strong></div>
+            <p>계승 인장은 공격력 배율보다 정책 슬롯, 오프라인 계획 길이, 시설 유형, 클래스 계보, 월드 변형을 연다. 플레이어의 선택 공간이 넓어지는 것이 장기 성장의 체감이다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="post-victory">
+          <div class="section-heading">
+            <p class="eyebrow">AFTER VICTORY</p>
+            <h2>새 조합과 현재 빌드의 한계 시험을 모두 살린다</h2>
+            <p>두 경로에 서로 대체할 수 없는 보상을 둔다. 숫자 유지량만 비교하면 현재 파티를 보존하는 심층 계속이 항상 우세해지기 쉽다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>선택</th><th>유지</th><th>초기화·변화</th><th>독점 가치</th><th>플레이 목적</th></tr></thead>
+              <tbody>
+                <tr><td><strong>계승</strong></td><td>영구 정책, 클래스·시설 해금, 계승 인장</td><td>파티 레벨, 런 장비, 지역 상태, 런 자원</td><td>새 월드 seed, 새 계보, 시작 특성 선택</td><td>다른 조합과 새 규칙 경험</td></tr>
+                <tr><td><strong>심층 계속</strong></td><td>현재 파티, 장비, 런 연구</td><td>지역 지도·일부 생산망, 난도 티어 상승</td><td>심층 전용 장비·변이</td><td>완성한 빌드의 한계 시험</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card"><span class="status status-reference">확인된 레퍼런스</span><h3>프레스티지</h3><p>파티·장비·런 자원·월드는 초기화하고 모험 포인트, 영구 업그레이드, 전역 승리·도전 기록은 유지한다.</p></article>
+            <article class="card"><span class="status status-reference">확인된 레퍼런스</span><h3>계속하기</h3><p>현재 파티와 성장·장비·런 자원을 보존하고 월드의 던전·성·농장·상점을 새로 만든다. 다음 요구 단계도 이어진다.</p></article>
+          </div>
+        </section>
+
+        <section class="content-section" id="reset-policy">
+          <div class="section-heading">
+            <p class="eyebrow">RESET TRANSACTION</p>
+            <h2>보존과 초기화를 코드의 한 정책으로 고정한다</h2>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="계승 처리의 원자적 흐름">
+            <div class="cycle-step"><span>01</span><strong>완료 검증</strong><small>RunCompleted 단 한 번</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>보상 고정</strong><small>미리보기 snapshot</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>원자 반영</strong><small>Profile + RunSummary</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>새 런</strong><small>ResetPolicy 적용</small></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>상태 소유자</th><th>계승 시</th><th>심층 계속 시</th><th>저장 근거</th></tr></thead>
+              <tbody>
+                <tr><td>MetaProfile</td><td>보존·계승 보상 반영</td><td>보존</td><td>별도 profileVersion과 원장</td></tr>
+                <tr><td>RunState</td><td>새 runId로 재생성</td><td>파티·빌드 보존, 티어 갱신</td><td>명시적 ResetPolicy</td></tr>
+                <tr><td>WorldCampaign</td><td>새 seed로 생성</td><td>새 지도·상승 규칙 적용</td><td>ContinuationCarryOver</td></tr>
+                <tr><td>ExpeditionState</td><td>없음</td><td>없음</td><td>정산 완료 뒤 전환</td></tr>
+                <tr><td>RewardLedger</td><td>요약 보관</td><td>runId와 함께 유지</td><td>동일 eventId 중복 지급 금지</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="content-section" id="guardrails">
+          <div class="section-heading">
+            <p class="eyebrow">BALANCE GUARDRAILS</p>
+            <h2>경제가 순환을 돕고 진행을 인질로 잡지 않게 한다</h2>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card metric-card"><strong>진행 열쇠 ≠ 범용 화폐</strong><p>필수 지역 해금은 제작·강화 지출과 경쟁하지 않는다.</p></article>
+            <article class="card metric-card"><strong>주요 소비처 2범주 이하</strong><p>한 화폐가 너무 많은 시스템의 균형을 동시에 떠받치지 않게 한다.</p></article>
+            <article class="card metric-card"><strong>Source / Sink 0.9–1.15</strong><p>챕터 예상 공급과 필수 소비를 맞추고 초과분은 선택 소비가 흡수한다.</p></article>
+            <article class="card metric-card"><strong>생산은 전투를 대체하지 않음</strong><p>시설은 준비를 돕되 희귀 장비·최초 정복의 가치는 능동 원정에 남긴다.</p></article>
+            <article class="card metric-card"><strong>배율 계열 감쇠</strong><p>공격·경제·시간 배율을 무한 곱하지 않고 상한 또는 점감 구간을 둔다.</p></article>
+            <article class="card metric-card"><strong>모든 변화는 원장 기록</strong><p>생성·소비·변환의 이유와 eventId를 남겨 복구와 밸런스 분석에 사용한다.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">완료 조건</span><strong>장시간 방치가 손실이나 대기로 바뀌지 않는다</strong></div>
+            <p>수동 수금 대기 0회, 인벤토리 초과 가치 소실 0, 자동 처리 이유 표시, 동일 보상 ID 중복 지급 0을 출시 전 필수 조건으로 둔다.</p>
+          </div>
+        </section>
+
+        <nav class="pager" aria-label="페이지 이동">
+          <a class="pager-prev" href="05_world.html"><span>이전</span><strong>필드와 월드</strong></a>
+          <a class="pager-next" href="07_architecture.html"><span>다음</span><strong>게임 구조</strong></a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>자율 원정대 방치형 RPG · 게임플레이 기획서</p>
+    <a href="#main">위로</a>
+  </footer>
+</body>
+</html>

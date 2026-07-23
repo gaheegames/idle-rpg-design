@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="자동 탐색, 던전 생성, 필드 정복과 장기 성장을 하나의 순환으로 설계한 방치형 파티 RPG 기획서">
+  <meta name="theme-color" content="#14263b">
+  <title>방치형 RPG 기획서 — 원정 지휘와 자동 탐색</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body class="cover-page">
+  <div data-site-header></div>
+
+  <main id="main-content" class="page-shell">
+    <section class="hero" aria-labelledby="cover-title">
+      <p class="eyebrow">Game Design Document · v0.1</p>
+      <h1 id="cover-title">원정대를 설계하고,<br>살아 있는 월드를 정복한다</h1>
+      <p class="hero-summary">플레이어가 파티의 빌드와 탐험 원칙을 정하면 원정대가 스스로 필드와 던전을 탐색합니다. 전투의 결과는 거점과 지역을 바꾸고, 그 변화가 다음 전략 선택을 엽니다.</p>
+      <div class="meta-row" aria-label="문서 상태">
+        <span class="status-chip complete">자동 탐색 추출 완료</span>
+        <span class="status-chip design">신규 프로젝트 설계</span>
+        <span class="status-chip">게임플레이 범위 한정</span>
+      </div>
+      <div class="hero-actions">
+        <a class="button amber" href="01_overview.html">기획서 처음부터 보기 →</a>
+        <a class="button ghost" href="03_auto_explore.html">자동 탐색 알고리즘 바로 보기</a>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="definition-title">
+      <div class="section-intro">
+        <p class="section-label">Project Definition</p>
+        <h2 class="section-title" id="definition-title">조작보다 판단이 중요한 방치형 파티 RPG</h2>
+        <p class="section-copy">기본 자동화는 편의 기능이 아니라 장르의 핵심입니다. 플레이어는 공격 버튼을 반복하는 대신 위험 성향, 회복 기준, 전리품 규칙, 성장 우선순위를 설계하고 결과를 관찰합니다.</p>
+      </div>
+      <div class="callout design">
+        <strong class="callout-title">한 문장 정의</strong>
+        플레이어가 원정대의 빌드와 탐험 원칙을 설계하면, 파티가 살아 있는 월드를 스스로 탐색·정복하고 그 결과로 다음 전략 선택지가 열리는 방치형 파티 RPG.
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="kpi-title">
+      <div class="section-intro">
+        <p class="section-label">Core Validation</p>
+        <h2 class="section-title" id="kpi-title">먼저 증명해야 할 네 가지</h2>
+        <p class="section-copy">콘텐츠 수량보다 자동 순환의 신뢰성을 먼저 검증합니다. 아래 목표가 충족된 뒤 클래스, 지역, 장비와 이벤트를 확장합니다.</p>
+      </div>
+      <div class="metric-grid">
+        <article class="metric-card">
+          <span class="metric-label">Dungeon Seeds</span>
+          <strong class="metric-value">10,000</strong>
+          <p>모든 유효 던전이 완료 또는 설명 가능한 실패 상태에 도달</p>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Unattended Run</span>
+          <strong class="metric-value">8시간</strong>
+          <p>수금·예약·길찾기 대기로 멈추지 않는 무인 콘텐츠 순환</p>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Lost / Duplicate</span>
+          <strong class="metric-value">0건</strong>
+          <p>중복 정산, 리더 단독 전환, 보상 없는 아이템 소실 방지</p>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Determinism</span>
+          <strong class="metric-value">100%</strong>
+          <p>동일 seed·입력·tick에서 목표와 명령 로그가 동일</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="loop-title">
+      <div class="section-intro">
+        <p class="section-label">Core Loop</p>
+        <h2 class="section-title" id="loop-title">결정이 자동 행동을 만들고, 자동 행동이 월드를 바꾼다</h2>
+        <p class="section-copy">초단기 전투부터 지역 정복과 계승까지 서로 끊기지 않는 여덟 단계의 순환입니다.</p>
+      </div>
+      <div class="loop-flow" aria-label="핵심 콘텐츠 순환">
+        <div class="loop-step"><span class="step-index">01</span><strong>정책·빌드 설정</strong><span>위험, 회복, 수집, 성장 원칙</span></div>
+        <div class="loop-step"><span class="step-index">02</span><strong>필드 목표 선정</strong><span>위협도와 보상에 따라 자동 결정</span></div>
+        <div class="loop-step"><span class="step-index">03</span><strong>던전 자동 탐색</strong><span>전투, 문, 분기, 계단 처리</span></div>
+        <div class="loop-step"><span class="step-index">04</span><strong>전투·정산</strong><span>XP, 골드, 장비, 유물 조각</span></div>
+        <div class="loop-step"><span class="step-index">05</span><strong>거점 전환</strong><span>정찰·훈련·채굴·수호 시설</span></div>
+        <div class="loop-step"><span class="step-index">06</span><strong>지역 보스</strong><span>탐험·경제·전투 게이트 돌파</span></div>
+        <div class="loop-step"><span class="step-index">07</span><strong>새 지역 해금</strong><span>인접 지역과 새 변형 규칙 개방</span></div>
+        <div class="loop-step"><span class="step-index">08</span><strong>계승·심층 진행</strong><span>수평 해금 뒤 새 원정 시작</span></div>
+      </div>
+      <div class="hero-actions">
+        <a class="button" href="02_content_loop.html">순환 구조 자세히 보기 →</a>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="pillars-title">
+      <div class="section-intro">
+        <p class="section-label">Design Pillars</p>
+        <h2 class="section-title" id="pillars-title">모든 시스템을 판단하는 여섯 기준</h2>
+      </div>
+      <div class="principle-grid">
+        <article class="principle-card"><span class="principle-index">01</span><h3>자율성</h3><p>전투와 이동은 처음부터 자동이며 반복 조작을 요구하지 않습니다.</p></article>
+        <article class="principle-card"><span class="principle-index">02</span><h3>설명 가능성</h3><p>현재 행동, 목표, 정지 이유와 실패 원인을 한눈에 보여 줍니다.</p></article>
+        <article class="principle-card"><span class="principle-index">03</span><h3>간접 통제</h3><p>세부 명령보다 위험 성향과 우선순위 같은 정책으로 개입합니다.</p></article>
+        <article class="principle-card"><span class="principle-index">04</span><h3>월드 변화</h3><p>던전 완료가 지도, 시설, 생산과 적의 반응을 영구적으로 바꿉니다.</p></article>
+        <article class="principle-card"><span class="principle-index">05</span><h3>다층 완주</h3><p>방, 층, 던전, 지역과 한 런마다 분명한 완료 보상이 있습니다.</p></article>
+        <article class="principle-card"><span class="principle-index">06</span><h3>유한 복구</h3><p>자동 시스템은 실패하더라도 정체 감지와 복구를 거쳐 반드시 끝납니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="chapters-title">
+      <div class="section-intro">
+        <p class="section-label">Document Map</p>
+        <h2 class="section-title" id="chapters-title">기획서 목차</h2>
+        <p class="section-copy">게임 정체성에서 구현 우선순위와 분석 근거까지, 각 주제를 독립적으로 읽을 수 있게 구성했습니다.</p>
+      </div>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="01_overview.html"><span class="chapter-number">CHAPTER 01</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>게임 핵심</h3><p>플레이어 역할, 핵심 재미, 설계 기둥과 유지·폐기할 원칙</p></a>
+        <a class="chapter-card" href="02_content_loop.html"><span class="chapter-number">CHAPTER 02</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>콘텐츠 순환</h3><p>인카운터부터 계승까지의 시간 층위와 자원 순환</p></a>
+        <a class="chapter-card" href="03_auto_explore.html"><span class="chapter-number">CHAPTER 03</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>자동 탐색</h3><p>18상태 Director, frontier 점수, 길찾기와 정체 복구</p></a>
+        <a class="chapter-card" href="04_dungeon.html"><span class="chapter-number">CHAPTER 04</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>던전 설계</h3><p>절차 생성 파이프라인, 그래프 구조와 콘텐츠 예산</p></a>
+        <a class="chapter-card" href="05_world.html"><span class="chapter-number">CHAPTER 05</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>필드와 정복</h3><p>월드 노드, 거점 전환, 지역 보스와 재활성화</p></a>
+        <a class="chapter-card" href="06_progression.html"><span class="chapter-number">CHAPTER 06</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>성장과 경제</h3><p>자원 역할, 아이템 순환, 시설 투자와 영구 성장</p></a>
+        <a class="chapter-card" href="07_architecture.html"><span class="chapter-number">CHAPTER 07</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>게임 구조</h3><p>상태 소유권, 모듈 경계, 이벤트 흐름과 저장</p></a>
+        <a class="chapter-card" href="08_mvp.html"><span class="chapter-number">CHAPTER 08</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>MVP와 검증</h3><p>수직 슬라이스, 제작 순서, 테스트와 완료 기준</p></a>
+        <a class="chapter-card" href="09_reference.html"><span class="chapter-number">CHAPTER 09</span><span class="chapter-arrow" aria-hidden="true">↗</span><h3>분석 근거</h3><p>확인된 레퍼런스 동작과 신규 클린룸 제안의 구분</p></a>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="scope-title">
+      <div class="section-intro">
+        <p class="section-label">Scope</p>
+        <h2 class="section-title" id="scope-title">이 문서가 다루는 것</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card"><span class="status-chip complete">확인</span><h3>레퍼런스 분석</h3><p>자동 전투·탐색, 던전·필드 진행, 성장·경제와 승리 이후 구조를 행동 단위로 확인했습니다.</p></article>
+        <article class="card"><span class="status-chip design">신규 제안</span><h3>클린룸 설계</h3><p>원작 코드와 수치를 복제하지 않고 새로운 상태 기계, 경제와 콘텐츠 구조로 재설계했습니다.</p></article>
+        <article class="card"><span class="status-chip warning">제외</span><h3>게임 외 정보</h3><p>패키지, 기기, SDK, 권한, 서명, 스토어와 하드웨어 정보는 기획 범위에서 제외했습니다.</p></article>
+      </div>
+    </section>
+
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>
