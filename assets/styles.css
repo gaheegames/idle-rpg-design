@@ -517,7 +517,7 @@ img {
 }
 
 .hero::after {
-  content: "01 — 09";
+  content: "01 — 11";
   position: absolute;
   right: clamp(26px, 6vw, 76px);
   bottom: clamp(24px, 5vw, 58px);

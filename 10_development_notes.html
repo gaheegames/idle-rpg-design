@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="개척형 방치 RPG의 1차 확정 설계: 횡구조 바이옴, 심층 던전, 위험 정책, 교회 부활, 집중 작전, 캐릭터와 장비, 경량 개척촌">
+  <title>개발 노트 v0.1.0 · 자율 개척단 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260724">
+  <script src="assets/site.js?v=release-20260724" defer></script>
+</head>
+<body data-page="development-notes">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="기획서 표지로 이동">
+        <span class="brand-mark" aria-hidden="true">AR</span>
+        <span class="brand-copy"><strong>Autonomous Raid</strong><small>Game Design Bible</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="global-nav">목차</button>
+      <nav class="site-nav" id="global-nav" aria-label="전체 기획서">
+        <a data-nav="cover" href="index.html">표지</a>
+        <a data-nav="overview" href="01_overview.html">핵심</a>
+        <a data-nav="loop" href="02_content_loop.html">순환</a>
+        <a data-nav="explore" href="03_auto_explore.html">자동 탐색</a>
+        <a data-nav="dungeon" href="04_dungeon.html">던전</a>
+        <a data-nav="world" href="05_world.html">필드</a>
+        <a data-nav="progression" href="06_progression.html">성장</a>
+        <a data-nav="architecture" href="07_architecture.html">구조</a>
+        <a data-nav="mvp" href="08_mvp.html">MVP</a>
+        <a data-nav="reference" href="09_reference.html">근거</a>
+        <a data-nav="development" href="10_development_notes.html" aria-current="page">개발노트</a>
+        <a data-nav="roadmap" href="11_roadmap.html">계획</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.1.0 · 2026-07-24</span></p>
+        <h1>자동으로 개척하고,<br><em>직접 지휘하면 더 깊어진다.</em></h1>
+        <p class="lede">플레이어가 개척단의 파티·장비·위험 정책을 설계하면 원정대가 미지의 권역을 쉬지 않고 탐사한다. 접속 중에는 고위험 집중 작전을 지휘하고, 원정의 결과는 다음 개척을 준비하는 정착촌으로 남는다.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#identity">확정 방향 보기</a>
+          <a class="button ghost" href="#scope">범위 제한 확인</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="탐사, 심층 도전, 귀환, 정착으로 이어지는 개척단 순환">
+        <div class="orbit-stack">
+          <div class="orbit-card orbit-a"><span>01</span><strong>탐사</strong><small>횡구조 권역</small></div>
+          <div class="orbit-card orbit-b"><span>02</span><strong>도전</strong><small>종구조 심층</small></div>
+          <div class="orbit-card orbit-c"><span>03</span><strong>귀환</strong><small>회복 · 정산</small></div>
+          <div class="orbit-card orbit-d"><span>04</span><strong>정착</strong><small>다음 개척 준비</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-strip" aria-label="개발 노트 핵심 기준">
+      <article class="kpi-card"><span class="kpi-label">소형 탐험지</span><strong class="kpi-value">4–6</strong><span class="kpi-note">권역당 횡구조 선택지</span></article>
+      <article class="kpi-card"><span class="kpi-label">심층 던전</span><strong class="kpi-value">2–4F</strong><span class="kpi-note">중간 보스부터 난도 상승</span></article>
+      <article class="kpi-card"><span class="kpi-label">집중 작전</span><strong class="kpi-value">5–15m</strong><span class="kpi-note">선택형 액티브 지휘</span></article>
+      <article class="kpi-card"><span class="kpi-label">초기 정착 시설</span><strong class="kpi-value">4</strong><span class="kpi-note">길드 · 교회 · 대장간 · 여관</span></article>
+    </section>
+
+    <div class="content-layout">
+      <aside class="section-nav" aria-label="이 페이지 목차">
+        <p class="section-nav-title">이 페이지</p>
+        <nav>
+          <a href="#identity">프로젝트 정체성</a>
+          <a href="#region-depth">횡·종구조 탐험</a>
+          <a href="#risk">난도와 위험 정책</a>
+          <a href="#defeat">전멸과 교회 복귀</a>
+          <a href="#play-modes">자동 원정·집중 작전</a>
+          <a href="#characters">캐릭터와 장비</a>
+          <a href="#settlement">경량 개척촌</a>
+          <a href="#doctrine">전술 교범</a>
+          <a href="#scope">범위 제한</a>
+        </nav>
+        <div class="legend compact">
+          <span><i class="legend-dot reference"></i> 원작에서 계승</span>
+          <span><i class="legend-dot proposal"></i> 1차 확정 설계</span>
+        </div>
+      </aside>
+
+      <div class="prose">
+        <section class="content-section" id="identity">
+          <div class="section-heading">
+            <p class="eyebrow">PROJECT IDENTITY <span class="status status-proposal">1차 확정</span></p>
+            <h2>모험가가 아니라 미지의 땅을 여는 개척단</h2>
+            <p>원작의 자동 전투·성장·던전 정복은 유지한다. 여기에 탐사 정책, 위험 관리, 정착 결과를 더해 “알아서 싸우는 게임”을 “정책대로 세계를 개척하는 게임”으로 확장한다.</p>
+          </div>
+          <blockquote class="statement">
+            <p>플레이어가 개척단의 원칙을 정하면 파티가 미지의 지역을 자동 탐사하고, 위협을 제거해 정착촌과 교역망을 넓혀 가는 개척형 방치 RPG.</p>
+          </blockquote>
+          <figure class="media-feature media-feature--wide">
+            <button class="media-zoom" type="button" data-lightbox aria-label="개척단 게임 순환을 보여 주는 원본 리소스 재구성 이미지 확대 보기">
+              <img class="asset-pixel" src="assets/media/system-montage.png" alt="파티 편성, 월드 탐사, 던전 전투, 장비와 전리품을 하나의 개척 순환으로 묶은 시각 자료" width="1400" height="510" loading="eager" decoding="async">
+            </button>
+            <figcaption>
+              <strong>파티에서 출발한 모든 결과는 다시 다음 원정의 조건이 된다</strong>
+              <span>캐릭터·장비·자동 탐사·던전·정착을 별도 메뉴로 분리하지 않고 하나의 장기 순환으로 연결한다.</span>
+              <span class="media-source">원본 리소스 재구성 · 분석 예시 · 실제 플레이 캡처 아님</span>
+            </figcaption>
+          </figure>
+          <div class="decision-cycle" role="img" aria-label="개척단의 핵심 장기 순환">
+            <div class="cycle-step"><span>01</span><strong>개척 준비</strong><small>파티 · 장비 · 정책</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>권역 탐사</strong><small>발견 · 정찰 · 확보</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>심층 공략</strong><small>중간 보스 · 최종 보스</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>정착과 확장</strong><small>시설 · 안전로 · 새 지역</small></div>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card accent-card"><span class="card-index">IDLE</span><h3>게임은 기다리지 않는다</h3><p>확인 버튼, 보상 선택, 부활 완료 때문에 자동 원정이 무기한 정지하지 않는다.</p></article>
+            <article class="card accent-card"><span class="card-index">MANAGE</span><h3>관리가 효율을 만든다</h3><p>파티 조합과 위험 정책을 잘 설계하면 더 낮은 전투력으로 더 깊이 진입한다.</p></article>
+            <article class="card accent-card"><span class="card-index">CHANGE</span><h3>진행이 화면을 바꾼다</h3><p>작은 탐험지, 심층 던전, 정착촌이 교대로 등장해 4X와 로그라이크 감각을 만든다.</p></article>
+          </div>
+        </section>
+
+        <section class="content-section" id="region-depth">
+          <div class="section-heading">
+            <p class="eyebrow">HORIZONTAL REGION × VERTICAL DEPTH</p>
+            <h2>넓게 준비하고, 깊게 시험한다</h2>
+            <p>기본 지역 단위는 던전 하나가 아니라 “횡구조 탐험권역 + 종구조 심층 던전”이다. 모든 장소를 청소하는 체크리스트가 아니라 어떤 준비를 먼저 확보할지 선택하는 구조다.</p>
+          </div>
+          <figure class="media-feature media-feature--wide algorithm-figure">
+            <button class="media-zoom" type="button" data-lightbox aria-label="월드 탐사에서 새 던전까지 이어지는 재구성 이미지 확대 보기">
+              <img class="asset-pixel" src="assets/media/world-dungeon-transition.png" alt="완료한 던전에서 보상을 정산하고 월드의 후보지를 평가해 다음 던전으로 이동하는 흐름" width="1600" height="920" loading="lazy" decoding="async">
+            </button>
+            <figcaption>
+              <strong>횡구조의 선택이 종구조의 위험과 보상을 바꾼다</strong>
+              <span>소형 탐험지에서 확보한 단서·시설·인물이 심층 던전 생성값과 보스 약화 조건으로 전달된다.</span>
+              <span class="media-source">원본 리소스 재구성 + 신규 설계 오버레이</span>
+            </figcaption>
+          </figure>
+          <div class="decision-cycle" role="img" aria-label="횡구조 탐험권역과 종구조 심층 던전 진행 흐름">
+            <div class="cycle-step"><span>01</span><strong>야영지 도착</strong><small>지도 안개 · 소문</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>소형지 4–6곳</strong><small>2–3곳 선택 확보</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>심층 2–4층</strong><small>준비 결과 반영</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>지역 안정화</strong><small>정착촌 · 다음 권역</small></div>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="card-index">FOREST</span><h3>숲 · 시야와 매복</h3><p>공터·굽은 오솔길·숨은 샛길로 구성한다. 정찰소를 확보하면 심층의 매복과 숨은 방을 먼저 발견한다.</p></article>
+            <article class="card"><span class="card-index">WASTELAND</span><h3>황야 · 거리와 보급</h3><p>개방지·협곡·폐허·오아시스를 묶는다. 수원과 안전로 확보 여부가 매몰 신전 진입 자원에 영향을 준다.</p></article>
+            <article class="card"><span class="card-index">SWAMP</span><h3>늪 · 수로와 오염</h3><p>섬·다리·침수지를 배치한다. 수문 관리소와 약초꾼 확보가 심층의 침수도와 독 대응을 바꾼다.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">생성 원칙</span><strong>바이옴은 배경 스킨이 아니라 공간 문법이다</strong></div>
+            <p>같은 방 구조에 색만 바꾸지 않는다. 시야, 이동 비용, 안전 지점, 우회로, 적 조합과 자동 목표 점수까지 함께 달라져야 새로운 지역으로 인정한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="risk">
+          <div class="section-heading">
+            <p class="eyebrow">DIFFICULTY CURVE &amp; RISK POLICY</p>
+            <h2>입구 통과가 완주 보장이 되지 않게 한다</h2>
+            <p>던전 생성 시 기준 난도를 고정하고 구간마다 분명한 봉우리를 둔다. 파티 성장에 맞춰 실시간으로 따라 올라가는 동적 보정은 사용하지 않는다.</p>
+          </div>
+          <div class="layer-diagram" role="img" aria-label="던전 입구부터 숨은 보스까지의 권장 전투력 대비 난도 곡선">
+            <div class="layer-row"><span>01</span><strong>입구 · 80–95%</strong><small>현재 파티 상태와 기본 조합 확인</small></div>
+            <div class="layer-row"><span>02</span><strong>일반 구역 · 95–110%</strong><small>회복 자원과 원정 빌드 축적</small></div>
+            <div class="layer-row"><span>03</span><strong>엘리트 분기 · 115–130%</strong><small>선택형 고위험 보상</small></div>
+            <div class="layer-row"><span>04</span><strong>중간 보스 · 135–150%</strong><small>심층 진입 자격과 지름길 확보</small></div>
+            <div class="layer-row"><span>05</span><strong>심층 구역 · 120–140%</strong><small>회복 제한과 지역 고유 변이</small></div>
+            <div class="layer-row"><span>06</span><strong>최종 보스 · 160–190%</strong><small>준비·상성·정책을 함께 시험</small></div>
+            <div class="layer-row"><span>07</span><strong>숨은 보스 · 210%+</strong><small>당장 잡지 않아도 되는 장기 목표</small></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>위험 정책</th><th>도전 기준</th><th>기본 재도전</th><th>자동 후속 행동</th></tr></thead>
+              <tbody>
+                <tr><td><strong>안전 우선</strong></td><td>예상 승률 85% 이상</td><td>0회</td><td>낮은 지역 파밍·정보 확보</td></tr>
+                <tr><td><strong>균형 진행</strong></td><td>예상 승률 65% 이상</td><td>1회</td><td>다른 분기 탐색 후 재평가</td></tr>
+                <tr><td><strong>고위험 도전</strong></td><td>예상 승률 45% 이상</td><td>2회</td><td>부활 후 약화 조건부터 확보</td></tr>
+                <tr><td><strong>보스 준비형</strong></td><td>단서·상성·회복 조건 충족</td><td>1회</td><td>정찰소·수문·약초꾼 등 우선</td></tr>
+                <tr><td><strong>강제 목표</strong></td><td>유저가 지정한 대상</td><td>설정 상한</td><td>상한 도달 시 자동 회피 전환</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card"><span class="card-index">POWER</span><h3>전투력 숫자는 출발점</h3><p>순수 전투력에 적 상성, 현재 체력·회복 자원, 부상, 보스 정보와 미정산 전리품 위험을 함께 계산한다.</p></article>
+            <article class="card"><span class="card-index">READOUT</span><h3>판단 근거를 한 줄로 공개</h3><p>“독 해제 +12% · 정보 부족 −8% · 예상 승률 64–72%”처럼 도전·회피 이유를 유저가 읽을 수 있게 한다.</p></article>
+          </div>
+        </section>
+
+        <section class="content-section" id="defeat">
+          <div class="section-heading">
+            <p class="eyebrow">WIPE &amp; RECOVERY</p>
+            <h2>제자리 부활 반복을 실패 이후의 새 원정으로 바꾼다</h2>
+            <p>파티가 완전히 전멸하면 같은 적 앞에서 부활하지 않는다. 본진 교회·성당으로 이송하고, 유한한 회복 시간과 회수 가능한 손실을 거쳐 자동으로 다시 출발한다.</p>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="파티 전멸에서 교회 복귀와 재출발까지의 흐름">
+            <div class="cycle-step"><span>01</span><strong>파티 전멸</strong><small>원인 · 위치 기록</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>교회 이송</strong><small>1–3분 회복</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>손실 정산</strong><small>미정산분 · 부상</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>자동 재계획</strong><small>회수 · 파밍 · 재도전</small></div>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="card-index">TIME</span><h3>부활 시간</h3><p>기본 1–3분. 끝나면 확인을 기다리지 않고 안전 정책에 따라 파밍·회수·재도전 중 하나를 실행한다.</p></article>
+            <article class="card"><span class="card-index">LOSS</span><h3>회수 가능한 손실</h3><p>이번 원정의 미정산 경험치·골드 일부와 신규 전리품 1개만 위험에 둔다. 장착·잠금 장비는 잃지 않는다.</p></article>
+            <article class="card"><span class="card-index">STORY</span><h3>실패가 다음 목표</h3><p>분실품 회수, 부상자 구조, 보스 약화, 숙적 추적 중 하나가 새 임무로 생성돼 손실을 이야기로 전환한다.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">반복 방지</span><strong>같은 적에게 무한히 돌아가지 않는다</strong></div>
+            <p>전멸 직후 위험도를 다시 계산하고 재도전 횟수를 차감한다. 상한에 도달하면 해당 목표를 임시 회피 목록에 넣고 장비·경험치 파밍이나 약화용 탐험지를 자동 선택한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="play-modes">
+          <div class="section-heading">
+            <p class="eyebrow">AUTONOMOUS EXPEDITION × FOCUSED OPERATION</p>
+            <h2>방치 중에는 계속 가고, 접속 중에는 결과를 바꾼다</h2>
+            <p>액티브 콘텐츠는 자동 진행의 반대가 아니다. 같은 파티와 정책 위에서 더 강한 목표를 일찍 상대하고, 중요한 순간에 제한된 전술 명령으로 결과를 바꾸는 선택형 층이다.</p>
+          </div>
+          <figure class="media-feature media-feature--wide algorithm-figure">
+            <button class="media-zoom" type="button" data-lightbox aria-label="자동 탐색과 경로 재계산 알고리즘 이미지 확대 보기">
+              <img class="asset-pixel" src="assets/media/pathfinding-algorithm.png" alt="후보 목표를 평가하고 그래프 경로와 로컬 경로를 계산한 뒤 막힘을 감지해 재계획하는 자동 탐색 알고리즘" width="1600" height="920" loading="lazy" decoding="async">
+            </button>
+            <figcaption>
+              <strong>자동 원정은 목표 선정부터 막힘 복구까지 스스로 완결한다</strong>
+              <span>유저가 관전하지 않아도 후보 평가, 경로 계산, 전투, 철수와 재계획이 같은 정책으로 실행된다.</span>
+              <span class="media-source">원본 리소스 재구성 + 신규 알고리즘 오버레이</span>
+            </figcaption>
+          </figure>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>구분</th><th>자율 원정</th><th>집중 작전</th></tr></thead>
+              <tbody>
+                <tr><td><strong>시작</strong></td><td>Director가 정책에 따라 자동 선택</td><td>유저가 퀘스트·현상금·보스 선택</td></tr>
+                <tr><td><strong>입력</strong></td><td>사전 정책과 기본 프리셋</td><td>임무당 지휘 명령 3–5회</td></tr>
+                <tr><td><strong>대상</strong></td><td>탐색·파밍·영토 안정화</td><td>현재 파티보다 강한 특수 목표</td></tr>
+                <tr><td><strong>장점</strong></td><td>끊기지 않는 장기 성장</td><td>조기 클리어·보상 선택·다른 결말</td></tr>
+                <tr><td><strong>미참여</strong></td><td>항상 계속 진행</td><td>보존·승률 조건 자동 처리·보조 파티·무시</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="card-index">ORDER 01</span><h3>집중 공격</h3><p>소환물, 치료사, 보스 부위 등 핵심 대상을 지정한다. 입력이 없으면 기존 우선순위를 따른다.</p></article>
+            <article class="card"><span class="card-index">ORDER 02</span><h3>진형과 궁극기</h3><p>방어 진형 전환, 보호 대상 변경, 궁극기 사용·보존 시점을 제한적으로 지시한다.</p></article>
+            <article class="card"><span class="card-index">ORDER 03</span><h3>환경과 철수</h3><p>수문·발리스타·봉인 장치를 작동하거나 전리품을 확보한 채 철수할 시점을 결정한다.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">보상 원칙</span><strong>액티브 플레이는 필수 능력치가 아니라 효율과 선택권을 준다</strong></div>
+            <p>핵심 성장과 스토리는 자동으로도 획득 가능하다. 직접 지휘한 유저는 더 낮은 전투력으로 조기 공략하고, 원하는 보상·보스 약화·세계 상태를 선택할 수 있다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="characters">
+          <div class="section-heading">
+            <p class="eyebrow">CHARACTER &amp; EQUIPMENT</p>
+            <h2>같은 직업도 다른 사람, 다른 원정대원이 된다</h2>
+            <p>림월드식 생활 시뮬레이션은 줄이고 배틀 브라더스식 용병 개체성을 채택한다. 직업의 핵심 역할은 보장하되 출신·재능·특징·장비·원정 이력이 운용법을 바꾼다.</p>
+          </div>
+          <figure class="media-feature media-feature--wide">
+            <button class="media-zoom" type="button" data-lightbox aria-label="원본 캐릭터 리소스 파티 구성 이미지 확대 보기">
+              <img class="asset-pixel" src="assets/media/party-roster.png" alt="서로 다른 직업과 외형의 원정대 캐릭터를 한 화면에 배치한 파티 로스터" width="1400" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>
+              <strong>직업은 역할을 보장하고, 개인 이력은 배치 이유를 만든다</strong>
+              <span>전사라면 누구나 전열을 유지하지만 성당 경비병, 황야 추적자, 퇴역 병참장교는 서로 다른 파티와 지역에서 빛난다.</span>
+              <span class="media-source">원본 캐릭터 리소스 재구성 · 분석 예시</span>
+            </figcaption>
+          </figure>
+          <div class="decision-cycle" role="img" aria-label="개척단 캐릭터 개성을 구성하는 요소">
+            <div class="cycle-step"><span>BASE</span><strong>직업</strong><small>핵심 역할·스킬 보장</small></div>
+            <div class="cycle-arrow" aria-hidden="true">+</div>
+            <div class="cycle-step"><span>ORIGIN</span><strong>출신·재능</strong><small>배경 1 · 재능 2</small></div>
+            <div class="cycle-arrow" aria-hidden="true">+</div>
+            <div class="cycle-step"><span>TRAIT</span><strong>특징·성향</strong><small>1–2개 · 정책 보정</small></div>
+            <div class="cycle-arrow" aria-hidden="true">+</div>
+            <div class="cycle-step"><span>HISTORY</span><strong>장비·이력</strong><small>외형 · 부상 · 숙적</small></div>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="card-index">STATS</span><h3>핵심 능력치 8개</h3><p>생명력, 지구력, 근접·원거리 공격, 방어, 회피, 의지, 감지·정찰. 직업별 중요 항목을 위에 강조한다.</p></article>
+            <article class="card"><span class="card-index">TALENT</span><h3>총량이 같은 성장 재능</h3><p>별 3개를 한 능력에 집중하거나 여러 능력에 분산한다. 별 개수 자체가 캐릭터 등급이 되지 않게 한다.</p></article>
+            <article class="card"><span class="card-index">RECRUIT</span><h3>세 후보 중 한 명 영입</h3><p>무한 리롤 대신 길드·구조 퀘스트·지역 출신 후보를 비교한다. 모든 후보가 직업 역할은 정상 수행한다.</p></article>
+          </div>
+          <figure class="media-feature media-feature--wide">
+            <button class="media-zoom" type="button" data-lightbox aria-label="원본 아이템 리소스와 장비 분류 이미지 확대 보기">
+              <img class="asset-pixel" src="assets/media/item-board.png" alt="무기, 방어구, 장신구와 전리품을 역할별로 배열한 장비 보드" width="1400" height="600" loading="lazy" decoding="async">
+            </button>
+            <figcaption>
+              <strong>외형·장비 슬롯·스탯 변화를 한 화면에서 읽는다</strong>
+              <span>교체 전후 공격·방어·속도와 새로 활성화되는 연계를 비교하며, 투구·갑옷·무기·방패는 필드 캐릭터 외형에도 반영한다.</span>
+              <span class="media-source">원본 아이템 리소스 재구성 · 분석 예시</span>
+            </figcaption>
+          </figure>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">자동 행동 우선순위</span><strong>개인 성격이 지휘관의 명령을 뒤집지 않는다</strong></div>
+            <p>파티 전술 교범 → 직업 책임 → 개인 성향 → 관계·감정 순으로 판단한다. 대담한 캐릭터도 “강적 회피” 정책을 무시하지 않고 도전 점수만 소폭 보정한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="settlement">
+          <div class="section-heading">
+            <p class="eyebrow">LIGHTWEIGHT FRONTIER SETTLEMENT</p>
+            <h2>도시를 경영하지 않고, 원정 결과를 정착시킨다</h2>
+            <p>마을은 별도의 건설 게임이 아니라 귀환·영입·회복·장비·다음 임무를 한곳에 묶는 경량 허브다. 원정에서 구조한 인물과 확보한 장소가 실제 기능과 외형 변화를 만든다.</p>
+          </div>
+          <div class="decision-cycle" role="img" aria-label="개척 야영지에서 안정화된 개척마을까지의 성장 흐름">
+            <div class="cycle-step"><span>01</span><strong>개척 야영지</strong><small>천막 · 치료소 · 화로</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>02</span><strong>정착촌</strong><small>목책 · 예배당 · 여관</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>03</span><strong>개척마을</strong><small>길드 · 교역로 · 공방</small></div>
+            <div class="cycle-arrow" aria-hidden="true">→</div>
+            <div class="cycle-step"><span>04</span><strong>안정화 거점</strong><small>자동 운영 · 월드 효과</small></div>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card"><span class="card-index">GUILD</span><h3>개척단 지휘소 → 모험가 길드</h3><p>퀘스트·현상금·집중 작전·파티 편성을 담당한다. 초기 천막에서 임무 게시판과 정식 길드로 성장한다.</p></article>
+            <article class="card"><span class="card-index">CHURCH</span><h3>치료소 → 교회·성당</h3><p>부활·부상 치료·분실품 추적을 담당한다. 성장하면 손실 보호와 전멸 지점 복귀 기능을 연다.</p></article>
+            <article class="card"><span class="card-index">FORGE</span><h3>야전 화로 → 대장간</h3><p>장비 장착·분해·개조와 외형 확인을 맡는다. 폐광과 대장장이 구조가 기능을 확장한다.</p></article>
+            <article class="card"><span class="card-index">INN</span><h3>모닥불 → 여관</h3><p>영입 후보·휴식·소문과 관계 사건을 제공한다. 후보 한 명 보류와 지역 출신 영입을 지원한다.</p></article>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>원정 성과</th><th>정착촌 변화</th><th>다음 원정의 새 선택</th></tr></thead>
+              <tbody>
+                <tr><td>폐광 확보</td><td>대장간과 광부 정착</td><td>중갑 제작·붕괴 위험 탐지</td></tr>
+                <tr><td>약초꾼 구조</td><td>치료소와 약초밭 개방</td><td>늪 독 대응 물자 자동 준비</td></tr>
+                <tr><td>현상금 해결</td><td>교역로와 상인 유입</td><td>원정 보급·목표 장비 추적</td></tr>
+                <tr><td>지도 회수</td><td>지도 제작소 확장</td><td>숨은 장소·보스 단서 공개</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">성장 원칙</span><strong>수치 보너스보다 새 관리 기능을 연다</strong></div>
+            <p>공격력 +2% 대신 영입 후보 보류, 보스 약점 공개, 분실품 회수 임무, 소모품 자동 준비처럼 플레이 방식이 달라지는 기능을 제공한다. 안정화한 마을은 자동 운영해 이전 지역의 반복 관리를 요구하지 않는다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="doctrine">
+          <div class="section-heading">
+            <p class="eyebrow">TACTICAL MANUAL</p>
+            <h2>유저의 플레이는 버튼 연타가 아니라 교범 설계다</h2>
+            <p>전술 교범은 자동 원정, 오프라인 처리, 집중 작전의 기본 판단을 하나로 묶는다. 복잡한 개별 규칙을 목적 중심 프리셋으로 제공하고, 원하는 유저만 세부 조건을 조정한다.</p>
+          </div>
+          <div class="layer-diagram" role="img" aria-label="파티 전술 교범의 여섯 설정 영역">
+            <div class="layer-row"><span>01</span><strong>목표 교범</strong><small>진행 · 현상금 · 자원 · 구조 우선순위</small></div>
+            <div class="layer-row"><span>02</span><strong>위험 교범</strong><small>승률 기준 · 강적 도전 · 재도전 상한</small></div>
+            <div class="layer-row"><span>03</span><strong>전투 교범</strong><small>집중 대상 · 진형 · 궁극기 보존</small></div>
+            <div class="layer-row"><span>04</span><strong>생존 교범</strong><small>회복 기준 · 부상 허용 · 철수 시점</small></div>
+            <div class="layer-row"><span>05</span><strong>전리품 교범</strong><small>자동 장착 · 잠금 · 보존 · 분해</small></div>
+            <div class="layer-row"><span>06</span><strong>실패 교범</strong><small>회수 · 파밍 · 약화 · 목표 회피</small></div>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="card-index">SAFE</span><h3>안전 개척</h3><p>구조와 안전로, 85% 이상 승률, 빠른 철수, 손실 회수를 우선하는 장시간 방치용 프리셋.</p></article>
+            <article class="card"><span class="card-index">BALANCED</span><h3>균형 원정</h3><p>진행·성장·현상금을 고르게 평가하고 한 번의 재도전을 허용하는 기본 프리셋.</p></article>
+            <article class="card"><span class="card-index">VANGUARD</span><h3>선봉 돌파</h3><p>엘리트와 보스를 일찍 노리고 지휘 가능 임무를 보존하는 적극적 플레이용 프리셋.</p></article>
+          </div>
+          <ol class="number-list">
+            <li><strong>정책은 항상 기본값을 가진다</strong><span>유저가 한 번도 열지 않아도 안전 프리셋으로 모든 상황을 유한하게 처리한다.</span></li>
+            <li><strong>변경은 안전 경계에서 적용한다</strong><span>현재 공격을 중단시키지 않고 다음 방, 다음 전투 또는 다음 원정부터 새 교범을 사용한다.</span></li>
+            <li><strong>오프라인도 같은 판단을 사용한다</strong><span>화면 전용 간이 계산이 아니라 동일한 정책과 사건 규칙으로 결과를 재현한다.</span></li>
+            <li><strong>선택 이유를 기록한다</strong><span>왜 도전·회피·철수·장비 교체를 했는지 귀환 연대기에서 한 줄로 설명한다.</span></li>
+          </ol>
+        </section>
+
+        <section class="content-section" id="scope">
+          <div class="section-heading">
+            <p class="eyebrow">SCOPE GUARDRAIL <span class="status status-proposal">v0.1.0</span></p>
+            <h2>깊이는 연결에서 만들고, 기능 수는 제한한다</h2>
+            <p>1차 버전의 목표는 생활·도시·액션 게임을 각각 만드는 것이 아니다. 자동 원정과 관리 선택이 지역 탐사, 캐릭터, 정착촌에 같은 결과를 남기는지 검증하는 것이다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>1차 범위에 포함</th><th>의도적으로 제외</th></tr></thead>
+              <tbody>
+                <tr><td>본진 정착촌 1개 + 지역별 경량 거점</td><td>여러 마을의 개별 생산·세금·주민 관리</td></tr>
+                <tr><td>길드·교회·대장간·여관 4개 핵심 시설</td><td>건물 자유 배치, 도로 건설, 시설 유지비</td></tr>
+                <tr><td>숲·황야·늪의 서로 다른 공간 문법</td><td>색상만 다른 다수 바이옴과 수십 종 자원</td></tr>
+                <tr><td>자동 원정 + 선택형 집중 작전</td><td>수동 조작을 요구하는 필수 성장 구간</td></tr>
+                <tr><td>출신·재능·특징·장비·후천 이력</td><td>욕구·식사·수면·신체 부위를 모두 다루는 생활 시뮬레이션</td></tr>
+                <tr><td>유한한 부활 시간과 회수 가능한 손실</td><td>장착 장비 영구 파괴와 오프라인 중 영구 실패</td></tr>
+                <tr><td>기능 해금형 정착 성장</td><td>수동 수금, 제작 완료 확인, 일일 숙제</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid two-col">
+            <article class="card metric-card"><strong>먼저 증명할 것</strong><p>자동 원정이 멈추지 않고, 위험 정책이 실제 경로·전멸·보스 도전 시점을 다르게 만드는가.</p></article>
+            <article class="card metric-card"><strong>두 번째로 증명할 것</strong><p>횡구조에서 무엇을 확보했는지가 종구조 심층 던전의 위험과 선택을 실제로 바꾸는가.</p></article>
+            <article class="card metric-card"><strong>세 번째로 증명할 것</strong><p>같은 직업 캐릭터도 출신·재능·장비 때문에 다른 파티와 지역에 배치하고 싶어지는가.</p></article>
+            <article class="card metric-card"><strong>마지막으로 증명할 것</strong><p>원정 결과가 정착촌의 기능과 모습으로 남아 다음 개척지로 떠날 동기를 만드는가.</p></article>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">1차 결론</span><strong>콘텐츠를 더 붙이기 전에 핵심 연결을 플레이 가능하게 만든다</strong></div>
+            <p>경쟁 개척단, 위협 전선, 계승 연대기와 대개척 원정은 확장 후보로만 보존한다. v0.1.0에서는 개척 정책 → 횡구조 준비 → 심층 도전 → 실패·귀환 → 정착 성장이라는 한 사이클을 먼저 완성한다.</p>
+          </div>
+        </section>
+
+        <nav class="pager" aria-label="페이지 이동">
+          <a class="pager-prev" href="09_reference.html"><span>이전</span><strong>근거와 신뢰도</strong></a>
+          <a class="pager-next" href="11_roadmap.html"><span>다음</span><strong>개발 계획</strong></a>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>자율 개척단 방치형 RPG · 개발 노트 v0.1.0 · 2026-07-24</p>
+    <a href="#main">위로</a>
+  </footer>
+</body>
+</html>

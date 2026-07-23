@@ -16,6 +16,10 @@
 | `07_architecture.html` | 게임 구조와 상태 |
 | `08_mvp.html` | MVP 범위와 검증 |
 | `09_reference.html` | 분석 근거와 설계 구분 |
+| `10_development_notes.html` | 기획 결정과 개발 기록 |
+| `11_roadmap.html` | 단계별 개발 계획과 버전 운영 |
+
+현재 문서 버전은 `v0.1.0`이며, 공개 사이트·원본 저장소·로컬 작업본·Google Drive 백업은 같은 버전 번호로 관리합니다.
 
 ## GitHub Pages 공개
 
