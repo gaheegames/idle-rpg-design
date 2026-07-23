@@ -18,8 +18,9 @@
 | `09_reference.html` | 분석 근거와 설계 구분 |
 | `10_development_notes.html` | 기획 결정과 개발 기록 |
 | `11_roadmap.html` | 단계별 개발 계획과 버전 운영 |
+| `12_pathfinding_ai.html` | 여러 게임에서 재사용할 길찾기·자동 탐험·던전 생성 AI의 독립 계약과 운영 원칙 |
 
-현재 문서 버전은 `v0.1.0`이며, 공개 사이트·원본 저장소·로컬 작업본·Google Drive 백업은 같은 버전 번호로 관리합니다.
+현재 문서 버전은 `v0.1.1`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
 
 ## GitHub Pages 공개
 

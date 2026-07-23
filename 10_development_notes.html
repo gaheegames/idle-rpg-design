@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="개척형 방치 RPG의 1차 확정 설계: 횡구조 바이옴, 심층 던전, 위험 정책, 교회 부활, 집중 작전, 캐릭터와 장비, 경량 개척촌">
-  <title>개발 노트 v0.1.0 · 자율 개척단 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260724">
-  <script src="assets/site.js?v=release-20260724" defer></script>
+  <title>개발 노트 v0.1.1 · 자율 개척단 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260724-v011">
+  <script src="assets/site.js?v=release-20260724-v011" defer></script>
 </head>
 <body data-page="development-notes">
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -31,6 +31,7 @@
         <a data-nav="reference" href="09_reference.html">근거</a>
         <a data-nav="development" href="10_development_notes.html" aria-current="page">개발노트</a>
         <a data-nav="roadmap" href="11_roadmap.html">계획</a>
+        <a data-nav="pathfinding-ai" href="12_pathfinding_ai.html">길찾기 AI</a>
       </nav>
     </div>
   </header>
@@ -38,7 +39,7 @@
   <main id="main">
     <section class="hero page-hero">
       <div class="hero-copy">
-        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.1.0 · 2026-07-24</span></p>
+        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.1.1 · 2026-07-24</span></p>
         <h1>자동으로 개척하고,<br><em>직접 지휘하면 더 깊어진다.</em></h1>
         <p class="lede">플레이어가 개척단의 파티·장비·위험 정책을 설계하면 원정대가 미지의 권역을 쉬지 않고 탐사한다. 접속 중에는 고위험 집중 작전을 지휘하고, 원정의 결과는 다음 개척을 준비하는 정착촌으로 남는다.</p>
         <div class="hero-actions">
@@ -366,7 +367,7 @@
 
         <section class="content-section" id="scope">
           <div class="section-heading">
-            <p class="eyebrow">SCOPE GUARDRAIL <span class="status status-proposal">v0.1.0</span></p>
+            <p class="eyebrow">SCOPE GUARDRAIL <span class="status status-proposal">1차 동결 v0.1.0</span></p>
             <h2>깊이는 연결에서 만들고, 기능 수는 제한한다</h2>
             <p>1차 버전의 목표는 생활·도시·액션 게임을 각각 만드는 것이 아니다. 자동 원정과 관리 선택이 지역 탐사, 캐릭터, 정착촌에 같은 결과를 남기는지 검증하는 것이다.</p>
           </div>
@@ -405,7 +406,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>자율 개척단 방치형 RPG · 개발 노트 v0.1.0 · 2026-07-24</p>
+    <p>자율 개척단 방치형 RPG · 개발 노트 v0.1.1 · 2026-07-24</p>
     <a href="#main">위로</a>
   </footer>
 </body>

@@ -13,7 +13,8 @@
     { file: "08_mvp.html", index: "08", label: "MVP", title: "제작 범위와 검증" },
     { file: "09_reference.html", index: "09", label: "근거", title: "분석 근거와 구분" },
     { file: "10_development_notes.html", index: "10", label: "개발노트", title: "기획 결정과 개발 기록" },
-    { file: "11_roadmap.html", index: "11", label: "계획", title: "개발 로드맵과 버전 운영" }
+    { file: "11_roadmap.html", index: "11", label: "계획", title: "개발 로드맵과 버전 운영" },
+    { file: "12_pathfinding_ai.html", index: "12", label: "길찾기 AI", title: "재사용 경로·탐험·던전 생성 코어" }
   ];
 
   const fileName = window.location.pathname.split("/").pop() || "index.html";
