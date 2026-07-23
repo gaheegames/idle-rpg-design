@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 이벤트와 역사 · Miniwar 개발 바이블</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<nav class="top"><div class="in"><a class="brand" href="index.html" style="text-decoration:none">MINIWAR <b>·</b> 개발 바이블</a><a href="index.html">표지</a><a href="01_overview.html">개요</a><a href="02_map.html">맵·지역</a><a href="03_nations_units.html">국가·유닛</a><a href="04_combat.html">전투</a><a href="05_events.html" class="active">이벤트</a><a href="06_development.html">개발기</a><a href="07_reference.html">근거</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow gold" style="color:#e0c428">05 · Events &amp; history</span>
+  <h1>26개의 역사가 전황에 개입한다.<span class="sub">라운드와 조건이 이벤트를 부르고, 실제 역사 사진과 해설이 따라붙는다.</span></h1>
+  <p class="lede">원작의 26개 이벤트를 <code>winwar2.exe</code> 문자열에서 원문 그대로 추출했습니다. 각 이벤트는 발생 문구·사진 캡션·역사 해설로 구성되며, 엔진은 라운드 스케줄과 게임 상태 조건으로 이를 발동합니다.</p>
+</div></header>
+
+<section><div class="wrap">
+  <span class="eyebrow blue">Engine</span>
+  <h2><span class="n">01</span>이벤트 스케줄러</h2>
+  <p>이벤트는 <code>classic_engine.gd</code>의 <code>_evaluate_events()</code>가 매 국가 턴에 평가합니다. 발동 방식은 두 갈래 — <b>고정 라운드</b>(예: 라운드 4 핀란드)와 <b>상태 조건</b>(예: 소련이 공격받으면 대조국전쟁). 각 이벤트는 <code>once</code> 플래그로 1회만 발동합니다.</p>
+  <table>
+    <thead><tr><th>이벤트</th><th>발동</th><th>효과</th></tr></thead>
+    <tbody>
+      <tr><td>핀란드의 독일 동맹</td><td>라운드 4 · 스칸디나비아 중립일 때</td><td>스칸디나비아 → 독일</td></tr>
+      <tr><td>대조국전쟁</td><td>조건 · 소련이 공격받으면</td><td>이번 턴 소련 유닛 비용 −50%</td></tr>
+      <tr><td>스탈린의 애국 방송</td><td>라운드 6 · 소련 참전 상태</td><td>소련 자원 +40</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><div class="lab">0.22 — 턴1 재무장 → 침공 분기</div><p><code>_select_recovered_turn_event</code>가 라운드 1에 <b>독일 재무장(라인란트)</b> 브리핑을 띄우고, 이후 실제 진행에 따라 사진을 분기합니다(폴란드 침공→바르샤바, 프랑스 침공→파리). 이벤트가 없는 턴에는 시대배경 백드롭 10종으로 폴백합니다.</p></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow red">Featured</span>
+  <h2><span class="n">02</span>주요 이벤트 — 원문과 역사</h2>
+
+  <div class="grid g2" style="align-items:start">
+    <figure><img src="ev_france_occupied.jpg" alt="파리 개선문 아래 독일군"><figcaption>German horse-drawn artillery passes beneath the Arc de Triomphe in Paris, June 10th 1940.</figcaption></figure>
+    <div>
+      <h3>프랑스 점령 · 비시</h3>
+      <blockquote>"The German occupation of France sends shock waves throughout the world. German troops march through the streets of Paris."</blockquote>
+      <p>프랑스 본토 함락 시 발동. 점령국은 비시 정부 수립을 선택할 수 있으며, 프랑스 지역 자원 절반을 얻는 대신 추축 승리 시 최종 점수 페널티를 집니다.</p>
+    </div>
+  </div>
+
+  <div class="grid g2" style="align-items:start;margin-top:8px">
+    <div>
+      <h3>카미카제</h3>
+      <blockquote>"The Japanese begin a campaign of suicide air attacks known as Kamikaze. Fighters that kamikaze are destroyed, but have double attack strength."</blockquote>
+      <p>일본 전투기의 자폭 공격을 해금합니다 — 파괴되지만 공격력 2배, 전함·항모 격침 확률이 높아집니다.</p>
+    </div>
+    <figure><img src="ev_kamikaze.jpg" alt="카미카제에 피격된 USS Bunker Hill"><figcaption>The USS Bunker Hill was hit by two Kamikazes within 30 seconds.</figcaption></figure>
+  </div>
+
+  <div class="grid g2" style="align-items:start;margin-top:8px">
+    <figure><img src="ev_atomic_power.jpg" alt="원폭 실험"><figcaption>An atomic test blast in the western United States.</figcaption></figure>
+    <div>
+      <h3>원자력 · 핵개발</h3>
+      <blockquote>"…has discovered the secret of atomic power. Atomic bombs may now be used in strategic bombing runs."</blockquote>
+      <p>핵개발 완료 후 폭격기가 원폭을 투하할 수 있습니다. 대상 지역의 가치·생산력을 <b>영구히</b> 떨어뜨립니다.</p>
+    </div>
+  </div>
+
+  <div class="grid g2" style="align-items:start;margin-top:8px">
+    <div>
+      <h3>미국 암호해독</h3>
+      <blockquote>"The US has broken the Japanese and German codes! They are able to out-maneuver their opponents. The US receives a +10 advantage in naval battles."</blockquote>
+      <p>에니그마 해독을 반영 — 미국 해전 명중에 +10 보정. 원작 해설은 U-보트에서 노획한 에니그마 기계를 언급합니다.</p>
+    </div>
+    <figure><img src="ev_codebreaking.jpg" alt="에니그마 암호기"><figcaption>A German Enigma cipher machine, captured from a U-boat.</figcaption></figure>
+  </div>
+
+  <div class="fig-row" style="margin-top:12px">
+    <figure><img src="ev_v2_rocket.jpg" alt="V2 로켓"><figcaption><b>V2 로켓.</b> "England and France will receive 1-6 points of bombing damage each turn." — 매턴 영·프에 폭격 피해.</figcaption></figure>
+    <figure><img src="ev_russian_winter.jpg" alt="러시아의 겨울"><figcaption><b>러시아의 겨울.</b> 소련 원소유 지역에 대한 모든 공격 −50%. 스탈린그라드 전선을 반영합니다.</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Gallery</span>
+  <h2><span class="n">03</span>이벤트 사진 24종</h2>
+  <p class="muted">각 엔진 이벤트에 공개도메인/CC 역사 사진을 배정했습니다. 최대 1000px로 다운스케일해 브리핑 서술상자 위에 표시합니다.</p>
+  <figure>
+    <img src="events_gallery.jpg" alt="이벤트 역사 사진 24종 그리드">
+    <figcaption>폴란드 침공·진주만·런던 공습·대조국전쟁·스탈린그라드·원폭·반호송·집중폭격·아이슬란드·그린란드·스페인내전·겨울전쟁·V2·발칸·무솔리니·프랑스 금·몰로토프·러시아 겨울·에니그마·비시 등. 출처·라이선스는 <a href="07_reference.html">근거·크레딧</a> 참조.</figcaption>
+  </figure>
+  <div class="fig-row">
+    <figure><img src="shot_turn_briefing.jpg" alt="턴 브리핑"><figcaption>턴 브리핑 서술상자 — 발생 문구 + (0.22) 캡션·역사 해설.</figcaption></figure>
+    <figure><img src="ev_poland_invasion.jpg" alt="바르샤바 독일군 행진"><figcaption>오프닝(턴1): "German troops parade through Warsaw, September 1939."</figcaption></figure>
+  </div>
+</div></section>
+
+<footer class="pn"><div class="in"><a href="04_combat.html"><div class="d">← 이전</div><div class="t">전투</div></a><a href="06_development.html" style="text-align:right"><div class="d">다음 →</div><div class="t">개발기</div></a></div></footer>
+<div class="sitefoot">Miniwar — WinWar II 3.0 클린룸 복각 · Gahee Games · 원작 타이틀·코드·리소스 미사용(동작·시각 참고만) · 역사 사진 출처는 <a href="07_reference.html">근거·크레딧</a> 참조</div>
+</body></html>

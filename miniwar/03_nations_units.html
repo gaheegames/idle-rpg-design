@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 국가·유닛·경제 · Miniwar 개발 바이블</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<nav class="top"><div class="in"><a class="brand" href="index.html" style="text-decoration:none">MINIWAR <b>·</b> 개발 바이블</a><a href="index.html">표지</a><a href="01_overview.html">개요</a><a href="02_map.html">맵·지역</a><a href="03_nations_units.html" class="active">국가·유닛</a><a href="04_combat.html">전투</a><a href="05_events.html">이벤트</a><a href="06_development.html">개발기</a><a href="07_reference.html">근거</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">03 · Forces &amp; economy</span>
+  <h1>7개국, 9병종, 하나의 회계.<span class="sub">자원 = 수입 = 승점. 공장이 국력을 찍어낸다.</span></h1>
+  <p class="lede">추축 3국과 연합 4국이 같은 규칙 아래 다른 처지에서 출발합니다. 유닛 9종과 건물 3종, 그리고 "가치=수입=승점" 회계가 전략의 뼈대입니다.</p>
+</div></header>
+
+<section><div class="wrap">
+  <span class="eyebrow red">Nations</span>
+  <h2><span class="n">01</span>일곱 국가</h2>
+  <figure>
+    <img src="nations.png" alt="7개국 국기 — 독일·이탈리아·일본(추축), 미국·영국·소련·프랑스(연합)">
+    <figcaption><b>클린룸 국기 렌더 7종.</b> 추축(독일·이탈리아·일본)과 연합(미국·영국·소련·프랑스). 국기는 공개도메인 도안 기반으로 새로 렌더했습니다.</figcaption>
+  </figure>
+  <table>
+    <thead><tr><th>국가</th><th>진영</th><th>시작 상황</th><th>특성</th></tr></thead>
+    <tbody>
+      <tr><td>독일</td><td><span class="badge axis">추축</span></td><td>본토 1개 지역</td><td>본토 가치 24 = 세계 최고 단일. 첫 턴. 폭격기 항속 +1</td></tr>
+      <tr><td>이탈리아</td><td><span class="badge axis">추축</span></td><td>이탈리아·리비아·동아프리카</td><td>전 영토 합쳐도 독일 본토 미만</td></tr>
+      <tr><td>일본</td><td><span class="badge axis">추축</span></td><td>일본·한국·만주·점령 중국</td><td>AI 중 가장 공격적. 수송전단으로 대륙 투사</td></tr>
+      <tr><td>미국</td><td><span class="badge allies">연합</span></td><td>동부(20)·서부(16)·하와이·필리핀 등</td><td><b>초기 자원 40%만 사용.</b> 피침 시 다음 턴 100% 활성화. 마지막 턴</td></tr>
+      <tr><td>영국</td><td><span class="badge allies">연합</span></td><td>본토+캐나다·인도·아프리카·오세아니아</td><td>자원 제한 없음. 식민지 광대·분산</td></tr>
+      <tr><td>소련</td><td><span class="badge allies">연합</span></td><td>모스크바·우랄·시베리아 등 본토</td><td><b>초기 자원 60%만 사용.</b> 대조국전쟁 이벤트로 활성화</td></tr>
+      <tr><td>프랑스</td><td><span class="badge allies">연합</span></td><td>본토·북아프리카·상아해안·인도차이나</td><td>초반 독일에 본토 상실 위험 = 최고 난도</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><div class="lab">턴 순서</div><p>독일 → 프랑스 → 이탈리아 → 소련 → 일본 → 영국 → <b>미국(마지막)</b>. 미국이 맨 뒤라 한 바퀴의 결과를 보고 물량을 투입합니다.</p></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow blue">Units</span>
+  <h2><span class="n">02</span>아홉 병종</h2>
+  <figure>
+    <img src="units.png" alt="유닛 9종 스탯 카드 — 보병·기갑·전투기·폭격기·수송선·항모·구축함·잠수함·전함">
+    <figcaption><b>유닛 로스터.</b> 21px 스프라이트는 원작 관찰 그리드를 근거로 재구현. 수치는 엔진 데이터 <code>classic_rules.json</code>에서 그대로 가져왔습니다.</figcaption>
+  </figure>
+  <table>
+    <thead><tr><th>병종</th><th>영역</th><th class="num">비용</th><th class="num">이동</th><th class="num">공격</th><th class="num">방어</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>보병 Infantry</td><td>육</td><td class="num">2</td><td class="num">1</td><td class="num">20</td><td class="num">30</td><td>점령 가능. 물량의 핵심</td></tr>
+      <tr><td>기갑 Armor</td><td>육</td><td class="num">4</td><td class="num">2</td><td class="num">30</td><td class="num">35</td><td>점령 가능. 보병 동반 시 이동 1</td></tr>
+      <tr><td>전투기 Fighter</td><td>공</td><td class="num">6</td><td class="num">4</td><td class="num">45</td><td class="num">60</td><td>비행장/항모 수용 필요. 복귀 실패 시 파괴</td></tr>
+      <tr><td>폭격기 Bomber</td><td>공</td><td class="num">10</td><td class="num">6</td><td class="num">60</td><td class="num">20</td><td>전략폭격. 핵개발 후 원폭 투하</td></tr>
+      <tr><td>수송선 Transport</td><td>해</td><td class="num">4</td><td class="num">2</td><td class="num">2</td><td class="num">10</td><td>지상군 2부대 탑재. 격침 시 수장</td></tr>
+      <tr><td>항공모함 Carrier</td><td>해</td><td class="num">12</td><td class="num">2</td><td class="num">20</td><td class="num">50</td><td>항공기 4기 수용. 항해 중 함재기 출격</td></tr>
+      <tr><td>구축함 Destroyer</td><td>해</td><td class="num">3</td><td class="num">3</td><td class="num">20</td><td class="num">30</td><td>유일한 이동 3. 최저가 군함</td></tr>
+      <tr><td>잠수함 Submarine</td><td>해</td><td class="num">6</td><td class="num">2</td><td class="num">30</td><td class="num">20</td><td>해전 선제타격, 봉쇄</td></tr>
+      <tr><td>전함 Battleship</td><td>해</td><td class="num">15</td><td class="num">2</td><td class="num">60</td><td class="num">80</td><td>최강. 함포로 인접 육군 궤멸(원작 AI 미사용)</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">국가별 비용 보정: 독일 전투기·잠수함 5, 소련 폭격기 15, 일본 수송선 3.</p>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Economy</span>
+  <h2><span class="n">03</span>생산과 경제 회계</h2>
+  <div class="grid g2">
+    <div class="card"><h4>가치 = 수입 = 승점</h4><p>지역 가치는 매턴 수입이자 승점 기여입니다. 추축 승점 <b>120 이상</b>이면 추축 승리, <b>40 이하</b>면 연합 승리. 이후 FFA(무한전).</p></div>
+    <div class="card"><h4>공장 = 국력 발권</h4><p>공장 1개당 매턴 1유닛 생산, 생산 유닛은 <b>다음 턴부터</b> 가동(건설 턴엔 회색). 한 번에 생산량 = min(공장 수, 가용 자원).</p></div>
+    <div class="card"><h4>이동·공격 비용</h4><p>유지비는 없지만 이동·공격에 자원이 듭니다(이동률 0.5%, 공격률 1% 계열). 비싼 유닛일수록 비쌉니다.</p></div>
+    <div class="card"><h4>참전 활성화</h4><p>미국은 초기 자원 40%, 소련 60%만 사용. 미국은 <b>피침 시</b> 다음 턴 완전 활성화(무혈점령은 활성화 안 됨).</p></div>
+  </div>
+  <div class="callout"><div class="lab">비시 프랑스</div><p>프랑스 본토가 함락되면 점령국은 <b>비시 정부 수립</b>을 선택할 수 있습니다 — 프랑스 지역 자원의 절반을 얻지만, 추축이 승리할 경우 최종 점수에 페널티. 원작 다이얼로그 문구를 그대로 복원했습니다.</p></div>
+  <div class="fig-row">
+    <figure><img src="shot_build_forces.jpg" alt="Build Forces 생산창"><figcaption>Build Forces — 병종별 수량·스탯·Active/Reserve 편성 생산창.</figcaption></figure>
+    <figure><img src="shot_production.jpg" alt="생산 보고 화면"><figcaption>Production 보고 — 국가별 생산·가용 자원 요약.</figcaption></figure>
+  </div>
+  <div class="fig-row">
+    <figure><img src="shot_assign_forces.jpg" alt="Active/Reserve 편성"><figcaption>전투 전 Active / Reserve(현역·예비) 편성 대화상자.</figcaption></figure>
+    <figure><img src="shot_vichy.jpg" alt="비시 프랑스 다이얼로그"><figcaption>비시 프랑스 수립 선택 — 원작 문구·국기 포함.</figcaption></figure>
+  </div>
+</div></section>
+
+<footer class="pn"><div class="in"><a href="02_map.html"><div class="d">← 이전</div><div class="t">맵·지역</div></a><a href="04_combat.html" style="text-align:right"><div class="d">다음 →</div><div class="t">전투</div></a></div></footer>
+<div class="sitefoot">Miniwar — WinWar II 3.0 클린룸 복각 · Gahee Games · 원작 타이틀·코드·리소스 미사용(동작·시각 참고만) · 역사 사진 출처는 <a href="07_reference.html">근거·크레딧</a> 참조</div>
+</body></html>

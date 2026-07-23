@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 근거·레퍼런스·크레딧 · Miniwar 개발 바이블</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<nav class="top"><div class="in"><a class="brand" href="index.html" style="text-decoration:none">MINIWAR <b>·</b> 개발 바이블</a><a href="index.html">표지</a><a href="01_overview.html">개요</a><a href="02_map.html">맵·지역</a><a href="03_nations_units.html">국가·유닛</a><a href="04_combat.html">전투</a><a href="05_events.html">이벤트</a><a href="06_development.html">개발기</a><a href="07_reference.html" class="active">근거</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">07 · Reference &amp; credits</span>
+  <h1>확인된 것과 새로 설계한 것.<span class="sub">근거를 구분하고, 사진의 출처를 밝힌다.</span></h1>
+  <p class="lede">복원의 신뢰도를 위해 "원작에서 확인된 동작"과 "우리가 신규 설계한 부분"을 배지로 구분합니다. 역사 사진은 모두 공개도메인/CC에서 별도 소싱했으며 출처를 명시합니다.</p>
+</div></header>
+
+<section><div class="wrap">
+  <span class="eyebrow blue">Confirmed vs new</span>
+  <h2><span class="n">01</span>확인된 동작 vs 신규 설계</h2>
+  <table>
+    <thead><tr><th>판정</th><th>항목</th><th>근거 / 적용</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge ok">확인</span></td><td>턴 순서 · 7개국</td><td>독일→프랑스→이탈리아→소련→일본→영국→미국. 도움말·영상 교차검증</td></tr>
+      <tr><td><span class="badge ok">확인</span></td><td>유닛 비용·이동</td><td>블로그 유닛표 + 도움말. 9병종 수치 확정</td></tr>
+      <tr><td><span class="badge ok">확인</span></td><td>승리 120 / 40 · FFA</td><td>추축 120↑ 또는 40↓, 승리 후 무한전</td></tr>
+      <tr><td><span class="badge ok">확인</span></td><td>일반전 1라운드 · 상륙 전멸</td><td>도움말 "8. Attacking"</td></tr>
+      <tr><td><span class="badge new">신규</span></td><td>정확한 명중 공식</td><td>동시 판정·제거 순서는 임시 d100 공식으로 구현(원작 내부식 미확인)</td></tr>
+      <tr><td><span class="badge new">신규</span></td><td>25% 하드스톱 교대사격</td><td>원작 다단계 감각의 복원 설계(한 발씩 적산)</td></tr>
+      <tr><td><span class="badge new">신규</span></td><td>지역 인접·초기배치 정밀값</td><td>추출 데이터 + 신규 밸런스. 지형은 Natural Earth 독립 생성</td></tr>
+    </tbody>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Sources</span>
+  <h2><span class="n">02</span>레퍼런스 출처</h2>
+  <div class="kv"><span class="k">원작 실행 파일</span><span class="v"><code>winwar2.exe</code> Delphi 리소스 · ASCII 문자열 추출(26 이벤트 원문)</span></div>
+  <div class="kv"><span class="k">원작 도움말</span><span class="v"><code>winwar2.hlp</code> — 전투·생산·규칙 서술</span></div>
+  <div class="kv"><span class="k">플레이 영상</span><span class="v">타이틀 "WinWar II 3.0" 실제 구동 — UI·전투 흐름·편성 관찰</span></div>
+  <div class="kv"><span class="k">공략 블로그</span><span class="v">lucidity.co.kr 4건(기본설명·유닛설명·국가별 공략·도스판 스샷) — 수치·규칙 교차검증</span></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow red">Photo credits</span>
+  <h2><span class="n">03</span>역사 사진 출처·라이선스</h2>
+  <p class="muted">이벤트 사진은 Wikimedia Commons · IWM · NARA · US Navy에서 소싱했습니다. 아래는 대표 항목이며, CC-BY-SA 항목은 표기 크레딧이 필요합니다.</p>
+  <table>
+    <thead><tr><th>사진</th><th>주제</th><th>라이선스</th></tr></thead>
+    <tbody>
+      <tr><td>france_occupied</td><td>파리 개선문 독일 포병(1940)</td><td><span class="badge new">CC-BY-SA</span> Bundesarchiv — 표기 필요</td></tr>
+      <tr><td>v2_rocket</td><td>페네뮌데 시험대(1943)</td><td><span class="badge new">CC-BY-SA</span> Bundesarchiv — 표기 권장</td></tr>
+      <tr><td>codebreaking</td><td>M4 에니그마(U-505)</td><td><span class="badge new">CC-BY-SA</span> 표기 권장</td></tr>
+      <tr><td>poland_invasion</td><td>바르샤바 독일군 행진(1939)</td><td><span class="badge ok">PD</span> NARA</td></tr>
+      <tr><td>kamikaze</td><td>USS Bunker Hill 피격</td><td><span class="badge ok">PD</span> US Navy</td></tr>
+      <tr><td>atomic_power</td><td>에놀라 게이 / 원폭</td><td><span class="badge ok">PD</span> US Gov</td></tr>
+      <tr><td>great_patriotic_war</td><td>1941 러시아 독일군</td><td><span class="badge ok">PD</span> NARA</td></tr>
+      <tr><td>russian_winter</td><td>ARMIR 이탈리아군 후퇴</td><td>Commons</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><div class="lab">저작권 고지</div><p>원작 <b>WinWar II 3.0</b>는 Silicon Commander Games의 저작물입니다. 이 프로젝트는 원작의 코드·비트맵·사운드·타이틀을 재배포하거나 게임 에셋으로 사용하지 않으며, 규칙·화면 동작을 참고 자료로만 활용한 <b>클린룸 재구현</b>입니다. 화면·아이콘·국기·지형·사운드는 모두 신규 제작물이고, 역사 사진은 위 출처의 공개도메인/CC 자료입니다.</p></div>
+</div></section>
+
+<footer class="pn"><div class="in"><a href="06_development.html"><div class="d">← 이전</div><div class="t">개발기</div></a><span></span></div></footer>
+<div class="sitefoot">Miniwar — WinWar II 3.0 클린룸 복각 · Gahee Games · 원작 타이틀·코드·리소스 미사용(동작·시각 참고만) · 역사 사진 출처는 <a href="07_reference.html">근거·크레딧</a> 참조</div>
+</body></html>

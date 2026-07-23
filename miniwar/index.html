@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miniwar — WinWar II 3.0 복각 개발 바이블</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<nav class="top"><div class="in"><a class="brand" href="index.html" style="text-decoration:none">MINIWAR <b>·</b> 개발 바이블</a><a href="index.html" class="active">표지</a><a href="01_overview.html">개요</a><a href="02_map.html">맵·지역</a><a href="03_nations_units.html">국가·유닛</a><a href="04_combat.html">전투</a><a href="05_events.html">이벤트</a><a href="06_development.html">개발기</a><a href="07_reference.html">근거</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Clean-room reconstruction · Godot 4.7</span>
+  <h1>Miniwar<span class="sub">— 1995년 <b>WinWar II 3.0</b> 원작 복각 개발 바이블</span></h1>
+  <p class="lede">Silicon Commander Games의 턴제 세계대전 전략게임 <b>WinWar II 3.0</b>을, 원작의 코드·아트·사운드를 일절 쓰지 않고 규칙과 화면 동작만 참고해 Godot 4.7로 재구현하는 프로젝트입니다. 이 바이블은 추출한 원작 데이터, 복원한 시스템과 알고리즘, 개발 경위를 한자리에 정리합니다.</p>
+  <div class="hero-actions">
+    <a class="btn primary" href="01_overview.html">처음부터 읽기 →</a>
+    <a class="btn ghost" href="04_combat.html">전투 알고리즘 바로가기</a>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <figure>
+    <img src="hero.jpg" alt="Miniwar 복각 게임 화면 — 타이틀, New Turn Events, 턴 브리핑, Battle Report">
+    <figcaption><b>실제 복각 빌드 화면.</b> 좌상단부터 타이틀 화면, New Turn Events 팝업, 턴 브리핑(대조국전쟁 이벤트), 그리고 월드맵 위 Battle Report("2 Fighters Destroyed by AA Fire!"). Win95풍 UI·툴바·지역 박스·유닛 아이콘 모두 클린룸 재구현물입니다.</figcaption>
+  </figure>
+  <div class="stats">
+    <div class="stat"><div class="v">114</div><div class="k">지역 (육지 61 · 해역 53)</div></div>
+    <div class="stat"><div class="v allies">7</div><div class="k">국가 (추축 3 · 연합 4)</div></div>
+    <div class="stat"><div class="v gold">9</div><div class="k">유닛 병종</div></div>
+    <div class="stat"><div class="v axis">26</div><div class="k">역사 이벤트</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow blue">Project definition</span>
+  <h2><span class="n">·</span>한 문장으로 고정하는 정체</h2>
+  <blockquote>7개국이 육·해·공 전력으로 세계를 두고 다투는 원작 <b>WinWar II 3.0</b>의 규칙·화면·조작감을, 원작 리소스 없이 새 코드와 새 그래픽으로 100% 충실히 되살린 턴제 전략 게임.</blockquote>
+  <p>이 문장이 모든 판단의 기준입니다. 원작에 있었던 것은 그대로 복원하고(모드 1 · 원작복각), 원작에 없던 개선은 별도 확장판으로 미룹니다(모드 2 · 어드밴스드). 자세한 구분은 <a href="01_overview.html">개요</a>에서 다룹니다.</p>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><div class="ic">확인</div><h4>레퍼런스 분석</h4><p>원작 실행 파일·도움말·플레이 영상을 교차 검증해 유닛 수치, 턴 순서, 승리 규칙, 26개 이벤트 원문을 행동 단위로 확인했습니다.</p></div>
+    <div class="card"><div class="ic">신규</div><h4>클린룸 재구현</h4><p>원작 코드·비트맵을 복제하지 않고, 지형은 Natural Earth 공개데이터로 독립 생성, 아이콘·사운드·국기는 새로 제작했습니다.</p></div>
+    <div class="card"><div class="ic">제외</div><h4>원작 리소스</h4><p>원작 타이틀명·OST·이미지·셰어웨어 배포물은 재배포하지 않으며 게임 에셋으로 쓰지 않습니다. 역사 사진은 공개도메인/CC로 별도 소싱했습니다.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Document map</span>
+  <h2><span class="n">·</span>목차</h2>
+  <p class="muted">원작 정체성에서 시스템·알고리즘, 개발 근거까지 — 각 장은 독립적으로 읽을 수 있습니다.</p>
+  <div class="toc">
+    <a href="01_overview.html"><div class="c">CHAPTER 01</div><h4>개요</h4><span>정체성, 원작복각 vs 어드밴스드 이중 모드, 원작 데이터 추출, 프로젝트 현황</span></a>
+    <a href="02_map.html"><div class="c">CHAPTER 02</div><h4>맵과 지역</h4><span>114개 지역 구조, 가치=경제, 소유·인접 그래프, 베벨 렌더와 미니맵</span></a>
+    <a href="03_nations_units.html"><div class="c">CHAPTER 03</div><h4>국가·유닛·경제</h4><span>7개국, 9병종 스탯, 3건물, 자원=수입=승점, 참전 활성화와 비시</span></a>
+    <a href="04_combat.html"><div class="c">CHAPTER 04</div><h4>전투 알고리즘</h4><span>d100 판정, 25% 중간종료 교대사격, 대공포, 병종 상성, 특수공격</span></a>
+    <a href="05_events.html"><div class="c">CHAPTER 05</div><h4>이벤트와 역사</h4><span>이벤트 엔진, 26종 원문·캡션·해설, 역사 사진 갤러리와 소싱</span></a>
+    <a href="06_development.html"><div class="c">CHAPTER 06</div><h4>개발 여정·버전사</h4><span>웹 0.8부터 Godot 0.21까지, 빌드·테스트 파이프라인, 0.22 로드맵</span></a>
+    <a href="07_reference.html"><div class="c">CHAPTER 07</div><h4>근거·레퍼런스·크레딧</h4><span>확인된 원작 동작 vs 신규 설계, 출처, 사진 라이선스와 저작권 고지</span></a>
+    <a href="04_combat.html" style="opacity:.55"><div class="c">ALGORITHMS</div><h4>알고리즘 하이라이트</h4><span>전투 해결 흐름도·이벤트 스케줄러·생산 회계는 04·05장에 흐름도로 수록</span></a>
+  </div>
+</div></section>
+
+<footer class="pn"><div class="in"><span></span><a href="01_overview.html" style="text-align:right"><div class="d">다음 →</div><div class="t">개요</div></a></div></footer>
+<div class="sitefoot">Miniwar — WinWar II 3.0 클린룸 복각 · Gahee Games · 원작 타이틀·코드·리소스 미사용(동작·시각 참고만) · 역사 사진 출처는 <a href="07_reference.html">근거·크레딧</a> 참조</div>
+</body></html>
