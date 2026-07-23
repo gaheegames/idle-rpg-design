@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 개발 여정·버전사 · Miniwar 개발 바이블</title>
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<nav class="top"><div class="in"><a class="brand" href="index.html" style="text-decoration:none">MINIWAR <b>·</b> 개발 바이블</a><a href="index.html">표지</a><a href="01_overview.html">개요</a><a href="02_map.html">맵·지역</a><a href="03_nations_units.html">국가·유닛</a><a href="04_combat.html">전투</a><a href="05_events.html">이벤트</a><a href="06_development.html" class="active">개발기</a><a href="07_reference.html">근거</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">06 · Development</span>
+  <h1>웹 프로토타입에서 배포 빌드까지.<span class="sub">회귀 테스트로 기능을 잠그고, 샌드박스에서 빌드한다.</span></h1>
+  <p class="lede">Miniwar는 브라우저 프로토타입에서 출발해 Godot로 이식되며 기능을 하나씩 복원해 왔습니다. 모든 변경은 자동 검증 스위트로 잠그고, 값은 설정 파일에서만 조정합니다.</p>
+</div></header>
+
+<section><div class="wrap">
+  <span class="eyebrow blue">Journey</span>
+  <h2><span class="n">01</span>개발 여정</h2>
+  <div class="steps">
+    <div class="step"><div class="no">STEP 1</div><h4>웹 0.8</h4><p>game/js 프로토타입. node 하니스 193항목 통과 기준선.</p></div>
+    <div class="step"><div class="no">STEP 2</div><h4>Godot 이식 0.10–0.12.1</h4><p>기능 정본 복원. 데이터·로직·UI 분리 확립.</p></div>
+    <div class="step"><div class="no">STEP 3</div><h4>0.14 조작 복원</h4><p>지도 이동·공격 입력, 원작형 Build Forces 생산창.</p></div>
+    <div class="step"><div class="no">STEP 4</div><h4>0.19–0.20</h4><p>UI 캡처 세트, 전투 규칙 정비.</p></div>
+  </div>
+  <p style="margin-top:6px">이 바이블의 화면들은 대부분 0.19 캡처 세트에서 가져왔습니다.</p>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Versions</span>
+  <h2><span class="n">02</span>버전 현황</h2>
+  <div class="ver done"><h4>0.21 <span class="tag done">배포됨</span></h4>
+    <p>25% 중간종료 전투(한 방씩·AA 포함), 전투 결과창→AA→이벤트 팝업 흐름, 원작 사운드 9종 + 전투 배경음, 네이티브 픽셀 렌더, 메뉴 작은창 + 게임 전체화면, 드래그 패닝·가장자리 스크롤·지역 베벨, 이벤트 역사사진 배선, BGM 플레이리스트.</p></div>
+  <div class="ver wip"><h4>0.22 <span class="tag wip">준비 중</span></h4>
+    <p>미니맵 위젯, 턴1 독일 재무장 + 턴2 이후 침공 분기 사진, 이벤트 캡션·역사 해설 배선, 전투 결과창 UI(국기 + 유닛 아이콘 + 시작/손실/잔존), 이벤트 없는 턴 폴백 백드롭 10종, 생산화면 국가명 가독성, <b>멀티언어팩(한/영) + 설정 메뉴</b>(언어·해상도).</p></div>
+  <div class="ver"><h4>이후 <span class="tag next">로드맵</span></h4>
+    <p>원작복각 100% 완료 후 <b>어드밴스드 모드</b>: EU4식 전장 씬, 장군 시스템, 확장 이벤트(~100), 지역 세분화.</p></div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Pipeline</span>
+  <h2><span class="n">03</span>빌드·검증 파이프라인</h2>
+  <div class="grid g2">
+    <div class="card"><h4>샌드박스 빌드</h4><p>리눅스 Godot 4.7 headless로 <code>--import</code>(스크립트 파싱 검증) → <code>--export-pack</code>으로 <code>Miniwar.pck</code> 생성. pck는 플랫폼 공통이라 Windows exe와 그대로 짝을 이룹니다.</p></div>
+    <div class="card"><h4>부팅 스모크 + 테스트</h4><p>엔진·캠페인·특수규칙·전투·이동 스택 회귀 스위트 실행. 웹 하니스 193항목 0 FAIL 유지가 병합 조건입니다.</p></div>
+    <div class="card"><h4>값은 설정에서만</h4><p>밸런스 수치는 <code>classic_rules.json</code> 등 데이터에서만 조정하고 근거를 기록합니다. 코드에 상수를 흩지 않습니다.</p></div>
+    <div class="card"><h4>배포</h4><p>GitHub push + Google Drive 빌드 보관. 버전 문자열은 <code>project.godot</code>에서 관리합니다.</p></div>
+  </div>
+  <figure style="margin-top:18px">
+    <img src="hero.jpg" alt="복각 빌드 화면 모음">
+    <figcaption>복각 빌드의 실제 화면들 — 타이틀, 이벤트, 브리핑, 전투 보고가 하나의 UI 언어로 묶여 있습니다.</figcaption>
+  </figure>
+</div></section>
+
+<footer class="pn"><div class="in"><a href="05_events.html"><div class="d">← 이전</div><div class="t">이벤트</div></a><a href="07_reference.html" style="text-align:right"><div class="d">다음 →</div><div class="t">근거</div></a></div></footer>
+<div class="sitefoot">Miniwar — WinWar II 3.0 클린룸 복각 · Gahee Games · 원작 타이틀·코드·리소스 미사용(동작·시각 참고만) · 역사 사진 출처는 <a href="07_reference.html">근거·크레딧</a> 참조</div>
+</body></html>
