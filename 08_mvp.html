@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="자율 원정대 방치형 RPG의 수직 슬라이스, 게임플레이 MVP 범위, 구현 순서와 완료 판정 기준">
   <title>MVP 로드맵 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=visual-20260723">
+  <link rel="stylesheet" href="assets/styles.css?v=variety-20260723">
   <script src="assets/site.js?v=visual-20260723" defer></script>
 </head>
 <body data-page="mvp">
@@ -189,6 +189,7 @@
             <article class="card metric-card"><strong>완전 추적</strong><p>모든 자원과 보상은 원천 eventId까지 역추적할 수 있다.</p></article>
             <article class="card metric-card"><strong>저장 안전</strong><p>문·층·던전·지역·계승 전후 체크포인트를 중복 보상 없이 복원한다.</p></article>
             <article class="card metric-card"><strong>정책 차이</strong><p>안전·탐욕·목표 직행 프리셋이 경로, 위험, 수익 결과에서 분명히 갈린다.</p></article>
+            <article class="card metric-card promise-card-wide"><strong>누적되는 새로움</strong><p>진행 원정은 월드에 보이는 변화를 남기고, 연속 원정은 지도·목표·규칙 조합을 그대로 반복하지 않는다. 4X의 확장과 로그라이크의 변주가 화면과 판단 양쪽에서 확인되어야 한다.</p></article>
           </div>
         </section>
 
@@ -204,13 +205,19 @@
                 <tr><td>자동 탐색</td><td>대량 seed 종료성</td><td>10,000개가 완료 또는 명시적 실패</td><td>Director·watchdog·폴백</td></tr>
                 <tr><td>결정성</td><td>명령 로그 해시</td><td>동일 입력에서 100% 일치</td><td>RNG stream·업데이트 순서</td></tr>
                 <tr><td>방치 품질</td><td>무입력 장시간 실행</td><td>8시간 수금·예약 대기 0</td><td>자동 정책·경제 정산</td></tr>
-                <tr><td>콘텐츠 신선도</td><td>최근 10회 원정</td><td>동일 던전 비중 30% 이하</td><td>목표 utility·변이</td></tr>
+                <tr><td>4X 월드 변화</td><td>진행 원정 전후 WorldState</td><td>노드·거점·위협·보스 진척 중 1개 이상 변화</td><td>월드 상태 전이·시설 효과</td></tr>
+                <tr><td>로그라이크 변주</td><td>최근 10회 experienceSignature</td><td>고유 조합 7개 이상 · 연속 동일 조합 0</td><td>목표·topology·변이·사건 quota</td></tr>
+                <tr><td>화면 신선도</td><td>30분 자동 원정</td><td>5분 이상 무변화 구간 0 · 평균 3분마다 새 정보</td><td>콘텐츠 스케줄러·상태 가시화</td></tr>
                 <tr><td>보상</td><td>eventId 재적용</td><td>중복 지급 0</td><td>RewardLedger</td></tr>
                 <tr><td>인벤토리</td><td>가방 초과</td><td>무보상 가치 소실 0</td><td>분해·회수 정책</td></tr>
                 <tr><td>오프라인</td><td>화면 대비 자원 결과</td><td>초기 완전 일치, 최적화 후 평균 1% 이내</td><td>사건 경계 재생</td></tr>
                 <tr><td>설명성</td><td>보스 미출격 사유</td><td>모든 경우 한 문장 제공</td><td>ReadModel·정책 진단</td></tr>
               </tbody>
             </table>
+          </div>
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">변주 서명</span><strong>다른 색이 아니라 다른 판단을 측정한다</strong></div>
+            <p>experienceSignature는 지역 테마 + 던전 목표 + 경로 topology + 변이 집합 + 사건 집합 + 보상 테마 + 거점·위협 상태로 만든다. 카메라나 색상만 달라진 경우는 고유 조합으로 인정하지 않는다.</p>
           </div>
         </section>
 

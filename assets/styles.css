@@ -707,6 +707,149 @@ img {
   line-height: 1.58;
 }
 
+.promise-card-wide {
+  grid-column: 1 / -1;
+  min-height: 0;
+  border-top-color: var(--amber);
+  background:
+    linear-gradient(115deg, rgb(255 247 224 / 96%), rgb(238 248 244 / 94%));
+}
+
+.promise-number {
+  display: inline-block;
+  margin-right: 9px;
+  color: var(--amber-dark);
+  font-family: var(--font-mono);
+  font-size: 0.76em;
+  letter-spacing: 0.08em;
+}
+
+.promise-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 18px 0 16px;
+}
+
+.promise-tags span {
+  padding: 7px 11px;
+  border: 1px solid rgb(22 102 96 / 22%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 70%);
+  color: var(--navy);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.inline-link {
+  color: var(--teal-dark);
+  font-weight: 800;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.variation-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0 16px;
+}
+
+.variation-axis {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  padding: 26px;
+  border: 1px solid rgb(21 47 66 / 14%);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.variation-axis::after {
+  position: absolute;
+  right: -28px;
+  bottom: -50px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgb(255 255 255 / 42%);
+  border-radius: 50%;
+  content: "";
+}
+
+.variation-axis-world {
+  background: linear-gradient(145deg, #173c48, #24685f);
+  color: #f5f0dc;
+}
+
+.variation-axis-run {
+  background: linear-gradient(145deg, #51332a, #9a5a34);
+  color: #fff1db;
+}
+
+.variation-kicker {
+  display: block;
+  margin-bottom: 28px;
+  color: rgb(255 255 255 / 70%);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.variation-axis strong {
+  display: block;
+  max-width: 32ch;
+  font-family: var(--font-sans);
+  font-size: clamp(1.18rem, 1.5vw, 1.55rem);
+  line-height: 1.35;
+}
+
+.variation-axis p {
+  position: relative;
+  z-index: 1;
+  max-width: 52ch;
+  margin: 18px 0 0;
+  color: rgb(255 255 255 / 78%);
+}
+
+.variation-cadence {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 24px;
+}
+
+.variation-cadence div {
+  padding: 18px;
+  border: 1px solid rgb(21 47 66 / 13%);
+  border-radius: 9px;
+  background: rgb(255 250 240 / 86%);
+}
+
+.variation-cadence span,
+.variation-cadence strong,
+.variation-cadence small {
+  display: block;
+}
+
+.variation-cadence span {
+  color: var(--amber-dark);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.variation-cadence strong {
+  margin: 6px 0 8px;
+  color: var(--navy);
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+}
+
+.variation-cadence small {
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
 .chapter-card {
   position: relative;
   min-height: 205px;

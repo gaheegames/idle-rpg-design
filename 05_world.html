@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="자율 원정대 방치형 RPG의 필드 노드, 던전 거점 전환, 목표 선정, 지역 보스와 월드 확장 구조">
   <title>필드와 월드 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=visual-20260723">
+  <link rel="stylesheet" href="assets/styles.css?v=variety-20260723">
   <script src="assets/site.js?v=visual-20260723" defer></script>
 </head>
 <body data-page="world">
@@ -71,6 +71,7 @@
           <a href="#target-policy">목표 정책</a>
           <a href="#travel-graph">필드 이동</a>
           <a href="#region-gate">지역과 보스</a>
+          <a href="#living-variety">4X·로그라이크 변주</a>
         </nav>
         <div class="legend compact">
           <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
@@ -237,6 +238,39 @@
           <div class="callout proposal-callout">
             <div><span class="status status-proposal">자동 공격 정책</span><strong>준비 완료와 실제 출격을 끊지 않는다</strong></div>
             <p>예상 승률, 회복 자원, 최근 실패, 오프라인 허용 여부를 검사해 성 공격을 자동 예약한다. 실행하지 못하면 “예상 승률 62%가 설정 기준 75%보다 낮음”처럼 한 줄로 설명한다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="living-variety">
+          <div class="section-heading">
+            <p class="eyebrow">4X × ROGUELIKE CADENCE <span class="status status-proposal">신규 제안</span></p>
+            <h2>월드는 넓어지고, 원정은 계속 달라진다</h2>
+            <p>같은 자동 전투 화면에 오래 머물지 않는다. 작은 변화라도 새 정보와 다음 판단을 만들도록, 4X의 누적되는 영토 변화와 로그라이크의 원정별 조합 변화를 서로 다른 시간 간격으로 계속 노출한다.</p>
+          </div>
+
+          <div class="variation-board" role="img" aria-label="4X 월드 변화와 로그라이크 원정 변주를 결합한 두 축">
+            <article class="variation-axis variation-axis-world">
+              <span class="variation-kicker">4X · 누적되는 지도</span>
+              <strong>미지 공개 → 정찰 → 정복 → 거점 → 위협 반격</strong>
+              <p>던전 완료는 신규 노드, 시설, 생산망, 안전한 도로와 적의 대응을 바꾼다. 이전 원정의 결과가 다음 화면에 남는다.</p>
+            </article>
+            <article class="variation-axis variation-axis-run">
+              <span class="variation-kicker">ROGUELIKE · 달라지는 원정</span>
+              <strong>새 seed → 다른 목표 → 방 역할 → 사건·변이 → 빌드 적응</strong>
+              <p>같은 장소를 다시 찾아도 경로 구조, 전투 조합, 위험 규칙과 보상 테마가 달라져 새로운 판단을 요구한다.</p>
+            </article>
+          </div>
+
+          <div class="variation-cadence" aria-label="플레이 시간대별 새 정보 노출 간격">
+            <div><span>20–60초</span><strong>장면</strong><small>적 역할 · 방 목적 · 전리품</small></div>
+            <div><span>2–5분</span><strong>층</strong><small>경로 분기 · 사건 · 회복</small></div>
+            <div><span>8–20분</span><strong>던전</strong><small>목표 · 변이 · 거점 선택</small></div>
+            <div><span>45분+</span><strong>월드</strong><small>영토 · 시설망 · 세력 반응</small></div>
+          </div>
+
+          <div class="callout proposal-callout">
+            <div><span class="status status-proposal">판정 원칙</span><strong>색만 바꾼 화면은 새로움으로 세지 않는다</strong></div>
+            <p>지역 테마, 던전 목표, 경로 topology, 변이, 사건, 보상 테마, 거점·위협 상태 가운데 하나 이상이 새 정보나 다른 판단을 만들 때만 변주로 기록한다.</p>
           </div>
         </section>
 
