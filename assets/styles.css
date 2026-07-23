@@ -2684,6 +2684,199 @@ main#main {
   }
 }
 
+/* Extracted source imagery and algorithm explainers */
+.media-feature {
+  position: relative;
+  margin: 30px 0 46px;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--paper-bright);
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+.media-feature--wide {
+  width: min(1040px, calc(100vw - 80px));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.cover-page .media-feature--wide {
+  width: min(1320px, calc(100vw - 80px));
+}
+
+.media-feature.algorithm-figure {
+  border-top: 4px solid var(--amber);
+}
+
+.media-zoom {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  color: inherit;
+  background: var(--navy);
+  border: 0;
+  cursor: zoom-in;
+}
+
+.media-zoom::after {
+  content: "크게 보기";
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 7px 11px;
+  color: #fff;
+  background: rgb(8 22 34 / 82%);
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.media-zoom:hover::after,
+.media-zoom:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.media-zoom img {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: auto;
+  transition: filter 160ms ease, transform 200ms ease;
+}
+
+.media-zoom:hover img {
+  filter: brightness(1.035) saturate(1.025);
+  transform: scale(1.006);
+}
+
+.media-feature figcaption {
+  padding: 17px 20px 18px;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
+  gap: 12px 16px;
+  color: var(--ink-soft);
+  background: var(--paper-bright);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.62;
+}
+
+.media-feature figcaption > .media-source {
+  grid-column: 1;
+  grid-row: 1 / span 8;
+}
+
+.media-feature figcaption > strong,
+.media-feature figcaption > span:not(.media-source) {
+  grid-column: 2;
+}
+
+.media-feature figcaption > strong {
+  color: var(--navy);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.media-source {
+  padding: 4px 9px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--teal-dark);
+  background: var(--teal-pale);
+  border: 1px solid #b9d7d4;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.media-lightbox {
+  width: min(1560px, calc(100vw - 72px));
+  max-width: none;
+  max-height: calc(100vh - 64px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  background: #0c1b2a;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 18px;
+  box-shadow: 0 32px 90px rgb(0 0 0 / 48%);
+}
+
+.media-lightbox::backdrop {
+  background: rgb(4 12 20 / 82%);
+  backdrop-filter: blur(7px);
+}
+
+.media-lightbox-inner {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  max-height: calc(100vh - 64px);
+}
+
+.media-lightbox img {
+  width: 100%;
+  max-height: calc(100vh - 128px);
+  display: block;
+  object-fit: contain;
+  background: #07131f;
+}
+
+.media-lightbox-bar {
+  min-height: 56px;
+  padding: 11px 16px 11px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: rgb(255 255 255 / 70%);
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  font-size: 12px;
+}
+
+.media-lightbox-close {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  color: #fff;
+  background: rgb(255 255 255 / 9%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .media-feature--wide,
+  .cover-page .media-feature--wide {
+    width: calc(100vw - 30px);
+  }
+
+  .media-feature figcaption {
+    grid-template-columns: 1fr;
+  }
+
+  .media-feature figcaption > .media-source,
+  .media-feature figcaption > strong,
+  .media-feature figcaption > span:not(.media-source) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
 @media print {
   :root {
     --ivory: #fff;

@@ -178,12 +178,84 @@
     document.body.prepend(skip);
   }
 
+  function setupSameWindowNavigation() {
+    const isSameWindowLink = (anchor) => {
+      if (!anchor || anchor.hasAttribute("download")) return false;
+      const rawHref = anchor.getAttribute("href") || "";
+      if (!rawHref || rawHref.startsWith("#") || /^(mailto:|tel:|javascript:)/i.test(rawHref)) return false;
+      const url = new URL(anchor.href, window.location.href);
+      return url.origin === window.location.origin;
+    };
+
+    document.querySelectorAll("a[href]").forEach((anchor) => {
+      if (isSameWindowLink(anchor)) anchor.setAttribute("target", "_self");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!(event.target instanceof Element)) return;
+      const anchor = event.target.closest("a[href]");
+      if (!isSameWindowLink(anchor)) return;
+
+      const url = new URL(anchor.href, window.location.href);
+      const isSamePageAnchor = url.pathname === window.location.pathname &&
+        url.search === window.location.search && Boolean(url.hash);
+      if (isSamePageAnchor) return;
+
+      event.preventDefault();
+      window.location.assign(url.href);
+    }, true);
+  }
+
+  function setupMediaLightbox() {
+    const triggers = Array.from(document.querySelectorAll(".media-zoom"));
+    if (!triggers.length || typeof HTMLDialogElement === "undefined") return;
+
+    const dialog = document.createElement("dialog");
+    dialog.className = "media-lightbox";
+    dialog.setAttribute("aria-label", "이미지 확대 보기");
+    dialog.innerHTML = `
+      <div class="media-lightbox-inner">
+        <img alt="">
+        <div class="media-lightbox-bar">
+          <span class="media-lightbox-description"></span>
+          <button class="media-lightbox-close" type="button">닫기 · Esc</button>
+        </div>
+      </div>`;
+    document.body.appendChild(dialog);
+
+    const image = dialog.querySelector("img");
+    const description = dialog.querySelector(".media-lightbox-description");
+    const closeButton = dialog.querySelector(".media-lightbox-close");
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const sourceImage = trigger.querySelector("img");
+        if (!sourceImage) return;
+        image.src = trigger.dataset.lightbox || sourceImage.currentSrc || sourceImage.src;
+        image.alt = sourceImage.alt;
+        description.textContent = sourceImage.alt;
+        dialog.showModal();
+      });
+    });
+
+    closeButton.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      image.removeAttribute("src");
+    });
+  }
+
   function init() {
     setupSkipLink();
     setupHeader();
+    setupSameWindowNavigation();
     wrapTables();
     buildSectionNavigation();
     buildPagination();
+    setupMediaLightbox();
     setupBackToTop();
     addFooter();
   }

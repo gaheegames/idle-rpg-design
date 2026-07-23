@@ -64,6 +64,17 @@
         </div>
         <p>현재 방에 살아 있는 적이 있거나 회수할 드롭이 있으면 파티 이동을 멈춘다. 같은 방의 영웅이 행동불능이면 진행을 보류한다. 방·복도에서 닫힌 문을 찾고, 공개된 열린 문·복도만 중간 경로로 사용하며, 목표 닫힌 문은 종점으로 허용한다. 더 이상 닫힌 문이 없으면 출구 계단으로 향한다.</p>
 
+        <figure class="media-feature media-feature--wide">
+          <button class="media-zoom" type="button" data-lightbox aria-label="원본 던전 타일로 재구성한 자동 탐색 경로 분석 예시 확대 보기">
+            <img class="asset-pixel" src="assets/media/dungeon-reconstruction.png" alt="입구에서 닫힌 문과 전투 방, 막다른 보상 방을 거쳐 층 출구로 이어지는 자동 탐색 경로 재구성도" width="1600" height="900">
+          </button>
+          <figcaption>
+            <strong>자동 탐색은 타일 좌표가 아니라 방 그래프의 상태를 따라간다</strong>
+            <span>입구에서 출구까지 한 줄로 질주하는 것이 아니라, 현재 방의 전투와 드롭을 해결하고 닫힌 문을 frontier로 선택한 뒤 막다른 보상을 회수하면서 경로를 다시 계산한다.</span>
+            <span class="media-source">원본 리소스 재구성 · 분석 예시 · 실제 플레이 캡처 아님</span>
+          </figcaption>
+        </figure>
+
         <h3 id="reference-routing">경로와 집결의 실제 형태</h3>
         <div class="card-grid">
           <article class="card"><span class="status-chip complete">확인</span><h3>상위 경로</h3><p>방↔문↔복도를 재귀 DFS로 따라 첫 번째 유효 경로를 사용한다. 문 후보는 그래프 최단거리보다 좌표상 가까움의 영향을 많이 받는다.</p></article>
@@ -145,6 +156,12 @@ else                               → SELECT_OBJECTIVE</code></pre>
 
         <h2 id="frontier-scoring">Frontier 선택 알고리즘</h2>
         <p>frontier는 현재 알려진 그래프에서 가까운 쪽까지 도달할 수 있는 닫힌 문이다. 봉인 조건, blacklist, 미해결 여부를 통과한 후보만 점수화한다.</p>
+        <figure class="media-feature media-feature--wide algorithm-figure">
+          <button class="media-zoom" type="button" data-lightbox="assets/media/pathfinding-algorithm.png" aria-label="방 그래프와 지역 경로를 결합한 자동 길찾기 알고리즘 그림 크게 보기">
+            <img class="asset-pixel" src="assets/media/pathfinding-algorithm.png" width="1600" height="920" loading="lazy" decoding="async" alt="원본 던전 타일 위에 후보 문 두 곳의 점수, 선택된 경로, Snapshot부터 Replan까지 다섯 단계가 표시된 방 단위 A* 자동 길찾기 설명도">
+          </button>
+          <figcaption><span class="media-source">원본 리소스 재구성 + 신규 기획 오버레이</span> 노란 경로는 좌표상 가까워 보이지만 이미 소비한 분기라 탈락한다. 청록 경로는 미탐험·보상·실제 그래프 비용을 합산해 선택되며, 방 그래프 A*와 현재 공간의 waypoint 계산을 분리한다.</figcaption>
+        </figure>
         <div class="formula">frontierScore =
     wN × novelty
   + wO × objectiveAffinity
@@ -203,6 +220,17 @@ else                               → SELECT_OBJECTIVE</code></pre>
           <span class="state">전원 반대편 통과</span>
         </div>
         <p>각 문은 가까운 쪽 집결 중심·개별 슬롯·상호작용점·반대편 이탈 중심·슬롯을 가진다. 필수 구성원이 모두 가까운 쪽 node에 있고 배정 슬롯 오차가 허용치 이하이며, 행동불능·전투·상호작용 중이 아니어야 한다.</p>
+
+        <figure class="media-feature">
+          <button class="media-zoom" type="button" data-lightbox aria-label="문 앞 집결과 원자 전환 3단계 분석 예시 확대 보기">
+            <img class="asset-pixel" src="assets/media/door-sequence.png" alt="목표 문 선택, 파티 슬롯 집결 안정, 문 개방 후 반대편 통과의 세 단계 재구성도" width="1400" height="430" loading="lazy">
+          </button>
+          <figcaption>
+            <strong>문 하나를 ‘선택 → 집결 → 개방·이탈’의 원자적 절차로 처리한다</strong>
+            <span>경로 종점으로 문을 선택한 뒤 필수 인원을 개별 슬롯에 모으고, 안정 판정을 통과한 한 번의 명령으로 문을 연다. 통과 완료점은 문 위가 아니라 반대편 exit anchor다.</span>
+            <span class="media-source">원본 리소스 재구성 · 분석 예시 · 실제 플레이 캡처 아님</span>
+          </figcaption>
+        </figure>
         <table>
           <thead><tr><th>판정</th><th>신규 초기값</th><th>운영 원칙</th></tr></thead>
           <tbody>

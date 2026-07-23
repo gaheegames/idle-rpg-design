@@ -89,6 +89,16 @@
             <div><span class="status status-reference">확인된 레퍼런스</span><strong>실제 목표 우선순위</strong></div>
             <p>열등 장비가 있으면 상점 → 예약된 성 → 현재 지역 미정복 던전 → 열린 지역의 미정복 던전 → 재감염 던전 순으로 목적지를 잡는다. 성은 지역 던전 완료, 요구 적 단계, 공격 예약을 함께 검사한다.</p>
           </div>
+          <figure class="media-feature media-feature--wide">
+            <button class="media-zoom" type="button" data-lightbox aria-label="원본 필드 타일로 재구성한 월드 이동 분석 예시 확대 보기">
+              <img class="asset-pixel" src="assets/media/world-reconstruction.png" alt="출발 거점에서 자동 생성 던전, 지역 보스 관문, 고가치 보상 노드로 이어지는 필드 이동 경로 재구성도" width="1600" height="900">
+            </button>
+            <figcaption>
+              <strong>필드는 목적지와 이동 비용을 함께 보여 주는 전략판이다</strong>
+              <span>거점, 자동 생성 던전, 지역 관문과 선택 보상 노드를 하나의 도로 그래프로 묶었다. Director는 가까운 장소가 아니라 진행 가치·필요 보상·위험·이동 시간을 합산해 다음 원정을 선택한다.</span>
+              <span class="media-source">원본 리소스 재구성 · 분석 예시 · 실제 플레이 캡처 아님</span>
+            </figcaption>
+          </figure>
           <div class="decision-cycle" role="img" aria-label="레퍼런스의 던전 완료에서 다음 지역 해금까지의 흐름">
             <div class="cycle-step"><span>01</span><strong>지역 던전</strong><small>마지막 층 완료</small></div>
             <div class="cycle-arrow" aria-hidden="true">→</div>
@@ -155,6 +165,12 @@
             <h2>거리 대신 목적과 위험을 함께 계산한다</h2>
             <p>목표 선택은 자동이지만 이유는 숨기지 않는다. 점수의 상위 세 항목을 “새 지역 진행 +100 · 필요한 제작 재료 +28 · 이동 2분 −16”처럼 보여 준다.</p>
           </div>
+          <figure class="media-feature media-feature--wide algorithm-figure">
+            <button class="media-zoom" type="button" data-lightbox="assets/media/world-dungeon-transition.png" aria-label="던전 완료 후 월드 이동과 다음 던전 생성 알고리즘 그림 크게 보기">
+              <img class="asset-pixel" src="assets/media/world-dungeon-transition.png" width="1600" height="920" loading="lazy" decoding="async" alt="완료 던전의 복귀 지점, 보상 정산, 다음 던전 후보 점수, 필드 A* 경로와 새 던전 생성을 원본 필드 타일 위에 표시한 전환 알고리즘 설명도">
+            </button>
+            <figcaption><span class="media-source">원본 리소스 재구성 + 신규 기획 오버레이</span> 던전 완료 시 저장해 둔 필드 anchor로 돌아온 뒤 보상을 정산하고, 세 후보의 진행 가치·필요 재료·이동 비용·위험을 비교한다. 선택한 목적지까지 필드 그래프 A*로 이동한 후 새 seed의 던전을 생성한다.</figcaption>
+          </figure>
           <pre class="formula-block" aria-label="필드 목표 효용 점수식"><code>fieldUtility =
   진행 가치
 + 필요한 자원 가치

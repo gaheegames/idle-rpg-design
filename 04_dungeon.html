@@ -36,6 +36,17 @@
         <h2 id="reference-summary">레퍼런스 생성 구조의 핵심</h2>
         <p class="lead">필드 던전 메타데이터는 이동 중 생기는 것이 아니라 월드 구성 시 선계산된다. 던전 안에서는 필드 좌표와 층 인덱스로 구조를 재현하고, 아직 열지 않은 방의 인카운터는 문을 열 때 실체화한다.</p>
 
+        <figure class="media-feature media-feature--wide">
+          <button class="media-zoom" type="button" data-lightbox aria-label="원본 던전 타일로 재구성한 방과 복도 구조 분석 예시 확대 보기">
+            <img class="asset-pixel" src="assets/media/dungeon-reconstruction.png" alt="다섯 개 방이 복도와 문으로 연결되고 전투, 보상, 출구 역할이 배치된 던전 층 재구성도" width="1600" height="900">
+          </button>
+          <figcaption>
+            <strong>방 그래프가 뼈대이고 타일은 그 결과를 화면에 펼친다</strong>
+            <span>방 역할과 연결 관계를 먼저 정한 뒤 복도·문·입구·출구를 배치한다. 번호는 생성 순서가 아니라 플레이 흐름을 읽기 위한 분석 표식이며, 막다른 보상 방과 주요 경로를 한눈에 비교하게 한다.</span>
+            <span class="media-source">원본 리소스 재구성 · 분석 예시 · 실제 플레이 캡처 아님</span>
+          </figcaption>
+        </figure>
+
         <div class="flow" aria-label="레퍼런스 던전 생성 순서">
           <div class="flow-node"><span class="step-index">01</span><strong>방 배치</strong><span>크기·위치 추첨, 충돌 검사, 북서 압축</span></div>
           <div class="flow-node"><span class="step-index">02</span><strong>트리 연결</strong><span>새 방을 기존 연결 집합의 가까운 방에 부착</span></div>
@@ -71,6 +82,17 @@
           <span class="state">출구</span>
         </div>
         <p>모든 방이 연결되고 구조를 읽기 쉽다는 장점이 있지만, 두 갈래가 다시 만나는 지름길이 없다. 자동 탐색은 막다른 분기에서 반드시 같은 복도를 되돌아와야 하며, “어느 길이 안전하거나 효율적인가”보다 “어느 막다른 길을 먼저 소비할까”에 가까운 선택만 남는다.</p>
+
+        <figure class="media-feature">
+          <button class="media-zoom" type="button" data-lightbox aria-label="던전 인카운터와 보스 스프라이트 선별 예시 확대 보기">
+            <img class="asset-pixel" src="assets/media/enemy-roster.png" alt="오크 전사, 해골왕, 악마 군주, 거대 거미, 적룡, 황금룡, 무지개룡, 해골 마도사의 원본 스프라이트 선별판" width="1400" height="480" loading="lazy">
+          </button>
+          <figcaption>
+            <strong>같은 공간도 적 조합에 따라 전투 리듬이 달라진다</strong>
+            <span>일반 근접 적, 소환형, 대형 보스와 마도사를 역할군으로 나누면 방 크기·동시 출현 수·지원 적 비율을 콘텐츠 예산으로 조절할 수 있다.</span>
+            <span class="media-source">원본 APK 스프라이트 선별 · 3배 정수 확대 · 분석 예시</span>
+          </figcaption>
+        </figure>
 
         <h3 id="reference-risks">확인된 품질 위험</h3>
         <div class="card-grid">
@@ -109,6 +131,12 @@
 
         <h2 id="generation-pipeline">토폴로지 먼저, 기하는 나중에</h2>
         <p>방 위치부터 뽑고 우연히 생긴 연결을 쓰지 않는다. 먼저 이 층이 제공해야 할 선택을 그래프로 만든 다음 화면 공간에 배치한다.</p>
+        <figure class="media-feature media-feature--wide algorithm-figure">
+          <button class="media-zoom" type="button" data-lightbox="assets/media/dungeon-generation-algorithm.png" aria-label="던전 생성 다섯 단계 알고리즘 그림 크게 보기">
+            <img class="asset-pixel" src="assets/media/dungeon-generation-algorithm.png" width="1600" height="920" loading="lazy" decoding="async" alt="방 그래프, 기하 배치, 복도와 문, 적과 보상 배치, 도달성 검증을 원본 던전 타일과 캐릭터로 보여 주는 다섯 단계 던전 생성 설명도">
+          </button>
+          <figcaption><span class="media-source">원본 리소스 재구성 + 신규 기획 오버레이</span> 무작위 타일 배치가 아니라 방 그래프를 먼저 만들고 실제 공간으로 변환한다. 마지막 검증에서 연결성·출구 거리·안전 반경을 통과하지 못하면 제한된 재시도 뒤 검증 템플릿으로 끝낸다.</figcaption>
+        </figure>
         <ol class="step-list">
           <li><strong>프로필 결정</strong> 지역 테마, 위험 티어, 던전 목적, 층 수와 난도 예산을 정한다.</li>
           <li><strong>토폴로지 생성</strong> 주요 경로 길이, 선택 분기, 막다른 보상실, 소수의 순환 edge를 만든다.</li>

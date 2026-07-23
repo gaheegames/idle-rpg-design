@@ -162,6 +162,12 @@
             <p class="eyebrow">COMMAND → EVENT → VIEW</p>
             <h2>의도, 일어난 사실, 화면 설명을 분리한다</h2>
           </div>
+          <figure class="media-feature media-feature--wide">
+            <button class="media-zoom" type="button" data-lightbox aria-label="문 전환 프로토콜 세 단계 확대 보기">
+              <img class="asset-pixel" src="assets/media/door-sequence.png" alt="닫힌 문을 목표로 선택하고 파티 전원이 문 앞에 집결한 뒤 문을 열어 반대편으로 통과하는 세 단계 장면" width="1400" height="430" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span class="media-source">원본 리소스 재구성</span>하나의 문 통과도 목표 선택, 필수 인원 집결, 원자적 개방, 반대편 이동으로 분리된다. 각 단계가 명령과 사건으로 남아야 저장·복구가 안전하다.</figcaption>
+          </figure>
           <div class="card-grid three-col">
             <article class="card accent-card"><span class="card-index">COMMAND</span><h3>해 달라는 요청</h3><p><code>OpenDoor</code>, <code>LevelUp</code>, <code>BuildFacility</code>, <code>CommitLegacy</code>. 비용과 상태를 검증하기 전에는 사실이 아니다.</p></article>
             <article class="card accent-card"><span class="card-index">EVENT</span><h3>이미 일어난 사실</h3><p><code>DoorOpened</code>, <code>MonsterDefeated</code>, <code>DungeonCompleted</code>, <code>LegacyCommitted</code>. 안정 eventId를 가진다.</p></article>
