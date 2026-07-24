@@ -16,11 +16,18 @@
 | `07_architecture.html` | 게임 구조와 상태 |
 | `08_mvp.html` | MVP 범위와 검증 |
 | `09_reference.html` | 분석 근거와 설계 구분 |
-| `10_development_notes.html` | 기획 결정과 개발 기록 |
+| `10_development_notes.html` | 기획 결정, PC-first·3단계 주의력 UI, TBH 참고 원칙과 아트 방향 |
 | `11_roadmap.html` | 단계별 개발 계획과 버전 운영 |
 | `12_pathfinding_ai.html` | 여러 게임에서 재사용할 길찾기·자동 탐험·던전 생성 AI의 독립 계약과 운영 원칙 |
 
-현재 문서 버전은 `v0.1.1`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
+현재 문서 버전은 `v0.2.0`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
+
+## UI·아트 이미지 상태
+
+- `assets/media/ui-concepts/01–03`은 정착촌·월드맵·던전의 정보 구조를 검토하기 위해 만든 기존 AI 화면 예시입니다.
+- `assets/media/ui-concepts/04–06`은 세 AI 화풍의 최초 비교 출력입니다.
+- 여섯 이미지는 모두 **구조 참고 또는 아트 미승인** 상태이며 최종 게임 그래픽으로 사용하지 않습니다.
+- 결과가 요구 조건과 다르더라도 임의로 재생성하거나 반복 수정하지 않습니다. 문제를 기록한 뒤 유저 승인 후 다음 시도를 진행합니다.
 
 ## GitHub Pages 공개
 
