@@ -7,7 +7,7 @@
     { file: "02_content_loop.html", index: "02", label: "순환", title: "콘텐츠 순환 구조" },
     { file: "03_auto_explore.html", index: "03", label: "자동탐색", title: "자동 탐색 알고리즘" },
     { file: "04_dungeon.html", index: "04", label: "던전", title: "던전 생성과 진행" },
-    { file: "05_world.html", index: "05", label: "필드", title: "필드와 지역 정복" },
+    { file: "05_world.html", index: "05", label: "월드맵", title: "월드맵과 외부 원정" },
     { file: "06_progression.html", index: "06", label: "성장", title: "성장과 경제" },
     { file: "07_architecture.html", index: "07", label: "구조", title: "게임 구조와 상태" },
     { file: "08_mvp.html", index: "08", label: "MVP", title: "제작 범위와 검증" },
@@ -15,7 +15,14 @@
     { file: "10_development_notes.html", index: "10", label: "개발노트", title: "기획 결정과 개발 기록" },
     { file: "11_roadmap.html", index: "11", label: "계획", title: "개발 로드맵과 버전 운영" },
     { file: "12_pathfinding_ai.html", index: "12", label: "길찾기 AI", title: "재사용 경로·탐험·던전 생성 코어" },
-    { file: "13_design_baseline.html", index: "13", label: "현재 기준", title: "v0.3.0 통합 기획 기준선" }
+    { file: "13_design_baseline.html", index: "13", label: "현재 기준", title: "v0.3.1 통합 기획 기준선" }
+  ];
+
+  const navigationGroups = [
+    { label: "게임 설계", files: ["13_design_baseline.html", "01_overview.html", "02_content_loop.html", "06_progression.html"] },
+    { label: "탐험", files: ["05_world.html", "04_dungeon.html", "03_auto_explore.html"] },
+    { label: "제작", files: ["07_architecture.html", "08_mvp.html", "11_roadmap.html", "12_pathfinding_ai.html"] },
+    { label: "자료", files: ["10_development_notes.html", "09_reference.html"] }
   ];
 
   const fileName = window.location.pathname.split("/").pop() || "index.html";
@@ -36,7 +43,16 @@
         </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">목차</button>
         <nav class="top-nav" id="primary-navigation" aria-label="주요 문서">
-          ${pages.map((page) => `<a href="${page.file}"><span class="nav-index">${page.index}</span>${page.label}</a>`).join("")}
+          <a class="nav-home" href="index.html"><span class="nav-index">00</span>홈</a>
+          ${navigationGroups.map((group, groupIndex) => {
+            const groupPages = group.files.map((file) => pages.find((page) => page.file === file)).filter(Boolean);
+            return `<div class="nav-group" data-nav-group>
+              <button class="nav-group-toggle" type="button" aria-expanded="false" aria-controls="nav-submenu-${groupIndex}">${group.label}<span aria-hidden="true">⌄</span></button>
+              <div class="nav-submenu" id="nav-submenu-${groupIndex}">
+                ${groupPages.map((page) => `<a href="${page.file}"><span class="nav-index">${page.index}</span><span><strong>${page.label}</strong><small>${page.title}</small></span></a>`).join("")}
+              </div>
+            </div>`;
+          }).join("")}
         </nav>
       </div>`;
 
@@ -54,8 +70,41 @@
 
     if (currentLink) {
       currentLink.setAttribute("aria-current", "page");
-      requestAnimationFrame(() => currentLink.scrollIntoView({ block: "nearest", inline: "center" }));
+      const currentGroup = currentLink.closest("[data-nav-group]");
+      if (currentGroup) currentGroup.classList.add("is-active");
     }
+
+    const groups = Array.from(header.querySelectorAll("[data-nav-group]"));
+    const closeGroups = (except) => {
+      groups.forEach((group) => {
+        if (group === except) return;
+        group.classList.remove("is-open");
+        const button = group.querySelector(".nav-group-toggle");
+        if (button) button.setAttribute("aria-expanded", "false");
+      });
+    };
+
+    groups.forEach((group) => {
+      const button = group.querySelector(".nav-group-toggle");
+      if (!button) return;
+      button.addEventListener("click", () => {
+        const nextOpen = !group.classList.contains("is-open");
+        closeGroups(group);
+        group.classList.toggle("is-open", nextOpen);
+        button.setAttribute("aria-expanded", String(nextOpen));
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!header.contains(event.target)) closeGroups();
+    });
+
+    header.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      closeGroups();
+      const active = header.querySelector(".nav-group.is-active .nav-group-toggle");
+      if (active) active.focus();
+    });
 
     if (toggle && nav) {
       toggle.addEventListener("click", () => {
@@ -68,6 +117,7 @@
         if (event.target.closest("a")) {
           header.dataset.open = "false";
           toggle.setAttribute("aria-expanded", "false");
+          closeGroups();
         }
       });
     }

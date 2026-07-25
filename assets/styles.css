@@ -198,45 +198,123 @@ img {
   flex: 1;
   display: flex;
   align-items: stretch;
-  gap: 2px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  justify-content: flex-end;
+  gap: 4px;
+  overflow: visible;
 }
 
-.top-nav::-webkit-scrollbar {
-  display: none;
+.nav-group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
 }
 
-.top-nav a {
+.top-nav .nav-home,
+.nav-group-toggle {
   position: relative;
   flex: 0 0 auto;
   min-height: 68px;
-  padding: 0 10px;
+  padding: 0 14px;
   display: inline-flex;
   align-items: center;
   color: rgb(255 255 255 / 68%);
+  background: transparent;
+  border: 0;
   font-size: 13px;
   font-weight: 640;
   text-decoration: none;
   white-space: nowrap;
   transition: color 140ms ease, background 140ms ease;
+  cursor: pointer;
 }
 
-.top-nav a:hover,
-.top-nav a[aria-current="page"] {
+.nav-group-toggle > span {
+  margin-left: 7px;
+  color: var(--amber);
+  font-size: 11px;
+  transition: transform 140ms ease;
+}
+
+.nav-group.is-open .nav-group-toggle > span {
+  transform: rotate(180deg);
+}
+
+.top-nav .nav-home:hover,
+.top-nav .nav-home[aria-current="page"],
+.nav-group-toggle:hover,
+.nav-group.is-active .nav-group-toggle,
+.nav-group.is-open .nav-group-toggle {
   color: #fff;
   background: rgb(255 255 255 / 5%);
 }
 
-.top-nav a[aria-current="page"]::after {
+.top-nav .nav-home[aria-current="page"]::after,
+.nav-group.is-active > .nav-group-toggle::after {
   content: "";
   position: absolute;
-  right: 10px;
+  right: 12px;
   bottom: 0;
-  left: 10px;
+  left: 12px;
   height: 3px;
   background: var(--amber);
   border-radius: 3px 3px 0 0;
+}
+
+.nav-submenu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% - 7px);
+  right: 0;
+  width: 286px;
+  padding: 8px;
+  display: none;
+  gap: 3px;
+  background: color-mix(in srgb, var(--navy) 96%, transparent);
+  border: 1px solid rgb(255 255 255 / 13%);
+  border-radius: 12px;
+  box-shadow: 0 18px 46px rgb(0 0 0 / 34%);
+  backdrop-filter: blur(14px);
+}
+
+.nav-group.is-open .nav-submenu {
+  display: grid;
+}
+
+.nav-submenu a {
+  min-height: 48px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  color: rgb(255 255 255 / 74%);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: color 140ms ease, background 140ms ease;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a[aria-current="page"] {
+  color: #fff;
+  background: rgb(255 255 255 / 8%);
+}
+
+.nav-submenu a[aria-current="page"] {
+  box-shadow: inset 3px 0 0 var(--amber);
+}
+
+.nav-submenu a > span:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+.nav-submenu strong {
+  font-size: 13px;
+}
+
+.nav-submenu small {
+  color: rgb(255 255 255 / 50%);
+  font-size: 10px;
+  font-weight: 500;
+  white-space: normal;
 }
 
 .nav-index {
@@ -244,6 +322,12 @@ img {
   color: var(--amber);
   font-size: 10px;
   font-variant-numeric: tabular-nums;
+}
+
+@media (hover: hover) and (min-width: 821px) {
+  .nav-group:hover .nav-submenu {
+    display: grid;
+  }
 }
 
 /* Page frame */
@@ -1419,20 +1503,56 @@ pre code,
     flex-basis: 100%;
     display: none;
     padding: 6px 0 11px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
   }
 
   .site-header[data-open="true"] .top-nav {
     display: flex;
   }
 
-  .top-nav a {
-    min-height: 38px;
-    padding: 0 9px;
+  .top-nav .nav-home,
+  .nav-group-toggle {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 11px;
     border-radius: 6px;
   }
 
-  .top-nav a[aria-current="page"]::after {
+  .nav-group {
+    display: block;
+  }
+
+  .nav-group-toggle {
+    justify-content: space-between;
+  }
+
+  .nav-submenu {
+    position: static;
+    width: 100%;
+    margin: 2px 0 6px;
+    padding: 5px;
+    background: rgb(255 255 255 / 4%);
+    border-radius: 8px;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .nav-group:not(.is-open) .nav-submenu {
+    display: none;
+  }
+
+  .nav-group.is-open .nav-submenu {
+    display: grid;
+  }
+
+  .nav-submenu a {
+    min-height: 44px;
+  }
+
+  .top-nav .nav-home[aria-current="page"]::after,
+  .nav-group.is-active > .nav-group-toggle::after {
     right: 8px;
     bottom: 2px;
     left: 8px;
