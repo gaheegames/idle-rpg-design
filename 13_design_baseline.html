@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="예측 불가능성, 자동화, 연속 월드맵, 던전 생성과 자동 탐색을 통합한 개척형 방치 RPG v0.3.0 기획 기준선">
+  <meta name="theme-color" content="#14263b">
+  <title>현재 기획 기준선 v0.3.0 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260725-v030">
+  <script src="assets/site.js?v=release-20260725-v030" defer></script>
+</head>
+<body data-page="design-baseline">
+  <div data-site-header></div>
+
+  <main id="main-content" class="page-shell">
+    <header class="page-heading">
+      <p class="page-kicker">13 · DESIGN BASELINE · v0.3.0</p>
+      <h1>보이지 않는 다음을 향해<br><em>자동 원정은 멈추지 않는다</em></h1>
+      <p class="page-summary">이번 기준선은 세계를 넓히는 것보다 먼저 무엇을 재미로 삼고, 무엇을 자동화하며, 미지의 월드와 던전을 어떤 규칙으로 계속 보여줄지를 고정한다. 내부 규칙은 깊어져도 화면과 조작은 단순하게 유지한다.</p>
+      <div class="meta-row">
+        <span class="status-chip complete">핵심 가치 확정</span>
+        <span class="status-chip complete">월드맵 기준 확정</span>
+        <span class="status-chip complete">던전 구조 확정</span>
+        <span class="status-chip design">캐릭터·파티 다음</span>
+      </div>
+    </header>
+
+    <section class="metric-grid" aria-label="현재 기획 기준 핵심 수치">
+      <article class="metric-card"><span class="metric-label">Base Jobs</span><strong class="metric-value">6</strong><p>전사·궁수·사제·마법사·도적·소환사</p></article>
+      <article class="metric-card"><span class="metric-label">Party Size</span><strong class="metric-value">5</strong><p>한 자리는 반드시 비어 조합 선택이 생긴다</p></article>
+      <article class="metric-card"><span class="metric-label">Starting Reveal</span><strong class="metric-value">≈1%</strong><p>대륙 전체 윤곽 중 정착지 주변만 공개</p></article>
+      <article class="metric-card"><span class="metric-label">Intervention</span><strong class="metric-value">3–5s</strong><p>선택하지 않으면 추천 기본값으로 계속 진행</p></article>
+    </section>
+
+    <div class="article-layout">
+      <article class="article">
+        <h2 id="core-values">네 가지 가치는 우선순위가 아니라 하나의 계약이다</h2>
+        <p class="lead">예측 불가능성은 콘텐츠의 재미이고, 심플함·조작의 단순함·자동화는 그 재미를 전달하는 방식이다. 어느 하나를 위해 다른 셋을 희생하는 기능은 넣지 않는다.</p>
+
+        <div class="principle-grid">
+          <article class="principle-card"><span class="principle-index">01</span><h3>예측 불가능성</h3><p>다음 지역·방·층·몬스터의 정확한 정체는 진입하거나 맞닥뜨릴 때 공개한다.</p></article>
+          <article class="principle-card"><span class="principle-index">02</span><h3>심플함</h3><p>현재 상황, 위험, 파티 상태와 중요한 결과를 한 화면에서 읽게 한다.</p></article>
+          <article class="principle-card"><span class="principle-index">03</span><h3>단순한 조작</h3><p>반복 입력 대신 소수의 정책과 필요한 순간의 짧은 개입만 제공한다.</p></article>
+          <article class="principle-card"><span class="principle-index">04</span><h3>자동화</h3><p>마을을 떠난 뒤 귀환할 때까지 탐색·전투·정산·회복·다음 행동이 멈추지 않는다.</p></article>
+        </div>
+
+        <div class="callout success">
+          <strong class="callout-title">기능 추가 통과선</strong>
+          새 기능은 미지의 내용, 공개 순간의 놀라움, 공개 뒤의 판단 중 하나를 강화해야 한다. 동시에 입력이 없어도 안전한 기본값으로 처리되고 반복 선택은 정책으로 흡수되어야 한다.
+        </div>
+
+        <h2 id="expedition-loop">게임 전체 순환</h2>
+        <div class="flow" aria-label="정착지에서 출발해 미지를 탐험하고 귀환하는 전체 게임 순환">
+          <div class="flow-node"><span class="step-index">01 · PREPARE</span><strong>정착지 준비</strong><span>5인 파티·장비·위험·철수 정책</span></div>
+          <div class="flow-node"><span class="step-index">02 · DEPART</span><strong>자동 출정</strong><span>월드 포그 속 경로와 징후 탐사</span></div>
+          <div class="flow-node"><span class="step-index">03 · REVEAL</span><strong>미지 공개</strong><span>지역·방·몬스터·사건을 진입 시 확정</span></div>
+          <div class="flow-node"><span class="step-index">04 · RETURN</span><strong>귀환·성장</strong><span>자원·교범·상처·발견으로 다음 원정 변화</span></div>
+        </div>
+        <p>마을 밖에서는 확인창 때문에 멈추지 않는다. 상황 선택은 3~5초 동안 개입 기회를 제공하되, 입력이 없으면 파티 능력치·성향·유저 정책을 반영한 추천안을 자동 실행한다. 봉인 해제, 저주 해제, 장비 교체, 스킬 장착처럼 즉시 결정할 필요가 없는 일은 귀환 후 정리한다.</p>
+
+        <h2 id="world-map">월드맵은 넓이를 약속하고 실제 발걸음으로 증명한다</h2>
+        <div class="state-lane" aria-label="월드맵 공개 흐름">
+          <span class="state">대륙 전체 윤곽</span><span class="arrow">→</span>
+          <span class="state">정착지 주변 약 1%</span><span class="arrow">→</span>
+          <span class="state">이동 경로·정찰 반경 공개</span><span class="arrow">→</span>
+          <span class="state">발견 등록부 누적</span>
+        </div>
+        <table>
+          <thead><tr><th>표시 층</th><th>유저가 보는 것</th><th>숨기는 것</th><th>의도</th></tr></thead>
+          <tbody>
+            <tr><td><strong>대륙</strong></td><td>거대한 윤곽, 지형대와 아주 먼 이상 징후</td><td>정확한 길·던전·세력·위험</td><td>남은 세계의 규모와 장기 기대감</td></tr>
+            <tr><td><strong>탐사 격자</strong></td><td>조사율, 지나간 길, 정찰 범위</td><td>아직 확인하지 않은 칸의 실체</td><td>실제 원정으로 지도가 밝혀지는 진척감</td></tr>
+            <tr><td><strong>발견 등록부</strong></td><td>확인된 던전·폐허·사건·자원지</td><td>포그 속 후보 슬롯의 정답</td><td>콘텐츠 목록과 지도 위치를 함께 기억</td></tr>
+          </tbody>
+        </table>
+        <div class="callout design">
+          <strong class="callout-title">‘?’의 의미</strong>
+          포그 속 표식은 완성된 던전을 미리 배치했다는 약속이 아니다. 던전·폐허·사건·자원지·헛소문 중 하나로 확정될 콘텐츠 발생 후보이며, 접근 과정과 지역 상태에 따라 실체가 달라질 수 있다.
+        </div>
+
+        <h2 id="dungeon-grammar">던전은 정체성을 기억하지만 내부는 계속 다시 말한다</h2>
+        <div class="card-grid">
+          <article class="card"><span class="status-chip complete">고정 기억</span><h3>장소의 정체성</h3><p>위치, 이름, 핵심 테마, 역사적 사건과 대표 생태는 유지해 같은 장소로 기억된다.</p></article>
+          <article class="card"><span class="status-chip design">누적 기억</span><h3>플레이 결과</h3><p>열린 지름길, 처치한 고유 개체, 구조한 인물, 붕괴·오염과 세력 변화가 다음 원정에 남는다.</p></article>
+          <article class="card"><span class="status-chip warning">재구성</span><h3>이번 원정의 내부</h3><p>세부 경로, 방 조합, 점유자, 사건, 보상과 변형 상태는 다시 구성한다.</p></article>
+        </div>
+        <p>방은 <strong>역할 × 지형 × 점유자 × 변형 상태 × 이전 방 결과</strong>로 조합한다. 최근 본 장소·몬스터·조우 조합은 짧은 기간 가중치를 낮추며, 소형 던전에는 보스가 없을 가능성을 기본값으로 둔다.</p>
+
+        <table>
+          <thead><tr><th>규모</th><th>구조적 특징</th><th>강적·보상</th><th>장기 변화</th></tr></thead>
+          <tbody>
+            <tr><td><strong>소형</strong></td><td>짧은 단층 또는 제한 구역, 적은 분기</td><td>엘리트·보스 확률 낮음, 적은 보상</td><td>차후 잠긴 구역 하나 정도 해금 가능</td></tr>
+            <tr><td><strong>보통</strong></td><td>복수 분기와 우회, 보급 판단 시작</td><td>엘리트·중간 목표 증가</td><td>지름길·세력 점유 변화</td></tr>
+            <tr><td><strong>대형</strong></td><td>여러 층과 생태 혼입, 체크포인트</td><td>고유 개체·희귀 보상과 명확한 난도 봉우리</td><td>여러 원정에 걸친 공략 기록</td></tr>
+            <tr><td><strong>심층</strong></td><td>장기 원정, 층별 문법 변화, 불완전한 규모 추정</td><td>지역 보스·환경 기믹·교범 획득</td><td>월드와 정착지 상태를 바꾸는 결과</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="auto-exploration">자동 탐색은 숨겨진 정답을 읽지 않는다</h2>
+        <div class="flow" aria-label="던전 자동 탐색의 기본 상태 흐름">
+          <div class="flow-node"><span class="step-index">01 · RESOLVE</span><strong>현재 방 해결</strong><span>전투·회복·전리품·부상 확인</span></div>
+          <div class="flow-node"><span class="step-index">02 · SCORE</span><strong>미지 경계 평가</strong><span>관측 단서·목표·위험·철수 가능성</span></div>
+          <div class="flow-node"><span class="step-index">03 · ROUTE</span><strong>실제 비용 경로</strong><span>Dijkstra/A*로 이동 비용 비교</span></div>
+          <div class="flow-node"><span class="step-index">04 · PASS</span><strong>집결·문 통과</strong><span>선두→구성원→통과 후 재집결</span></div>
+          <div class="flow-node"><span class="step-index">05 · REVEAL</span><strong>공개·기억 갱신</strong><span>새 공간을 본 뒤 다음 판단 반복</span></div>
+        </div>
+        <p>다음 문 선택은 가까운 거리만 보지 않는다. 정보 가치, 목표 친화도, 단서 흥미, 새 경로, 안전 철수 가능성과 파티 성향을 더하고 실제 이동 비용, 관측된 위험, 보급 위험, 역주행과 최근 실패를 뺀다. 숨겨진 방의 실제 몬스터·보상·구조는 점수 계산에 사용하지 않는다.</p>
+
+        <h3 id="door-passage">문 통과 상태기계</h3>
+        <div class="state-lane" aria-label="파티가 문을 통과하는 상태 순서">
+          <span class="state">접근</span><span class="arrow">→</span>
+          <span class="state">문 앞 집결</span><span class="arrow">→</span>
+          <span class="state">관문 예약</span><span class="arrow">→</span>
+          <span class="state">선두 통과</span><span class="arrow">→</span>
+          <span class="state">구성원 통과</span><span class="arrow">→</span>
+          <span class="state">통과 후 재집결</span>
+        </div>
+
+        <h3 id="stuck-recovery">교착 복구 사다리</h3>
+        <ol class="step-list">
+          <li><strong>waypoint 재표본</strong> 같은 목표를 유지하고 지역 이동점만 다시 잡는다.</li>
+          <li><strong>막힌 간선 비용 상승·재경로</strong> 반복 실패한 통로를 잠시 덜 선호한다.</li>
+          <li><strong>집결 기준·선두 교체</strong> 대형 소환물이나 느린 구성원의 충돌을 해소한다.</li>
+          <li><strong>관문 예약 해제·재예약</strong> 문 통과 상태를 유한하게 초기화한다.</li>
+          <li><strong>다른 관문·다른 frontier</strong> 같은 실패를 계속 반복하지 않는다.</li>
+          <li><strong>안전 방 철수</strong> 복구 예산이 끝나면 설명 가능한 후퇴·귀환으로 종료한다.</li>
+        </ol>
+        <div class="callout warning">
+          <strong class="callout-title">금지</strong>
+          파티원을 선두 위치로 복사해 순간이동시키거나 같은 상태를 무기한 반복하지 않는다. 각 복구 단계에는 실패 횟수와 시간 예산이 있으며, 최종적으로 안전 철수 또는 자동 귀환으로 끝난다.
+        </div>
+
+        <h2 id="settlement">정착지는 원정 결과를 다음 가능성으로 바꾸는 경량 허브다</h2>
+        <div class="state-lane" aria-label="정착지 성장 단계">
+          <span class="state">폐허</span><span class="arrow">→</span>
+          <span class="state">개척 거점</span><span class="arrow">→</span>
+          <span class="state">정착촌</span><span class="arrow">→</span>
+          <span class="state">작은 마을</span><span class="arrow">→</span>
+          <span class="state">도시 확장 후보</span>
+        </div>
+        <p>마을은 자유 배치 도시 건설 게임이 아니다. 길드·교회·대장간·창고 같은 소수 시설이 회복, 편성, 장비, 정보와 다음 원정의 효율을 바꾼다. 자원과 돈은 마을을 키우지만, 시설 관리가 자동 탐험보다 더 많은 조작을 요구해서는 안 된다.</p>
+
+        <h2 id="planning-status">12개 기획 영역의 현재 위치</h2>
+        <table>
+          <thead><tr><th>영역</th><th>현재 상태</th><th>이번 기준선</th><th>다음 산출물</th></tr></thead>
+          <tbody>
+            <tr><td>1. 마을</td><td><span class="status-chip design">골격 확정</span></td><td>경량 허브, 폐허→작은 마을</td><td>시설 기능·해금 배치도</td></tr>
+            <tr><td>2. 월드맵</td><td><span class="status-chip complete">핵심 완료</span></td><td>연속 대륙·포그·탐사 격자·등록부</td><td>첫 대륙 영역·바이옴 배치</td></tr>
+            <tr><td>3. 던전</td><td><span class="status-chip complete">핵심 완료</span></td><td>규모 문법·세 기억층·자동 탐색·교착 복구</td><td>첫 대표 던전 데이터표</td></tr>
+            <tr><td>4. 캐릭터·파티</td><td><span class="status-chip warning">다음</span></td><td>6직업·최대 5인·배경/특성 영향</td><td>역할 매트릭스·성격·트라우마·자동 행동</td></tr>
+            <tr><td>5–7. 아이템·몬스터·보스</td><td><span class="status-chip design">구조만</span></td><td>원정·던전 결과와 연결</td><td>첫 바이옴용 목록과 조우 규칙</td></tr>
+            <tr><td>8–12. 성장 이후</td><td><span class="status-chip design">순환만</span></td><td>귀환·마을·교범·월드 변화 연결</td><td>영역별 시각 기획서</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout design">
+          <strong class="callout-title">바로 다음 작업</strong>
+          6개 기본 직업과 최대 5인 파티의 역할 겹침·빈자리 위험을 표로 만들고, 힘·지능·민첩·매력 같은 능력치와 출신·성격·강박·트라우마가 전투, 탐색 선택, 대사와 관계에 미치는 영향을 하나의 자동 행동 규칙으로 연결한다.
+        </div>
+      </article>
+
+      <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
+    </div>
+
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>
