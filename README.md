@@ -22,17 +22,15 @@
 | `13_design_baseline.html` | 현재까지 확정한 통합 기획 기준선 |
 | `14_visual_archive.html` | 개척 순환·월드·던전·UI·분석 이미지 시각 자료실 |
 
-현재 문서 버전은 `v0.3.2`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
+현재 문서 버전은 `v0.3.3`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
 
-## UI·아트 이미지 상태
+## 시각 기획 자료 운영
 
-- `assets/media/planning/`은 개척 순환 스토리보드와 슬라임 던전 전투 화면처럼 기획 대화에서 만든 대표 시각화 원본입니다.
-- `assets/media/`의 구성도·알고리즘 이미지는 시스템 설명과 분석용으로 사용합니다.
-- `assets/media/ui-concepts/01–03`은 정착촌·월드맵·던전의 정보 구조를 검토하기 위해 만든 기존 AI 화면 예시입니다.
-- `assets/media/ui-concepts/04–06`은 세 AI 화풍의 최초 비교 출력입니다.
-- `planning`과 `ui-concepts` 이미지는 모두 **구조 참고 또는 아트 미승인** 상태이며 최종 게임 그래픽으로 사용하지 않습니다.
-- 결과가 요구 조건과 다르더라도 임의로 재생성하거나 반복 수정하지 않습니다. 문제를 기록한 뒤 유저 승인 후 다음 시도를 진행합니다.
-- 전체 이미지의 현재 상태와 관련 기획 링크는 `14_visual_archive.html`에서 관리합니다.
+- `assets/media/diagrams/`은 논의 과정에서 확정한 화면 와이어프레임, 맵 구성도와 상태 변화 도식을 보관합니다.
+- `assets/media/`의 기존 구성도·알고리즘 이미지는 시스템 설명과 분석용으로 계속 사용합니다.
+- 승인된 새 도식은 일부만 고르지 않고 관련 기획 페이지와 `14_visual_archive.html`에 모두 추가합니다.
+- 폐기 지시된 AI 화면·화풍 이미지는 공개 자산에서 삭제했으며 다시 올리지 않습니다.
+- 전체 목록과 업로드 절차는 `docs/VISUAL_ARCHIVE.md`에서 관리합니다.
 
 ## GitHub Pages 공개
 

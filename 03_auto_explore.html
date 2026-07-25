@@ -6,8 +6,8 @@
   <meta name="description" content="방치형 파티 RPG의 자동 탐색 Director, frontier 점수, 계층형 길찾기, 문 전환과 정체 복구 알고리즘 명세">
   <meta name="theme-color" content="#14263b">
   <title>자동 탐색 알고리즘 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v032">
-  <script src="assets/site.js?v=release-20260726-v032" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v033">
+  <script src="assets/site.js?v=release-20260726-v033" defer></script>
 </head>
 <body data-page="explore">
   <div data-site-header></div>
@@ -51,6 +51,17 @@
           <strong class="callout-title">질문에 대한 직접 답</strong>
           자동 탐색의 정리와 알고리즘 추출은 완료되었다. 아래 내용은 분석 메모가 아니라 신규 프로젝트의 구현 계약이다.
         </div>
+
+        <figure class="media-feature media-feature--wide">
+          <button class="media-zoom" type="button" data-lightbox aria-label="던전 자동 원정 화면 구성 도식 크게 보기">
+            <img src="assets/media/diagrams/dungeon-auto-expedition-screen-diagram-v1.png" width="746" height="434" loading="lazy" decoding="async" alt="쿼터뷰 던전 방과 복도, 파티, 몬스터, 다음 방 단서, 자동 원정 상태와 다섯 캐릭터 정보를 배치한 던전 화면 도식">
+          </button>
+          <figcaption>
+            <strong>알고리즘 결과가 실제 화면에서 읽히는 방식</strong>
+            <span>방 그래프와 이동 경로는 중앙 공간에, 현재 판단과 다음 행동은 오른쪽에, 전투·감지·대사는 현장 로그와 파티 상태에 배치한다. 자동 진행을 멈추지 않고도 이유를 읽게 하는 화면 기준이다.</span>
+            <span class="media-source">기획 도식 · 화면 정보 구조 · v1</span>
+          </figcaption>
+        </figure>
 
         <h2 id="reference-behavior">레퍼런스에서 확인된 실제 행동</h2>
         <div class="state-lane" aria-label="레퍼런스 던전 탐색 흐름">

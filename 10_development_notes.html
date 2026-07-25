@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="개척형 방치 RPG의 확정 설계: PC-first 플랫폼, 3단계 주의력 UI, TBH 참고 원칙, 16-bit 픽셀 아트 방향, 자동 원정과 경량 개척촌">
-  <title>개발 노트 v0.3.2 · 자율 개척단 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v032">
-  <script src="assets/site.js?v=release-20260726-v032" defer></script>
+  <title>개발 노트 v0.3.3 · 자율 개척단 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v033">
+  <script src="assets/site.js?v=release-20260726-v033" defer></script>
 </head>
 <body data-page="development-notes">
   <div data-site-header></div>
@@ -14,7 +14,7 @@
   <main id="main">
     <section class="hero page-hero">
       <div class="hero-copy">
-        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.3.2 · 2026-07-26</span></p>
+        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.3.3 · 2026-07-26</span></p>
         <h1>자동으로 개척하고,<br><em>직접 지휘하면 더 깊어진다.</em></h1>
         <p class="lede">플레이어가 개척단의 파티·장비·위험 정책을 설계하면 원정대가 미지의 권역을 쉬지 않고 탐사한다. 접속 중에는 고위험 집중 작전을 지휘하고, 원정의 결과는 다음 개척을 준비하는 정착촌으로 남는다.</p>
         <div class="hero-actions">
@@ -389,28 +389,28 @@
             <article class="card"><span class="card-index">MANAGE</span><h3>확장 관리 창</h3><p>파티·장비·교범·전리품·정착촌을 비교한다. 지금 싸움을 끊지 않고 변경 사항은 다음 안전 경계부터 반영한다.</p></article>
             <article class="card"><span class="card-index">FOCUS</span><h3>집중 작전 화면</h3><p>퀘스트 던전, 현상금, 보스 레이드처럼 유저가 선택한 고위험 임무만 크게 보여 주고 제한된 지휘권을 연다.</p></article>
           </div>
-          <div class="callout warning-callout">
-            <div><span class="status-chip risk">구조 참고 / 아트 미승인</span><strong>아래 이미지는 이전 AI 화면 시안이며 최종 그래픽이 아니다</strong></div>
-            <p>정보 위계와 화면 전환 관계만 참고한다. 금색 장식, 강한 광원, 부드러운 그라데이션과 회화적 디테일은 현재 아트 방향에서 폐기했다.</p>
+          <div class="callout proposal-callout">
+            <div><span class="status-chip complete">현재 기획 도식</span><strong>화풍이 아니라 상태·경로·정보 관계를 먼저 고정한다</strong></div>
+            <p>아래 자료는 논의 과정에서 만든 실제 기획 산출물이다. 캐릭터 일러스트나 장식 표현을 지시하지 않고, 무엇을 보여주며 어떤 상태가 다음으로 이어지는지 설명한다.</p>
           </div>
-          <div class="concept-gallery" aria-label="정착촌, 월드맵, 던전 화면 구조 참고 이미지">
+          <div class="concept-gallery" aria-label="던전, 정착지 성장, 월드맵 기획 도식">
             <figure class="concept-card">
-              <button class="media-zoom" type="button" data-lightbox aria-label="정착촌 화면 구조 참고 이미지 크게 보기">
-                <img src="assets/media/ui-concepts/01_settlement_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="아트는 미승인 상태인 정착촌 관리 화면 구조 참고 이미지">
+              <button class="media-zoom" type="button" data-lightbox aria-label="던전 자동 원정 화면 구성 도식 크게 보기">
+                <img src="assets/media/diagrams/dungeon-auto-expedition-screen-diagram-v1.png" width="746" height="434" loading="lazy" decoding="async" alt="쿼터뷰 던전, 자동 진행 정보와 5인 파티 상태를 배치한 화면 구성 도식">
               </button>
-              <figcaption><span class="status-chip risk">아트 미승인</span><strong>정착촌 · 정비와 성장</strong><span>시설 상태, 원정 보고, 다음 준비를 PC 한 화면에서 비교하는 정보 구조만 참고한다.</span></figcaption>
+              <figcaption><span class="status-chip complete">기획 도식</span><strong>던전 · 자동 원정 화면</strong><span>공간, 파티, 적, 로그, 다음 행동과 개입 지점을 한 화면에서 읽는 구조다.</span></figcaption>
             </figure>
             <figure class="concept-card">
-              <button class="media-zoom" type="button" data-lightbox aria-label="월드맵 화면 구조 참고 이미지 크게 보기">
-                <img src="assets/media/ui-concepts/02_world-map_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="아트는 미승인 상태인 월드맵 원정 화면 구조 참고 이미지">
+              <button class="media-zoom" type="button" data-lightbox aria-label="정착지 성장 순환 도식 크게 보기">
+                <img src="assets/media/diagrams/settlement-growth-loop-diagram-v1.png" width="778" height="615" loading="lazy" decoding="async" alt="원정, 귀환 정산, 시설과 파티 성장, 더 깊은 던전으로 이어지는 정착지 성장 순환 도식">
               </button>
-              <figcaption><span class="status-chip risk">아트 미승인</span><strong>월드맵 · 자동 원정</strong><span>노드 관계, 이동 경로, 위험과 목표 이유를 동시에 읽는 탐사 화면의 기준으로만 사용한다.</span></figcaption>
+              <figcaption><span class="status-chip complete">기획 도식</span><strong>정착지 · 성장 경제 순환</strong><span>단계별 시설 변화와 원정 결과가 다음 콘텐츠로 이어지는 구조다.</span></figcaption>
             </figure>
             <figure class="concept-card">
-              <button class="media-zoom" type="button" data-lightbox aria-label="던전 화면 구조 참고 이미지 크게 보기">
-                <img src="assets/media/ui-concepts/03_dungeon_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="아트는 미승인 상태인 던전 자동 탐색 화면 구조 참고 이미지">
+              <button class="media-zoom" type="button" data-lightbox aria-label="초기 월드맵 진행 도식 크게 보기">
+                <img src="assets/media/diagrams/initial-world-map-progression-diagram-v1.png" width="744" height="560" loading="lazy" decoding="async" alt="정착지 주변 확인 경로와 포그 속 미확인 탐험지를 구분한 초기 월드맵 진행 도식">
               </button>
-              <figcaption><span class="status-chip risk">아트 미승인</span><strong>던전 · 모험과 파밍</strong><span>전투 공간, 미니맵, 파티 상태, 자동 판단 로그의 동시 관찰 구조만 보존한다.</span></figcaption>
+              <figcaption><span class="status-chip complete">기획 도식</span><strong>월드맵 · 첫 출발 진행</strong><span>확인된 장소와 포그 속 후보를 같은 지도에서 비교하는 표시 기준이다.</span></figcaption>
             </figure>
           </div>
         </section>
@@ -434,28 +434,8 @@
             </table>
           </div>
           <div class="callout warning-callout">
-            <div><span class="status-chip warning">최초 출력 보존</span><strong>세 AI 화풍 비교안은 전부 미승인 상태다</strong></div>
-            <p>실패와 불일치를 포함해 최초 결과를 그대로 기록했다. 임의 재생성·수정·반복은 하지 않으며, 다음 시도는 유저가 후보와 수정 범위를 승인한 뒤 한 번씩 진행한다.</p>
-          </div>
-          <div class="concept-gallery" aria-label="세 가지 픽셀 아트 화풍 최초 비교안">
-            <figure class="concept-card">
-              <button class="media-zoom" type="button" data-lightbox aria-label="화풍 A 최초 비교안 크게 보기">
-                <img src="assets/media/ui-concepts/04_style-a_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 A 개척단 연대기 픽셀 아트 비교안">
-              </button>
-              <figcaption><span class="status-chip risk">미승인 · 최초 출력</span><strong>A · 개척단 연대기</strong><span>방향은 가장 가깝지만 던전 타일이 요구 수량 12개를 넘었고, 생성 질감 정리가 필요하다.</span></figcaption>
-            </figure>
-            <figure class="concept-card">
-              <button class="media-zoom" type="button" data-lightbox aria-label="화풍 B 최초 비교안 크게 보기">
-                <img src="assets/media/ui-concepts/05_style-b_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 B 전술 미니어처 픽셀 아트 비교안">
-              </button>
-              <figcaption><span class="status-chip risk">미승인 · 최초 출력</span><strong>B · 전술 미니어처</strong><span>6·3·12·5 구성 수량은 맞지만 A와의 화풍 차이가 약해 별도 제작 비용을 정당화하지 못했다.</span></figcaption>
-            </figure>
-            <figure class="concept-card">
-              <button class="media-zoom" type="button" data-lightbox aria-label="화풍 C 최초 비교안 크게 보기">
-                <img src="assets/media/ui-concepts/06_style-c_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 C 잉크맵 로그라이크 픽셀 아트 비교안">
-              </button>
-              <figcaption><span class="status-chip risk">미승인 · 최초 출력</span><strong>C · 잉크맵 로그라이크</strong><span>월드·건물·던전 수량은 맞지만 캐릭터 수량이 초과됐고 16색 잉크 규칙도 충분히 선명하지 않았다.</span></figcaption>
-            </figure>
+            <div><span class="status-chip risk">폐기 완료</span><strong>승인되지 않은 AI 화풍·화면 출력은 프로젝트와 공개 사이트에서 제거했다</strong></div>
+            <p>앞으로는 기획 단계에서 표·플로우차트·화면 와이어프레임·맵 구성도처럼 검증 가능한 도식을 먼저 만든다. 그래픽 생성은 구조와 명세가 확정된 뒤 별도 도구에 전달한다.</p>
           </div>
           <div class="card-grid three-col">
             <article class="card"><span class="card-index">SLICE 01</span><h3>월드 타일 6개</h3><p>바이옴별 이동 비용·위험·시야가 실루엣과 색만으로 구분되는지 먼저 본다.</p></article>
@@ -505,7 +485,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>자율 개척단 방치형 RPG · 개발 노트 v0.3.2 · 2026-07-26</p>
+    <p>자율 개척단 방치형 RPG · 개발 노트 v0.3.3 · 2026-07-26</p>
     <a href="#main">위로</a>
   </footer>
 </body>

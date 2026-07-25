@@ -6,61 +6,72 @@
   <meta name="description" content="자율 원정대 RPG에서 제작한 개척 순환, 월드맵, 던전 구성, 길찾기, UI 구조와 리소스 분석 시각 자료 아카이브">
   <meta name="theme-color" content="#14263b">
   <title>시각 자료실 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v032">
-  <script src="assets/site.js?v=release-20260726-v032" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v033">
+  <script src="assets/site.js?v=release-20260726-v033" defer></script>
 </head>
 <body data-page="visual-archive">
   <div data-site-header></div>
 
   <main id="main-content" class="page-shell">
     <header class="page-heading">
-      <p class="page-kicker">14 · VISUAL ARCHIVE · v0.3.2</p>
+      <p class="page-kicker">14 · VISUAL ARCHIVE · v0.3.3</p>
       <h1>말로 합의한 기획을<br><em>한눈에 다시 찾는다</em></h1>
-      <p class="page-summary">개척 순환, 월드와 던전의 연결, 자동 탐색 알고리즘, 화면 구성 초안과 분석 보드를 한곳에 보존한다. 그림마다 사용 상태를 표시해 확정된 시스템 설명과 미승인 아트를 혼동하지 않게 한다.</p>
+      <p class="page-summary">논의 과정에서 확정한 던전 화면 구성, 정착지 성장, 월드 탐사와 시스템 알고리즘을 선·도형·상태·경로 중심의 기획 도식으로 보존한다. 폐기된 AI 이미지는 싣지 않으며 이후 제작하는 모든 도식도 같은 자료실에 누적한다.</p>
       <div class="meta-row">
-        <span class="status-chip complete">시각 자료 19종</span>
+        <span class="status-chip complete">시각 자료 14종</span>
         <span class="status-chip design">원본 해상도 보존</span>
-        <span class="status-chip warning">상태별 분리</span>
+        <span class="status-chip warning">폐기 이미지 제외</span>
       </div>
     </header>
 
     <section class="metric-grid" aria-label="시각 자료실 구성">
-      <article class="metric-card"><span class="metric-label">Planning Visuals</span><strong class="metric-value">9</strong><p>게임 순환·월드·던전·자동 탐색</p></article>
-      <article class="metric-card"><span class="metric-label">UI References</span><strong class="metric-value">3</strong><p>정착지·월드맵·던전 화면 구조</p></article>
+      <article class="metric-card"><span class="metric-label">Planning Diagrams</span><strong class="metric-value">3</strong><p>던전 화면·정착지 성장·초기 월드</p></article>
+      <article class="metric-card"><span class="metric-label">System Diagrams</span><strong class="metric-value">7</strong><p>월드·던전·자동 탐색 알고리즘</p></article>
       <article class="metric-card"><span class="metric-label">Analysis Boards</span><strong class="metric-value">4</strong><p>캐릭터·몬스터·아이템·출처 구분</p></article>
-      <article class="metric-card"><span class="metric-label">Rejected Records</span><strong class="metric-value">3</strong><p>미승인 화풍의 실패 기록</p></article>
+      <article class="metric-card"><span class="metric-label">Future Upload Rule</span><strong class="metric-value">ALL</strong><p>승인된 새 도식은 매번 함께 게시</p></article>
     </section>
 
     <div class="article-layout">
       <article class="article">
-        <h2 id="featured">핵심 플레이를 보여주는 대표 시각화</h2>
-        <p class="lead">두 이미지는 기획 대화에서 만든 대표 장면이다. 완성 아트를 확정하는 자료가 아니라 게임의 전체 순환과 던전 전투 화면에 필요한 정보 관계를 빠르게 공유하는 기준으로 보존한다.</p>
+        <h2 id="featured">논의 결과를 화면으로 고정한 기획 도식</h2>
+        <p class="lead">아래 세 자료는 캐릭터 일러스트를 꾸미는 그림이 아니라 화면에 무엇이 보이고, 어떤 상태가 어떻게 연결되며, 자동 진행 중 어디에 개입할 수 있는지를 검토하기 위해 만든 실제 기획 산출물이다.</p>
 
         <figure class="media-feature media-feature--wide archive-feature">
-          <button class="media-zoom" type="button" data-lightbox aria-label="개척 순환 스토리보드 크게 보기">
-            <img src="assets/media/planning/core-expedition-loop-storyboard-v1.png" width="1870" height="841" alt="정착지 준비, 월드 원정, 던전 탐험과 보스전, 귀환과 정착지 성장을 네 장면으로 연결한 개척 순환 스토리보드">
+          <button class="media-zoom" type="button" data-lightbox aria-label="던전 자동 원정 화면 도식 크게 보기">
+            <img src="assets/media/diagrams/dungeon-auto-expedition-screen-diagram-v1.png" width="746" height="434" alt="쿼터뷰 던전 방과 복도, 파티, 몬스터, 다음 방 단서, 자동 원정 상태와 다섯 캐릭터 정보를 배치한 던전 화면 도식">
           </button>
           <figcaption>
-            <strong>개척 순환 스토리보드 · v1</strong>
-            <span>정착지에서 준비하고 대륙을 이동해 던전을 돌파한 뒤, 부상과 전리품을 안고 귀환해 다음 원정을 준비하는 전체 게임 순환을 네 장면으로 압축했다.</span>
-            <span class="media-source">AI 기획 시각화 · 순환·장면 참고 · 최종 아트 미확정</span>
+            <strong>던전 자동 원정 화면 구성 · v1</strong>
+            <span>쿼터뷰 방 연결, 파티와 적의 위치, 다음 방 단서, 진행 정책, 전투 로그와 5인 상태를 한 화면에 배치한 기능 와이어프레임이다.</span>
+            <span class="media-source">기획 도식 · 화면 정보 구조 · 아트 지시 아님</span>
           </figcaption>
         </figure>
 
         <figure class="media-feature media-feature--wide archive-feature">
-          <button class="media-zoom" type="button" data-lightbox aria-label="슬라임 던전 자동 전투 화면 초안 크게 보기">
-            <img src="assets/media/planning/slime-dungeon-quarter-view-combat-draft-v1.png" width="1672" height="941" loading="lazy" decoding="async" alt="쿼터뷰 슬라임 던전에서 다섯 명의 파티가 자동 전투하며 상단 진행도, 하단 파티 상태, 전투 로그와 자동 배속 버튼을 함께 보여 주는 화면 초안">
+          <button class="media-zoom" type="button" data-lightbox aria-label="정착지 성장과 전체 성장 경제 순환 도식 크게 보기">
+            <img src="assets/media/diagrams/settlement-growth-loop-diagram-v1.png" width="778" height="615" loading="lazy" decoding="async" alt="외부 던전 자동 원정, 귀환 정산, 시설과 파티 성장, 더 먼 지역과 깊은 던전으로 이어지는 정착지 성장 순환 도식">
           </button>
           <figcaption>
-            <strong>슬라임 기초 던전 자동 전투 화면 · v1</strong>
-            <span>쿼터뷰 전투 공간, 5인 파티 상태, 진행도, 전투 로그, 자동·배속 조작이 한 화면에서 어떻게 공존하는지 확인하기 위한 구도 초안이다.</span>
-            <span class="media-source">AI 화면 초안 · 정보 배치 참고 · 캐릭터·화풍 미승인</span>
+            <strong>정착지 성장과 전체 성장 경제 · v1</strong>
+            <span>폐허 야영지에서 도시 확장까지 시설 변화와 원정→정산→성장→더 깊은 원정의 반복 구조를 비교하는 상태 도식이다.</span>
+            <span class="media-source">기획 도식 · 순환·상태 비교 · 단계별 업데이트 기준</span>
           </figcaption>
         </figure>
 
-        <div class="callout warning">
-          <strong class="callout-title">사용 경계</strong>
-          대표 이미지는 최종 그래픽 시안이 아니다. 시스템 관계, 화면에 동시에 보여야 할 정보, 장면의 규모만 참고하고 캐릭터 조형·색·재질·UI 장식은 별도 아트 기준을 거쳐 다시 제작한다.
+        <figure class="media-feature media-feature--wide archive-feature">
+          <button class="media-zoom" type="button" data-lightbox aria-label="초기 월드맵 진행 도식 크게 보기">
+            <img src="assets/media/diagrams/initial-world-map-progression-diagram-v1.png" width="744" height="560" loading="lazy" decoding="async" alt="폐허 정착지, 불탄 옛길, 근거리 숲, 미확인 탐험지와 던전 후보를 포그와 확인된 경로로 구분한 초기 월드맵 진행 도식">
+          </button>
+          <figcaption>
+            <strong>첫 출발 월드맵 진행 · v1</strong>
+            <span>정착지 주변 일부만 밝히고 다른 방향은 소문과 안개로 남겨, 넓은 전체 지도와 실제 공개 범위를 동시에 보여 주는 초기 진행도다.</span>
+            <span class="media-source">기획 도식 · 포그·경로·후보 장소 표시 규칙</span>
+          </figcaption>
+        </figure>
+
+        <div class="callout success">
+          <strong class="callout-title">앞으로의 업로드 기준</strong>
+          이후 대화에서 만드는 표·플로우차트·화면 와이어프레임·맵 구성도·상태 비교도는 승인된 시점에 원본 파일, 관련 기획 페이지 링크, 버전과 용도를 이 자료실에 함께 추가한다. 폐기 지시된 이미지는 자료실과 공개 자산에서 제거한다.
         </div>
 
         <h2 id="system-diagrams">시스템과 던전 구성도</h2>
@@ -96,14 +107,6 @@
           </figure>
         </div>
 
-        <h2 id="ui-drafts">화면 정보 구조 초안</h2>
-        <p>아트 스타일은 승인되지 않았지만 정착지, 월드맵, 던전 화면에서 무엇을 동시에 보여줄지 검토한 자료다. 이후 다른 제작 도구나 AI에 화면 작업을 맡길 때 레이아웃 기준으로 사용한다.</p>
-        <div class="archive-grid archive-grid--three" aria-label="화면 정보 구조 초안">
-          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="정착촌 화면 구조 초안 크게 보기"><img src="assets/media/ui-concepts/01_settlement_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="정착촌 시설, 원정 보고와 다음 준비를 한 화면에서 비교하는 정착촌 관리 화면 구조 초안"></button><figcaption><span class="status-chip warning">아트 미승인</span><strong>정착촌 · 정비와 성장</strong><span>시설 상태, 원정 보고, 다음 준비의 정보 위계를 검토한다.</span></figcaption></figure>
-          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="월드맵 화면 구조 초안 크게 보기"><img src="assets/media/ui-concepts/02_world-map_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="넓은 대륙과 경로, 파티 상태, 위험과 목적지 정보를 함께 보여 주는 월드맵 원정 화면 구조 초안"></button><figcaption><span class="status-chip warning">아트 미승인</span><strong>월드맵 · 자동 원정</strong><span>넓은 세계와 현재 파티의 목적·이동 이유를 동시에 읽는 구조다.</span></figcaption></figure>
-          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="던전 화면 구조 초안 크게 보기"><img src="assets/media/ui-concepts/03_dungeon_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="쿼터뷰 던전, 파티 상태, 탐색 정보와 자동 판단 로그를 함께 보여 주는 던전 화면 구조 초안"></button><figcaption><span class="status-chip warning">아트 미승인</span><strong>던전 · 자동 탐색</strong><span>전투 공간, 파티 상태, 다음 행동과 판단 로그의 동시 관찰 구조다.</span></figcaption></figure>
-        </div>
-
         <h2 id="analysis-boards">리소스 분석 보드</h2>
         <p>레퍼런스의 시각 문법을 분석하기 위해 필요한 범위만 선별한 보드다. 제품에 그대로 사용하는 자산이 아니며, 출처 분석과 역할군 구분을 위한 참고 자료로만 보존한다.</p>
         <div class="archive-grid" aria-label="리소스 분석 보드">
@@ -113,17 +116,9 @@
           <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="분석 출처 표본 보드 크게 보기"><img class="asset-pixel" src="assets/media/provenance-strip.png" width="1400" height="480" loading="lazy" decoding="async" alt="캐릭터, 아이템과 지형의 분석 출처 표본을 세 묶음으로 나눈 보드"></button><figcaption><span class="status-chip design">출처 구분</span><strong>분석 표본과 제품 자산의 경계</strong><span>원본 분석용 표본을 신규 제작 자산과 물리적으로 구분하기 위한 출처 보드다.</span><a class="archive-link" href="09_reference.html">분석 근거에서 보기 →</a></figcaption></figure>
         </div>
 
-        <h2 id="rejected-records">미승인 화풍과 실패 기록</h2>
-        <p>좋은 결과만 남기면 같은 실수를 반복한다. 최초 출력의 문제와 폐기 이유를 함께 보관하고, 다음 그래픽 제작에서는 승인된 구조 자료만 입력으로 전달한다.</p>
-        <div class="archive-grid archive-grid--three" aria-label="미승인 화풍 최초 출력">
-          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="화풍 A 최초 출력 크게 보기"><img src="assets/media/ui-concepts/04_style-a_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 A 개척단 연대기 픽셀 아트 비교안"></button><figcaption><span class="status-chip risk">미승인</span><strong>A · 개척단 연대기</strong><span>방향은 가깝지만 생성 질감과 구성 수량을 다시 통제해야 한다.</span></figcaption></figure>
-          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="화풍 B 최초 출력 크게 보기"><img src="assets/media/ui-concepts/05_style-b_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 B 전술 미니어처 픽셀 아트 비교안"></button><figcaption><span class="status-chip risk">미승인</span><strong>B · 전술 미니어처</strong><span>구성 수량은 맞지만 A안과 시각적 차별이 충분하지 않았다.</span></figcaption></figure>
-          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="화풍 C 최초 출력 크게 보기"><img src="assets/media/ui-concepts/06_style-c_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 C 잉크맵 로그라이크 픽셀 아트 비교안"></button><figcaption><span class="status-chip risk">미승인</span><strong>C · 잉크맵 로그라이크</strong><span>제한 팔레트와 잉크성, 캐릭터 수량 통제가 부족했다.</span></figcaption></figure>
-        </div>
-
         <div class="callout success">
           <strong class="callout-title">보존 원칙</strong>
-          게시된 이미지는 기존 파일명을 유지하며 임의로 덮어쓰지 않는다. 수정안은 새 버전 파일로 추가하고, 각 카드의 상태와 사용 목적을 함께 갱신한다.
+          승인된 도식은 기존 파일명을 유지하며 임의로 덮어쓰지 않는다. 수정안은 새 버전 파일로 추가하고, 새로 만드는 모든 도식은 관련 기획 문서와 이 자료실 양쪽에 함께 반영한다.
         </div>
       </article>
 
