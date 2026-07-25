@@ -15,14 +15,15 @@
     { file: "10_development_notes.html", index: "10", label: "개발노트", title: "기획 결정과 개발 기록" },
     { file: "11_roadmap.html", index: "11", label: "계획", title: "개발 로드맵과 버전 운영" },
     { file: "12_pathfinding_ai.html", index: "12", label: "길찾기 AI", title: "재사용 경로·탐험·던전 생성 코어" },
-    { file: "13_design_baseline.html", index: "13", label: "현재 기준", title: "v0.3.1 통합 기획 기준선" }
+    { file: "13_design_baseline.html", index: "13", label: "현재 기준", title: "v0.3.2 통합 기획 기준선" },
+    { file: "14_visual_archive.html", index: "14", label: "시각 자료", title: "도식·화면·분석 이미지 자료실" }
   ];
 
   const navigationGroups = [
     { label: "게임 설계", files: ["13_design_baseline.html", "01_overview.html", "02_content_loop.html", "06_progression.html"] },
     { label: "탐험", files: ["05_world.html", "04_dungeon.html", "03_auto_explore.html"] },
     { label: "제작", files: ["07_architecture.html", "08_mvp.html", "11_roadmap.html", "12_pathfinding_ai.html"] },
-    { label: "자료", files: ["10_development_notes.html", "09_reference.html"] }
+    { label: "자료", files: ["14_visual_archive.html", "10_development_notes.html", "09_reference.html"] }
   ];
 
   const fileName = window.location.pathname.split("/").pop() || "index.html";

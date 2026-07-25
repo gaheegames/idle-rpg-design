@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="자율 원정대 RPG에서 제작한 개척 순환, 월드맵, 던전 구성, 길찾기, UI 구조와 리소스 분석 시각 자료 아카이브">
+  <meta name="theme-color" content="#14263b">
+  <title>시각 자료실 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v032">
+  <script src="assets/site.js?v=release-20260726-v032" defer></script>
+</head>
+<body data-page="visual-archive">
+  <div data-site-header></div>
+
+  <main id="main-content" class="page-shell">
+    <header class="page-heading">
+      <p class="page-kicker">14 · VISUAL ARCHIVE · v0.3.2</p>
+      <h1>말로 합의한 기획을<br><em>한눈에 다시 찾는다</em></h1>
+      <p class="page-summary">개척 순환, 월드와 던전의 연결, 자동 탐색 알고리즘, 화면 구성 초안과 분석 보드를 한곳에 보존한다. 그림마다 사용 상태를 표시해 확정된 시스템 설명과 미승인 아트를 혼동하지 않게 한다.</p>
+      <div class="meta-row">
+        <span class="status-chip complete">시각 자료 19종</span>
+        <span class="status-chip design">원본 해상도 보존</span>
+        <span class="status-chip warning">상태별 분리</span>
+      </div>
+    </header>
+
+    <section class="metric-grid" aria-label="시각 자료실 구성">
+      <article class="metric-card"><span class="metric-label">Planning Visuals</span><strong class="metric-value">9</strong><p>게임 순환·월드·던전·자동 탐색</p></article>
+      <article class="metric-card"><span class="metric-label">UI References</span><strong class="metric-value">3</strong><p>정착지·월드맵·던전 화면 구조</p></article>
+      <article class="metric-card"><span class="metric-label">Analysis Boards</span><strong class="metric-value">4</strong><p>캐릭터·몬스터·아이템·출처 구분</p></article>
+      <article class="metric-card"><span class="metric-label">Rejected Records</span><strong class="metric-value">3</strong><p>미승인 화풍의 실패 기록</p></article>
+    </section>
+
+    <div class="article-layout">
+      <article class="article">
+        <h2 id="featured">핵심 플레이를 보여주는 대표 시각화</h2>
+        <p class="lead">두 이미지는 기획 대화에서 만든 대표 장면이다. 완성 아트를 확정하는 자료가 아니라 게임의 전체 순환과 던전 전투 화면에 필요한 정보 관계를 빠르게 공유하는 기준으로 보존한다.</p>
+
+        <figure class="media-feature media-feature--wide archive-feature">
+          <button class="media-zoom" type="button" data-lightbox aria-label="개척 순환 스토리보드 크게 보기">
+            <img src="assets/media/planning/core-expedition-loop-storyboard-v1.png" width="1870" height="841" alt="정착지 준비, 월드 원정, 던전 탐험과 보스전, 귀환과 정착지 성장을 네 장면으로 연결한 개척 순환 스토리보드">
+          </button>
+          <figcaption>
+            <strong>개척 순환 스토리보드 · v1</strong>
+            <span>정착지에서 준비하고 대륙을 이동해 던전을 돌파한 뒤, 부상과 전리품을 안고 귀환해 다음 원정을 준비하는 전체 게임 순환을 네 장면으로 압축했다.</span>
+            <span class="media-source">AI 기획 시각화 · 순환·장면 참고 · 최종 아트 미확정</span>
+          </figcaption>
+        </figure>
+
+        <figure class="media-feature media-feature--wide archive-feature">
+          <button class="media-zoom" type="button" data-lightbox aria-label="슬라임 던전 자동 전투 화면 초안 크게 보기">
+            <img src="assets/media/planning/slime-dungeon-quarter-view-combat-draft-v1.png" width="1672" height="941" loading="lazy" decoding="async" alt="쿼터뷰 슬라임 던전에서 다섯 명의 파티가 자동 전투하며 상단 진행도, 하단 파티 상태, 전투 로그와 자동 배속 버튼을 함께 보여 주는 화면 초안">
+          </button>
+          <figcaption>
+            <strong>슬라임 기초 던전 자동 전투 화면 · v1</strong>
+            <span>쿼터뷰 전투 공간, 5인 파티 상태, 진행도, 전투 로그, 자동·배속 조작이 한 화면에서 어떻게 공존하는지 확인하기 위한 구도 초안이다.</span>
+            <span class="media-source">AI 화면 초안 · 정보 배치 참고 · 캐릭터·화풍 미승인</span>
+          </figcaption>
+        </figure>
+
+        <div class="callout warning">
+          <strong class="callout-title">사용 경계</strong>
+          대표 이미지는 최종 그래픽 시안이 아니다. 시스템 관계, 화면에 동시에 보여야 할 정보, 장면의 규모만 참고하고 캐릭터 조형·색·재질·UI 장식은 별도 아트 기준을 거쳐 다시 제작한다.
+        </div>
+
+        <h2 id="system-diagrams">시스템과 던전 구성도</h2>
+        <p>실제 기획 문서에서 사용하는 설명도다. 이미지를 누르면 원본 크기에 맞춰 확대되며, 각 그림의 세부 설명은 관련 페이지에서 이어서 확인할 수 있다.</p>
+        <div class="archive-grid" aria-label="게임 시스템과 던전 구성 시각 자료">
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="전체 게임플레이 구성도 크게 보기"><img class="asset-pixel" src="assets/media/system-montage.png" width="1400" height="510" loading="lazy" decoding="async" alt="파티 편성, 필드 탐색, 던전 공략과 전리품 판단을 네 단계로 연결한 전체 게임플레이 구성도"></button>
+            <figcaption><span class="status-chip complete">기획 연결도</span><strong>전체 게임플레이 구성</strong><span>파티 편성부터 전리품 판단까지 핵심 플레이 네 단계를 한 장에 배열했다.</span><a class="archive-link" href="02_content_loop.html">콘텐츠 순환에서 보기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="월드와 던전 전환 구성도 크게 보기"><img class="asset-pixel" src="assets/media/world-dungeon-transition.png" width="1600" height="920" loading="lazy" decoding="async" alt="정착지 주변 탐사, 미지의 후보지 발견, 던전 진입과 내부 미지 공개를 연결한 월드와 던전 전환 구성도"></button>
+            <figcaption><span class="status-chip complete">기획 연결도</span><strong>월드에서 던전으로</strong><span>연속 월드맵의 포그와 던전 내부의 미지가 같은 공개 원칙으로 이어지는 구조다.</span><a class="archive-link" href="05_world.html">월드맵 기획에서 보기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="월드 진행 재구성도 크게 보기"><img class="asset-pixel" src="assets/media/world-reconstruction.png" width="1600" height="900" loading="lazy" decoding="async" alt="출발 거점, 던전 후보, 지역 보스와 고가치 보상 장소의 관계를 보여 주는 월드 진행 재구성도"></button>
+            <figcaption><span class="status-chip design">구조 분석</span><strong>월드 진행 재구성</strong><span>거점과 탐험지의 연결 밀도, 장기 목표의 거리감을 분석하기 위한 재구성이다.</span><a class="archive-link" href="01_overview.html">게임 핵심에서 보기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="던전 층 재구성도 크게 보기"><img class="asset-pixel" src="assets/media/dungeon-reconstruction.png" width="1600" height="900" loading="lazy" decoding="async" alt="입구, 닫힌 문, 전투 방, 막다른 보상 방과 층 출구를 다섯 개 방으로 연결한 던전 층 재구성도"></button>
+            <figcaption><span class="status-chip complete">던전 구성도</span><strong>방·복도·문·콘텐츠 배치</strong><span>방 그래프를 실제 쿼터뷰 공간으로 펼쳤을 때 플레이 흐름이 어떻게 읽히는지 보여 준다.</span><a class="archive-link" href="04_dungeon.html">던전 설계에서 보기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="던전 생성 알고리즘 설명도 크게 보기"><img class="asset-pixel" src="assets/media/dungeon-generation-algorithm.png" width="1600" height="920" loading="lazy" decoding="async" alt="방 그래프, 기하 배치, 복도와 문, 콘텐츠 예산, 검증과 확정의 던전 생성 다섯 단계를 보여 주는 알고리즘 설명도"></button>
+            <figcaption><span class="status-chip complete">생성 알고리즘</span><strong>던전 생성 다섯 단계</strong><span>토폴로지부터 도달성 검증까지 생성기의 책임을 단계별로 분리했다.</span><a class="archive-link" href="04_dungeon.html#generation-pipeline">생성 파이프라인에서 보기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="자동 길찾기 알고리즘 설명도 크게 보기"><img class="asset-pixel" src="assets/media/pathfinding-algorithm.png" width="1600" height="920" loading="lazy" decoding="async" alt="후보 목표 평가, 방 그래프 경로, 지역 경로, 실행과 막힘 감지, 재계획의 자동 길찾기 과정을 보여 주는 알고리즘 설명도"></button>
+            <figcaption><span class="status-chip complete">탐색 알고리즘</span><strong>방 그래프와 지역 경로</strong><span>목표 선택과 실제 이동을 분리하고 막힘이 생기면 유한한 재계획으로 끝내는 구조다.</span><a class="archive-link" href="03_auto_explore.html">자동 탐색에서 보기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="문 통과 상태 전환도 크게 보기"><img class="asset-pixel" src="assets/media/door-sequence.png" width="1400" height="430" loading="lazy" decoding="async" alt="목표 문 선택, 다섯 명의 파티 집결, 문 개방 후 반대편 통과를 세 장면으로 보여 주는 상태 전환도"></button>
+            <figcaption><span class="status-chip complete">상태 전환도</span><strong>선택·집결·개방·통과</strong><span>파티가 흩어진 채 문을 열거나 리더만 순간이동하지 않도록 경계 통과를 세 장면으로 고정했다.</span><a class="archive-link" href="03_auto_explore.html">문 통과 규칙에서 보기 →</a></figcaption>
+          </figure>
+        </div>
+
+        <h2 id="ui-drafts">화면 정보 구조 초안</h2>
+        <p>아트 스타일은 승인되지 않았지만 정착지, 월드맵, 던전 화면에서 무엇을 동시에 보여줄지 검토한 자료다. 이후 다른 제작 도구나 AI에 화면 작업을 맡길 때 레이아웃 기준으로 사용한다.</p>
+        <div class="archive-grid archive-grid--three" aria-label="화면 정보 구조 초안">
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="정착촌 화면 구조 초안 크게 보기"><img src="assets/media/ui-concepts/01_settlement_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="정착촌 시설, 원정 보고와 다음 준비를 한 화면에서 비교하는 정착촌 관리 화면 구조 초안"></button><figcaption><span class="status-chip warning">아트 미승인</span><strong>정착촌 · 정비와 성장</strong><span>시설 상태, 원정 보고, 다음 준비의 정보 위계를 검토한다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="월드맵 화면 구조 초안 크게 보기"><img src="assets/media/ui-concepts/02_world-map_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="넓은 대륙과 경로, 파티 상태, 위험과 목적지 정보를 함께 보여 주는 월드맵 원정 화면 구조 초안"></button><figcaption><span class="status-chip warning">아트 미승인</span><strong>월드맵 · 자동 원정</strong><span>넓은 세계와 현재 파티의 목적·이동 이유를 동시에 읽는 구조다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="던전 화면 구조 초안 크게 보기"><img src="assets/media/ui-concepts/03_dungeon_structure-reference.png" width="1672" height="941" loading="lazy" decoding="async" alt="쿼터뷰 던전, 파티 상태, 탐색 정보와 자동 판단 로그를 함께 보여 주는 던전 화면 구조 초안"></button><figcaption><span class="status-chip warning">아트 미승인</span><strong>던전 · 자동 탐색</strong><span>전투 공간, 파티 상태, 다음 행동과 판단 로그의 동시 관찰 구조다.</span></figcaption></figure>
+        </div>
+
+        <h2 id="analysis-boards">리소스 분석 보드</h2>
+        <p>레퍼런스의 시각 문법을 분석하기 위해 필요한 범위만 선별한 보드다. 제품에 그대로 사용하는 자산이 아니며, 출처 분석과 역할군 구분을 위한 참고 자료로만 보존한다.</p>
+        <div class="archive-grid" aria-label="리소스 분석 보드">
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="파티 직업군 분석 보드 크게 보기"><img class="asset-pixel" src="assets/media/party-roster.png" width="1400" height="480" loading="lazy" decoding="async" alt="서로 다른 체형, 무기, 복장과 실루엣을 가진 파티 직업군 스프라이트 분석 보드"></button><figcaption><span class="status-chip design">분석용</span><strong>파티 직업군과 실루엣</strong><span>체형, 무기 방향, 복장 면적과 역할 판독성을 비교한다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="몬스터 역할군 분석 보드 크게 보기"><img class="asset-pixel" src="assets/media/enemy-roster.png" width="1400" height="480" loading="lazy" decoding="async" alt="일반 근접 적, 소환형, 대형 보스, 용과 마도사를 모은 몬스터 역할군 분석 보드"></button><figcaption><span class="status-chip design">분석용</span><strong>몬스터·보스 역할군</strong><span>크기, 점유 면적과 전투 역할이 실루엣에서 구분되는지 비교한다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="아이템 역할 분석 보드 크게 보기"><img class="asset-pixel" src="assets/media/item-board.png" width="1400" height="600" loading="lazy" decoding="async" alt="무기, 방어구, 장신구, 소모품, 주문서, 열쇠와 골드를 역할별로 배열한 아이템 분석 보드"></button><figcaption><span class="status-chip design">분석용</span><strong>장비와 전리품 분류</strong><span>작은 아이콘에서도 유형과 희소성을 읽게 하는 형태·색 사용을 비교한다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="분석 출처 표본 보드 크게 보기"><img class="asset-pixel" src="assets/media/provenance-strip.png" width="1400" height="480" loading="lazy" decoding="async" alt="캐릭터, 아이템과 지형의 분석 출처 표본을 세 묶음으로 나눈 보드"></button><figcaption><span class="status-chip design">출처 구분</span><strong>분석 표본과 제품 자산의 경계</strong><span>원본 분석용 표본을 신규 제작 자산과 물리적으로 구분하기 위한 출처 보드다.</span><a class="archive-link" href="09_reference.html">분석 근거에서 보기 →</a></figcaption></figure>
+        </div>
+
+        <h2 id="rejected-records">미승인 화풍과 실패 기록</h2>
+        <p>좋은 결과만 남기면 같은 실수를 반복한다. 최초 출력의 문제와 폐기 이유를 함께 보관하고, 다음 그래픽 제작에서는 승인된 구조 자료만 입력으로 전달한다.</p>
+        <div class="archive-grid archive-grid--three" aria-label="미승인 화풍 최초 출력">
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="화풍 A 최초 출력 크게 보기"><img src="assets/media/ui-concepts/04_style-a_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 A 개척단 연대기 픽셀 아트 비교안"></button><figcaption><span class="status-chip risk">미승인</span><strong>A · 개척단 연대기</strong><span>방향은 가깝지만 생성 질감과 구성 수량을 다시 통제해야 한다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="화풍 B 최초 출력 크게 보기"><img src="assets/media/ui-concepts/05_style-b_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 B 전술 미니어처 픽셀 아트 비교안"></button><figcaption><span class="status-chip risk">미승인</span><strong>B · 전술 미니어처</strong><span>구성 수량은 맞지만 A안과 시각적 차별이 충분하지 않았다.</span></figcaption></figure>
+          <figure class="concept-card archive-card"><button class="media-zoom" type="button" data-lightbox aria-label="화풍 C 최초 출력 크게 보기"><img src="assets/media/ui-concepts/06_style-c_first-pass-unapproved.png" width="1672" height="941" loading="lazy" decoding="async" alt="미승인 상태인 화풍 C 잉크맵 로그라이크 픽셀 아트 비교안"></button><figcaption><span class="status-chip risk">미승인</span><strong>C · 잉크맵 로그라이크</strong><span>제한 팔레트와 잉크성, 캐릭터 수량 통제가 부족했다.</span></figcaption></figure>
+        </div>
+
+        <div class="callout success">
+          <strong class="callout-title">보존 원칙</strong>
+          게시된 이미지는 기존 파일명을 유지하며 임의로 덮어쓰지 않는다. 수정안은 새 버전 파일로 추가하고, 각 카드의 상태와 사용 목적을 함께 갱신한다.
+        </div>
+      </article>
+
+      <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
+    </div>
+
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>
