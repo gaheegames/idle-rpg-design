@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="개척형 방치 RPG의 확정 설계: PC-first 플랫폼, 3단계 주의력 UI, TBH 참고 원칙, 16-bit 픽셀 아트 방향, 자동 원정과 경량 개척촌">
-  <title>개발 노트 v0.3.3 · 자율 개척단 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v033">
-  <script src="assets/site.js?v=release-20260726-v033" defer></script>
+  <title>개발 노트 v0.4.0 · 자율 개척단 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
+  <script src="assets/site.js?v=release-20260727-v040" defer></script>
 </head>
 <body data-page="development-notes">
   <div data-site-header></div>
@@ -14,7 +14,7 @@
   <main id="main">
     <section class="hero page-hero">
       <div class="hero-copy">
-        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.3.3 · 2026-07-26</span></p>
+        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.4.0 · 2026-07-27</span></p>
         <h1>자동으로 개척하고,<br><em>직접 지휘하면 더 깊어진다.</em></h1>
         <p class="lede">플레이어가 개척단의 파티·장비·위험 정책을 설계하면 원정대가 미지의 권역을 쉬지 않고 탐사한다. 접속 중에는 고위험 집중 작전을 지휘하고, 원정의 결과는 다음 개척을 준비하는 정착촌으로 남는다.</p>
         <div class="hero-actions">
@@ -92,7 +92,7 @@
             <div class="cycle-step"><span>04</span><strong>정착과 확장</strong><small>시설 · 안전로 · 새 지역</small></div>
           </div>
           <div class="card-grid three-col">
-            <article class="card accent-card"><span class="card-index">IDLE</span><h3>게임은 기다리지 않는다</h3><p>확인 버튼, 보상 선택, 부활 완료 때문에 자동 원정이 무기한 정지하지 않는다.</p></article>
+            <article class="card accent-card"><span class="card-index">IDLE</span><h3>게임은 기다리지 않는다</h3><p>확인 버튼, 보상 선택, 치료 완료 때문에 자동 원정이 무기한 정지하지 않는다.</p></article>
             <article class="card accent-card"><span class="card-index">MANAGE</span><h3>관리가 효율을 만든다</h3><p>파티 조합과 위험 정책을 잘 설계하면 더 낮은 전투력으로 더 깊이 진입한다.</p></article>
             <article class="card accent-card"><span class="card-index">CHANGE</span><h3>진행이 화면을 바꾼다</h3><p>작은 탐험지, 심층 던전, 정착촌이 교대로 등장해 4X와 로그라이크 감각을 만든다.</p></article>
           </div>
@@ -155,7 +155,7 @@
               <tbody>
                 <tr><td><strong>안전 우선</strong></td><td>예상 승률 85% 이상</td><td>0회</td><td>낮은 지역 파밍·정보 확보</td></tr>
                 <tr><td><strong>균형 진행</strong></td><td>예상 승률 65% 이상</td><td>1회</td><td>다른 분기 탐색 후 재평가</td></tr>
-                <tr><td><strong>고위험 도전</strong></td><td>예상 승률 45% 이상</td><td>2회</td><td>부활 후 약화 조건부터 확보</td></tr>
+                <tr><td><strong>고위험 도전</strong></td><td>예상 승률 45% 이상</td><td>2회</td><td>치료 후 약화 조건부터 확보</td></tr>
                 <tr><td><strong>보스 준비형</strong></td><td>단서·상성·회복 조건 충족</td><td>1회</td><td>정찰소·수문·약초꾼 등 우선</td></tr>
                 <tr><td><strong>강제 목표</strong></td><td>유저가 지정한 대상</td><td>설정 상한</td><td>상한 도달 시 자동 회피 전환</td></tr>
               </tbody>
@@ -170,8 +170,8 @@
         <section class="content-section" id="defeat">
           <div class="section-heading">
             <p class="eyebrow">WIPE &amp; RECOVERY</p>
-            <h2>제자리 부활 반복을 실패 이후의 새 원정으로 바꾼다</h2>
-            <p>파티가 완전히 전멸하면 같은 적 앞에서 부활하지 않는다. 본진 교회·성당으로 이송하고, 유한한 회복 시간과 회수 가능한 손실을 거쳐 자동으로 다시 출발한다.</p>
+            <h2>제자리 반복을 실패 이후의 새 원정으로 바꾼다</h2>
+            <p>파티가 완전히 전멸하면 같은 적 앞에서 다시 일어나지 않는다. 구조대가 본진 치료소·교회로 이송하고, 유한한 회복 시간과 회수 가능한 손실을 거쳐 자동으로 다시 출발한다.</p>
           </div>
           <div class="decision-cycle" role="img" aria-label="파티 전멸에서 교회 복귀와 재출발까지의 흐름">
             <div class="cycle-step"><span>01</span><strong>파티 전멸</strong><small>원인 · 위치 기록</small></div>
@@ -183,7 +183,7 @@
             <div class="cycle-step"><span>04</span><strong>자동 재계획</strong><small>회수 · 파밍 · 재도전</small></div>
           </div>
           <div class="card-grid three-col">
-            <article class="card"><span class="card-index">TIME</span><h3>부활 시간</h3><p>기본 1–3분. 끝나면 확인을 기다리지 않고 안전 정책에 따라 파밍·회수·재도전 중 하나를 실행한다.</p></article>
+            <article class="card"><span class="card-index">TIME</span><h3>치료·복귀 시간</h3><p>거리와 부상 단계로 계산한다. 끝나면 확인을 기다리지 않고 안전 정책에 따라 파밍·회수·재도전 중 하나를 실행한다.</p></article>
             <article class="card"><span class="card-index">LOSS</span><h3>회수 가능한 손실</h3><p>이번 원정의 미정산 경험치·골드 일부와 신규 전리품 1개만 위험에 둔다. 장착·잠금 장비는 잃지 않는다.</p></article>
             <article class="card"><span class="card-index">STORY</span><h3>실패가 다음 목표</h3><p>분실품 회수, 부상자 구조, 보스 약화, 숙적 추적 중 하나가 새 임무로 생성돼 손실을 이야기로 전환한다.</p></article>
           </div>
@@ -295,7 +295,7 @@
           </div>
           <div class="card-grid two-col">
             <article class="card"><span class="card-index">GUILD</span><h3>개척단 지휘소 → 모험가 길드</h3><p>퀘스트·현상금·집중 작전·파티 편성을 담당한다. 초기 천막에서 임무 게시판과 정식 길드로 성장한다.</p></article>
-            <article class="card"><span class="card-index">CHURCH</span><h3>치료소 → 교회·성당</h3><p>부활·부상 치료·분실품 추적을 담당한다. 성장하면 손실 보호와 전멸 지점 복귀 기능을 연다.</p></article>
+            <article class="card"><span class="card-index">CHURCH</span><h3>치료소 → 교회·성당</h3><p>부상·저주 치료와 분실품 추적을 담당한다. 성장하면 손실 보호와 전멸 지점 구조 기능을 연다.</p></article>
             <article class="card"><span class="card-index">FORGE</span><h3>야전 화로 → 대장간</h3><p>장비 장착·분해·개조와 외형 확인을 맡는다. 폐광과 대장장이 구조가 기능을 확장한다.</p></article>
             <article class="card"><span class="card-index">INN</span><h3>모닥불 → 여관</h3><p>영입 후보·휴식·소문과 관계 사건을 제공한다. 후보 한 명 보류와 지역 출신 영입을 지원한다.</p></article>
           </div>
@@ -459,7 +459,7 @@
                 <tr><td>숲·황야·늪의 서로 다른 공간 문법</td><td>색상만 다른 다수 바이옴과 수십 종 자원</td></tr>
                 <tr><td>자동 원정 + 선택형 집중 작전</td><td>수동 조작을 요구하는 필수 성장 구간</td></tr>
                 <tr><td>출신·재능·특징·장비·후천 이력</td><td>욕구·식사·수면·신체 부위를 모두 다루는 생활 시뮬레이션</td></tr>
-                <tr><td>유한한 부활 시간과 회수 가능한 손실</td><td>장착 장비 영구 파괴와 오프라인 중 영구 실패</td></tr>
+                <tr><td>유한한 치료 시간과 회수 가능한 손실</td><td>장착 장비 영구 파괴와 오프라인 중 영구 실패</td></tr>
                 <tr><td>기능 해금형 정착 성장</td><td>수동 수금, 제작 완료 확인, 일일 숙제</td></tr>
               </tbody>
             </table>
@@ -485,7 +485,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>자율 개척단 방치형 RPG · 개발 노트 v0.3.3 · 2026-07-26</p>
+    <p>자율 개척단 방치형 RPG · 개발 노트 v0.4.0 · 2026-07-27</p>
     <a href="#main">위로</a>
   </footer>
 </body>

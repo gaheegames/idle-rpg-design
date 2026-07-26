@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="마을 준비부터 월드·던전 자동 탐험, 전투, 귀환 정산, 영웅·장비·정착지 성장까지 12개 기획 영역을 연결한 전체 게임 시스템 지도">
+  <meta name="theme-color" content="#14263b">
+  <title>전체 시스템 연결도 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
+  <script src="assets/site.js?v=release-20260727-v040" defer></script>
+</head>
+<body>
+  <div data-site-header></div>
+  <main id="main-content" class="page-shell">
+    <header class="page-heading">
+      <p class="page-kicker">16 · INTEGRATED SYSTEM MAP · v0.4.0</p>
+      <h1>열두 기획 영역이<br><em>하나의 자동 순환으로 이어진다</em></h1>
+      <p class="page-summary">마을·월드·던전·파티·장비·몬스터·보스·성장·퀘스트·반복 동선·세계관·확장 운영이 어느 단계에서 입력되고 무엇을 남기는지 한 장에서 확인한다.</p>
+      <div class="meta-row">
+        <span class="status-chip complete">구조 모순 없음</span>
+        <span class="status-chip complete">12개 영역 연결</span>
+        <span class="status-chip warning">수치 5종 테스트 필요</span>
+      </div>
+    </header>
+
+    <section class="section-block" aria-labelledby="map-title">
+      <div class="section-intro">
+        <p class="section-label">Interactive Design Map</p>
+        <h2 class="section-title" id="map-title">기획 항목을 누르면 연결되는 플레이 단계가 표시된다</h2>
+        <p class="section-copy">마을 준비부터 자동 재출정까지의 순환과 영웅·장비·세계의 세 성장축, 충돌 가능 지점의 해결 규칙을 함께 표시한다.</p>
+      </div>
+      <div class="interactive-embed">
+        <iframe src="assets/interactive/integrated-game-system-map-v1.html" title="전체 게임 순환과 12개 기획 영역의 상호작용 연결도" loading="eager"></iframe>
+      </div>
+      <p class="interactive-open"><a class="button amber" href="assets/interactive/integrated-game-system-map-v1.html">연결도만 크게 열기 →</a></p>
+    </section>
+
+    <div class="article-layout">
+      <article class="article">
+        <h2 id="loop">멈추지 않는 일곱 단계</h2>
+        <div class="master-loop-track" aria-label="전체 게임 순환">
+          <article class="loop-node"><span>01</span><strong>마을 준비</strong><small>모집·장비·치료</small></article>
+          <article class="loop-node"><span>02</span><strong>파티 출정</strong><small>1~5인·정책</small></article>
+          <article class="loop-node"><span>03</span><strong>월드 탐험</strong><small>포그·거리 위험</small></article>
+          <article class="loop-node"><span>04</span><strong>랜덤 던전</strong><small>다음 내용 미공개</small></article>
+          <article class="loop-node"><span>05</span><strong>전투·사건</strong><small>자동+제한 개입</small></article>
+          <article class="loop-node"><span>06</span><strong>귀환 정산</strong><small>전리품·수리·회복</small></article>
+          <article class="loop-node"><span>07</span><strong>장기 성장</strong><small>영웅·장비·세계</small></article>
+        </div>
+
+        <h2 id="three-tracks">세 가지 누적 성장축</h2>
+        <table>
+          <thead><tr><th>성장축</th><th>시작</th><th>누적</th><th>순환 끝</th></tr></thead>
+          <tbody>
+            <tr><td>영웅 생애</td><td>15세·Lv.1</td><td>레벨·관계·부상·경력</td><td>60세 은퇴·계승·마을 보직</td></tr>
+            <tr><td>장비</td><td>획득</td><td>등급·옵션·내구도</td><td>수리·재련·보관·가보</td></tr>
+            <tr><td>세계</td><td>포그</td><td>던전 발견·보스 토벌</td><td>마을 성장·원거리 해금</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="consistency">충돌하지 않게 만든 연결 규칙</h2>
+        <table>
+          <thead><tr><th>충돌 가능 지점</th><th>해결 규칙</th><th>판정</th></tr></thead>
+          <tbody>
+            <tr><td>자동화 ↔ 선택</td><td>3~5초 뒤 추천안 자동 실행, 개입은 비용·시간·보상 개선</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>불예측 ↔ 공정성</td><td>미래는 숨기고 현재 위험·감지 단서·적합도 표시</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>콘텐츠 규모 ↔ 단순함</td><td>종·외형은 늘리고 행동 원형은 약 8종 재사용</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>자유 조합 ↔ 필수 직업</td><td>동일 직업 5인 허용, 모든 조건에 대체 경로·비용</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>내구도 ↔ 장비 애착</td><td>0은 파손, 전설·유니크 자동 폐기 금지</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>수명 ↔ 캐릭터 애착</td><td>무작위 영구사망 제외, 은퇴·계승·보직으로 연결</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>귀환 정비 ↔ 방치 진행</td><td>정책 기반 자동 정산, 결과창은 재출정을 막지 않음</td><td><span class="status-chip complete">해결</span></td></tr>
+            <tr><td>보스 반복 ↔ 세계관</td><td>후계·재생·재구축으로 설명, 대기 중 주변 파밍</td><td><span class="status-chip complete">해결</span></td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="calibration">플레이 테스트로만 결정할 값</h2>
+        <ul class="check-list">
+          <li>영웅 전체 생애 30~60일과 1년당 약 24시간</li>
+          <li>레벨 100 도달 곡선과 일반 은퇴 레벨</li>
+          <li>장비 내구도 감소량과 수리 비용</li>
+          <li>보스 재등장 시간·드롭률·확정 제작 횟수</li>
+          <li>오프라인 누적 상한과 원정당 개입 횟수</li>
+        </ul>
+
+        <div class="callout success">
+          <strong class="callout-title">개발 판단 기준</strong>
+          새 시스템이 어느 단계의 입력도 받지 않고 어느 성장축에도 결과를 남기지 않는다면 연결되지 않은 기능이다. 새 콘텐츠가 자동 진행을 멈추거나 일반전의 확인창을 늘리면 핵심 가치와 충돌한다.
+        </div>
+      </article>
+      <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
+    </div>
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>

@@ -6,19 +6,19 @@
   <meta name="description" content="자율 원정대 RPG에서 제작한 개척 순환, 월드맵, 던전 구성, 길찾기, UI 구조와 리소스 분석 시각 자료 아카이브">
   <meta name="theme-color" content="#14263b">
   <title>시각 자료실 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v033">
-  <script src="assets/site.js?v=release-20260726-v033" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
+  <script src="assets/site.js?v=release-20260727-v040" defer></script>
 </head>
 <body data-page="visual-archive">
   <div data-site-header></div>
 
   <main id="main-content" class="page-shell">
     <header class="page-heading">
-      <p class="page-kicker">14 · VISUAL ARCHIVE · v0.3.3</p>
+      <p class="page-kicker">14 · VISUAL ARCHIVE · v0.4.0</p>
       <h1>말로 합의한 기획을<br><em>한눈에 다시 찾는다</em></h1>
       <p class="page-summary">논의 과정에서 확정한 던전 화면 구성, 정착지 성장, 월드 탐사와 시스템 알고리즘을 선·도형·상태·경로 중심의 기획 도식으로 보존한다. 폐기된 AI 이미지는 싣지 않으며 이후 제작하는 모든 도식도 같은 자료실에 누적한다.</p>
       <div class="meta-row">
-        <span class="status-chip complete">시각 자료 14종</span>
+        <span class="status-chip complete">시각 자료 17종</span>
         <span class="status-chip design">원본 해상도 보존</span>
         <span class="status-chip warning">폐기 이미지 제외</span>
       </div>
@@ -28,7 +28,7 @@
       <article class="metric-card"><span class="metric-label">Planning Diagrams</span><strong class="metric-value">3</strong><p>던전 화면·정착지 성장·초기 월드</p></article>
       <article class="metric-card"><span class="metric-label">System Diagrams</span><strong class="metric-value">7</strong><p>월드·던전·자동 탐색 알고리즘</p></article>
       <article class="metric-card"><span class="metric-label">Analysis Boards</span><strong class="metric-value">4</strong><p>캐릭터·몬스터·아이템·출처 구분</p></article>
-      <article class="metric-card"><span class="metric-label">Future Upload Rule</span><strong class="metric-value">ALL</strong><p>승인된 새 도식은 매번 함께 게시</p></article>
+      <article class="metric-card"><span class="metric-label">Interactive Plans</span><strong class="metric-value">3</strong><p>6직업·캐릭터 정보·전체 연결도</p></article>
     </section>
 
     <div class="article-layout">
@@ -73,6 +73,23 @@
           <strong class="callout-title">앞으로의 업로드 기준</strong>
           이후 대화에서 만드는 표·플로우차트·화면 와이어프레임·맵 구성도·상태 비교도는 승인된 시점에 원본 파일, 관련 기획 페이지 링크, 버전과 용도를 이 자료실에 함께 추가한다. 폐기 지시된 이미지는 자료실과 공개 자산에서 제거한다.
         </div>
+
+        <h2 id="interactive-plans">직접 눌러 확인하는 통합 기획 도식</h2>
+        <p>최근 확정한 캐릭터·파티 기획과 전체 시스템 연결도는 정지 이미지뿐 아니라 상태를 바꿔 볼 수 있는 원본도 함께 보존한다.</p>
+        <div class="archive-grid" aria-label="상호작용 기획 도식">
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="6직업 설계 보드 크게 보기"><img src="assets/interactive/six-class-design-board-v1.png" width="1280" height="720" loading="lazy" decoding="async" alt="전사 궁수 사제 마법사 도적 소환사의 역할 능력치 기술과 동일 직업 파티 대응을 비교한 설계 보드"></button>
+            <figcaption><span class="status-chip complete">기획 도식</span><strong>6직업 설계 보드 · v1</strong><span>직업 역할, 주 능력치, 기술 방향과 중복 파티의 약점 보완 원칙을 비교한다.</span><a class="archive-link" href="assets/interactive/six-class-design-board-v1.html">상호작용 원본 열기 →</a></figcaption>
+          </figure>
+          <figure class="concept-card archive-card">
+            <button class="media-zoom" type="button" data-lightbox aria-label="캐릭터 정보 화면 와이어프레임 크게 보기"><img src="assets/interactive/character-profile-wireframe-v1.png" width="1280" height="720" loading="lazy" decoding="async" alt="캐릭터 요약 장비 기술 상태 관계 경력 탭을 구성한 정보 화면 와이어프레임"></button>
+            <figcaption><span class="status-chip complete">화면 와이어프레임</span><strong>캐릭터 정보 화면 · v1</strong><span>배틀 브라더스식 장비·능력치 골격에 상태, 관계와 생애 경력을 분리해 배치한다.</span><a class="archive-link" href="assets/interactive/character-profile-wireframe-v1.html">상호작용 원본 열기 →</a></figcaption>
+          </figure>
+        </div>
+        <div class="interactive-embed">
+          <iframe src="assets/interactive/integrated-game-system-map-v1.html" title="마을부터 자동 재출정까지 전체 시스템과 12개 기획 영역의 연결도" loading="lazy"></iframe>
+        </div>
+        <p class="interactive-open"><a class="button amber" href="assets/interactive/integrated-game-system-map-v1.html">전체 시스템 연결도 크게 열기 →</a></p>
 
         <h2 id="system-diagrams">시스템과 던전 구성도</h2>
         <p>실제 기획 문서에서 사용하는 설명도다. 이미지를 누르면 원본 크기에 맞춰 확대되며, 각 그림의 세부 설명은 관련 페이지에서 이어서 확인할 수 있다.</p>

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="예측 불가능성, 자동화, 연속 월드맵, 던전 생성과 자동 탐색을 통합한 개척형 방치 RPG v0.3.3 기획 기준선">
   <meta name="theme-color" content="#14263b">
-  <title>현재 기획 기준선 v0.3.3 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260726-v033">
-  <script src="assets/site.js?v=release-20260726-v033" defer></script>
+  <title>월드·던전 기초 기준선 v0.3.3 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
+  <script src="assets/site.js?v=release-20260727-v040" defer></script>
 </head>
 <body data-page="design-baseline">
   <div data-site-header></div>
@@ -21,13 +21,13 @@
         <span class="status-chip complete">핵심 가치 확정</span>
         <span class="status-chip complete">월드맵 기준 확정</span>
         <span class="status-chip complete">던전 구조 확정</span>
-        <span class="status-chip design">캐릭터·파티 다음</span>
+        <span class="status-chip complete">후속 기획은 15·16장</span>
       </div>
     </header>
 
     <section class="metric-grid" aria-label="현재 기획 기준 핵심 수치">
       <article class="metric-card"><span class="metric-label">Base Jobs</span><strong class="metric-value">6</strong><p>전사·궁수·사제·마법사·도적·소환사</p></article>
-      <article class="metric-card"><span class="metric-label">Party Size</span><strong class="metric-value">5</strong><p>한 자리는 반드시 비어 조합 선택이 생긴다</p></article>
+      <article class="metric-card"><span class="metric-label">Party Size</span><strong class="metric-value">5</strong><p>직업 중복과 동일 직업 5인도 허용</p></article>
       <article class="metric-card"><span class="metric-label">Starting Reveal</span><strong class="metric-value">≈1%</strong><p>대륙 전체 윤곽 중 정착지 주변만 공개</p></article>
       <article class="metric-card"><span class="metric-label">Intervention</span><strong class="metric-value">3–5s</strong><p>선택하지 않으면 추천 기본값으로 계속 진행</p></article>
     </section>
@@ -140,22 +140,22 @@
         </div>
         <p>마을은 자유 배치 도시 건설 게임이 아니다. 길드·교회·대장간·창고 같은 소수 시설이 회복, 편성, 장비, 정보와 다음 원정의 효율을 바꾼다. 자원과 돈은 마을을 키우지만, 시설 관리가 자동 탐험보다 더 많은 조작을 요구해서는 안 된다.</p>
 
-        <h2 id="planning-status">12개 기획 영역의 현재 위치</h2>
+        <h2 id="planning-status">v0.3.3 이후 확장된 기획 위치</h2>
         <table>
           <thead><tr><th>영역</th><th>현재 상태</th><th>이번 기준선</th><th>다음 산출물</th></tr></thead>
           <tbody>
             <tr><td>1. 마을</td><td><span class="status-chip design">골격 확정</span></td><td>경량 허브, 폐허→작은 마을</td><td>시설 기능·해금 배치도</td></tr>
             <tr><td>2. 월드맵</td><td><span class="status-chip complete">핵심 완료</span></td><td>연속 대륙·포그·탐사 격자·등록부</td><td>첫 대륙 영역·바이옴 배치</td></tr>
             <tr><td>3. 던전</td><td><span class="status-chip complete">핵심 완료</span></td><td>규모 문법·세 기억층·자동 탐색·교착 복구</td><td>첫 대표 던전 데이터표</td></tr>
-            <tr><td>4. 캐릭터·파티</td><td><span class="status-chip warning">다음</span></td><td>6직업·최대 5인·배경/특성 영향</td><td>역할 매트릭스·성격·트라우마·자동 행동</td></tr>
-            <tr><td>5–7. 아이템·몬스터·보스</td><td><span class="status-chip design">구조만</span></td><td>원정·던전 결과와 연결</td><td>첫 바이옴용 목록과 조우 규칙</td></tr>
-            <tr><td>8–12. 성장 이후</td><td><span class="status-chip design">순환만</span></td><td>귀환·마을·교범·월드 변화 연결</td><td>영역별 시각 기획서</td></tr>
+            <tr><td>4. 캐릭터·파티</td><td><span class="status-chip complete">기준 확정</span></td><td>6직업·중복 가능 5인·능력치·생애·관계</td><td><a href="15_character_systems.html">캐릭터·전투 시스템</a></td></tr>
+            <tr><td>5–7. 아이템·몬스터·보스</td><td><span class="status-chip complete">기본 규칙 확정</span></td><td>파밍·내구도·등급·행동 원형·보스 확장</td><td><a href="15_character_systems.html#equipment">상세 기준</a></td></tr>
+            <tr><td>8–12. 성장 이후</td><td><span class="status-chip complete">연결 완료</span></td><td>영웅·장비·마을·세계의 세 성장축</td><td><a href="16_integrated_system_map.html">전체 시스템 연결도</a></td></tr>
           </tbody>
         </table>
 
         <div class="callout design">
-          <strong class="callout-title">바로 다음 작업</strong>
-          6개 기본 직업과 최대 5인 파티의 역할 겹침·빈자리 위험을 표로 만들고, 힘·지능·민첩·매력 같은 능력치와 출신·성격·강박·트라우마가 전투, 탐색 선택, 대사와 관계에 미치는 영향을 하나의 자동 행동 규칙으로 연결한다.
+          <strong class="callout-title">후속 기준선</strong>
+          이 장은 월드·던전의 기초 기준을 보존한다. 캐릭터·장비·몬스터·보스는 15장, 열두 기획 영역의 전체 연결과 모순 점검은 16장에서 이어진다.
         </div>
       </article>
 

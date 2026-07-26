@@ -21,8 +21,10 @@
 | `12_pathfinding_ai.html` | 여러 게임에서 재사용할 길찾기·자동 탐험·던전 생성 AI의 독립 계약과 운영 원칙 |
 | `13_design_baseline.html` | 현재까지 확정한 통합 기획 기준선 |
 | `14_visual_archive.html` | 개척 순환·월드·던전·UI·분석 이미지 시각 자료실 |
+| `15_character_systems.html` | 6직업·5인 파티, 능력치·생애, 장비·몬스터·보스 기준 |
+| `16_integrated_system_map.html` | 12개 기획 영역의 전체 순환·성장축·모순 점검 |
 
-현재 문서 버전은 `v0.3.3`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
+현재 문서 버전은 `v0.4.0`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
 
 ## 시각 기획 자료 운영
 

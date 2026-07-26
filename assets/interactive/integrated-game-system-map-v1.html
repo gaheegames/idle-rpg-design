@@ -1,0 +1,1559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Integrated Game System Map</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Integrated Game System Map" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Integrated Game System Map&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --red: light-dark(rgb(186 38 35), rgb(250 66 62));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: var(--border-radius-lg, 12.5px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;integrated-game-system-map&quot; class=&quot;igsm&quot;&gt;
+  &lt;section class=&quot;igsm-principles&quot; aria-label=&quot;게임 핵심 원칙&quot;&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;다음 상황은 보이지 않음&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;마을 밖은 전 과정 자동&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;조작은 선택적 개입만&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;보이는 규칙은 단순하게&lt;/span&gt;
+  &lt;/section&gt;
+
+  &lt;section aria-label=&quot;전체 게임 플레이 순환&quot;&gt;
+    &lt;div class=&quot;igsm-loop&quot; role=&quot;group&quot; aria-label=&quot;게임 순환 단계&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;town&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;1&lt;/span&gt;&lt;span&gt;마을 준비&lt;/span&gt;&lt;small&gt;모집 · 장비 · 치료&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;depart&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;2&lt;/span&gt;&lt;span&gt;파티 출정&lt;/span&gt;&lt;small&gt;1~5인 · 자동 정책&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;world&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;3&lt;/span&gt;&lt;span&gt;월드 탐험&lt;/span&gt;&lt;small&gt;포그 · 거리 위험층&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;dungeon&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;4&lt;/span&gt;&lt;span&gt;랜덤 던전&lt;/span&gt;&lt;small&gt;방 · 길 · 층 미공개&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;encounter&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;5&lt;/span&gt;&lt;span&gt;전투·사건&lt;/span&gt;&lt;small&gt;자동 + 3~5초 선택&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;return&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;6&lt;/span&gt;&lt;span&gt;귀환 정산&lt;/span&gt;&lt;small&gt;전리품 · 수리 · 회복&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn igsm-phase&quot; data-phase=&quot;growth&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;span class=&quot;igsm-num&quot;&gt;7&lt;/span&gt;&lt;span&gt;장기 성장&lt;/span&gt;&lt;small&gt;정착지 · 영웅 · 세계&lt;/small&gt;
+      &lt;/button&gt;
+      &lt;span class=&quot;igsm-return&quot; aria-label=&quot;성장 후 다시 출정&quot;&gt;↺ 자동 재출정&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;igsm-selector&quot; aria-label=&quot;기획 항목별 연결 확인&quot;&gt;
+    &lt;div class=&quot;igsm-system-grid&quot; role=&quot;group&quot; aria-label=&quot;기획 항목 선택&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;village&quot; aria-pressed=&quot;false&quot;&gt;1. 마을&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;worldmap&quot; aria-pressed=&quot;false&quot;&gt;2. 월드맵&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;dungeons&quot; aria-pressed=&quot;false&quot;&gt;3. 던전&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;party&quot; aria-pressed=&quot;false&quot;&gt;4. 캐릭터·파티&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;items&quot; aria-pressed=&quot;false&quot;&gt;5. 장비·아이템&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;monsters&quot; aria-pressed=&quot;false&quot;&gt;6. 몬스터&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;bosses&quot; aria-pressed=&quot;false&quot;&gt;7. 보스&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;progression&quot; aria-pressed=&quot;false&quot;&gt;8. 성장·순환&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;quests&quot; aria-pressed=&quot;false&quot;&gt;9. 퀘스트·업적&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;repeat&quot; aria-pressed=&quot;false&quot;&gt;10. 동선·반복&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;lore&quot; aria-pressed=&quot;false&quot;&gt;11. 세계관&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-system=&quot;expansion&quot; aria-pressed=&quot;false&quot;&gt;12. 확장·운영&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;card igsm-detail&quot; aria-live=&quot;polite&quot; aria-label=&quot;선택한 기획 항목의 연결 정보&quot;&gt;
+    &lt;div class=&quot;igsm-detail-head&quot;&gt;
+      &lt;strong id=&quot;igsm-detail-title&quot;&gt;10. 전체 게임 동선·반복&lt;/strong&gt;
+      &lt;span id=&quot;igsm-detail-status&quot; class=&quot;viz-badge&quot;&gt;전체 순환 연결&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;igsm-detail-grid&quot;&gt;
+      &lt;div&gt;&lt;span class=&quot;text-muted&quot;&gt;들어오는 것&lt;/span&gt;&lt;p id=&quot;igsm-input&quot;&gt;파티 상태 · 자동 정책 · 탐험 목표&lt;/p&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;span class=&quot;text-muted&quot;&gt;자동 처리&lt;/span&gt;&lt;p id=&quot;igsm-auto&quot;&gt;출정 → 탐험 → 전투 → 귀환 → 재정비 → 재출정&lt;/p&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;span class=&quot;text-muted&quot;&gt;유저가 하는 것&lt;/span&gt;&lt;p id=&quot;igsm-player&quot;&gt;출정 전 설정과 드문 3~5초 개입&lt;/p&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;span class=&quot;text-muted&quot;&gt;남는 결과&lt;/span&gt;&lt;p id=&quot;igsm-output&quot;&gt;자원 · 장비 · 성장 · 지도 · 사건 기록&lt;/p&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;igsm-tracks&quot; aria-label=&quot;세 가지 누적 성장 축&quot;&gt;
+    &lt;div class=&quot;igsm-track&quot;&gt;
+      &lt;strong&gt;영웅 생애&lt;/strong&gt;
+      &lt;div class=&quot;igsm-line&quot;&gt;&lt;span&gt;15세 시작&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;Lv.1~100&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;부상·관계·경력&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;60세 은퇴·계승&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;igsm-track&quot;&gt;
+      &lt;strong&gt;장비 순환&lt;/strong&gt;
+      &lt;div class=&quot;igsm-line&quot;&gt;&lt;span&gt;획득&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;등급·옵션&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;착용·내구도&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;수리·재련·보관&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;igsm-track&quot;&gt;
+      &lt;strong&gt;세계 확장&lt;/strong&gt;
+      &lt;div class=&quot;igsm-line&quot;&gt;&lt;span&gt;포그 지역&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;던전 발견&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;보스 토벌&lt;/span&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;마을 성장·원거리 해금&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;igsm-audit&quot; aria-label=&quot;기획 일관성 점검&quot;&gt;
+    &lt;div class=&quot;table-responsive&quot;&gt;
+      &lt;table class=&quot;table table-sm&quot;&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;&lt;th&gt;충돌 가능 지점&lt;/th&gt;&lt;th&gt;연결 규칙&lt;/th&gt;&lt;th class=&quot;text-nowrap&quot;&gt;판정&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;&lt;td&gt;자동화 ↔ 선택의 재미&lt;/td&gt;&lt;td&gt;마을 밖은 계속 진행하며, 중요 선택만 3~5초 뒤 추천안으로 자동 확정&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;불예측성 ↔ 억울함&lt;/td&gt;&lt;td&gt;다음 방은 숨기되 현재 위험 1개, 감지 단서, 파티 적합도는 표시&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;콘텐츠 규모 ↔ 단순함&lt;/td&gt;&lt;td&gt;종·외형은 늘리고 행동 원형은 약 8종, 일반전은 팝업 없음&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;자유 조합 ↔ 필수 직업&lt;/td&gt;&lt;td&gt;동일 직업 5인도 허용하고 모든 장애물에 대체 경로와 비용을 제공&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;장비 내구도 ↔ 파밍 애착&lt;/td&gt;&lt;td&gt;내구도 0은 삭제가 아닌 파손, 전설·유니크는 자동 폐기 금지&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;영웅 수명 ↔ 캐릭터 애착&lt;/td&gt;&lt;td&gt;무작위 영구사망 없이 부상·휴양·은퇴·후계자·마을 보직으로 연결&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;마을 정비 ↔ 방치 진행&lt;/td&gt;&lt;td&gt;귀환 정산·수리·보급·교체는 정책에 따라 처리하고 결과창은 진행을 막지 않음&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+          &lt;tr&gt;&lt;td&gt;보스 반복 ↔ 세계관&lt;/td&gt;&lt;td&gt;후계 개체·재생·재구축으로 재등장을 설명하고 대기 중에는 주변 자원 파밍&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;viz-badge&quot;&gt;해결&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;igsm-calibration&quot; aria-label=&quot;수치 검증이 필요한 항목&quot;&gt;
+    &lt;span class=&quot;text-muted&quot;&gt;구조 충돌 없음 · 테스트에서 수치만 조정:&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;영웅 생애 30~60일&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;1년 = 약 24시간&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;Lv.100 도달 곡선&lt;/span&gt;
+    &lt;span class=&quot;viz-badge&quot;&gt;보스 재등장·드롭률&lt;/span&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  #integrated-game-system-map {
+    color: var(--foreground);
+    display: grid;
+    gap: 18px;
+    width: 100%;
+  }
+  #integrated-game-system-map .igsm-principles,
+  #integrated-game-system-map .igsm-calibration {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  #integrated-game-system-map .igsm-loop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 7px;
+  }
+  #integrated-game-system-map .igsm-phase {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 2px 7px;
+    min-width: 122px;
+    text-align: left;
+  }
+  #integrated-game-system-map .igsm-phase small {
+    grid-column: 1 / -1;
+    white-space: nowrap;
+  }
+  #integrated-game-system-map .igsm-num {
+    color: var(--muted-foreground);
+  }
+  #integrated-game-system-map .igsm-arrow {
+    align-self: center;
+    color: var(--muted-foreground);
+  }
+  #integrated-game-system-map .igsm-return {
+    align-self: center;
+    color: var(--foreground);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  #integrated-game-system-map .igsm-system-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+  #integrated-game-system-map .igsm-detail {
+    display: grid;
+    gap: 14px;
+  }
+  #integrated-game-system-map .igsm-detail-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  #integrated-game-system-map .igsm-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  #integrated-game-system-map .igsm-detail-grid p {
+    margin: 5px 0 0;
+  }
+  #integrated-game-system-map .igsm-tracks {
+    display: grid;
+    gap: 12px;
+  }
+  #integrated-game-system-map .igsm-track {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+  #integrated-game-system-map .igsm-line {
+    display: grid;
+    grid-template-columns: auto minmax(18px, 1fr) auto minmax(18px, 1fr) auto minmax(18px, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+  }
+  #integrated-game-system-map .igsm-line span {
+    text-align: center;
+  }
+  #integrated-game-system-map .igsm-line i {
+    height: 2px;
+    background: var(--border);
+    position: relative;
+  }
+  #integrated-game-system-map .igsm-line i::after {
+    content: &quot;&quot;;
+    position: absolute;
+    right: -1px;
+    top: -3px;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid var(--border);
+  }
+  #integrated-game-system-map .igsm-audit td:last-child,
+  #integrated-game-system-map .igsm-audit th:last-child {
+    text-align: center;
+  }
+  @media (max-width: 760px) {
+    #integrated-game-system-map .igsm-system-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    #integrated-game-system-map .igsm-detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    #integrated-game-system-map .igsm-arrow {
+      display: none;
+    }
+  }
+  @media (max-width: 500px) {
+    #integrated-game-system-map .igsm-system-grid,
+    #integrated-game-system-map .igsm-detail-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    #integrated-game-system-map .igsm-phase {
+      width: calc(50% - 8px);
+      min-width: 0;
+    }
+    #integrated-game-system-map .igsm-return {
+      width: 100%;
+      text-align: center;
+    }
+    #integrated-game-system-map .igsm-track {
+      grid-template-columns: 1fr;
+    }
+    #integrated-game-system-map .igsm-line {
+      grid-template-columns: 1fr;
+      justify-items: start;
+      gap: 5px;
+    }
+    #integrated-game-system-map .igsm-line i {
+      width: 2px;
+      height: 12px;
+      margin-left: 7px;
+    }
+    #integrated-game-system-map .igsm-line i::after {
+      right: -3px;
+      top: 8px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 6px solid var(--border);
+      border-bottom: 0;
+    }
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  const root = document.getElementById(&#x27;integrated-game-system-map&#x27;);
+  if (!root) return;
+
+  const phases = [&#x27;town&#x27;, &#x27;depart&#x27;, &#x27;world&#x27;, &#x27;dungeon&#x27;, &#x27;encounter&#x27;, &#x27;return&#x27;, &#x27;growth&#x27;];
+  const data = {
+    village: {
+      title: &#x27;1. 마을&#x27;, status: &#x27;시작점·종착점&#x27;,
+      links: [&#x27;town&#x27;, &#x27;return&#x27;, &#x27;growth&#x27;],
+      input: &#x27;귀환 전리품 · 부상자 · 모집 후보 · 건설 자원&#x27;,
+      auto: &#x27;수리 · 보급 · 치료 · 보관 · 잠금 장비 유지&#x27;,
+      player: &#x27;시설 투자, 모집, 장비·출정 정책 변경&#x27;,
+      output: &#x27;강한 파티 · 새 기능 · 더 먼 탐험 기반&#x27;
+    },
+    worldmap: {
+      title: &#x27;2. 월드맵&#x27;, status: &#x27;광대한 진행도&#x27;,
+      links: [&#x27;depart&#x27;, &#x27;world&#x27;, &#x27;dungeon&#x27;, &#x27;growth&#x27;],
+      input: &#x27;파티 적합도 · 이동 거리 · 지역 위험층&#x27;,
+      auto: &#x27;포그 개방 · 경로 이동 · 위험 초과 지역 회피&#x27;,
+      player: &#x27;목표 지역과 탐험 모드 지정&#x27;,
+      output: &#x27;새 던전 · 자원지 · 사건 · 장거리 목표&#x27;
+    },
+    dungeons: {
+      title: &#x27;3. 던전&#x27;, status: &#x27;핵심 불예측성&#x27;,
+      links: [&#x27;world&#x27;, &#x27;dungeon&#x27;, &#x27;encounter&#x27;, &#x27;return&#x27;],
+      input: &#x27;규모 · 거리 · 테마 · 위험도 · 파티 감지력&#x27;,
+      auto: &#x27;방 연결 · 다음 길 선택 · 전투 · 이탈 판단&#x27;,
+      player: &#x27;중요 갈림길에서만 3~5초 개입&#x27;,
+      output: &#x27;전리품 · 부상 · 정보 · 보스 발견&#x27;
+    },
+    party: {
+      title: &#x27;4. 캐릭터·파티&#x27;, status: &#x27;모든 단계 관통&#x27;,
+      links: phases,
+      input: &#x27;6직업 · 중복 허용 · 능력치 · 성향 · 관계 · 진형&#x27;,
+      auto: &#x27;역할 분담 · 대화 · 기술 사용 · 부상자 보호&#x27;,
+      player: &#x27;최대 5인 구성, 장비·스킬·진형·정책 설정&#x27;,
+      output: &#x27;경험 · 경력 · 관계 · 부상 · 후계자 자산&#x27;
+    },
+    items: {
+      title: &#x27;5. 장비·아이템&#x27;, status: &#x27;파밍 순환&#x27;,
+      links: [&#x27;town&#x27;, &#x27;depart&#x27;, &#x27;encounter&#x27;, &#x27;return&#x27;, &#x27;growth&#x27;],
+      input: &#x27;무기 18종 · 방패 · 방어구 · 물약 · 스크롤&#x27;,
+      auto: &#x27;퀵슬롯 사용 · 명백한 상위 장비 비교 · 자동 수리&#x27;,
+      player: &#x27;빌드 변경, 희귀·저주 장비, 잠금 여부 결정&#x27;,
+      output: &#x27;전투 효율 · 유지비 · 수집 · 계승 장비&#x27;
+    },
+    monsters: {
+      title: &#x27;6. 몬스터&#x27;, status: &#x27;많아 보이고 읽기 쉬움&#x27;,
+      links: [&#x27;world&#x27;, &#x27;dungeon&#x27;, &#x27;encounter&#x27;, &#x27;return&#x27;],
+      input: &#x27;지역 계열 · 레벨 · 등급 · 엘리트 특성 1개&#x27;,
+      auto: &#x27;약 8종 행동 원형으로 전투 처리&#x27;,
+      player: &#x27;주요 계열·위험 1개만 확인&#x27;,
+      output: &#x27;재료 · 장비 · 도감 · 지역 위협 변화&#x27;
+    },
+    bosses: {
+      title: &#x27;7. 보스&#x27;, status: &#x27;출시 후 모듈 확장&#x27;,
+      links: [&#x27;dungeon&#x27;, &#x27;encounter&#x27;, &#x27;return&#x27;, &#x27;growth&#x27;],
+      input: &#x27;던전·지역·레이드 등급과 전용 기믹&#x27;,
+      auto: &#x27;기본 공격 대응과 재도전 예약&#x27;,
+      player: &#x27;보스당 핵심 개입 1회, 고난도는 단계별 추가&#x27;,
+      output: &#x27;확정 재료 · 전용 장비 · 칭호 · 지역 해금&#x27;
+    },
+    progression: {
+      title: &#x27;8. 성장·순환&#x27;, status: &#x27;세 축 병행&#x27;,
+      links: [&#x27;town&#x27;, &#x27;return&#x27;, &#x27;growth&#x27;, &#x27;depart&#x27;],
+      input: &#x27;영웅 경험 · 장비 · 자원 · 지도 · 업적&#x27;,
+      auto: &#x27;레벨·나이·공사·회복 시간 누적&#x27;,
+      player: &#x27;계승·은퇴·시설·다음 성장 목표 선택&#x27;,
+      output: &#x27;영웅 생애 + 마을 성장 + 세계 확장&#x27;
+    },
+    quests: {
+      title: &#x27;9. 퀘스트·업적&#x27;, status: &#x27;순환에 의미 부여&#x27;,
+      links: [&#x27;town&#x27;, &#x27;world&#x27;, &#x27;dungeon&#x27;, &#x27;encounter&#x27;, &#x27;return&#x27;, &#x27;growth&#x27;],
+      input: &#x27;세계 사건 · 캐릭터 배경 · 토벌·탐사 기록&#x27;,
+      auto: &#x27;조건 추적 · 경력·대화·기록 갱신&#x27;,
+      player: &#x27;목표 우선순위와 보상 수령&#x27;,
+      output: &#x27;지역 변화 · 칭호 · 서사 · 장기 목표&#x27;
+    },
+    repeat: {
+      title: &#x27;10. 전체 게임 동선·반복&#x27;, status: &#x27;전체 순환 연결&#x27;,
+      links: phases,
+      input: &#x27;파티 상태 · 자동 정책 · 탐험 목표&#x27;,
+      auto: &#x27;출정 → 탐험 → 전투 → 귀환 → 재정비 → 재출정&#x27;,
+      player: &#x27;출정 전 설정과 드문 3~5초 개입&#x27;,
+      output: &#x27;자원 · 장비 · 성장 · 지도 · 사건 기록&#x27;
+    },
+    lore: {
+      title: &#x27;11. 세계관&#x27;, status: &#x27;밝은 외형·냉혹한 현실&#x27;,
+      links: [&#x27;town&#x27;, &#x27;world&#x27;, &#x27;dungeon&#x27;, &#x27;encounter&#x27;, &#x27;growth&#x27;],
+      input: &#x27;선발대 전멸 · 폐허 개척지 · 개인의 상처와 강박&#x27;,
+      auto: &#x27;장소·적·기억에 맞춘 대화와 사건 호출&#x27;,
+      player: &#x27;파티 선택과 행동으로 관계·기억 형성&#x27;,
+      output: &#x27;마을 복구 서사 · 영웅별 생애 기록&#x27;
+    },
+    expansion: {
+      title: &#x27;12. 확장·운영&#x27;, status: &#x27;기본 규칙 유지&#x27;,
+      links: phases,
+      input: &#x27;유저 반응 · 성공률 · 선택률 · 반복 토벌 데이터&#x27;,
+      auto: &#x27;새 지역·종·보스가 기존 행동 원형에 결합&#x27;,
+      player: &#x27;고난도·이벤트는 선택적으로 참여&#x27;,
+      output: &#x27;복잡도를 강요하지 않는 콘텐츠 확장&#x27;
+    }
+  };
+
+  const phaseButtons = [...root.querySelectorAll(&#x27;[data-phase]&#x27;)];
+  const systemButtons = [...root.querySelectorAll(&#x27;[data-system]&#x27;)];
+  const title = root.querySelector(&#x27;#igsm-detail-title&#x27;);
+  const status = root.querySelector(&#x27;#igsm-detail-status&#x27;);
+  const input = root.querySelector(&#x27;#igsm-input&#x27;);
+  const auto = root.querySelector(&#x27;#igsm-auto&#x27;);
+  const player = root.querySelector(&#x27;#igsm-player&#x27;);
+  const output = root.querySelector(&#x27;#igsm-output&#x27;);
+
+  function highlight(linked) {
+    phaseButtons.forEach((button) =&gt; {
+      button.setAttribute(&#x27;aria-pressed&#x27;, linked.includes(button.dataset.phase) ? &#x27;true&#x27; : &#x27;false&#x27;);
+    });
+  }
+
+  function selectSystem(key) {
+    const item = data[key];
+    if (!item) return;
+    systemButtons.forEach((button) =&gt; {
+      button.setAttribute(&#x27;aria-pressed&#x27;, button.dataset.system === key ? &#x27;true&#x27; : &#x27;false&#x27;);
+    });
+    highlight(item.links);
+    title.textContent = item.title;
+    status.textContent = item.status;
+    input.textContent = item.input;
+    auto.textContent = item.auto;
+    player.textContent = item.player;
+    output.textContent = item.output;
+  }
+
+  systemButtons.forEach((button) =&gt; {
+    button.addEventListener(&#x27;click&#x27;, () =&gt; selectSystem(button.dataset.system));
+  });
+
+  phaseButtons.forEach((button) =&gt; {
+    button.addEventListener(&#x27;click&#x27;, () =&gt; {
+      systemButtons.forEach((systemButton) =&gt; systemButton.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;));
+      highlight([button.dataset.phase]);
+      const labels = {
+        town: [&#x27;마을 준비&#x27;, &#x27;모집 · 장비 · 스킬 · 진형 · 치료 · 출정 정책&#x27;],
+        depart: [&#x27;파티 출정&#x27;, &#x27;반복 · 진행 · 자원 · 보스 준비 중 자동 탐험 모드 선택&#x27;],
+        world: [&#x27;월드 탐험&#x27;, &#x27;거대한 포그 지도와 4단계 위험층을 자동 이동&#x27;],
+        dungeon: [&#x27;랜덤 던전&#x27;, &#x27;다음 방·길·층을 숨긴 채 감지 단서만 제공&#x27;],
+        encounter: [&#x27;전투·사건&#x27;, &#x27;일반전 완전 자동, 엘리트·보스·중요 사건만 제한 개입&#x27;],
+        return: [&#x27;귀환 정산&#x27;, &#x27;전리품 하역 · 봉인·저주 보관 · 자동 수리·보급·치료&#x27;],
+        growth: [&#x27;장기 성장&#x27;, &#x27;영웅 생애 · 장비 파밍 · 정착지 · 세계 개방이 함께 누적&#x27;]
+      };
+      const current = labels[button.dataset.phase];
+      title.textContent = current[0];
+      status.textContent = &#x27;순환 단계&#x27;;
+      input.textContent = current[1];
+      auto.textContent = &#x27;설정된 정책에 따라 다음 단계로 계속 진행&#x27;;
+      player.textContent = &#x27;원할 때 정책을 바꾸거나 중요 순간에 개입&#x27;;
+      output.textContent = &#x27;다음 단계의 입력값과 장기 성장 기록&#x27;;
+    });
+  });
+
+  selectSystem(&#x27;repeat&#x27;);
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

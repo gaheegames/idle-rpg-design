@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="6직업 5인 자유 파티, 능력치·생애·관계, 장비 파밍과 내구도, 몬스터·보스 구조를 연결한 방치형 RPG 기획">
+  <meta name="theme-color" content="#14263b">
+  <title>캐릭터·장비·몬스터·보스 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
+  <script src="assets/site.js?v=release-20260727-v040" defer></script>
+</head>
+<body>
+  <div data-site-header></div>
+  <main id="main-content" class="page-shell">
+    <header class="page-heading">
+      <p class="page-kicker">15 · CHARACTER &amp; COMBAT SYSTEMS · v0.4.0</p>
+      <h1>영웅의 생애와 장비 파밍을<br><em>자동 원정에 연결한다</em></h1>
+      <p class="page-summary">직업 중복이 가능한 5인 파티, 1~18 능력치, 관계·경력·부상·은퇴, 18종 무기와 장비 내구도, 읽기 쉬운 몬스터·보스 규칙을 하나의 성장 순환으로 정리했다.</p>
+      <div class="meta-row">
+        <span class="status-chip complete">6직업·5인 자유 조합</span>
+        <span class="status-chip complete">장비 파밍·내구도</span>
+        <span class="status-chip complete">몬스터·보스 기본 규칙</span>
+        <span class="status-chip warning">수치는 테스트 조정</span>
+      </div>
+    </header>
+
+    <div class="article-layout">
+      <article class="article">
+        <h2 id="party">직업을 강제하지 않는 5인 파티</h2>
+        <p class="lead">전사·궁수·사제·마법사·도적·소환사를 기본으로 하되, 같은 직업 다섯 명도 정상적인 조합이다. 특정 직업이 없으면 막히는 문 대신 시간·자원·위험을 지불하는 대체 경로를 제공한다.</p>
+        <div class="stage-grid">
+          <article class="stage-card"><span class="stage-index">01</span><strong>전사</strong><p>힘·건강 / 보호·파괴·지휘 / 결의</p></article>
+          <article class="stage-card"><span class="stage-index">02</span><strong>궁수</strong><p>민첩·통찰 / 정찰·표식·차단 / 집중</p></article>
+          <article class="stage-card"><span class="stage-index">03</span><strong>사제</strong><p>통찰·매력 / 치유·정화·사기 / 성력</p></article>
+          <article class="stage-card"><span class="stage-index">04</span><strong>마법사</strong><p>지능·통찰 / 범위·제어·해제 / 마나</p></article>
+          <article class="stage-card"><span class="stage-index">05</span><strong>도적</strong><p>민첩·통찰 / 기습·약화·함정 / 기회</p></article>
+          <article class="stage-card"><span class="stage-index">06</span><strong>소환사</strong><p>지능·매력 / 소환으로 빈 역할 보완 / 유대</p></article>
+        </div>
+
+        <figure class="media-feature media-feature--wide">
+          <button class="media-zoom" type="button" data-lightbox aria-label="6직업 설계 보드 크게 보기">
+            <img src="assets/interactive/six-class-design-board-v1.png" width="1280" height="720" alt="전사 궁수 사제 마법사 도적 소환사의 능력치 역할 기술과 동일 직업 파티 대응을 비교한 설계 보드">
+          </button>
+          <figcaption><span class="media-source">상호작용 원본 보존</span><strong>6직업 역할·능력치·자동 행동 설계</strong><span>직업을 선택하면 역할, 기술, 자원과 중복 파티의 약점 보완 방식을 확인할 수 있다.</span><a class="archive-link" href="assets/interactive/six-class-design-board-v1.html">상호작용 보드 열기 →</a></figcaption>
+        </figure>
+
+        <h2 id="stats">주사위로 보이지만 총합은 공정한 능력치</h2>
+        <table>
+          <thead><tr><th>능력치</th><th>주요 역할</th><th>탐험 예시</th></tr></thead>
+          <tbody>
+            <tr><td>힘 STR</td><td>근접·중장비·밀기</td><td>무너진 문을 들어 올림</td></tr>
+            <tr><td>민첩 DEX</td><td>속도·회피·함정</td><td>함정 해제와 빠른 재정렬</td></tr>
+            <tr><td>건강 CON</td><td>체력·부상 저항</td><td>긴 원정과 독성 환경 버팀</td></tr>
+            <tr><td>지능 INT</td><td>주문·지식·해석</td><td>마법 장치와 봉인 분석</td></tr>
+            <tr><td>통찰 INS</td><td>감지·예측·치유 판단</td><td>다음 방의 소리와 흔적 감지</td></tr>
+            <tr><td>매력 CHA</td><td>사기·지휘·협상</td><td>포로·정령·소환 계약 대응</td></tr>
+          </tbody>
+        </table>
+        <p>일반 범위는 3~18, 생성 총합은 72다. 주사위를 굴릴 때 전체 배치가 바뀌고 생성 뒤 총 3점을 재배분한다. 하드 캐시 재굴림은 두지 않는다.</p>
+
+        <h2 id="life">레벨보다 길게 남는 영웅의 생애</h2>
+        <div class="state-lane" aria-label="영웅 생애">
+          <span class="state">15세·Lv.1</span><span class="arrow">→</span>
+          <span class="state">경험·관계</span><span class="arrow">→</span>
+          <span class="state">부상·경력</span><span class="arrow">→</span>
+          <span class="state">60세 은퇴</span><span class="arrow">→</span>
+          <span class="state">계승·마을 보직</span>
+        </div>
+        <p>레벨 상한은 100이며 1~20 초보, 21~50 중급, 51~89 상급, 90~99 전설, 100 데미갓이다. 시험 기준 전체 생애는 약 45일이지만 30~60일 범위에서 조정한다. 무작위 영구사망 대신 전투불능 누적에 따른 경상·강한 약화·중상을 사용한다.</p>
+        <div class="callout design"><strong class="callout-title">고레벨의 실제 가치</strong> 레벨은 대응 슬롯 상한을 늘리고 실제 모험 경험이 내용을 채운다. 분열형 적, 용, 저주 장비처럼 직접 겪은 사건이 드문 전투·탐험 선택지로 남는다.</div>
+
+        <figure class="media-feature media-feature--wide">
+          <button class="media-zoom" type="button" data-lightbox aria-label="캐릭터 정보 화면 와이어프레임 크게 보기">
+            <img src="assets/interactive/character-profile-wireframe-v1.png" width="1280" height="720" loading="lazy" decoding="async" alt="캐릭터 요약 장비 기술 상태 관계 경력 탭을 구성한 정보 화면 와이어프레임">
+          </button>
+          <figcaption><span class="media-source">상호작용 원본 보존</span><strong>캐릭터 정보 화면</strong><span>한 화면에 모든 수치를 쌓지 않고 요약·장비·기술·상태·관계·경력으로 분리한다.</span><a class="archive-link" href="assets/interactive/character-profile-wireframe-v1.html">상호작용 화면 열기 →</a></figcaption>
+        </figure>
+
+        <h2 id="equipment">장비 파밍과 유지의 순환</h2>
+        <table>
+          <thead><tr><th>등급</th><th>옵션 수·성격</th><th>운영 규칙</th></tr></thead>
+          <tbody>
+            <tr><td>노말</td><td>0</td><td>아이템 레벨의 기본 수치</td></tr>
+            <tr><td>언커먼</td><td>1</td><td>한 가지 명확한 보강</td></tr>
+            <tr><td>매직</td><td>2</td><td>초기 빌드 분기</td></tr>
+            <tr><td>레어</td><td>3</td><td>자동 분해 보호 시작</td></tr>
+            <tr><td>히로익</td><td>4</td><td>장기 사용 후보</td></tr>
+            <tr><td>레전드</td><td>무작위 5</td><td>자동 폐기 금지</td></tr>
+            <tr><td>유니크</td><td>고정 기믹 중심</td><td>낮은 레벨에도 등장, 반드시 최강은 아님</td></tr>
+          </tbody>
+        </table>
+        <p>개인 장비는 주무기, 보조무기·도구, 머리, 몸, 신발, 장신구 6칸이다. 직업별 무기 3종 총 18종을 장기 목표로 하되 프로토타입은 직업당 대표 1종부터 만든다. 내구도 0은 삭제가 아니라 파손이며 레전드·유니크는 휴면·복원 상태로 보존한다.</p>
+
+        <h2 id="monsters">많아 보이지만 읽기 쉬운 몬스터</h2>
+        <p>내부에서는 종·계열, 레벨, 등급, 엘리트, 지역을 계산하지만 화면은 위협도, 주요 계열, 특별 위험 1개를 먼저 보여 준다. 외형과 종은 늘리되 행동은 돌진·방어·원거리·무리·분열·독·소환·기습의 약 8개 원형을 재사용한다.</p>
+        <div class="pillar-grid">
+          <article class="principle-card"><span class="principle-index">01</span><h3>일반</h3><p>완전 자동. 반복되는 선택창 없음.</p></article>
+          <article class="principle-card"><span class="principle-index">02</span><h3>엘리트</h3><p>등급과 별도로 명확한 특성 1개만 추가.</p></article>
+          <article class="principle-card"><span class="principle-index">03</span><h3>유니크</h3><p>이름과 수제 기믹. 낮은 레벨에도 출현 가능.</p></article>
+          <article class="principle-card"><span class="principle-index">04</span><h3>보스</h3><p>고유 실루엣·기믹·전용 보상과 제한 개입.</p></article>
+        </div>
+
+        <h2 id="bosses">출시 후 확장 가능한 보스</h2>
+        <table>
+          <thead><tr><th>종류</th><th>초기 기믹</th><th>개입</th><th>성장 연결</th></tr></thead>
+          <tbody>
+            <tr><td>던전 보스</td><td>대표 1개</td><td>전투 중 1회</td><td>확정 재료·낮은 확률 전용 장비</td></tr>
+            <tr><td>지역 보스</td><td>1~2개</td><td>핵심 순간 1~2회</td><td>지역 해금·칭호·전용 장비</td></tr>
+            <tr><td>레이드 보스</td><td>2~3개·페이즈</td><td>페이즈별 제한</td><td>생애 경력·장기 제작 목표</td></tr>
+          </tbody>
+        </table>
+        <p>기본 보스는 자동전투로 클리어할 수 있고 개입하면 피해·시간·소모품을 절약한다. 출시 뒤에는 초급 보스를 복잡하게 덮어쓰기보다 각성·변이·고난도 개체를 별도로 추가한다.</p>
+
+        <h2 id="calibration">구조는 확정, 숫자는 검증</h2>
+        <ul class="check-list">
+          <li>영웅 생애 30~60일과 1년당 약 24시간</li>
+          <li>일반 은퇴 레벨과 Lv.100 도달 곡선</li>
+          <li>내구도 감소량·수리 비용·오프라인 누적 상한</li>
+          <li>보스 재등장 시간·장비 드롭률·조각 제작 횟수</li>
+          <li>대사 간격·패킷 수·원정당 개입 횟수</li>
+        </ul>
+      </article>
+      <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
+    </div>
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>
