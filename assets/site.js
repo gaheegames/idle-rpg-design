@@ -350,8 +350,8 @@
 
     const tabs = Array.from(archive.querySelectorAll("[data-interactive-src]"));
     const frame = archive.querySelector("[data-interactive-frame]");
-    const title = archive.querySelector("[data-interactive-title]");
-    const description = archive.querySelector("[data-interactive-description]");
+    const title = archive.querySelector("h3[data-interactive-title]");
+    const description = archive.querySelector("p[data-interactive-description]");
     const openLink = archive.querySelector("[data-interactive-open]");
     if (!tabs.length || !frame || !title || !description || !openLink) return;
 
