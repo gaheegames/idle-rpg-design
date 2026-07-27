@@ -3339,6 +3339,93 @@ main#main {
   cursor: pointer;
 }
 
+.research-tabs {
+  margin: 30px 0 44px;
+}
+
+.research-tab-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.research-tab {
+  min-height: 54px;
+  padding: 11px 14px;
+  color: var(--ink-soft);
+  background: var(--paper-bright);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+
+.research-tab:hover,
+.research-tab:focus-visible {
+  color: var(--navy);
+  border-color: var(--amber);
+}
+
+.research-tab[aria-selected="true"] {
+  color: var(--paper-bright);
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: var(--shadow-sm);
+}
+
+.research-panel {
+  padding: clamp(20px, 3vw, 34px);
+  background: var(--paper-bright);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.research-panel[hidden] {
+  display: none;
+}
+
+.research-panel > :first-child {
+  margin-top: 0;
+}
+
+.research-panel > :last-child {
+  margin-bottom: 0;
+}
+
+.research-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0 24px;
+}
+
+.research-stat {
+  padding: 16px;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.research-stat strong,
+.research-stat span {
+  display: block;
+}
+
+.research-stat strong {
+  margin-bottom: 3px;
+  color: var(--navy);
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.2;
+}
+
+.research-stat span {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
 @media (max-width: 760px) {
   .media-feature--wide,
   .cover-page .media-feature--wide {
@@ -3377,6 +3464,11 @@ main#main {
   }
 
   .interactive-archive-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .research-tab-list,
+  .research-stat-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3421,6 +3513,14 @@ main#main {
   .back-to-top,
   .hero-actions {
     display: none !important;
+  }
+
+  .research-tab-list {
+    display: none;
+  }
+
+  .research-panel[hidden] {
+    display: block;
   }
 
   .page-shell {

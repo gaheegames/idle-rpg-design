@@ -23,14 +23,16 @@
 | `14_visual_archive.html` | 개척 순환·월드·던전·UI·분석 이미지 시각 자료실 |
 | `15_character_systems.html` | 6직업·5인 파티, 능력치·생애, 장비·몬스터·보스 기준 |
 | `16_integrated_system_map.html` | 12개 기획 영역의 전체 순환·성장축·모순 점검 |
+| `17_research_findings.html` | Google Play·Reddit·웹판 BM·Gervais 자산 분석과 반영 결정 |
 
-현재 문서 버전은 `v0.4.0`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
+현재 문서 버전은 `v0.5.0`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
 
 ## 시각 기획 자료 운영
 
 - `assets/media/diagrams/`은 논의 과정에서 확정한 화면 와이어프레임, 맵 구성도와 상태 변화 도식을 보관합니다.
 - `assets/interactive/`은 직업·단계·상태 탭을 포함한 상호작용 기획 정본 12종을 보관하며, 웹 본문에서는 정적 스크린샷 대신 이 원본을 직접 표시합니다.
 - `assets/media/`의 기존 구성도·알고리즘 이미지는 시스템 설명과 분석용으로 계속 사용합니다.
+- `assets/reports/`은 사용자 리뷰와 커뮤니티 분석 보고서의 PDF·HTML 공개본을 보관합니다.
 - 승인된 새 도식은 일부만 고르지 않고 관련 기획 페이지와 `14_visual_archive.html`에 모두 추가합니다.
 - 폐기 지시된 AI 화면·화풍 이미지는 공개 자산에서 삭제했으며 다시 올리지 않습니다.
 - 전체 목록과 업로드 절차는 `docs/VISUAL_ARCHIVE.md`에서 관리합니다.
