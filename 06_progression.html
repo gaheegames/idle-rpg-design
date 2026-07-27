@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="자율 원정대 방치형 RPG의 성장 자원, 장비 순환, 자동화, 계승과 심층 계속을 정리한 기획서">
   <title>성장과 경제 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
-  <script src="assets/site.js?v=release-20260727-v040" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-interactive1">
+  <script src="assets/site.js?v=release-20260727-interactive1" defer></script>
 </head>
 <body data-page="progression">
   <div data-site-header></div>
@@ -144,16 +144,19 @@
             <h2>편의를 잠그지 않고 정책의 깊이를 성장시킨다</h2>
             <p>자동화의 존재 여부를 보상으로 삼으면 초반 게임이 의도적으로 불편해진다. 기본 반복은 처음부터 자동이고, 진행할수록 조건을 더 정교하게 조합한다.</p>
           </div>
-          <figure class="media-feature media-feature--wide">
-            <button class="media-zoom" type="button" data-lightbox aria-label="정착지 성장과 전체 성장 경제 순환 도식 크게 보기">
-              <img src="assets/media/diagrams/settlement-growth-loop-diagram-v1.png" width="778" height="615" loading="lazy" decoding="async" alt="외부 던전 자동 원정, 귀환 정산, 시설과 파티 성장, 더 먼 지역과 깊은 던전으로 이어지는 정착지 성장 순환 도식">
-            </button>
-            <figcaption>
-              <strong>원정의 결과가 시설과 파티 성장으로 돌아온다</strong>
-              <span>폐허 야영지에서 도시 확장까지의 상태를 비교하고, 외부·던전 자동 원정→귀환 정산→시설·파티 성장→더 먼 지역·깊은 던전의 반복을 한 장에 고정한다.</span>
-              <span class="media-source">기획 도식 · 정착지 성장 순환 · v1</span>
-            </figcaption>
-          </figure>
+          <section class="interactive-document" aria-labelledby="settlement-progression-title">
+            <div class="interactive-document-head">
+              <div>
+                <span class="status-chip complete">성장 단계 탭 작동 원본</span>
+                <h3 id="settlement-progression-title">원정의 결과가 시설과 파티 성장으로 돌아온다</h3>
+                <p>폐허 야영지·개척 거점·정착촌·작은 마을·도시 확장 탭을 눌러 시설 변화와 다음 원정의 확장을 비교한다.</p>
+              </div>
+              <a class="button amber" href="assets/interactive/settlement-growth-loop-v1.html">크게 열기 →</a>
+            </div>
+            <div class="interactive-embed interactive-embed--board">
+              <iframe src="assets/interactive/settlement-growth-loop-v1.html" title="정착지 성장과 전체 경제 순환 상호작용 기획" loading="lazy" data-auto-height-frame data-frame-min-height="720" data-frame-max-height="1500"></iframe>
+            </div>
+          </section>
           <div class="layer-diagram" role="img" aria-label="게임 진행에 따른 자동화 정책 확장">
             <div class="layer-row"><span>시작 즉시</span><strong>기본 자율 행동</strong><small>이동 · 전투 · 루팅 · 무가치 드롭 분해 · 판매금 입금</small></div>
             <div class="layer-row"><span>첫 던전</span><strong>장비 정책</strong><small>즉시 장착 · 보관 · 향상률 임계값</small></div>

@@ -3177,6 +3177,97 @@ main#main {
   text-align: center;
 }
 
+.interactive-document {
+  width: min(1180px, calc(100vw - 56px));
+  margin: 30px 0 42px 50%;
+  transform: translateX(-50%);
+}
+
+.interactive-document-head,
+.interactive-archive-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 14px;
+}
+
+.interactive-document-head h3,
+.interactive-archive-head h3 {
+  margin: 4px 0 6px;
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 34px);
+  line-height: 1.15;
+}
+
+.interactive-document-head p,
+.interactive-archive-head p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.interactive-document .interactive-embed,
+.interactive-archive .interactive-embed {
+  width: 100%;
+  margin: 0;
+  transform: none;
+}
+
+.interactive-embed--board iframe,
+.interactive-embed--archive iframe {
+  height: 820px;
+  transition: height 180ms ease;
+}
+
+.interactive-archive {
+  width: min(1180px, calc(100vw - 56px));
+  margin: 28px 0 48px 50%;
+  transform: translateX(-50%);
+}
+
+.interactive-archive-picker {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.interactive-archive-tab {
+  min-height: 54px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper-bright);
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.interactive-archive-tab:hover,
+.interactive-archive-tab:focus-visible {
+  border-color: var(--amber);
+  color: var(--navy);
+}
+
+.interactive-archive-tab.is-active,
+.interactive-archive-tab[aria-selected="true"] {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--paper-bright);
+  box-shadow: var(--shadow-sm);
+}
+
+.interactive-archive-head .button,
+.interactive-document-head .button {
+  flex: 0 0 auto;
+}
+
 .media-source {
   padding: 4px 9px;
   display: inline-flex;
@@ -3271,6 +3362,27 @@ main#main {
 
   .interactive-embed iframe {
     height: 2050px;
+  }
+
+  .interactive-document,
+  .interactive-archive {
+    width: calc(100vw - 30px);
+  }
+
+  .interactive-document-head,
+  .interactive-archive-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .interactive-archive-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .interactive-embed--board iframe,
+  .interactive-embed--archive iframe {
+    height: 1180px;
   }
 
   .concept-card figcaption,

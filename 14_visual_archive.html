@@ -6,8 +6,8 @@
   <meta name="description" content="자율 원정대 RPG에서 제작한 개척 순환, 월드맵, 던전 구성, 길찾기, UI 구조와 리소스 분석 시각 자료 아카이브">
   <meta name="theme-color" content="#14263b">
   <title>시각 자료실 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-v040">
-  <script src="assets/site.js?v=release-20260727-v040" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-interactive1">
+  <script src="assets/site.js?v=release-20260727-interactive1" defer></script>
 </head>
 <body data-page="visual-archive">
   <div data-site-header></div>
@@ -18,7 +18,7 @@
       <h1>말로 합의한 기획을<br><em>한눈에 다시 찾는다</em></h1>
       <p class="page-summary">논의 과정에서 확정한 던전 화면 구성, 정착지 성장, 월드 탐사와 시스템 알고리즘을 선·도형·상태·경로 중심의 기획 도식으로 보존한다. 폐기된 AI 이미지는 싣지 않으며 이후 제작하는 모든 도식도 같은 자료실에 누적한다.</p>
       <div class="meta-row">
-        <span class="status-chip complete">시각 자료 17종</span>
+        <span class="status-chip complete">시각 자료 26종</span>
         <span class="status-chip design">원본 해상도 보존</span>
         <span class="status-chip warning">폐기 이미지 제외</span>
       </div>
@@ -28,7 +28,7 @@
       <article class="metric-card"><span class="metric-label">Planning Diagrams</span><strong class="metric-value">3</strong><p>던전 화면·정착지 성장·초기 월드</p></article>
       <article class="metric-card"><span class="metric-label">System Diagrams</span><strong class="metric-value">7</strong><p>월드·던전·자동 탐색 알고리즘</p></article>
       <article class="metric-card"><span class="metric-label">Analysis Boards</span><strong class="metric-value">4</strong><p>캐릭터·몬스터·아이템·출처 구분</p></article>
-      <article class="metric-card"><span class="metric-label">Interactive Plans</span><strong class="metric-value">3</strong><p>6직업·캐릭터 정보·전체 연결도</p></article>
+      <article class="metric-card"><span class="metric-label">Interactive Plans</span><strong class="metric-value">12</strong><p>월드·던전·파티·성장·전체 연결도</p></article>
     </section>
 
     <div class="article-layout">
@@ -36,60 +36,82 @@
         <h2 id="featured">논의 결과를 화면으로 고정한 기획 도식</h2>
         <p class="lead">아래 세 자료는 캐릭터 일러스트를 꾸미는 그림이 아니라 화면에 무엇이 보이고, 어떤 상태가 어떻게 연결되며, 자동 진행 중 어디에 개입할 수 있는지를 검토하기 위해 만든 실제 기획 산출물이다.</p>
 
-        <figure class="media-feature media-feature--wide archive-feature">
-          <button class="media-zoom" type="button" data-lightbox aria-label="던전 자동 원정 화면 도식 크게 보기">
-            <img src="assets/media/diagrams/dungeon-auto-expedition-screen-diagram-v1.png" width="746" height="434" alt="쿼터뷰 던전 방과 복도, 파티, 몬스터, 다음 방 단서, 자동 원정 상태와 다섯 캐릭터 정보를 배치한 던전 화면 도식">
-          </button>
-          <figcaption>
-            <strong>던전 자동 원정 화면 구성 · v1</strong>
-            <span>쿼터뷰 방 연결, 파티와 적의 위치, 다음 방 단서, 진행 정책, 전투 로그와 5인 상태를 한 화면에 배치한 기능 와이어프레임이다.</span>
-            <span class="media-source">기획 도식 · 화면 정보 구조 · 아트 지시 아님</span>
-          </figcaption>
-        </figure>
+        <section class="interactive-document" aria-labelledby="dungeon-screen-interactive-title">
+          <div class="interactive-document-head">
+            <div>
+              <span class="status-chip complete">탭 작동 원본</span>
+              <h3 id="dungeon-screen-interactive-title">던전 자동 원정 화면 구성 · v1</h3>
+              <p>플레이어 화면·설계자 전체도와 전투 개입 상태를 직접 전환해 공간, 파티, 적, 로그와 다음 행동의 관계를 확인한다.</p>
+            </div>
+            <a class="button amber" href="assets/interactive/slime-dungeon-screen-layout-v1.html">크게 열기 →</a>
+          </div>
+          <div class="interactive-embed interactive-embed--board">
+            <iframe src="assets/interactive/slime-dungeon-screen-layout-v1.html" title="던전 자동 원정 화면 구성 상호작용 기획" loading="eager" data-auto-height-frame data-frame-min-height="720" data-frame-max-height="1500"></iframe>
+          </div>
+        </section>
 
-        <figure class="media-feature media-feature--wide archive-feature">
-          <button class="media-zoom" type="button" data-lightbox aria-label="정착지 성장과 전체 성장 경제 순환 도식 크게 보기">
-            <img src="assets/media/diagrams/settlement-growth-loop-diagram-v1.png" width="778" height="615" loading="lazy" decoding="async" alt="외부 던전 자동 원정, 귀환 정산, 시설과 파티 성장, 더 먼 지역과 깊은 던전으로 이어지는 정착지 성장 순환 도식">
-          </button>
-          <figcaption>
-            <strong>정착지 성장과 전체 성장 경제 · v1</strong>
-            <span>폐허 야영지에서 도시 확장까지 시설 변화와 원정→정산→성장→더 깊은 원정의 반복 구조를 비교하는 상태 도식이다.</span>
-            <span class="media-source">기획 도식 · 순환·상태 비교 · 단계별 업데이트 기준</span>
-          </figcaption>
-        </figure>
+        <section class="interactive-document" aria-labelledby="settlement-loop-interactive-title">
+          <div class="interactive-document-head">
+            <div>
+              <span class="status-chip complete">탭 작동 원본</span>
+              <h3 id="settlement-loop-interactive-title">정착지 성장과 전체 성장 경제 · v1</h3>
+              <p>폐허 야영지부터 도시 확장까지 단계 탭을 눌러 시설 변화와 원정→정산→성장→더 깊은 원정의 순환을 비교한다.</p>
+            </div>
+            <a class="button amber" href="assets/interactive/settlement-growth-loop-v1.html">크게 열기 →</a>
+          </div>
+          <div class="interactive-embed interactive-embed--board">
+            <iframe src="assets/interactive/settlement-growth-loop-v1.html" title="정착지 성장과 전체 경제 순환 상호작용 기획" loading="lazy" data-auto-height-frame data-frame-min-height="720" data-frame-max-height="1500"></iframe>
+          </div>
+        </section>
 
-        <figure class="media-feature media-feature--wide archive-feature">
-          <button class="media-zoom" type="button" data-lightbox aria-label="초기 월드맵 진행 도식 크게 보기">
-            <img src="assets/media/diagrams/initial-world-map-progression-diagram-v1.png" width="744" height="560" loading="lazy" decoding="async" alt="폐허 정착지, 불탄 옛길, 근거리 숲, 미확인 탐험지와 던전 후보를 포그와 확인된 경로로 구분한 초기 월드맵 진행 도식">
-          </button>
-          <figcaption>
-            <strong>첫 출발 월드맵 진행 · v1</strong>
-            <span>정착지 주변 일부만 밝히고 다른 방향은 소문과 안개로 남겨, 넓은 전체 지도와 실제 공개 범위를 동시에 보여 주는 초기 진행도다.</span>
-            <span class="media-source">기획 도식 · 포그·경로·후보 장소 표시 규칙</span>
-          </figcaption>
-        </figure>
+        <section class="interactive-document" aria-labelledby="world-map-interactive-title">
+          <div class="interactive-document-head">
+            <div>
+              <span class="status-chip complete">탭 작동 원본</span>
+              <h3 id="world-map-interactive-title">첫 출발 월드맵 진행 · v1</h3>
+              <p>첫 출발·첫 정찰·개척 거점·작은 마을 탭으로 같은 월드에서 포그, 확인 경로와 후보 장소가 누적되는 과정을 확인한다.</p>
+            </div>
+            <a class="button amber" href="assets/interactive/world-map-expedition-states-v1.html">크게 열기 →</a>
+          </div>
+          <div class="interactive-embed interactive-embed--board">
+            <iframe src="assets/interactive/world-map-expedition-states-v1.html" title="첫 출발 월드맵 진행 상호작용 기획" loading="lazy" data-auto-height-frame data-frame-min-height="720" data-frame-max-height="1500"></iframe>
+          </div>
+        </section>
 
         <div class="callout success">
           <strong class="callout-title">앞으로의 업로드 기준</strong>
           이후 대화에서 만드는 표·플로우차트·화면 와이어프레임·맵 구성도·상태 비교도는 승인된 시점에 원본 파일, 관련 기획 페이지 링크, 버전과 용도를 이 자료실에 함께 추가한다. 폐기 지시된 이미지는 자료실과 공개 자산에서 제거한다.
         </div>
 
-        <h2 id="interactive-plans">직접 눌러 확인하는 통합 기획 도식</h2>
-        <p>최근 확정한 캐릭터·파티 기획과 전체 시스템 연결도는 정지 이미지뿐 아니라 상태를 바꿔 볼 수 있는 원본도 함께 보존한다.</p>
-        <div class="archive-grid" aria-label="상호작용 기획 도식">
-          <figure class="concept-card archive-card">
-            <button class="media-zoom" type="button" data-lightbox aria-label="6직업 설계 보드 크게 보기"><img src="assets/interactive/six-class-design-board-v1.png" width="1280" height="720" loading="lazy" decoding="async" alt="전사 궁수 사제 마법사 도적 소환사의 역할 능력치 기술과 동일 직업 파티 대응을 비교한 설계 보드"></button>
-            <figcaption><span class="status-chip complete">기획 도식</span><strong>6직업 설계 보드 · v1</strong><span>직업 역할, 주 능력치, 기술 방향과 중복 파티의 약점 보완 원칙을 비교한다.</span><a class="archive-link" href="assets/interactive/six-class-design-board-v1.html">상호작용 원본 열기 →</a></figcaption>
-          </figure>
-          <figure class="concept-card archive-card">
-            <button class="media-zoom" type="button" data-lightbox aria-label="캐릭터 정보 화면 와이어프레임 크게 보기"><img src="assets/interactive/character-profile-wireframe-v1.png" width="1280" height="720" loading="lazy" decoding="async" alt="캐릭터 요약 장비 기술 상태 관계 경력 탭을 구성한 정보 화면 와이어프레임"></button>
-            <figcaption><span class="status-chip complete">화면 와이어프레임</span><strong>캐릭터 정보 화면 · v1</strong><span>배틀 브라더스식 장비·능력치 골격에 상태, 관계와 생애 경력을 분리해 배치한다.</span><a class="archive-link" href="assets/interactive/character-profile-wireframe-v1.html">상호작용 원본 열기 →</a></figcaption>
-          </figure>
-        </div>
-        <div class="interactive-embed">
-          <iframe src="assets/interactive/integrated-game-system-map-v1.html" title="마을부터 자동 재출정까지 전체 시스템과 12개 기획 영역의 연결도" loading="lazy"></iframe>
-        </div>
-        <p class="interactive-open"><a class="button amber" href="assets/interactive/integrated-game-system-map-v1.html">전체 시스템 연결도 크게 열기 →</a></p>
+        <h2 id="interactive-plans">상단 탭까지 보존한 상호작용 기획 원본 12종</h2>
+        <p>아래 목록에서 자료를 고르면 고정 스크린샷이 아니라 제작 당시의 원본 화면이 열린다. 원본 안의 직업·단계·상태·방식 탭을 직접 눌러 세부 내용을 확인할 수 있다.</p>
+        <section class="interactive-archive" data-interactive-archive aria-label="상호작용 기획 원본 선택기">
+          <div class="interactive-archive-picker" role="tablist" aria-label="기획 원본 선택">
+            <button class="interactive-archive-tab is-active" type="button" role="tab" aria-selected="true" data-interactive-src="assets/interactive/slime-dungeon-screen-layout-v1.html" data-interactive-title="슬라임 던전 화면·전투 개입" data-interactive-description="분열체 집중·후퇴와 플레이어 화면·설계자 전체도를 전환합니다.">던전 화면·전투</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/dungeon-scale-structure-v1.html" data-interactive-title="던전 규모별 구조" data-interactive-description="소형·보통·대형·심층 던전의 방·층·분기와 보상 규칙을 비교합니다.">던전 규모</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/dungeon-auto-exploration-comparison-v1.html" data-interactive-title="던전 자동 탐색 비교" data-interactive-description="기본 탐색·위험한 두 문·교착 발생 상황에서 자동 판단이 어떻게 달라지는지 봅니다.">자동 탐색 비교</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/clickpocalypse-dungeon-path-analysis-v1.html" data-interactive-title="원작 던전 길찾기 분석" data-interactive-description="방 처리부터 출구 이동까지 원작의 자동 경로 선택을 여섯 단계로 확인합니다.">원작 길찾기</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/world-map-expedition-states-v1.html" data-interactive-title="월드맵 원정 상태" data-interactive-description="첫 출발부터 작은 마을까지 확인 경로와 포그가 누적되는 상태를 비교합니다.">월드 원정 상태</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/vast-world-fog-reveal-v1.html" data-interactive-title="거대 월드 포그 공개" data-interactive-description="대륙 전체 규모와 실제 공개 범위가 성장 단계에 따라 어떻게 달라지는지 봅니다.">거대 월드 포그</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/world-map-progress-atlas-v1.html" data-interactive-title="월드맵 진행 아틀라스" data-interactive-description="게임 시작·첫 귀환·개척 거점·작은 마을의 지도와 발견 등록부를 함께 비교합니다.">월드 진행도</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/settlement-growth-loop-v1.html" data-interactive-title="정착지 성장 순환" data-interactive-description="폐허 야영지부터 도시 확장까지 시설과 원정 경제의 변화를 전환합니다.">정착지 성장</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/six-class-design-board-v1.html" data-interactive-title="6직업 설계 보드" data-interactive-description="전사·궁수·사제·마법사·도적·소환사의 역할과 동일 직업 파티 대응을 비교합니다.">6직업 설계</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/character-profile-wireframe-v1.html" data-interactive-title="캐릭터 정보 화면" data-interactive-description="요약·장비·기술·상태·관계·생애 탭으로 캐릭터 정보를 나눠 확인합니다.">캐릭터 정보</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/integrated-game-system-map-v1.html" data-interactive-title="전체 게임 시스템 연결도" data-interactive-description="일곱 플레이 단계와 열두 기획 영역을 선택해 입력·결과·성장축 연결을 확인합니다.">전체 연결도</button>
+            <button class="interactive-archive-tab" type="button" role="tab" aria-selected="false" data-interactive-src="assets/interactive/zerohof-dungeon-combat-v2.html" data-interactive-title="쿼터뷰 던전 전투 화면 구조" data-interactive-description="원작 화면의 공간·전투·파티 상태·자동 진행 정보 배치를 구조적으로 비교합니다.">원작 화면 구조</button>
+          </div>
+          <div class="interactive-archive-head">
+            <div>
+              <span class="status-chip complete">상호작용 정본</span>
+              <h3 data-interactive-title>슬라임 던전 화면·전투 개입</h3>
+              <p data-interactive-description>분열체 집중·후퇴와 플레이어 화면·설계자 전체도를 전환합니다.</p>
+            </div>
+            <a class="button amber" data-interactive-open href="assets/interactive/slime-dungeon-screen-layout-v1.html">현재 원본 크게 열기 →</a>
+          </div>
+          <div class="interactive-embed interactive-embed--archive">
+            <iframe src="assets/interactive/slime-dungeon-screen-layout-v1.html" title="슬라임 던전 화면·전투 개입 상호작용 기획 화면" loading="lazy" data-interactive-frame data-auto-height-frame data-frame-min-height="720" data-frame-max-height="2200"></iframe>
+          </div>
+        </section>
 
         <h2 id="system-diagrams">시스템과 던전 구성도</h2>
         <p>실제 기획 문서에서 사용하는 설명도다. 이미지를 누르면 원본 크기에 맞춰 확대되며, 각 그림의 세부 설명은 관련 페이지에서 이어서 확인할 수 있다.</p>

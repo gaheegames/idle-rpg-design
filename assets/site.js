@@ -305,6 +305,91 @@
     });
   }
 
+  function setupAutoHeightFrames() {
+    document.querySelectorAll("iframe[data-auto-height-frame]").forEach((frame) => {
+      if (frame.dataset.autoHeightReady === "true") return;
+      frame.dataset.autoHeightReady = "true";
+
+      let observer;
+      const minHeight = Number(frame.dataset.frameMinHeight || 700);
+      const maxHeight = Number(frame.dataset.frameMaxHeight || 2200);
+      const syncHeight = () => {
+        try {
+          const documentElement = frame.contentDocument && frame.contentDocument.documentElement;
+          const body = frame.contentDocument && frame.contentDocument.body;
+          if (!documentElement || !body) return;
+          const contentHeight = Math.max(documentElement.scrollHeight, body.scrollHeight);
+          if (contentHeight > 0) {
+            frame.style.height = `${Math.max(minHeight, Math.min(maxHeight, contentHeight + 8))}px`;
+          }
+        } catch (_) {
+          // Same-origin planning documents are expected. The CSS height remains as a safe fallback.
+        }
+      };
+
+      frame.addEventListener("load", () => {
+        if (observer) observer.disconnect();
+        syncHeight();
+        window.setTimeout(syncHeight, 120);
+        window.setTimeout(syncHeight, 600);
+        try {
+          if ("ResizeObserver" in window && frame.contentDocument && frame.contentDocument.body) {
+            observer = new ResizeObserver(syncHeight);
+            observer.observe(frame.contentDocument.body);
+          }
+        } catch (_) {
+          // Keep the fixed fallback height if the embedded document cannot be observed.
+        }
+      });
+    });
+  }
+
+  function setupInteractiveArchive() {
+    const archive = document.querySelector("[data-interactive-archive]");
+    if (!archive) return;
+
+    const tabs = Array.from(archive.querySelectorAll("[data-interactive-src]"));
+    const frame = archive.querySelector("[data-interactive-frame]");
+    const title = archive.querySelector("[data-interactive-title]");
+    const description = archive.querySelector("[data-interactive-description]");
+    const openLink = archive.querySelector("[data-interactive-open]");
+    if (!tabs.length || !frame || !title || !description || !openLink) return;
+
+    const selectTab = (tab, moveFocus) => {
+      tabs.forEach((candidate) => {
+        const isActive = candidate === tab;
+        candidate.classList.toggle("is-active", isActive);
+        candidate.setAttribute("aria-selected", String(isActive));
+        candidate.tabIndex = isActive ? 0 : -1;
+      });
+
+      const nextSource = tab.dataset.interactiveSrc;
+      frame.src = nextSource;
+      frame.title = `${tab.dataset.interactiveTitle} 상호작용 기획 화면`;
+      title.textContent = tab.dataset.interactiveTitle;
+      description.textContent = tab.dataset.interactiveDescription;
+      openLink.href = nextSource;
+      openLink.setAttribute("aria-label", `${tab.dataset.interactiveTitle} 크게 열기`);
+      if (moveFocus) tab.focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectTab(tab, false));
+      tab.addEventListener("keydown", (event) => {
+        let nextIndex;
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") nextIndex = (index + 1) % tabs.length;
+        else if (event.key === "ArrowLeft" || event.key === "ArrowUp") nextIndex = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === "Home") nextIndex = 0;
+        else if (event.key === "End") nextIndex = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        selectTab(tabs[nextIndex], true);
+      });
+    });
+
+    selectTab(tabs.find((tab) => tab.getAttribute("aria-selected") === "true") || tabs[0], false);
+  }
+
   function init() {
     setupSkipLink();
     setupHeader();
@@ -313,6 +398,8 @@
     buildSectionNavigation();
     buildPagination();
     setupMediaLightbox();
+    setupInteractiveArchive();
+    setupAutoHeightFrames();
     setupBackToTop();
     addFooter();
   }
