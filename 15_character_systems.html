@@ -13,9 +13,9 @@
   <div data-site-header></div>
   <main id="main-content" class="page-shell">
     <header class="page-heading">
-      <p class="page-kicker">15 · CHARACTER &amp; COMBAT SYSTEMS · v0.5.0</p>
+      <p class="page-kicker">15 · CHARACTER &amp; COMBAT SYSTEMS · v0.5.1</p>
       <h1>영웅의 생애와 장비 파밍을<br><em>자동 원정에 연결한다</em></h1>
-      <p class="page-summary">직업 중복이 가능한 5인 파티, 1~18 능력치, 관계·경력·부상·은퇴, 18종 무기와 장비 내구도, 읽기 쉬운 몬스터·보스 규칙을 하나의 성장 순환으로 정리했다.</p>
+      <p class="page-summary">직업 중복이 가능한 5인 파티, 1~18 능력치, 관계·경력·부상·은퇴, 장비 내구도와 함께 실제 구현 입력이 될 스킬·특성·사건·대사·유니크·엘리트 카탈로그를 연결했다.</p>
       <div class="meta-row">
         <span class="status-chip complete">6직업·5인 자유 조합</span>
         <span class="status-chip complete">장비 파밍·내구도</span>
@@ -73,7 +73,7 @@
           <span class="state">60세 은퇴</span><span class="arrow">→</span>
           <span class="state">계승·마을 보직</span>
         </div>
-        <p>레벨 상한은 100이며 1~20 초보, 21~50 중급, 51~89 상급, 90~99 전설, 100 데미갓이다. 시험 기준 전체 생애는 약 45일이지만 30~60일 범위에서 조정한다. 무작위 영구사망 대신 전투불능 누적에 따른 경상·강한 약화·중상을 사용한다.</p>
+        <p>레벨 상한은 100이며 1~20 초보, 21~50 중급, 51~89 상급, 90~99 전설, 100 데미갓이다. 시험 기준 전체 생애는 45일이며 30·14·7일 단축안을 같은 성장 분포로 비교한다. 무작위 영구사망 대신 전투불능 누적에 따른 경상·강한 약화·중상을 사용한다.</p>
         <div class="callout design"><strong class="callout-title">고레벨의 실제 가치</strong> 레벨은 대응 슬롯 상한을 늘리고 실제 모험 경험이 내용을 채운다. 분열형 적, 용, 저주 장비처럼 직접 겪은 사건이 드문 전투·탐험 선택지로 남는다.</div>
 
         <section class="interactive-document" aria-labelledby="character-profile-title">
@@ -105,6 +105,21 @@
         </table>
         <p>개인 장비는 주무기, 보조무기·도구, 머리, 몸, 신발, 장신구 6칸이다. 직업별 무기 3종 총 18종을 장기 목표로 하되 프로토타입은 직업당 대표 1종부터 만든다. 내구도 0은 삭제가 아니라 파손이며 레전드·유니크는 휴면·복원 상태로 보존한다.</p>
 
+        <h2 id="content-catalog">기획 문장을 구현 입력으로 바꾼 콘텐츠 카탈로그</h2>
+        <p>명칭·문구·수치는 자체 작성했으며 `data/content/*.json`을 게임 로드용 정본 후보로 둔다. 수치 밸런스는 워크북과 실제 플레이 로그에 맞춰 조정한다.</p>
+        <table>
+          <thead><tr><th>데이터</th><th>현재 수량</th><th>자동 원정에서의 역할</th></tr></thead>
+          <tbody>
+            <tr><td><strong>직업 스킬</strong></td><td>36종</td><td>6직업 × 액티브 4·패시브 2, 자동 우선순위와 자원 운용</td></tr>
+            <tr><td><strong>특성·결점</strong></td><td>16 + 12</td><td>판정 보정, 철수·소비 성향, 대사 태그</td></tr>
+            <tr><td><strong>자동 선택 사건</strong></td><td>18종</td><td>6능력치 × 3, 실패해도 진행되는 대체 경로</td></tr>
+            <tr><td><strong>대사 패킷</strong></td><td>98개</td><td>전술·사건·관계·잡담·마을·생애 상황 표현</td></tr>
+            <tr><td><strong>유니크 장비</strong></td><td>12종</td><td>고정 기믹·사연·저레벨 발견 가능성</td></tr>
+            <tr><td><strong>엘리트 특성</strong></td><td>8종</td><td>한눈에 읽히는 특별 위험 1개</td></tr>
+          </tbody>
+        </table>
+        <div class="callout design"><strong class="callout-title">필수 직업 방지</strong> 감지 단서는 도적만의 권한이 아니다. 궁수 패시브, 랜턴 유니크, 마을 시설과 실패 대체 경로로 분산한다.</div>
+
         <h2 id="monsters">많아 보이지만 읽기 쉬운 몬스터</h2>
         <p>내부에서는 종·계열, 레벨, 등급, 엘리트, 지역을 계산하지만 화면은 위협도, 주요 계열, 특별 위험 1개를 먼저 보여 준다. 외형과 종은 늘리되 행동은 돌진·방어·원거리·무리·분열·독·소환·기습의 약 8개 원형을 재사용한다.</p>
         <div class="pillar-grid">
@@ -127,11 +142,12 @@
 
         <h2 id="calibration">구조는 확정, 숫자는 검증</h2>
         <ul class="check-list">
-          <li>영웅 생애 30~60일과 1년당 약 24시간</li>
+          <li>45일 생애 기준선과 30·14·7일 테스트 사다리</li>
           <li>일반 은퇴 레벨과 Lv.100 도달 곡선</li>
           <li>내구도 감소량·수리 비용·오프라인 누적 상한</li>
           <li>보스 재등장 시간·장비 드롭률·조각 제작 횟수</li>
           <li>대사 간격·패킷 수·원정당 개입 횟수</li>
+          <li>스킬 36종·사건 18종·대사 98개의 실제 플레이 중 중복 체감</li>
         </ul>
       </article>
       <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>

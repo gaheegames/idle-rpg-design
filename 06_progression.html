@@ -47,6 +47,7 @@
           <a href="#resource-model">신규 자원</a>
           <a href="#item-loop">장비 순환</a>
           <a href="#automation-curve">자동화 성장</a>
+          <a href="#lifecycle-model">생애·성장 기준</a>
           <a href="#post-victory">승리 이후</a>
           <a href="#reset-policy">보존과 초기화</a>
           <a href="#guardrails">경제 안전장치</a>
@@ -168,6 +169,34 @@
           <div class="callout proposal-callout">
             <div><span class="status status-proposal">메타 성장</span><strong>슬롯 수와 조건 조합 수를 늘린다</strong></div>
             <p>계승 인장은 공격력 배율보다 정책 슬롯, 오프라인 계획 길이, 시설 유형, 클래스 계보, 월드 변형을 연다. 플레이어의 선택 공간이 넓어지는 것이 장기 성장의 체감이다.</p>
+          </div>
+        </section>
+
+        <section class="content-section" id="lifecycle-model">
+          <div class="section-heading">
+            <p class="eyebrow">LIFECYCLE MODEL <span class="status status-proposal">v0.5.1 시험 기준</span></p>
+            <h2>45일은 확정 수명이 아니라 비교 가능한 기준선이다</h2>
+            <p>영웅은 15세에 시작해 60세에 은퇴하며 현재 환산은 실시간 45일이다. 첫 세대 완주율과 애착 형성 시간을 실제 로그로 비교하기 위해 30·14·7일 단축안을 같은 성장 분포로 시험한다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>시험 단계</th><th>전체 생애</th><th>게임 1년</th><th>확인할 것</th></tr></thead>
+              <tbody>
+                <tr><td><strong>기준선</strong></td><td>45일</td><td>24시간</td><td>첫 은퇴 완주율, D7·D30, 영웅 애착</td></tr>
+                <tr><td><strong>1차 단축</strong></td><td>30일</td><td>16시간</td><td>완주율 개선과 성장 깊이 손실</td></tr>
+                <tr><td><strong>2차 단축</strong></td><td>14일</td><td>7.5시간</td><td>짧은 세대 순환의 피로와 계승 동기</td></tr>
+                <tr><td><strong>극한 시험</strong></td><td>7일</td><td>3.7시간</td><td>최소 허용선, 오프라인 상한 재조정</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-grid three-col">
+            <article class="card"><span class="card-index">CURVE</span><h3>2구간 XP</h3><p>60레벨 전후로 곡선을 나눠 초반은 빠르게 읽히고 후반은 장비·위험 선택에 의존하게 한다.</p></article>
+            <article class="card"><span class="card-index">PROFILE</span><h3>4개 플레이 패턴</h3><p>라이트·일반·하드코어·극한을 같은 식으로 비교해 접속량과 장비 운의 영향을 분리한다.</p></article>
+            <article class="card"><span class="card-index">SCALE</span><h3>분포 보존</h3><p>생애를 줄일 때 YEAR_HOURS와 XP_A를 같은 비율로 조정해 목표 레벨 분포를 유지한다.</p></article>
+          </div>
+          <div class="callout warning-callout">
+            <div><span class="status status-proposal">현재 기준</span><strong>Project A는 Windows/Steam PC 우선이며 강제 광고가 없다</strong></div>
+            <p>모바일 광고형 BM은 향후 플랫폼 확장 때 비교할 가설일 뿐 확정안이 아니다. 생애 길이도 플레이 로그 없이 짧게 고정하지 않는다.</p>
           </div>
         </section>
 
