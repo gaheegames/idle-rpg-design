@@ -6,14 +6,14 @@
   <meta name="description" content="6직업 5인 자유 파티, 능력치·생애·관계, 장비 파밍과 내구도, 몬스터·보스 구조를 연결한 방치형 RPG 기획">
   <meta name="theme-color" content="#14263b">
   <title>캐릭터·장비·몬스터·보스 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-research1">
-  <script src="assets/site.js?v=release-20260727-research1" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
 </head>
 <body>
   <div data-site-header></div>
   <main id="main-content" class="page-shell">
     <header class="page-heading">
-      <p class="page-kicker">15 · CHARACTER &amp; COMBAT SYSTEMS · v0.5.1</p>
+      <p class="page-kicker">15 · CHARACTER &amp; COMBAT SYSTEMS · v0.12.0</p>
       <h1>영웅의 생애와 장비 파밍을<br><em>자동 원정에 연결한다</em></h1>
       <p class="page-summary">직업 중복이 가능한 5인 파티, 1~18 능력치, 관계·경력·부상·은퇴, 장비 내구도와 함께 실제 구현 입력이 될 스킬·특성·사건·대사·유니크·엘리트 카탈로그를 연결했다.</p>
       <div class="meta-row">
@@ -149,6 +149,20 @@
           <li>대사 간격·패킷 수·원정당 개입 횟수</li>
           <li>스킬 36종·사건 18종·대사 98개의 실제 플레이 중 중복 체감</li>
         </ul>
+
+        <h2 id="implementation-status">구현 현황 · v0.12.0</h2>
+        <p class="lead">이 장의 콘텐츠 카탈로그는 v0.7.0에서 데이터와 코드를 분리하면서 전량 게임에 연결됐다. 실제로 로드되어 원정에서 쓰이는 수량과, 아직 따라오지 못한 항목을 함께 적는다.</p>
+        <table>
+          <thead><tr><th>정본 항목</th><th>구현</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#content-catalog">콘텐츠 카탈로그 실연결</a></td><td><span class="status-chip complete">구현</span></td><td>직업 6 · 스킬 60 · 몬스터 16 · 사이트 8 · 상태이상 8 · 시너지 18 · 대사 98 · 자동 선택 사건 18 · 특성 16 · 결점 12 · 유니크 장비 12 · 엘리트 특성 8이 실제로 로드되어 참조된다</td></tr>
+            <tr><td>카탈로그 표의 스킬 수량 표기</td><td><span class="status-chip warning">부분</span></td><td>위 표는 직업 스킬을 36종으로 적었지만 실연결은 60종이다. 구현이 아니라 <strong>정본 표를 갱신해야 하는 항목</strong>이다</td></tr>
+            <tr><td><a href="#monsters">엘리트 &mdash; 일반 개체에 특성 1개 추가</a></td><td><span class="status-chip complete">구현</span></td><td>처음에는 엘리트를 별도 종처럼 다뤄 사이트 8곳 중 1곳에서만 나왔다. 정본대로 “일반 개체에 특성 하나를 부여한다”로 고치자 조우 빈도가 크게 늘었다. <strong>엘리트가 등급과는 별개의 축</strong>이라는 점도 함께 바로잡았다</td></tr>
+            <tr><td>직업별 스프라이트</td><td><span class="status-chip risk">미이행</span></td><td>궁수 · 마법사 · 도적 · 소환사 4종이 아직 없어 다른 2종을 재사용하고 있다. 6직업이 화면에서 구별되지 않는다</td></tr>
+            <tr><td><a href="#bosses">지역 보스 전용 전투</a></td><td><span class="status-chip risk">미이행</span></td><td>지역 해금과 연결되는 전용 전투가 아직 없다</td></tr>
+          </tbody>
+        </table>
+        <p>전체 변천 과정은 <a href="18_implementation_history.html">18장 구현 이력</a>에 있다.</p>
       </article>
       <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
     </div>

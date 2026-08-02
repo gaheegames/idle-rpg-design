@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="자율 원정대 방치형 RPG 기획의 게임플레이 코드 근거, 분석 신뢰도, 사실과 신규 제안의 구분">
   <title>근거와 신뢰도 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-research1">
-  <script src="assets/site.js?v=release-20260727-research1" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
 </head>
 <body data-page="reference">
   <div data-site-header></div>
@@ -50,6 +50,7 @@
           <a href="#traceability">근거→설계 추적</a>
           <a href="#limits">한계와 검증</a>
           <a href="#clean-room">클린룸 원칙</a>
+          <a href="#implementation-status">구현 현황</a>
         </nav>
         <div class="legend compact">
           <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
@@ -220,6 +221,34 @@
             <li><strong>테스트가 최종 사양</strong><span>종료성, 결정성, 중복 방지, 설명 가능성을 자동 검증해 구현의 정답을 고정한다.</span></li>
           </ol>
           <blockquote class="statement"><p>레퍼런스의 본질은 숫자나 코드가 아니라, 전투가 성장을 만들고 성장이 던전·지역·다음 런을 다시 여는 연결성에 있다.</p></blockquote>
+        </section>
+
+        <section class="content-section" id="implementation-status">
+          <div class="section-heading">
+            <p class="eyebrow">IMPLEMENTATION STATUS <span class="status status-proposal">v0.12.0</span></p>
+            <h2>검증 방법론 자체가 한 번 무너졌다가 다시 세워졌다</h2>
+            <p>이 장은 “모르는 것을 기능 가정으로 숨기지 않는다”를 원칙으로 적었다. 실제로는 그 원칙을 지키지 못한 사건이 한 번 있었고, 지금의 검증 체계는 그 사건 이후에 다시 만든 것이다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>정본 항목</th><th>구현</th><th>비고</th></tr></thead>
+              <tbody>
+                <tr><td>자동 검증 항목</td><td><span class="status status-reference">구현</span></td><td>8항목에서 39항목으로 늘렸다. 늘어난 항목의 상당수는 아래 사건에서 “있는 줄 알았는데 없던” 검사들이다</td></tr>
+                <tr><td>수치 유한성 검사</td><td><span class="status status-reference">구현</span></td><td>기준선 무효 사건 직후 신설했다. 이 검사가 없었다는 사실이 사건의 직접 원인이다</td></tr>
+                <tr><td>계측 정확성</td><td><span class="status status-proposal">부분</span></td><td>계측 결함 2건을 정정했다. 다만 새로 넣은 장부 대사 검사에는 한계가 있다 &mdash; <strong>장부에 정직하게 적으면서 넣고 빼는 변경은 원리상 잡지 못한다.</strong> 계측 누락 탐지기이지 밸런스 변경 탐지기가 아니다</td></tr>
+                <tr><td>실험 표본 규모</td><td><span class="status status-reference">구현</span></td><td>3시드에서 8시드 이상으로 바꿨다. 3시드로 “원인을 찾았다”고 진단하고 대책까지 냈다가, 8시드로 다시 재니 값이 단조롭게 움직이지 않아 진단 자체가 무효가 된 일이 있었다</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout warning-callout">
+            <div><span class="status status-proposal">기준선 전면 무효</span><strong>파티가 죽지 않는 상태로 오래 돌았고, 그동안 자동 검사 16항목이 전부 통과했다</strong></div>
+            <p>파티 체력이 어느 시점부터 유효하지 않은 값이 되어 상당 기간을 사실상 무적으로 진행했다. 그 상태에서 기록한 “전멸률”은 실력이 아니라 <strong>죽지 않아서 나온 값</strong>이었고, 그 위에 쌓아 올린 밸런스 기준선은 통째로 버렸다. 체력이 유한한 수인지 확인하는 검사가 없었기 때문에 검사는 전부 초록이었다.</p>
+          </div>
+          <div class="callout reference-callout">
+            <div><span class="status status-reference">교훈</span><strong>검사 통과는 “결함 없음”이 아니라 “그 검사가 보는 범위에 결함 없음”이다</strong></div>
+            <p>이후 새 검사를 만들면 <strong>일부러 결함을 주입해 그 검사가 실패하는지를 먼저 확인한다.</strong> 통과만 보고 넘기면 항상 참인 검사를 만들게 된다. 검사 개수는 신뢰도가 아니며, 무엇을 보지 않는지를 함께 적어야 한다.</p>
+          </div>
+          <p>전체 변천 과정은 <a href="18_implementation_history.html">18장 구현 이력</a>에 있다.</p>
         </section>
 
         <nav class="pager" aria-label="페이지 이동">

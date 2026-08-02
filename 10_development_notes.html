@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="개척형 방치 RPG의 확정 설계: PC-first 플랫폼, 3단계 주의력 UI, TBH 참고 원칙, Gervais 32px 자산 정책, 자동 원정과 경량 개척촌">
-  <title>개발 노트 v0.5.1 · 자율 개척단 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-research1">
-  <script src="assets/site.js?v=release-20260727-research1" defer></script>
+  <title>개발 노트 v0.12.0 · 자율 개척단 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
 </head>
 <body data-page="development-notes">
   <div data-site-header></div>
@@ -14,7 +14,7 @@
   <main id="main">
     <section class="hero page-hero">
       <div class="hero-copy">
-        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.5.1 · 2026-07-28</span></p>
+        <p class="eyebrow">10 · DEVELOPMENT NOTES <span class="status status-proposal">v0.12.0 · 2026-08-02</span></p>
         <h1>자동으로 개척하고,<br><em>직접 지휘하면 더 깊어진다.</em></h1>
         <p class="lede">플레이어가 개척단의 파티·장비·위험 정책을 설계하면 원정대가 미지의 권역을 쉬지 않고 탐사한다. 접속 중에는 고위험 집중 작전을 지휘하고, 원정의 결과는 다음 개척을 준비하는 정착촌으로 남는다.</p>
         <div class="hero-actions">
@@ -55,6 +55,7 @@
           <a href="#attention">3단계 주의력 UI</a>
           <a href="#art-direction">아트 방향</a>
           <a href="#scope">범위 제한</a>
+          <a href="#implementation-status">구현 현황</a>
         </nav>
         <div class="legend compact">
           <span><i class="legend-dot reference"></i> 원작에서 계승</span>
@@ -402,7 +403,7 @@
 
         <section class="content-section" id="art-direction">
           <div class="section-heading">
-            <p class="eyebrow">ART DIRECTION <span class="status status-reference">v0.5.1 확정 후보</span></p>
+            <p class="eyebrow">ART DIRECTION <span class="status status-reference">v0.12.0 확정 후보</span></p>
             <h2>Gervais 32px 체계: 방대한 공개 자산을 같은 문법으로 조립한다</h2>
             <p>원작과 같은 David E. Gervais의 CC BY 3.0 대형 타일셋을 프로토타입과 1차 정식 아트 기반 후보로 사용한다. 캐릭터·몬스터·지형·아이템을 이미 검증된 32px 계열 안에서 조합하고, UI·월드맵·정착지 랜드마크·주요 인물과 보스부터 자체 자산으로 단계적으로 차별화한다.</p>
           </div>
@@ -461,6 +462,31 @@
           </div>
         </section>
 
+        <section class="content-section" id="implementation-status">
+          <div class="section-heading">
+            <p class="eyebrow">IMPLEMENTATION STATUS <span class="status status-proposal">v0.12.0</span></p>
+            <h2>아트 규칙은 처음부터 여기 있었고, 지키지 않고 있었다</h2>
+            <p>이 장의 아트·화면 관련 결정이 실제 빌드에 어떻게 반영됐는지 적는다. 가장 중요한 사실은 규칙이 새로 생긴 것이 아니라는 점이다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>정본 항목</th><th>구현</th><th>비고</th></tr></thead>
+              <tbody>
+                <tr><td><a href="#art-direction">픽셀 격자 · 정수 확대</a></td><td><span class="status status-reference">구현</span></td><td>모든 스프라이트를 배율 1로 통일했다. 그 전에는 <strong>서로 다른 배율 8종이 한 화면 안에서 동시에 쓰이고 있었다</strong> &mdash; 화면 안에 1픽셀의 크기가 여덟 가지였다는 뜻이다. <strong>규칙은 이 장에 처음부터 있었고, 구현이 지키지 않고 있었을 뿐이다</strong></td></tr>
+                <tr><td>스프라이트 원본 크기 해석</td><td><span class="status status-reference">구현</span></td><td>실측해 보니 <strong>54px는 그림 크기가 아니라 캔버스 크기였다.</strong> 세로로 솟는 쿼터뷰 부분을 담으려고 캔버스를 크게 잡은 타일셋 구조였고, 실제 그림은 그보다 작았다. 자산을 다시 만들지 않고 원본 크기 그대로 그리는 것만으로 해소됐다</td></tr>
+                <tr><td>화면 확대</td><td><span class="status status-reference">구현</span></td><td>플레이 영역 면적이 1.80배가 됐다. 이것은 독립적인 UI 결정이 아니라 <strong>픽셀 배율 통일의 연쇄 결과</strong>다 &mdash; 배율을 1로 올리자 스프라이트가 셀보다 커져 가시 범위가 좁아졌고, 축소는 아트 규칙상 금지이므로 캔버스를 넓히는 것이 유일한 수단이었다. 타일 격자는 고정이다</td></tr>
+                <tr><td>마을 화면 배치</td><td><span class="status">미이행</span></td><td>이전 해상도 기준 절대좌표가 남아 있어 요소가 좌상단으로 쏠린다</td></tr>
+                <tr><td>캐릭터창 초상</td><td><span class="status">미이행</span></td><td>초상이 규격보다 작게 표시된다. 픽셀 격자 통일 이후 남은 잔여 항목이다</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout warning-callout">
+            <div><span class="status status-proposal">메타 교훈</span><strong>“정본에 없다”고 단정하지 않는다</strong></div>
+            <p>이 작업은 처음에 “공개 기획서에 픽셀 격자 규격이 없다”고 판단하고 다른 문서를 기준으로 삼았다가 틀렸다. 이 장의 아트 방향 표 첫 행이 정확히 그 규격이었다. <strong>“없다”는 전칭 주장이고, 전수 확인 없이는 쓸 수 없다.</strong> 같은 종류의 실수가 반복돼 “정본은 공개 기획서를 먼저 연다”가 작업 규칙이 됐다.</p>
+          </div>
+          <p>전체 변천 과정은 <a href="18_implementation_history.html">18장 구현 이력</a>에 있다.</p>
+        </section>
+
         <nav class="pager" aria-label="페이지 이동">
           <a class="pager-prev" href="09_reference.html"><span>이전</span><strong>근거와 신뢰도</strong></a>
           <a class="pager-next" href="11_roadmap.html"><span>다음</span><strong>개발 계획</strong></a>
@@ -470,7 +496,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>자율 개척단 방치형 RPG · 개발 노트 v0.5.1 · 2026-07-28</p>
+    <p>자율 개척단 방치형 RPG · 개발 노트 v0.12.0 · 2026-08-02</p>
     <a href="#main">위로</a>
   </footer>
 </body>

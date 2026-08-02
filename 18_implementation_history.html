@@ -1,0 +1,274 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="v0.5.1부터 v0.12.0까지 기획이 어떻게 바뀌어 왔는지 — 뒤집힌 결정, 정본끼리의 충돌, 기준선 무효화, 폐기·보류 목록을 연대순으로 기록한 방치형 RPG 구현 이력">
+  <meta name="theme-color" content="#14263b">
+  <title>구현 진행 기록 · 자율 원정대 RPG</title>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
+</head>
+<body>
+  <div data-site-header></div>
+  <main id="main-content" class="page-shell">
+    <header class="page-heading">
+      <p class="page-kicker">18 · IMPLEMENTATION HISTORY · v0.12.0</p>
+      <h1>결과만 남기지 않는다.<br><em>어떻게 바뀌어 왔는지를 남긴다.</em></h1>
+      <p class="page-summary">01~17장은 “지금 이렇게 설계한다”를 적는다. 이 장은 “처음엔 이랬는데 왜 이렇게 바뀌었나”를 적는다. 뒤집힌 결정, 정본끼리 충돌한 지점, 통째로 무효가 된 기준선, 폐기하거나 회피한 설계를 숨기지 않고 연대순으로 남긴다. 나중에 마지막 결과물만 보는 것이 아니라 판단의 경로를 볼 수 있어야 하기 때문이다.</p>
+      <div class="meta-row">
+        <span class="status-chip complete">v0.5.1 → v0.12.0 · 9개 릴리스</span>
+        <span class="status-chip warning">뒤집힌 결정 6건</span>
+        <span class="status-chip risk">기준선 전면 무효 1회</span>
+      </div>
+    </header>
+
+    <section class="metric-grid" aria-label="구현 이력 요약 지표">
+      <article class="metric-card"><span class="metric-value">9</span><span class="metric-label">릴리스 (v0.6.0~v0.12.0)</span></article>
+      <article class="metric-card"><span class="metric-value">6</span><span class="metric-label">뒤집힌 설계 결정</span></article>
+      <article class="metric-card"><span class="metric-value">3</span><span class="metric-label">정본끼리 충돌한 지점</span></article>
+      <article class="metric-card"><span class="metric-value">14</span><span class="metric-label">폐기·보류·회피 항목</span></article>
+    </section>
+
+    <div class="article-layout">
+      <article class="article">
+
+        <h2 id="why">왜 이 장이 필요한가</h2>
+        <p class="lead">기획서는 보통 최신 결론만 담는다. 그러면 “왜 이 값인가”를 물었을 때 아무도 답하지 못한다. 이미 폐기한 안을 다시 제안하고, 한 번 확인한 것을 또 확인한다.</p>
+        <p>이 프로젝트는 짧은 기간에 결정이 여러 번 뒤집혔다. 던전 방 수는 세 번, 화면 크기는 세 번 바뀌었다. 밸런스 기준선은 한 번 통째로 무효가 됐다. 그 과정이 남지 않으면 다음 사람은 최종 숫자만 보고 그것이 처음부터 그랬다고 오해한다.</p>
+        <div class="callout design">
+          <strong class="callout-title">이 장의 규칙</strong>
+          바뀐 값만 적지 않는다. <strong>이전에 무엇이었는지</strong>, <strong>왜 바꿨는지</strong>, <strong>바꾸고 나서 무엇이 나빠졌는지</strong>를 함께 적는다. 되돌린 결정과 틀렸던 판단도 지우지 않는다.
+        </div>
+
+        <h2 id="timeline">버전 타임라인</h2>
+        <p class="lead">v0.5.1에서 기획 기준선이 동결됐고, 그 뒤 구현이 기획을 따라잡는 과정에서 기획 자체가 여러 번 수정됐다.</p>
+        <table>
+          <thead>
+            <tr><th>버전</th><th>무엇을 했나</th><th>기획에 남긴 것</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="data-number">v0.6.0</td><td>플레이 가능한 수직 슬라이스. 기획자 피드백 9건 반영</td><td>월드 2배 확대 · 던전 확대 · 화면 확대 · 대사 빈도 하향</td></tr>
+            <tr><td class="data-number">v0.7.0</td><td>데이터와 코드 분리. 콘텐츠 정본 전량 연결</td><td>직업 6 · 스킬 60 · 몬스터 16 · 사이트 8 · 사건 18 · 대사 98</td></tr>
+            <tr><td class="data-number">v0.8.0</td><td>불사 결함 발견 → <strong>밸런스 기준선 전면 무효</strong></td><td>성장 곡선 정본화 · 검증 방법론 재설계</td></tr>
+            <tr><td class="data-number">v0.9.0</td><td>자동 탐색을 정본대로 재구현</td><td>frontier 8신호 · 위험 정책 4종 · 엘리트 정의 정정</td></tr>
+            <tr><td class="data-number">v0.10.0</td><td>저장·재현성 기반</td><td>난수 스트림 분리 · 저장 계약 · 보상 원장 · 정체 복구 7단계</td></tr>
+            <tr><td class="data-number">v0.10.1</td><td><strong>계측이 틀렸다</strong> — 경제 지표 정정</td><td>“수입”의 정의를 바로잡음</td></tr>
+            <tr><td class="data-number">v0.10.2</td><td>치료비 인하 (기획자 결정)</td><td>골드 사용처에 치료가 없다는 정본 확인</td></tr>
+            <tr><td class="data-number">v0.11.0</td><td>픽셀 격자 통일</td><td>이미 있던 아트 규칙을 지키지 않고 있었음을 확인</td></tr>
+            <tr><td class="data-number">v0.12.0</td><td>화면 확대 + 던전 생성을 정본 파이프라인으로 재작성</td><td>방 역할 6종 · 방 크기 가변 · 규모 밴드 · 검증 6항목</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">v0.10.2는 별도 태그 없이 v0.11.0에 동봉해 릴리스했다.</p>
+
+        <h2 id="reversals">뒤집힌 결정 6건</h2>
+        <p class="lead">한 번 정하고 끝난 것이 아니라 만들어 보고 되돌린 것들이다. 각 항목의 “이전”을 지우지 않는 이유는, 되돌린 이유가 곧 설계 근거이기 때문이다.</p>
+
+        <h3 id="rev-room-roles">① 방 역할 — 정본 밖 4종에서 정본 6종으로</h3>
+        <table>
+          <thead><tr><th>시점</th><th>상태</th></tr></thead>
+          <tbody>
+            <tr><td>정본 (변한 적 없음)</td><td>04장 <a href="04_dungeon.html#room-roles">방 역할</a> 6종 — 일반 전투 · 엘리트 · 보물 · 사건 · 회복 · 봉인/퍼즐</td></tr>
+            <tr><td>v0.6.0 ~ v0.11.0 구현</td><td><strong>4종 + 빈방.</strong> 엘리트실 · 회복실 · 봉인실이 <strong>전부 없었고</strong>, 정본에 없는 “빈 방”이 배정 확률 11%로 있었다</td></tr>
+            <tr><td>v0.12.0</td><td>정본 6종으로 교체. 빈 방 폐기</td></tr>
+          </tbody>
+        </table>
+        <p>정본에 여섯 종이 적혀 있는데 구현은 네 종이었고, 대신 정본에 없는 역할이 하나 있었다. 이런 어긋남은 “정본을 읽었다”는 것만으로는 잡히지 않는다. 구현을 정본과 항목 단위로 대조해야 나온다.</p>
+
+        <h3 id="rev-room-count">② 던전 방 수 — 세 번 바뀌었고, 되돌린 것이 오히려 정본에서 멀어졌다</h3>
+        <table>
+          <thead><tr><th>시점</th><th>값</th><th>근거</th></tr></thead>
+          <tbody>
+            <tr><td>초기</td><td class="data-number">6~9</td><td>최초 설정</td></tr>
+            <tr><td>v0.6.0</td><td class="data-number">9~13</td><td>기획자 요구 “던전 확대”</td></tr>
+            <tr><td>v0.7.0 ~ v0.11.0</td><td class="data-number">최대 22</td><td>사이트별 방 수에 1.6~1.8배를 곱하고 있었다. <strong>근거가 문서에 없었다</strong></td></tr>
+            <tr><td>v0.12.0</td><td class="data-number">소형 4~7 / 보통 8~16</td><td>정본 규모 비교도의 밴드로 재작성. 8곳 중 7곳 조정</td></tr>
+          </tbody>
+        </table>
+        <div class="callout warning">
+          <strong class="callout-title">“근거가 없다”는 제거의 충분조건이 아니다</strong>
+          근거 없는 1.6~1.8배 증폭을 제거했더니, 정본이 요구하는 <strong>입구→출구 4간선 충족률이 55%에서 18.6%로 후퇴</strong>했다. 근거 없이 들어간 값이 결과적으로는 정본에 더 가까웠던 것이다. 제거 자체가 목적이 되면 안 된다는 사례로 남긴다.
+        </div>
+        <p>부작용도 함께 적는다. 방이 짧아지면서 원정 횟수가 늘었고(54.5 → 66회), 그만큼 치료·수리 고정비 비중이 올라 유지비 지표가 목표 상단 경계로 밀렸다.</p>
+
+        <h3 id="rev-screen">③ 화면 크기 — 세 번 바뀌었고, 마지막 변경은 아트 결정의 연쇄였다</h3>
+        <table>
+          <thead><tr><th>시점</th><th>논리 캔버스</th><th>왜</th></tr></thead>
+          <tbody>
+            <tr><td>초기</td><td class="data-number">420 × 264</td><td>게임 뷰포트와 우측 패널 분리</td></tr>
+            <tr><td>v0.6.0</td><td class="data-number">640 × 360</td><td>기획자 요구 — 게임 화면 확대, 우측 패널을 정보·조작 2분할</td></tr>
+            <tr><td>v0.12.0</td><td class="data-number">800 × 450</td><td>픽셀 배율을 1로 통일(⑤)하자 스프라이트가 셀보다 커져 화면이 좁아졌다. <strong>축소는 아트 규칙상 금지</strong>이므로 가시 범위를 넓히는 수단은 캔버스 확대뿐이었다</td></tr>
+          </tbody>
+        </table>
+        <p>플레이 영역은 14.7 × 8.25칸에서 <strong>19.7 × 11.1칸(면적 1.80배)</strong>이 됐다. 타일 격자 32는 고정이다 — 54로 올리면 화면에 11.9 × 6.7칸만 들어가 던전 방 하나가 한 화면에 안 들어간다.</p>
+        <p>③이 ⑤ 때문에 일어났다는 점이 중요하다. <strong>아트 규칙 하나를 지키기로 한 결정이 화면 설계를 바꿨다.</strong> 결정은 독립적이지 않다.</p>
+
+        <h3 id="rev-pixel">④ 픽셀 격자 — 규칙은 처음부터 있었고, 지키지 않고 있었다</h3>
+        <table>
+          <thead><tr><th>시점</th><th>상태</th></tr></thead>
+          <tbody>
+            <tr><td>정본 (v0.5.0부터)</td><td>10장 <a href="10_development_notes.html#art-direction">아트 방향</a> — “32×32 계열을 기준으로 <strong>정수 확대</strong> / (금지) 비정수 확대와 보간”</td></tr>
+            <tr><td>~ v0.11.0 구현</td><td><strong>배율 8종이 동시에 쓰이고 있었다</strong> (0.37 · 0.44 · 0.48 · 0.59 · 0.65 · 0.75 · 0.81 · 1). 화면 안에 1픽셀 크기가 여덟 개였다는 뜻이다</td></tr>
+            <tr><td>v0.11.0</td><td>전부 배율 1.0</td></tr>
+          </tbody>
+        </table>
+        <p><strong>54px는 그림 크기가 아니라 캔버스 크기였다.</strong> 실측한 결과 실제 그림은 전사·사제 30×31, 슬라임 30×27, 벽 32×40이었다. 세로로 솟는 쿼터뷰 부분을 담으려고 캔버스를 54로 잡은 타일셋 구조였을 뿐이다. <strong>자산을 다시 만들지 않고 원본 크기 그대로 그리는 것만으로 해소됐다.</strong></p>
+        <div class="callout risk">
+          <strong class="callout-title">메타 교훈 — “정본에 없다”고 단정하지 않는다</strong>
+          이 작업은 처음에 “공개 기획서에 픽셀 격자 규격이 없다”고 판단하고 별도 문서를 기준으로 삼았다가 틀렸다. 10장 표 첫 행이 정확히 그 규격이었다. <strong>같은 종류의 실수가 세 번 반복됐다.</strong> “없다”는 전칭 주장이고, 전수 확인 없이는 쓸 수 없다.
+        </div>
+
+        <h3 id="rev-streams">⑤ 난수 스트림 — 1개 → 8개 → 9개</h3>
+        <table>
+          <thead><tr><th>시점</th><th>값</th><th>왜</th></tr></thead>
+          <tbody>
+            <tr><td>~ v0.9.x</td><td class="data-number">1</td><td>구분 없음</td></tr>
+            <tr><td>v0.10.0</td><td class="data-number">8</td><td>스트림이 하나면 전투에서 주사위를 한 번 더 굴리는 순간 이후의 던전 구조와 전리품이 전부 밀린다. 밸런스 한 줄 수정이 맵 생성을 바꾸면 재현 로그로 회귀를 판정할 수 없다</td></tr>
+            <tr><td>v0.12.0</td><td class="data-number">9</td><td>정본 <a href="04_dungeon.html#seed-streams">seed 스트림</a>이 “방 크기·좌표·복도”용 스트림을 규정하는데 <strong>그 스트림 자체가 없었다</strong> — 방 크기가 고정이라 추첨할 것이 없었기 때문이다. 방 크기를 가변으로 바꾸면서 함께 만들었다</td></tr>
+          </tbody>
+        </table>
+
+        <h3 id="rev-recovery">⑥ 정체 복구 — 정본 7단계를 4단계로 줄였다가 되돌림</h3>
+        <table>
+          <thead><tr><th>시점</th><th>상태</th></tr></thead>
+          <tbody>
+            <tr><td>~ v0.9.x</td><td>경로 계산이 실패하면 즉시 철수</td></tr>
+            <tr><td>v0.10.0 1차</td><td><strong>4단계로 축소.</strong> “작업 계획의 7단계는 정본에 근거가 없다”고 문서에 적었다</td></tr>
+            <tr><td>v0.10.0 최종</td><td><strong>정본 7단계.</strong> 03장 <a href="03_auto_explore.html#stuck-recovery">정체 복구</a>에 절 제목·지표·본문으로 명시돼 있었다</td></tr>
+          </tbody>
+        </table>
+        <p>④와 같은 실수다. 저장소의 요약 문서만 보고 공개 기획서를 확인하지 않았다. 이 두 사건 때문에 <strong>“정본은 공개 기획서를 먼저 연다”</strong>가 작업 규칙 1조가 됐다.</p>
+
+        <h2 id="canon-conflicts">정본끼리 충돌한 지점 3건</h2>
+        <p class="lead">구현이 정본을 어긴 것이 아니라, <strong>정본 안에서 두 곳이 서로 다른 말을 하는</strong> 경우다. 이럴 때 임의로 하나를 고르고 넘어가면 나중에 아무도 왜 그랬는지 모른다. 어느 쪽을 따랐는지와 그 이유를 남긴다.</p>
+        <table>
+          <thead><tr><th>주제</th><th>정본 A</th><th>정본 B</th><th>채택과 근거</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>방 역할 6종</td>
+              <td>04장 <a href="04_dungeon.html#room-roles">방 역할</a> — 봉인·퍼즐 포함, 출구 없음</td>
+              <td>04장 <a href="04_dungeon.html#generation-pipeline">생성 파이프라인</a>·08장 — 출구 포함, 봉인 없음</td>
+              <td><strong>A 채택.</strong> 출구는 모든 층에 반드시 있는 구조 요소라 확률 배정 대상이 아니고(입구·출구·보스는 역할 추첨 밖에서 정해진다), 봉인·퍼즐은 추첨 대상 역할이기 때문이다</td>
+            </tr>
+            <tr>
+              <td>방 수</td>
+              <td>04장 <a href="04_dungeon.html#topology-profile">토폴로지 프로필</a> — 층당 7~11</td>
+              <td>규모 비교도 — 소형 4~7 / 보통 8~16</td>
+              <td><strong>B 채택.</strong> A는 “일반 던전” 프로필 값이고 B는 던전 규모별 값이라 서로 다른 축을 말한다. 사이트마다 규모가 다르므로 규모 비교도를 따랐다</td>
+            </tr>
+            <tr>
+              <td>순환 간선</td>
+              <td>04장 표 — 15~25%</td>
+              <td>layer-stack 서술 — 0~2개</td>
+              <td>비율 밴드를 판정 기준으로 쓰되, 방 수가 적어 밴드 안에 정수가 하나도 없는 경우에만 최근접 정수를 허용한다</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout warning">
+          <strong class="callout-title">충돌은 정본의 결함이다</strong>
+          위 세 건은 구현이 해결할 문제가 아니라 기획서가 정리해야 할 문제다. 여기 적어 두는 이유는 <strong>다음에 정본을 고칠 때 이 지점부터 보라</strong>는 뜻이다.
+        </div>
+
+        <h2 id="baseline-reset">기준선을 통째로 버린 일 (v0.8.0)</h2>
+        <p class="lead">이 프로젝트에서 가장 큰 단절이다. 좋아 보이던 숫자가 전부 무효였다.</p>
+        <p>v0.7.0 시점에 “사이트 8/8 클리어, 전멸률 2.1%”라는 실측치를 기록했다. 그런데 감사에서 <strong>파티 체력이 특정 시점부터 유효하지 않은 값이 되어 3만 틱 중 절반 가까이를 죽지 않는 상태로 돌았다는 것</strong>이 드러났다.</p>
+        <div class="callout risk">
+          <strong class="callout-title">그 상태로 자동 검사 16항목이 전부 통과했다</strong>
+          체력이 유한한 수인지 확인하는 검사가 없었기 때문이다. 즉 “전멸률 2.1%”는 실력이 아니라 <strong>죽지 않아서 나온 숫자</strong>였다. 이후 “수치 유한성” 검사를 추가했고, 검증 항목은 8개에서 39개로 늘었다.
+        </div>
+        <p>이 사건 이후 규칙이 하나 생겼다. <strong>검사가 통과했다는 것은 “결함이 없다”가 아니라 “그 검사가 보는 범위에 결함이 없다”만 뜻한다.</strong> 새 검사를 만들면 일부러 결함을 주입해 실패하는지 먼저 확인한다.</p>
+
+        <h2 id="measurement">계측이 틀렸던 일 2건</h2>
+        <p class="lead">설계가 틀린 것이 아니라 재는 방법이 틀렸던 경우다. 이쪽이 더 위험하다 — 틀린 숫자가 문서에 실려 그 위에서 다음 판단이 이뤄진다.</p>
+        <h3 id="measure-economy">① “수입”을 잘못 세고 있었다 (v0.10.1)</h3>
+        <p>유지비 지표를 계산할 때 수입을 <strong>귀환 정산 전리품만으로</strong> 세고 있었다. 처치로 직접 얻는 골드(수입의 약 26%)와 교역소 판매가 빠져 있었다. 그 결과 유지비 비율이 약 40%p 과장됐고, <strong>그 틀린 값이 기준선 문서와 릴리스 기록에 그대로 실렸다.</strong></p>
+        <p>수정 후 “장부에 적힌 유입−유출이 실제 잔액과 같은가”를 검사하는 항목을 추가했다. 다만 그 검사의 한계도 함께 적어 두었다 — <strong>장부에 정직하게 적으면서 넣고 빼는 변경은 원리상 잡지 못한다. 계측 누락 탐지기이지 밸런스 변경 탐지기가 아니다.</strong></p>
+        <h3 id="measure-seeds">② 3시드로 판정하다 틀렸다 (v0.12.0)</h3>
+        <p>3개 시드에서 전멸률이 높게 나오자 “엘리트실이 원인”이라 진단하고 인하안까지 제시했다. <strong>8개 시드로 다시 재니 값이 단조롭게 움직이지 않았다.</strong> 격리 대조라 믿었던 측정도 같은 잡음이었다.</p>
+        <p>시드 편차가 ±10%p 수준이라 3시드로는 효과가 잡음에 묻힌다. 이후 <strong>밸런스 판정은 8시드 이상으로 한다</strong>가 규칙이 됐다.</p>
+
+        <h2 id="deprecated">폐기 · 보류 · 회피 목록</h2>
+        <p class="lead">지운 것도 기록이다. 남기지 않으면 다음에 같은 것을 다시 제안하거나, 이미 판단이 끝난 것을 다시 논의한다.</p>
+        <table>
+          <thead><tr><th>항목</th><th>상태</th><th>사유</th></tr></thead>
+          <tbody>
+            <tr><td>빈 방(<code>empty</code>) 역할</td><td><span class="status-chip risk">폐기</span></td><td>정본에 없는 역할이었다. v0.12.0에서 제거</td></tr>
+            <tr><td>방 수 1.6~1.8배 증폭</td><td><span class="status-chip risk">폐기</span></td><td>근거 없음. 단 제거가 정본 충족률을 후퇴시킴(②)</td></tr>
+            <tr><td>좌표 거리 기반 방 선택</td><td><span class="status-chip risk">폐기</span></td><td>기획서가 “그대로 가져오면 안 되는 지점”으로 명시한 방식이었다</td></tr>
+            <tr><td>자체 경험치 지수 곡선</td><td><span class="status-chip risk">폐기</span></td><td>정본 2구간 곡선으로 교체</td></tr>
+            <tr><td>정체 복구 4단계 안</td><td><span class="status-chip risk">폐기</span></td><td>정본 7단계로 되돌림(⑥)</td></tr>
+            <tr><td>봉인·퍼즐실의 필수 경로 차단</td><td><span class="status-chip warning">회피 중</span></td><td>정본은 “필수 경로를 막으면 해결 순서를 검증한다”인데 막다른 방에만 배치해 검증을 피했다. <strong>정본 준수가 아니라 정본 회피다.</strong> 실제 플레이에서 발동이 거의 없어 사실상 없는 콘텐츠</td></tr>
+            <tr><td>함정 방 역할</td><td><span class="status-chip warning">보류</span></td><td>기획자 요청이 있었으나 정본 방 역할 목록에 함정이 없다. 차이를 보고하고 기획자 결정을 받았다. <strong>단 “함정은 방 역할로 존재하지 않는다”는 단정은 과장이었다</strong> — 공개 자료 중 하나에 “미지의 방 — 적·함정·사건 불명”과 “함정 통로”가 있다</td></tr>
+            <tr><td>체크포인트 “행동 완료 뒤”</td><td><span class="status-chip warning">미구현</span></td><td>비용 문제. 다른 경로로 같은 불변조건을 만족한다고 주장 중 — 검증 대상</td></tr>
+            <tr><td>체크포인트 “계승 확정 전후”</td><td><span class="status-chip design">해당 없음</span></td><td>계승 시스템 자체가 아직 없다</td></tr>
+            <tr><td>복구 2단계 “진형 재배정”</td><td><span class="status-chip design">해당 없음</span></td><td>이 슬라이스에 진형·회피 캐시가 없다. <strong>단계 번호를 정본과 어긋나게 재배치하지 않으려고 자리는 유지</strong>하고 미구현으로 명시</td></tr>
+            <tr><td>밀도 검증의 “방 면적 대비 최대 동시 적 수”</td><td><span class="status-chip warning">선언만</span></td><td>값은 정했으나 전투 생성에 연결하지 않았다</td></tr>
+            <tr><td>모바일 광고 수익화</td><td><span class="status-chip warning">가설로 격리</span></td><td>PC 우선. 강제 광고 없음</td></tr>
+            <tr><td>생성형 아트 화풍 기준</td><td><span class="status-chip warning">하향</span></td><td>전면 제작 기준에서 내리고 공개 라이선스 타일셋으로 대체. 향후 교체·보강 후보로 남김</td></tr>
+            <tr><td>일부 데이터가 주입되나 참조되지 않음</td><td><span class="status-chip warning">미연결</span></td><td>드롭 항목 일부, 유지비 목표치, 위험 등급표, 영웅 성장 계수 전체</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="canon-gap">정본 대비 미이행</h2>
+        <p class="lead">정본이 규정했는데 아직 구현이 따라가지 못한 것들이다. “나중에”라고만 적으면 잊히므로 무엇이 왜 안 됐는지 남긴다.</p>
+        <table>
+          <thead><tr><th>정본</th><th>현재</th></tr></thead>
+          <tbody>
+            <tr><td>04장 <a href="04_dungeon.html#validation">검증</a> 6항목</td><td>6항목 전부 판정하되 <strong>3항목이 부분 판정</strong>이다. 공간 안전은 계단 반경 검사가 정본 기하에서 구조적으로 발동하지 않고 상자·몬스터를 보지 않는다. 구조 계약은 복도 폭·벽 여유를 보지 않는다. 밀도는 총 이동 거리와 바닥 셀 수를 보지 않는다</td></tr>
+            <tr><td>04장 생성 실패 시 “제한 횟수 내 수선”</td><td>수선이 고아 방만 고친다. 실제 실패 사유는 밴드·거리인데 그쪽은 수선하지 못해 <strong>대규모 표본에서 수선 성공이 한 건도 없었다.</strong> 실질 복구 수단은 재시도뿐이다</td></tr>
+            <tr><td>04장 “선택 분기 층당 1~3개”</td><td>검사하지 않는다</td></tr>
+            <tr><td>06장 골드 사용처 — 제작 · 재련 · 시설</td><td>물약 · 치료 · 수리뿐이다. <strong>정본이 규정한 사용처 셋이 없어 골드가 쌓인다.</strong> 공급 쪽도 정본이 규정한 채굴 시설이 없다. 수치 조정이 아니라 구조 결정이 필요하다</td></tr>
+            <tr><td>07장 안정 ID</td><td>영웅이 이름과 직업 조합으로만 식별되고 아이템에 안정 ID가 없다</td></tr>
+            <tr><td>07장 오프라인 구간 시뮬레이션</td><td>미구현</td></tr>
+            <tr><td>03장 정체 감지</td><td>전투 정체를 감지하지 못한다. 게이지가 차오르는 것을 진행으로 세기 때문이다. 행동 간격 기준의 별도 신호가 필요하다</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="next">다음에 결정해야 할 것</h2>
+        <p class="lead">구현이 막힌 것이 아니라 <strong>기획 판단이 필요해 멈춘</strong> 항목들이다.</p>
+        <div class="card-grid two-col">
+          <article class="card">
+            <span class="status-chip warning">경제</span>
+            <h3>유지비를 목표 안으로 넣을 것인가</h3>
+            <p>현재 중앙값이 목표 구간 상단 경계에 있고 편차도 크다. 원인은 원정 횟수 증가에 따른 고정비 비중 상승이므로, 손댈 곳은 치료·수리 계수가 아니라 <strong>원정당 보상</strong> 쪽이다.</p>
+          </article>
+          <article class="card">
+            <span class="status-chip warning">던전</span>
+            <h3>회복실이 실질적으로 빈 방이다</h3>
+            <p>비구조 방의 약 5분의 1을 차지하는데 발동의 대부분이 회복량 0이다. 파티가 만피로 진입하기 때문이다. 회복 외 기능(부상 1단계 치료, 물약 보급 등)을 주거나 비율을 낮춰야 한다.</p>
+          </article>
+          <article class="card">
+            <span class="status-chip warning">성장</span>
+            <h3>성장 속도가 느려졌다</h3>
+            <p>던전이 짧아지고 회복실이 실질 빈 방이 되면서 같은 시간에 처치 수가 줄었다. 그대로 둘지, 경험치·보상을 올릴지 결정이 필요하다.</p>
+          </article>
+          <article class="card">
+            <span class="status-chip risk">경제 구조</span>
+            <h3>골드 사용처가 정본과 다르다</h3>
+            <p>정본이 규정한 제작·재련·시설이 없다. 가장 오래 미뤄진 항목이며, 수치 조정으로는 해결되지 않는다.</p>
+          </article>
+        </div>
+
+        <h2 id="rules">이 과정에서 생긴 작업 규칙</h2>
+        <p class="lead">규칙은 사고가 만든다. 아래는 전부 실제로 어겼다가 지적받은 뒤에 생긴 것들이다.</p>
+        <div class="flow">
+          <div class="flow-node"><span class="step-index">01</span><strong>정본은 공개 기획서를 먼저 연다</strong><span>저장소 문서는 요약본일 수 있다. ④·⑥이 여기서 나왔다</span></div>
+          <div class="flow-node"><span class="step-index">02</span><strong>“정본에 없다”고 단정하지 않는다</strong><span>전칭 주장이다. 전수 확인 없이는 쓰지 않는다</span></div>
+          <div class="flow-node"><span class="step-index">03</span><strong>정본끼리 충돌하면 밝힌다</strong><span>임의로 고르지 않는다. 어느 쪽을 왜 따랐는지 적는다</span></div>
+          <div class="flow-node"><span class="step-index">04</span><strong>정본 회피를 정본 준수라고 적지 않는다</strong><span>봉인·퍼즐실이 그 사례다</span></div>
+          <div class="flow-node"><span class="step-index">05</span><strong>수치 옆에 표본을 적는다</strong><span>표본 없는 수치는 인용할 수 없다</span></div>
+          <div class="flow-node"><span class="step-index">06</span><strong>새 검사는 결함을 주입해 실패를 확인한다</strong><span>통과만 보면 항상 참인 검사를 만든다</span></div>
+          <div class="flow-node"><span class="step-index">07</span><strong>밸런스는 8시드 이상으로 잰다</strong><span>3시드는 효과가 잡음에 묻힌다</span></div>
+        </div>
+
+        <h2 id="scope">이 장에 적지 않는 것</h2>
+        <p>내부 수치표, 코드 구조, 검사를 우회하는 방법은 여기 적지 않는다. 특히 <strong>“이 검사는 이렇게 뚫린다”는 내용은 공개하지 않는다</strong> — 우회 방법을 공개하는 것이 되기 때문이다. 밸런스 계수와 시드별 원시 측정값도 내부 문서에 둔다.</p>
+        <p>여기 남기는 것은 <strong>기획 판단의 경로</strong>다. 무엇을 정했고, 무엇이 틀렸고, 왜 바꿨는가.</p>
+
+      </article>
+      <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
+    </div>
+    <nav data-page-pagination aria-label="문서 이동"></nav>
+  </main>
+</body>
+</html>

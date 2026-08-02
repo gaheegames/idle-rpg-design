@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="자율 원정대 방치형 RPG의 상태 수명, 시뮬레이션, 모듈 경계, 이벤트, 저장과 오프라인 구조">
   <title>게임 구조 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-research1">
-  <script src="assets/site.js?v=release-20260727-research1" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
 </head>
 <body data-page="architecture">
   <div data-site-header></div>
@@ -50,6 +50,7 @@
           <a href="#simulation">시뮬레이션</a>
           <a href="#save-boundary">저장과 원장</a>
           <a href="#invariants">필수 불변조건</a>
+          <a href="#implementation-status">구현 현황</a>
         </nav>
         <div class="legend compact">
           <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
@@ -237,6 +238,28 @@
             <article class="card metric-card"><strong>월드</strong><p>잠긴 지역은 목표가 될 수 없고 한 사이트에 던전과 시설이 동시에 활성화되지 않는다.</p></article>
             <article class="card metric-card"><strong>저장</strong><p>schemaVersion, contentVersion, runSeed, tick, RNG counter가 항상 함께 있다.</p></article>
           </div>
+        </section>
+
+        <section class="content-section" id="implementation-status">
+          <div class="section-heading">
+            <p class="eyebrow">IMPLEMENTATION STATUS <span class="status status-proposal">v0.12.0</span></p>
+            <h2>재현 가능성 기반이 어디까지 깔렸나</h2>
+            <p>이 장에서 요구한 시뮬레이션 결정성, 저장 경계, 보상 원장은 v0.10.0에서 대부분 들어갔다. 안정 ID와 오프라인 구간은 아직이다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>정본 항목</th><th>구현</th><th>비고</th></tr></thead>
+              <tbody>
+                <tr><td>난수 스트림 목적별 분리</td><td><span class="status status-reference">구현</span></td><td>하나였던 스트림을 아홉 개로 나눴다. <strong>스트림이 하나면 전투에서 주사위를 한 번 더 굴리는 순간 그 뒤의 던전 구조와 전리품이 전부 밀린다.</strong> 밸런스 한 줄 수정이 맵 생성을 바꾸면 재현 로그로 회귀를 판정할 수 없다. 마지막 하나는 방 크기를 가변으로 바꾸면서 함께 만들었다</td></tr>
+                <tr><td>저장 계약과 로드 거부 정책</td><td><span class="status status-reference">구현</span></td><td>스키마·콘텐츠 버전과 진행 상태를 함께 저장하고, 읽을 수 없는 저장본은 <strong>부분 적용하지 않고 거부한다.</strong> 절반만 복원된 상태가 남는 것이 더 위험하기 때문이다</td></tr>
+                <tr><td>보상 원장 · 멱등 정산</td><td><span class="status status-reference">구현</span></td><td>같은 이벤트 ID를 두 번 처리해도 한 번만 정산된다</td></tr>
+                <tr><td>체크포인트 5시점</td><td><span class="status status-proposal">부분</span></td><td>3시점을 배선했다. “행동 완료 뒤”는 비용 문제로 미구현이며 다른 경로로 같은 불변조건을 만족한다고 <strong>주장 중인 상태 &mdash; 아직 검증 대상이다.</strong> “계승 확정 전후”는 계승 시스템 자체가 없어 해당 없음이다</td></tr>
+                <tr><td>안정 ID</td><td><span class="status">미이행</span></td><td>영웅이 이름과 직업 조합으로만 식별되고, 아이템에는 안정 ID가 없다. 이 장이 요구한 “모든 보상 원천은 한 번만 닫힌다”를 아이템 단위로는 아직 보장하지 못한다</td></tr>
+                <tr><td>오프라인 구간 시뮬레이션</td><td><span class="status">미이행</span></td><td>이벤트 경계까지 시간을 점프하는 오프라인 계산이 없다</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>전체 변천 과정은 <a href="18_implementation_history.html">18장 구현 이력</a>에 있다.</p>
         </section>
 
         <nav class="pager" aria-label="페이지 이동">

@@ -19,14 +19,15 @@
     { file: "14_visual_archive.html", index: "14", label: "시각 자료", title: "도식·화면·분석 이미지 자료실" },
     { file: "15_character_systems.html", index: "15", label: "캐릭터·전투", title: "파티·장비·몬스터·보스" },
     { file: "16_integrated_system_map.html", index: "16", label: "전체 연결도", title: "전체 시스템 지도" },
-    { file: "17_research_findings.html", index: "17", label: "사용자 연구", title: "리뷰·커뮤니티·웹판·그래픽 자산" }
+    { file: "17_research_findings.html", index: "17", label: "사용자 연구", title: "리뷰·커뮤니티·웹판·그래픽 자산" },
+    { file: "18_implementation_history.html", index: "18", label: "구현 이력", title: "버전별 구현 진행과 기획 변천" }
   ];
 
   const navigationGroups = [
     { label: "게임 설계", files: ["16_integrated_system_map.html", "15_character_systems.html", "13_design_baseline.html", "01_overview.html", "02_content_loop.html", "06_progression.html"] },
     { label: "탐험", files: ["05_world.html", "04_dungeon.html", "03_auto_explore.html"] },
     { label: "제작", files: ["07_architecture.html", "08_mvp.html", "11_roadmap.html", "12_pathfinding_ai.html"] },
-    { label: "자료", files: ["17_research_findings.html", "14_visual_archive.html", "10_development_notes.html", "09_reference.html"] }
+    { label: "자료", files: ["18_implementation_history.html", "17_research_findings.html", "14_visual_archive.html", "10_development_notes.html", "09_reference.html"] }
   ];
 
   const fileName = window.location.pathname.split("/").pop() || "index.html";

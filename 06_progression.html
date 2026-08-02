@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="자율 원정대 방치형 RPG의 성장 자원, 장비 순환, 자동화, 계승과 심층 계속을 정리한 기획서">
   <title>성장과 경제 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-research1">
-  <script src="assets/site.js?v=release-20260727-research1" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
 </head>
 <body data-page="progression">
   <div data-site-header></div>
@@ -51,6 +51,7 @@
           <a href="#post-victory">승리 이후</a>
           <a href="#reset-policy">보존과 초기화</a>
           <a href="#guardrails">경제 안전장치</a>
+          <a href="#implementation-status">구현 현황</a>
         </nav>
         <div class="legend compact">
           <span><i class="legend-dot reference"></i> 확인된 레퍼런스</span>
@@ -174,7 +175,7 @@
 
         <section class="content-section" id="lifecycle-model">
           <div class="section-heading">
-            <p class="eyebrow">LIFECYCLE MODEL <span class="status status-proposal">v0.5.1 시험 기준</span></p>
+            <p class="eyebrow">LIFECYCLE MODEL <span class="status status-proposal">v0.12.0 시험 기준</span></p>
             <h2>45일은 확정 수명이 아니라 비교 가능한 기준선이다</h2>
             <p>영웅은 15세에 시작해 60세에 은퇴하며 현재 환산은 실시간 45일이다. 첫 세대 완주율과 애착 형성 시간을 실제 로그로 비교하기 위해 30·14·7일 단축안을 같은 성장 분포로 시험한다.</p>
           </div>
@@ -266,6 +267,32 @@
             <div><span class="status status-proposal">완료 조건</span><strong>장시간 방치가 손실이나 대기로 바뀌지 않는다</strong></div>
             <p>수동 수금 대기 0회, 인벤토리 초과 가치 소실 0, 자동 처리 이유 표시, 동일 보상 ID 중복 지급 0을 출시 전 필수 조건으로 둔다.</p>
           </div>
+        </section>
+
+        <section class="content-section" id="implementation-status">
+          <div class="section-heading">
+            <p class="eyebrow">IMPLEMENTATION STATUS <span class="status status-proposal">v0.12.0</span></p>
+            <h2>경제 설계가 실제 플레이에서 어디까지 돌아가고 있나</h2>
+            <p>이 장의 자원 모델과 안전장치를 구현과 항목 단위로 대조했다. 맞은 것보다 <strong>어긋난 것과 재는 방법이 틀렸던 것</strong>을 먼저 적는다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>정본 항목</th><th>구현</th><th>비고</th></tr></thead>
+              <tbody>
+                <tr><td>생애·성장 곡선 기준</td><td><span class="status status-reference">구현</span></td><td>자체 지수 곡선을 폐기하고 정본 2구간 곡선으로 교체했다. 성장 속도의 기준선이 문서와 같아졌다</td></tr>
+                <tr><td>모든 변화는 원장 기록</td><td><span class="status status-reference">구현</span></td><td>생성·소비의 사유와 이벤트 ID를 남긴다. 장부의 유입−유출이 실제 잔액과 맞는지 자동으로 대사한다</td></tr>
+                <tr><td>유지비 목표 구간</td><td><span class="status status-proposal">부분</span></td><td>실측 중앙값이 목표 구간의 <strong>상단 경계</strong>에 있고 시드 간 편차도 크다(8시드 표본). 원인은 치료·수리 계수가 아니라 <strong>원정 횟수가 늘면서 고정비 비중이 올라간 것</strong>이다. 손댈 곳은 원정당 보상 쪽이다</td></tr>
+                <tr><td>치료 비용</td><td><span class="status status-proposal">부분</span></td><td>초기에는 치료가 유지비의 대부분을 차지해 <strong>경제가 0으로 수렴했다.</strong> 정본 골드 사용처 목록에 치료가 없다는 점을 근거로 인하했다. 완전 무료 안도 검토했으나 목표 구간을 아래로 뚫어 기각했다</td></tr>
+                <tr><td>유지비 계측 방식</td><td><span class="status status-reference">구현</span></td><td>정정 이력이 있다. “수입”을 <strong>귀환 정산 전리품만으로</strong> 세는 바람에 유지비 비율이 크게 과장됐고, 그 틀린 값이 기준선 문서에 그대로 실렸다. 처치로 직접 얻는 골드와 교역소 판매를 포함해 다시 계산했다</td></tr>
+                <tr><td>골드 사용처 &mdash; 제작 · 재련 · 시설</td><td><span class="status">미이행</span></td><td>구현에는 물약 · 치료 · 수리뿐이다. <strong>정본이 규정한 사용처 셋이 통째로 없어 골드가 쌓인다.</strong> 공급 쪽도 정본이 규정한 채굴 시설이 없다</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout warning-callout">
+            <div><span class="status status-proposal">구조 결정 필요</span><strong>골드가 쌓이는 것은 밸런스 문제가 아니라 구조 문제다</strong></div>
+            <p>이 장은 “주요 소비처 2범주 이하”와 “Source / Sink 0.9–1.15”를 안전장치로 두었다. 그런데 현재 구현에는 소비처가 유지 계열밖에 없다. 계수를 조정해서 맞출 수 있는 상태가 아니며, 제작·재련·시설 중 무엇을 먼저 넣을지 결정해야 한다. 가장 오래 미뤄진 항목이다.</p>
+          </div>
+          <p>전체 변천 과정은 <a href="18_implementation_history.html">18장 구현 이력</a>에 있다.</p>
         </section>
 
         <nav class="pager" aria-label="페이지 이동">

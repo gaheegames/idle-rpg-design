@@ -6,8 +6,8 @@
   <meta name="description" content="방치형 파티 RPG의 자동 탐색 Director, frontier 점수, 계층형 길찾기, 문 전환과 정체 복구 알고리즘 명세">
   <meta name="theme-color" content="#14263b">
   <title>자동 탐색 알고리즘 · 자율 원정대 RPG</title>
-  <link rel="stylesheet" href="assets/styles.css?v=release-20260727-research1">
-  <script src="assets/site.js?v=release-20260727-research1" defer></script>
+  <link rel="stylesheet" href="assets/styles.css?v=release-20260802-v0120">
+  <script src="assets/site.js?v=release-20260802-v0120" defer></script>
 </head>
 <body data-page="explore">
   <div data-site-header></div>
@@ -311,6 +311,21 @@ else                               → SELECT_OBJECTIVE</code></pre>
           <li>동일 입력·seed·tick의 목표·명령 로그 해시가 동일하다.</li>
           <li>복구가 일어난 seed, 상태, 실패 edge를 그대로 재현할 수 있다.</li>
         </ul>
+
+        <h2 id="implementation-status">구현 현황 · v0.12.0</h2>
+        <p class="lead">이 장은 스스로를 “구현 명세”라고 적었다. 그러면 명세와 실제 구현이 어긋난 지점도 같이 적어야 문서가 사실과 어긋나지 않는다. 위 절들을 항목 단위로 대조한 결과다.</p>
+        <table>
+          <thead><tr><th>정본 항목</th><th>구현</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#frontier-scoring">Frontier 8신호 가중 점수</a></td><td><span class="status-chip complete">구현</span></td><td>여덟 신호를 모두 반영한 가중 점수로 다음 방을 고른다. 그 전에는 좌표 거리로 가까운 방을 골랐다 &mdash; 위 <a href="#reference-risks">그대로 가져오면 안 되는 지점</a>이 지목한 바로 그 방식이었다</td></tr>
+            <tr><td><a href="#policy-presets">위험 정책 4종</a></td><td><span class="status-chip complete">구현</span></td><td>안전 · 균형 · 탐욕 · 목표 직행. 같은 층을 같은 seed로 열어도 정책에 따라 다른 경로가 나온다</td></tr>
+            <tr><td><a href="#room-classifier">방 역할 실패 누적 시 일시 제외</a></td><td><span class="status-chip complete">구현</span></td><td>처음에는 제외 만료 기준을 잘못 잡아 <strong>제외가 한 번도 발동하지 않았다.</strong> 재방문 횟수 기준으로 고친 뒤 실제 발동을 확인했다</td></tr>
+            <tr><td><a href="#stuck-recovery">ProgressWatchdog 7단계 복구</a></td><td><span class="status-chip complete">구현</span></td><td>7단계를 전부 배선했다. 작업 도중 4단계로 축소했다가 정본을 다시 확인하고 되돌린 이력이 있다</td></tr>
+            <tr><td>복구 2단계 · 진형 재배정</td><td><span class="status-chip design">해당 없음</span></td><td>이 슬라이스에는 진형과 회피 캐시가 없어 통과 처리한다. 단계 번호가 정본과 어긋나지 않도록 <strong>자리는 그대로 두고</strong> 미구현임을 명시했다</td></tr>
+            <tr><td>정체 감지 &mdash; 전투 구간</td><td><span class="status-chip risk">미이행</span></td><td>전투가 멈춰 있어도 감지하지 못한다. 게이지가 차오르는 것을 진행으로 세기 때문이다. 행동 간격을 보는 별도 신호가 필요하다</td></tr>
+          </tbody>
+        </table>
+        <p>전체 변천 과정은 <a href="18_implementation_history.html">18장 구현 이력</a>에 있다.</p>
       </article>
 
       <aside class="section-nav" data-section-nav aria-label="이 페이지의 목차"></aside>
