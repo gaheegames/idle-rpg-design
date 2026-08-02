@@ -24,6 +24,7 @@
 | `15_character_systems.html` | 6직업·5인 파티, 능력치·생애, 장비·몬스터·보스 기준 |
 | `16_integrated_system_map.html` | 12개 기획 영역의 전체 순환·성장축·모순 점검 |
 | `17_research_findings.html` | Google Play·Reddit·웹판 BM·Gervais 자산 분석과 반영 결정 |
+| `18_implementation_history.html` | v0.5.1 → v0.12.0 구현 진행 기록. 뒤집힌 결정, 정본끼리 충돌한 지점, 폐기·보류 목록 |
 
 현재 문서 버전은 `v0.12.0`입니다. 게임 문서와 `Pathfinding AI`는 독립적으로 버전업하되, 매 릴리스마다 로컬 원본·비공개 Git·공개 GitHub Pages·Google Drive `versions/latest` 네 위치를 모두 동기화합니다.
 
